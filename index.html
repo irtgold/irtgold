@@ -56,13 +56,9 @@
             bottom: 0;
             background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23FACC15" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,138.7C672,149,768,203,864,213.3C960,224,1056,192,1152,170.7C1248,149,1344,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
             background-size: cover;
-            animation: wave 10s linear infinite;
         }
         
-        @keyframes wave {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+
         
         /* Navigation */
         nav {
@@ -90,13 +86,9 @@
             font-weight: 800;
             color: var(--gold-accent);
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: pulse 2s infinite;
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+
         
         .nav-menu {
             display: flex;
@@ -149,19 +141,9 @@
             border-radius: 30px;
             font-weight: 600;
             margin-bottom: 20px;
-            animation: slideDown 0.8s ease-out;
         }
         
-        @keyframes slideDown {
-            from { 
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+
         
         h1 {
             font-size: 48px;
@@ -169,14 +151,12 @@
             color: var(--white);
             margin-bottom: 20px;
             line-height: 1.2;
-            animation: slideDown 0.8s ease-out 0.2s both;
         }
         
         .hero-subtitle {
             font-size: 22px;
             color: var(--primary-light);
             margin-bottom: 30px;
-            animation: slideDown 0.8s ease-out 0.4s both;
         }
         
         .cta-buttons {
@@ -184,7 +164,6 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            animation: slideDown 0.8s ease-out 0.6s both;
         }
         
         .cta-primary {
@@ -258,19 +237,9 @@
             padding: 30px;
             text-align: center;
             transition: all 0.3s;
-            animation: fadeIn 1s ease-out 0.8s both;
         }
         
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+
         
         .feature-card:hover {
             transform: translateY(-10px);
@@ -371,7 +340,6 @@
         .indicator-badge.premium {
             background: var(--gold-accent);
             color: var(--primary-dark);
-            animation: pulse 2s infinite;
         }
         
         .indicator-content {
@@ -593,6 +561,156 @@
             font-size: 18px;
             color: var(--text-dark);
             font-weight: 600;
+        }
+        
+        /* Features Section */
+        .features-section {
+            background: linear-gradient(180deg, var(--white) 0%, var(--gray-light) 100%);
+            padding: 80px 20px;
+        }
+        
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .features-category {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+        
+        .features-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .category-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--gold-accent);
+        }
+        
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: var(--gray-light);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .feature-item:hover {
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.1), transparent);
+            transform: translateX(5px);
+        }
+        
+        .feature-check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--success);
+            color: var(--white);
+            border-radius: 50%;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .feature-content h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+        
+        .feature-content p {
+            font-size: 14px;
+            color: var(--gray-medium);
+            line-height: 1.5;
+        }
+        
+        /* Platform Section */
+        .platform-section {
+            max-width: 1200px;
+            margin: 60px auto 0;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .platform-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 40px;
+        }
+        
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .platform-item {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary-light), var(--gray-light));
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+        
+        .platform-item:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(135deg, var(--gold-accent), var(--gold-hover));
+        }
+        
+        .platform-item:hover .platform-icon {
+            transform: scale(1.2);
+        }
+        
+        .platform-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .platform-item h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+        
+        .platform-item p {
+            font-size: 14px;
+            color: var(--gray-medium);
         }
         
         /* Video Demo Section */
@@ -1040,7 +1158,6 @@
         .demo-badge.live {
             background: var(--success);
             color: var(--white);
-            animation: pulse 2s infinite;
         }
         
         .demo-badge.downtrend {
@@ -1495,7 +1612,6 @@
         
         .signal-item.active {
             background: linear-gradient(90deg, rgba(250, 204, 21, 0.1), transparent);
-            animation: pulse 2s infinite;
         }
         
         .signal-time {
@@ -1673,13 +1789,9 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             cursor: pointer;
             z-index: 999;
-            animation: bounce 2s infinite;
         }
         
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+
         
         .whatsapp-float:hover {
             transform: scale(1.1);
@@ -2236,6 +2348,183 @@
             <div class="stat-card">
                 <div class="stat-number">100%</div>
                 <div class="stat-label">ความพึงพอใจ</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="section-header">
+            <h2 class="section-title">คุณสมบัติโดดเด่น IRT GOLD V5.0</h2>
+            <p class="section-subtitle">ครบครันทุกฟังก์ชันที่นักเทรดมืออาชีพต้องการ</p>
+        </div>
+        
+        <div class="features-container">
+            <!-- Core Features -->
+            <div class="features-category">
+                <h3 class="category-title">🎯 ฟังก์ชันหลัก</h3>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>ระบบ 5 อินดิเคเตอร์ในตัวเดียว</h4>
+                            <p>Harmonic, Volume, Trend, S&R, Signal Alert ทำงานประสานกัน</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>AI Pattern Recognition</h4>
+                            <p>ตรวจจับรูปแบบกราฟอัตโนมัติ แม่นยำ 87%</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>Smart Entry & Exit Points</h4>
+                            <p>คำนวณจุดเข้า-ออก พร้อม TP/SL อัตโนมัติ</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>Multi-Timeframe Analysis</h4>
+                            <p>วิเคราะห์ 3 Timeframes พร้อมกัน (M5, M15, H1)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Alert Features -->
+            <div class="features-category">
+                <h3 class="category-title">🔔 ระบบแจ้งเตือน</h3>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>Real-time Signal Alerts</h4>
+                            <p>แจ้งเตือนทันทีเมื่อมีสัญญาณซื้อ-ขาย</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>LINE Notification</h4>
+                            <p>ส่งสัญญาณผ่าน LINE แบบ Real-time</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>Mobile Push Alerts</h4>
+                            <p>รับการแจ้งเตือนบนมือถือ iOS/Android</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>Email Notifications</h4>
+                            <p>ส่งรายงานสัญญาณทาง Email</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Trading Features -->
+            <div class="features-category">
+                <h3 class="category-title">💹 การเทรด</h3>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>รองรับทุกตลาด</h4>
+                            <p>ใช้ได้กับ Forex, ทองคำ, หุ้น, Crypto</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>5 รูปแบบการเทรด</h4>
+                            <p>Trend Following, Reversal, Breakout, Retest, Scalping</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>Risk Management</h4>
+                            <p>คำนวณ Lot Size และ Risk:Reward อัตโนมัติ</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>Backtesting Results</h4>
+                            <p>ทดสอบย้อนหลัง 5 ปี Win Rate 85%+</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Support Features -->
+            <div class="features-category">
+                <h3 class="category-title">🎓 การสนับสนุน</h3>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>คอร์สสอนการใช้งาน</h4>
+                            <p>วิดีโอสอน 20+ ตอน พร้อม Live Coaching</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>กลุ่ม LINE VIP</h4>
+                            <p>ชุมชนนักเทรด + Signal Room ฟรี</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>Support 24/7</h4>
+                            <p>ทีมงานพร้อมช่วยเหลือตลอด 24 ชั่วโมง</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        <div class="feature-content">
+                            <h4>อัพเดทฟรีตลอดชีพ</h4>
+                            <p>รับเวอร์ชันใหม่ฟรีตลอดการใช้งาน</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Platform Compatibility -->
+        <div class="platform-section">
+            <h3 class="platform-title">รองรับทุกแพลตฟอร์ม</h3>
+            <div class="platforms-grid">
+                <div class="platform-item">
+                    <span class="platform-icon">💻</span>
+                    <h4>MT4/MT5 Desktop</h4>
+                    <p>Windows & Mac</p>
+                </div>
+                <div class="platform-item">
+                    <span class="platform-icon">📱</span>
+                    <h4>MT5 Mobile</h4>
+                    <p>iOS & Android</p>
+                </div>
+                <div class="platform-item">
+                    <span class="platform-icon">📊</span>
+                    <h4>TradingView</h4>
+                    <p>Pine Script V5</p>
+                </div>
+                <div class="platform-item">
+                    <span class="platform-icon">🌐</span>
+                    <h4>Web Terminal</h4>
+                    <p>เทรดผ่าน Browser</p>
+                </div>
             </div>
         </div>
     </section>
