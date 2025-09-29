@@ -676,3 +676,18 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
 .pricing-section .pricing-card{
   max-width: none; /* ใช้เต็มคอลัมน์กริด */
 }
+.indicator-screenshot{
+  width:100%;
+  height:300px;
+  border-radius:15px;
+  overflow:hidden;
+  background:#0a0e1a;
+  border:2px solid var(--primary-light);
+  position:relative;
+}
+.indicator-screenshot .shot-cover{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
