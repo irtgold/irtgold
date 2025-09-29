@@ -754,15 +754,3 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
 .indicators-container{
   gap: 28px;
 }
-/* ค่าเริ่มต้น: ไม่มีเส้นทอง */
-.indicator-box{
-  border: 2px solid transparent;
-  transition: border-color .25s, box-shadow .25s, transform .25s;
-}
-
-/* ตอนเอาเมาส์วาง: ค่อยโชว์เส้นทองและเงา */
-.indicator-box:hover{
-  border-color: var(--gold-accent);
-  box-shadow: 0 20px 40px rgba(250, 204, 21, 0.25);
-  transform: translateY(-5px);
-}
