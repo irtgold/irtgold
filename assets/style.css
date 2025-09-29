@@ -754,3 +754,26 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
 .indicators-container{
   gap: 28px;
 }
+/* กล่องภาพสกรีนช็อต: สร้างกรอบ 16:9 อัตโนมัติ */
+.indicator-screenshot{
+  position: relative;
+  background: #0a0e1a;
+  border: 2px solid var(--primary-light);
+  border-radius: 15px;
+  overflow: hidden;
+}
+/* อัตราส่วน 16:9 */
+.indicator-screenshot::before{
+  content: "";
+  display: block;
+  padding-top: 56.25%;
+}
+/* ให้รูป “เต็มกรอบ” พอดี ไม่เบี้ยว */
+.indicator-screenshot .shot-cover{
+  position: absolute;
+  inset: 0;             /* top/right/bottom/left: 0 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* หรือใช้ contain ถ้าต้องการเห็นทั้งภาพแบบมีขอบดำ */
+  object-position: center;
+}
