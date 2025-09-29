@@ -747,3 +747,28 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
 .indicator-screenshot.contain > .shot-cover{
   object-fit: contain;           /* พอดีโดยไม่ครอป แต่จะมีพื้นหลังสีเข้มล้อม */
 }
+/* ===== Screenshot: ให้รูปเต็มกรอบแบบพอดี ===== */
+.indicator-screenshot{
+  position: relative;
+  aspect-ratio: 16 / 9;          /* สัดส่วนกรอบ 16:9 */
+  background: #071a32;
+  border: 2px solid var(--primary-light);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.indicator-screenshot > img,
+.indicator-screenshot > .shot-cover{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;             /* ครอบเต็มกรอบ (อาจครอปนิดหน่อย) */
+  object-position: center;
+  display: block;                /* ตัดช่องว่าง baseline ของรูป */
+}
+
+/* ถ้ากรอบไหนไม่อยากให้ครอป ใช้คลาส 'contain' ที่กรอบภาพ */
+.indicator-screenshot.contain > img,
+.indicator-screenshot.contain > .shot-cover{
+  object-fit: contain;
+}
