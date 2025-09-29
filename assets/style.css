@@ -691,3 +691,30 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
   object-fit:cover;
   display:block;
 }
+/* แก้ขอบขาวด้านข้างของส่วน Indicators บนจอแคบ */
+@media (max-width: 768px) {
+  /* ตัด padding ซ้าย-ขวา ของ section ออก */
+  .indicators-section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* ให้ container กว้างเต็ม และไม่เหลือร่องข้าง */
+  .indicators-container {
+    max-width: 100%;
+  }
+  /* ถ้าอยากให้การ์ดเต็มขอบจอจริง ๆ (ไม่มีมุมโค้ง/เงาดันออก) ให้ปลดมุมโค้ง */
+  .indicator-box {
+    border-radius: 0;
+  }
+  .indicator-header {
+    border-radius: 0;
+  }
+}
+
+/* กันเส้นว่างใต้รูปจาก inline-img และบังคับเต็มกรอบ */
+.indicator-screenshot img,
+.indicator-screenshot .shot-cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
