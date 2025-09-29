@@ -676,23 +676,81 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
 .pricing-section .pricing-card{
   max-width: none; /* ใช้เต็มคอลัมน์กริด */
 }
-/* กล่องพรีวิวรูป */
 .indicator-screenshot{
   position: relative;
   background: #0a0e1a;
   border: 2px solid var(--primary-light);
   border-radius: 15px;
   overflow: hidden;
-
-  /* แทนที่จะ fix height:300px ใช้สัดส่วนภาพ 16:9 ที่ยืดตามความกว้าง */
-  aspect-ratio: 16 / 9;               /* ทำให้ responsive พอดีกรอบ */
 }
-
-/* ตัวรูปภาพ */
+.indicator-screenshot::before{
+  content: "";
+  display: block;
+  padding-top: 56.25%;  /* = 16:9 */
+}
 .indicator-screenshot .shot-cover{
+  position: absolute;
+  inset: 0;             /* top:0; right:0; bottom:0; left:0; */
   width: 100%;
   height: 100%;
-  object-fit: contain;                 /* แสดงรูปทั้งภาพ ไม่ถูกครอป */
+  object-fit: contain;
   object-position: center;
+}
+/* ให้รูปในกรอบสกรีนช็อตพอดีพื้นที่ */
+.indicator-screenshot {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0a0e1a;       /* เผื่อรูปยังโหลด */
+  border: 2px solid var(--primary-light);
+}
+
+.indicator-screenshot .shot-cover {
   display: block;
+  width: 100%;
+  height: auto;              /* ไม่บี้สัดส่วน */
+  object-fit: cover;         /* กันรูปยืด/เบี้ยวตอนมีความกว้างแคบ */
+}
+/* ===== ขยายกรอบสกรีนช็อตให้เต็มการ์ด + สูงขึ้น ===== */
+.indicator-box{           /* เอา padding ส่วนเกินของการ์ดออก */
+  padding: 0;
+}
+
+.indicator-header{
+  padding: 20px 28px;
+}
+
+.indicator-content{
+  padding: 0 28px 28px;   /* คุม padding ด้านในการ์ด */
+}
+
+/* ทำให้ภาพล้นขอบซ้าย-ขวาแบบ full-bleed และโค้งมนสวย */
+.indicator-screenshot{
+  margin: 0 -28px 24px;   /* ดันออกซ้าย/ขวาให้พอดีกับขอบการ์ด */
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0a0e1a;
+  border: 2px solid var(--primary-light);
+}
+
+/* กำหนดความสูงภาพให้สูงขึ้น และครอบเต็มพื้นที่ */
+.indicator-screenshot .shot-cover{
+  display: block;
+  width: 100%;
+  height: 380px;          /* ← ปรับเลขนี้เพื่อ “ยืน” กรอบให้สูงขึ้น/ลง */
+  object-fit: cover;      /* ครอบภาพให้เต็ม ไม่ยืด/เบี้ยว */
+}
+
+/* ปรับความสูงตามหน้าจอเล็กลงเพื่อความพอดี */
+@media (max-width: 1024px){
+  .indicator-screenshot .shot-cover{ height: 300px; }
+}
+@media (max-width: 640px){
+  .indicator-screenshot .shot-cover{ height: 220px; }
+}
+
+/* เว้นระยะระหว่างการ์ดเพิ่มเติม (ถ้าต้องการ) */
+.indicators-container{
+  gap: 28px;
 }
