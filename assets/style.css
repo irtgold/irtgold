@@ -754,3 +754,16 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
 .indicators-container{
   gap: 28px;
 }
+/* ให้กรอบคงสัดส่วน 16:9 และครอบรูปให้เต็ม */
+.indicator-screenshot{
+  aspect-ratio:16 / 9;     /* เบราว์เซอร์ใหม่รองรับ */
+  position:relative;
+  overflow:hidden;
+}
+.indicator-screenshot .shot-cover{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  display:block;
+  object-fit:cover;         /* ครอบให้เต็มกรอบ */
+  object-position:center;   /* โฟกัสกลางภาพ */
+}
