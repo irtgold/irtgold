@@ -766,7 +766,3 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
   box-shadow: 0 20px 40px rgba(250, 204, 21, 0.25);
   transform: translateY(-5px);
 }
-.indicator-box:active{
-  border-color: var(--gold-accent);
-  box-shadow: 0 20px 40px rgba(250, 204, 21, 0.25);
-}
