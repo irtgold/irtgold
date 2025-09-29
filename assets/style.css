@@ -696,3 +696,19 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
   object-fit: contain;
   object-position: center;
 }
+/* ให้รูปในกรอบสกรีนช็อตพอดีพื้นที่ */
+.indicator-screenshot {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0a0e1a;       /* เผื่อรูปยังโหลด */
+  border: 2px solid var(--primary-light);
+}
+
+.indicator-screenshot .shot-cover {
+  display: block;
+  width: 100%;
+  height: auto;              /* ไม่บี้สัดส่วน */
+  object-fit: cover;         /* กันรูปยืด/เบี้ยวตอนมีความกว้างแคบ */
+}
