@@ -772,3 +772,28 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
 .indicator-screenshot.contain > .shot-cover{
   object-fit: contain;
 }
+/* === Enlarge indicator screenshot box === */
+/* ทำให้กรอบภาพสูงขึ้น (จากอัตราส่วน 16:9 → สูงขึ้น) */
+.indicator-screenshot::before{
+  padding-top: 66.666%;   /* เดิม 56.25%  → สูงขึ้น ~3:2 */
+}
+
+/* ขยายความกว้างคอนเทนเนอร์ให้กินพื้นที่มากขึ้น */
+.indicators-container{
+  max-width: 1300px;      /* เดิม 1200px */
+}
+
+/* ลด padding ภายในการ์ดเล็กน้อย เพื่อให้ภาพเด่นขึ้น */
+.indicator-content{
+  padding: 24px;          /* เดิม 30px */
+}
+
+/* ปรับเพิ่มเติมตามหน้าจอ */
+@media (min-width: 1440px){
+  .indicators-container{ max-width: 1400px; }
+  .indicator-screenshot::before{ padding-top: 62%; } /* จูนความสูงบนจอใหญ่ */
+}
+
+@media (max-width: 768px){
+  .indicator-screenshot::before{ padding-top: 75%; }  /* มือถือให้สูงขึ้นอีกนิด */
+}
