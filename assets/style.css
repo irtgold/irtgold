@@ -676,18 +676,23 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
 .pricing-section .pricing-card{
   max-width: none; /* ใช้เต็มคอลัมน์กริด */
 }
+/* กล่องพรีวิวรูป */
 .indicator-screenshot{
-  width:100%;
-  height:300px;
-  border-radius:15px;
-  overflow:hidden;
-  background:#0a0e1a;
-  border:2px solid var(--primary-light);
-  position:relative;
+  position: relative;
+  background: #0a0e1a;
+  border: 2px solid var(--primary-light);
+  border-radius: 15px;
+  overflow: hidden;
+
+  /* แทนที่จะ fix height:300px ใช้สัดส่วนภาพ 16:9 ที่ยืดตามความกว้าง */
+  aspect-ratio: 16 / 9;               /* ทำให้ responsive พอดีกรอบ */
 }
+
+/* ตัวรูปภาพ */
 .indicator-screenshot .shot-cover{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;                 /* แสดงรูปทั้งภาพ ไม่ถูกครอป */
+  object-position: center;
+  display: block;
 }
