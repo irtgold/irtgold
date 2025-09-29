@@ -852,3 +852,54 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
   transform-origin: center;
   border-radius: inherit;
 }
+/* === unify container width across sections === */
+:root{
+  --site-container: 1200px;   /* ใช้ตัวเลขเดียวกับส่วนอื่นของหน้า */
+}
+
+/* ความกว้างของกล่องหลักแต่ละส่วน */
+.indicators-container,
+.performance-showcase,
+.features-container,
+.video-container,
+.platform-section,
+.demo-container{
+  max-width: var(--site-container);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* เอา margin/padding ที่ทำให้การ์ดแคบกว่า container ออก */
+.indicators-section{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.indicators-container{
+  padding-left: 0;
+  padding-right: 0;
+}
+.indicator-box{
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* ให้กรอบรูปกินเต็มการ์ด (จะไม่เหลือไหล่ขาวด้านข้าง) */
+.indicator-screenshot{
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.indicator-screenshot::before{
+  content: "";
+  display: block;
+  padding-top: 45%;      /* สูงขึ้นนิด ให้ภาพเต็มมากขึ้น ถ้ายังแคบอยู่ลอง 50% */
+}
+.indicator-screenshot .shot-cover{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* ให้ภาพกินเต็มกรอบ */
+}
