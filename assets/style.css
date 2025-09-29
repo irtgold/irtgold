@@ -816,3 +816,39 @@ footer { background: var(--primary-dark); color: var(--white); padding: 40px 20p
   transform-origin: center;
   border-radius: inherit;
 }
+/* ทำให้กรอบรูปในทุกการ์ดเท่ากัน */
+.indicator-screenshot{
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 2px solid var(--primary-light);
+
+  /* เลือกอย่างใดอย่างหนึ่งด้านล่าง (แนะนำแบบ A) */
+  /* A) ใช้ aspect-ratio + ความสูงแบบ responsive */
+  aspect-ratio: 16 / 9;             /* บังคับสัดส่วนเท่ากันทุกใบ */
+  height: clamp(220px, 28vw, 360px); /* ความสูงเดียวกัน (ยืดหยุ่นตามจอ) */
+
+  /* หรือ
+  B) ถ้าชอบแบบเดิมใช้ before padding-top ได้ แต่แนะนำ A
+  }
+  .indicator-screenshot::before{
+    content:"";
+    display:block;
+    padding-top:56.25%;  16:9
+  }
+  */
+}
+
+/* ให้รูปกินเต็มกรอบเสมอ และซูมเล็กน้อยเพื่อไม่ให้เห็นขอบขาวของภาพเอง */
+.indicator-screenshot .shot-cover{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover !important;   /* ครอบเต็มกรอบ */
+  object-position: center;
+  transform: scale(var(--shot-zoom, 1.08)); /* ซูมเล็กน้อยตัดขอบว่างของรูป */
+  transform-origin: center;
+  border-radius: inherit;
+}
