@@ -270,3 +270,19 @@ h1 { font-size:48px; font-weight:800; color:var(--white); margin-bottom:20px; li
   .v{ font-size: 22px; }
   .panel-media.full-bleed img{ max-height: 480px; }
 }
+/* ==== TUNE: ลดขนาดรูป + จัดกลาง (ทับ full-bleed เดิม) ==== */
+.indicators-alt .panel-media.full-bleed img{
+  width: auto;             /* ทับ 100vw เดิม */
+  max-width: 100%;
+  max-height: 600px;       /* ปรับตามชอบ: 560/640px */
+  margin: 0 auto;          /* จัดภาพให้อยู่กึ่งกลาง */
+  display: block;
+  object-fit: contain;     /* ไม่บิดภาพ */
+  border-radius: 12px;     /* เอามุมโค้งเล็กน้อย ถ้าไม่ชอบลบได้ */
+}
+
+/* จัดคอนเทนต์ข้อความให้อยู่กลางและอ่านง่าย */
+.indicators-alt .panel-body{
+  max-width: 960px;        /* ความกว้างบล็อกข้อความ */
+  margin: 16px auto 0;     /* จัดกึ่งกลาง */
+}
