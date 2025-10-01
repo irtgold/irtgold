@@ -248,3 +248,25 @@ h1 { font-size:48px; font-weight:800; color:var(--white); margin-bottom:20px; li
 .panel-list li{ position:relative; padding-left:26px; }
 .panel-list li::before{ content:'✅'; position:absolute; left:0; top:0; }
 .panel-stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1f
+/* ========== Tuning: Indicators panels (smaller) ========== */
+.indicators-alt .panel{ padding: 28px 0 36px; }           /* เดิม 40/50 */
+.panel-title{ font-size: clamp(22px, 2.6vw, 30px); }      /* เดิม 32px */
+.panel-sub{   font-size: 18px; margin-bottom: 10px; }     /* เดิม 20px */
+.panel-body{  margin-top: 16px; }
+.panel-list{  gap: 8px; }                                  /* เดิม 10px */
+.v{ font-size: 24px; }                                     /* เดิม 28px */
+
+ /* จำกัดความสูงรูป full-bleed ไม่ให้สูงไป */
+.panel-media.full-bleed img{
+  max-height: 680px;       /* ปรับได้: 600–720px แล้วแต่ชอบ */
+  object-fit: cover;
+}
+
+/* มือถือย่ออีกนิด */
+@media (max-width: 768px){
+  .indicators-alt .panel{ padding: 22px 0 30px; }
+  .panel-title{ font-size: clamp(20px, 5.2vw, 26px); }
+  .panel-sub{ font-size: 17px; }
+  .v{ font-size: 22px; }
+  .panel-media.full-bleed img{ max-height: 480px; }
+}
