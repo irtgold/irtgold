@@ -1,441 +1,135 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IRT GOLD V5.0 - ระบบเทรดครบวงจร | เทรดทองและหุ้นแบบมืออาชีพ</title>
-  <meta name="description" content="IRT GOLD ระบบอินดิเคเตอร์ 5-in-1 สำหรับ MT4/MT5 และ TradingView พร้อมสัญญาณแจ้งเตือนแบบเรียลไทม์และคอร์สสอนใช้งาน" />
-
-  <!-- Performance: fonts & critical connections -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Icons & PWA -->
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/assets/icon-192.png">
-  <link rel="manifest" href="/site.webmanifest">
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="IRT GOLD V5.0 - ระบบเทรดครบวงจร" />
-  <meta property="og:description" content="อินดิเคเตอร์ 5-in-1 แจ้งเตือนเรียลไทม์ เทรดมืออาชีพได้ในหน้าจอเดียว" />
-  <meta property="og:image" content="https://example.com/og-cover.jpg" />
-  <meta property="og:url" content="https://example.com" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-  <!-- CSS (คุณจะใส่เอง) -->
-  <link rel="stylesheet" href="assets/style.css" />
-
-  <!-- JSON-LD: Product -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Product",
-    "name":"IRT GOLD V5.0",
-    "image":["https://example.com/og-cover.jpg"],
-    "description":"อินดิเคเตอร์ 5-in-1 สำหรับ MT5/TradingView พร้อมสัญญาณแจ้งเตือนแบบเรียลไทม์",
-    "brand":{"@type":"Brand","name":"IRT GOLD"},
-    "offers":{
-      "@type":"Offer",
-      "priceCurrency":"THB",
-      "price":"2390",
-      "availability":"https://schema.org/InStock",
-      "url":"https://example.com#pricing"
-    }
-  }
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRT GOLD V5.0 - Indicator Rhythm Trading</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a class="skip-link" href="#home">ข้ามไปเนื้อหา</a>
-
   <!-- Navigation -->
-  <nav class="nav" aria-label="หลัก">
-    <div class="nav-container">
-      <a class="logo" href="#home" aria-label="กลับสู่หน้าแรก">IRT GOLD</a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu" aria-label="เปิดเมนู">
-        <span class="nav-toggle__bar"></span>
-        <span class="nav-toggle__bar"></span>
-        <span class="nav-toggle__bar"></span>
-      </button>
-      <ul id="primary-menu" class="nav-menu">
+  <nav class="nav">
+    <div class="container nav__container">
+      <div class="logo">IRT GOLD</div>
+      <ul class="nav__menu">
         <li><a href="#home">หน้าแรก</a></li>
         <li><a href="#features">คุณสมบัติ</a></li>
         <li><a href="#indicators">Indicators</a></li>
-        <li><a href="#results">ผลลัพธ์</a></li>
-        <li><a href="#video-demo">วิดีโอ</a></li>
         <li><a href="#pricing">ราคา</a></li>
         <li><a href="#contact">ติดต่อ</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- ================= HERO ================= -->
-  <!-- ใส่รูปแบนเนอร์ผ่าน CSS: .hero-forex { background-image:url('PATH/your-hero.jpg'); } -->
-  <header class="hero-header hero-forex" id="home">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-badge">🔥 Limited Offer - ลดราคา 50% เหลือ 3 วันเท่านั้น!</div>
-      <h1>IRT GOLD V5.0 — Indicator 5‑in‑1</h1>
-      <p class="hero-subtitle">รวม Harmonic, Volume, Trend, S&R และ Signal Alert ในจอเดียว<br>แจ้งเตือนแบบเรียลไทม์ จับจังหวะเข้า–ออกเหมือนมืออาชีพ</p>
-      <div class="hero-cta">
-        <a href="#pricing" class="btn-cta">🚀 สั่งซื้อทันที - รับส่วนลด 50%</a>
-        <a href="#video-demo" class="btn-ghost" data-open-modal>▶ ดูสาธิต</a>
+  <!-- Hero Section -->
+  <header class="hero" id="home">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <h1>IRT GOLD V5.0</h1>
+      <p>Indicator 5-in-1: Harmonic • Signal • Support/Resistance • Trend • Volume</p>
+      <div class="hero__cta">
+        <a href="#pricing" class="btn btn--primary">🚀 สั่งซื้อเลย</a>
+        <a href="#features" class="btn btn--outline">ดูรายละเอียด</a>
       </div>
-      <ul class="trust-list" aria-label="จุดเด่นความน่าเชื่อถือ">
-        <li>🔒 ชำระเงินปลอดภัย</li>
-        <li>📞 Support 24/7</li>
-        <li>✅ รับประกันคืนเงิน 30 วัน</li>
-      </ul>
     </div>
   </header>
 
-  <!-- Hero features (รูปไอคอนถ้ามี: ใส่ใน .feature-icon หรือปล่อยเป็นอิโมจิอย่างเดิม) -->
-  <section class="hero-features">
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon"><!-- วาง <img src="PATH/icon1.png" alt=""> ได้ที่นี่ --></div>
-        <div class="feature-title">5 อินดิเคเตอร์ในตัวเดียว</div>
-        <div class="feature-desc">Harmonic, Volume, Trend, S&R, Signal Alert</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><!-- <img src="PATH/icon2.png" alt=""> --></div>
-        <div class="feature-title">85%+ </div>
-        <div class="feature-desc">จุดเข้า TP/SL อัตโนมัติ</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><!-- <img src="PATH/icon3.png" alt=""> --></div>
-        <div class="feature-title">แจ้งเตือน 24/7</div>
-        <div class="feature-desc">ไม่พลาดทุกจังหวะการทำกำไร</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><!-- <img src="PATH/icon4.png" alt=""> --></div>
-        <div class="feature-title">เข้ากลุ่ม LINE VIP</div>
-        <div class="feature-desc">ชุมชนนักเทรด + Signal Room ฟรี</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= INDICATORS ================= -->
-  <section id="indicators" class="indicators-alt" aria-label="Indicators">
-    <!-- Panel 1: Harmonic -->
-    <article class="panel">
-      <figure class="panel-media full-bleed">
-        <!-- รูป 16:9 -->
-        <img src="" alt="เครื่องตรวจจับรูปแบบฮาร์มอนิก" width="1920" height="1080" loading="lazy" decoding="async"><!-- ใส่ PATH/irt1.png -->
-      </figure>
-      <div class="container panel-body">
-        <ul class="panel-list">
-          <li><strong>สแกนอัตโนมัติ 7 รูปแบบ:</strong> ครอบคลุมโครงสร้าง Harmonic หลัก</li>
-          <li><strong>Fibonacci validation:</strong> ตรวจสัดส่วน 0.618 / 0.786 / 1.272 อัตโนมัติ</li>
-          <li><strong>ตัวกรองเกรด A:</strong> ทำงานเฉพาะสัญญาณคะแนนสูง (&gt;80%)</li>
-          <li><strong>โซนเข้าออกแม่นยำ:</strong> ให้จุดเข้า–ออกพร้อม R:R ที่เหมาะสม</li>
-        </ul>
-        <div class="panel-stats">
-          <div class="ps"><span class="v">87%</span><span class="l">อัตราความสำเร็จ</span></div>
-          <div class="ps"><span class="v">1:3</span><span class="l">ความเสี่ยง:ผลตอบแทน</span></div>
+  <!-- Features Section -->
+  <section class="section" id="features">
+    <div class="container">
+      <h2 class="section__title">คุณสมบัติหลัก</h2>
+      <div class="features__grid">
+        <div class="feature">
+          <div class="feature__img placeholder">รูปภาพ</div>
+          <h3>Harmonic Pattern</h3>
+          <p>ตรวจจับรูปแบบฮาร์โมนิก 7 แบบ พร้อมจุดเข้า-ออก TP/SL</p>
         </div>
-      </div>
-    </article>
-
-    <!-- Panel 2: Signals -->
-    <article class="panel">
-      <figure class="panel-media full-bleed">
-        <img src="" alt="สัญญาณซื้อขาย AI" width="1920" height="1080" loading="lazy" decoding="async"><!-- PATH/irt2.png -->
-      </figure>
-      <div class="container panel-body">
-        <ul class="panel-list">
-          <li><strong>Smart Signal:</strong> จุดเข้า–ออกพร้อม TP/SL</li>
-          <li><strong>Alerts:</strong> แจ้งเตือนทันทีผ่าน Mobile / Email / Line</li>
-          <li><strong>Filter:</strong> กรองร่วมกับเทรนด์และโซนราคา</li>
-          <li><strong>Signal Room:</strong> ซิงก์ห้องสัญญาณสำหรับเทรดตาม</li>
-        </ul>
-        <div class="panel-stats">
-          <div class="ps"><span class="v">LIVE</span><span class="l">Monitoring</span></div>
-          <div class="ps"><span class="v">95%</span><span class="l">ความแม่นยำ</span></div>
+        <div class="feature">
+          <div class="feature__img placeholder">รูปภาพ</div>
+          <h3>Signal Buy/Sell</h3>
+          <p>แจ้งสัญญาณกลับตัวและจังหวะเข้าซื้อ-ขายแบบ Real-time</p>
         </div>
-      </div>
-    </article>
-
-    <!-- Panel 3: Support/Resistance -->
-    <article class="panel">
-      <figure class="panel-media full-bleed">
-        <img src="" alt="แนวรับแนวต้านแบบไดนามิก" width="1920" height="1080" loading="lazy" decoding="async"><!-- PATH/irt3.png -->
-      </figure>
-      <div class="container panel-body">
-        <ul class="panel-list">
-          <li><strong>Auto Zone:</strong> วาดโซน S/R อัตโนมัติ</li>
-          <li><strong>Strength Level:</strong> ประเมินความแข็งแรงของโซน</li>
-          <li><strong>Price Action:</strong> วิเคราะห์ใจกลางโซน</li>
-          <li><strong>Breakout Alert:</strong> เตือนเมื่อทะลุโซนสำคัญ</li>
-        </ul>
-        <div class="panel-stats">
-          <div class="ps"><span class="v">AUTO</span><span class="l">การตรวจจับ</span></div>
-          <div class="ps"><span class="v">89%</span><span class="l">Zone Accuracy</span></div>
+        <div class="feature">
+          <div class="feature__img placeholder">รูปภาพ</div>
+          <h3>Support & Resistance</h3>
+          <p>สร้างแนวรับ-แนวต้านอัตโนมัติ แม่นยำใช้งานง่าย</p>
         </div>
-      </div>
-    </article>
-
-    <!-- Panel 4: Volume/Pressure -->
-    <article class="panel">
-      <figure class="panel-media full-bleed">
-        <img src="" alt="ปริมาณซื้อขายและแรงกดดัน" width="1920" height="1080" loading="lazy" decoding="async"><!-- PATH/irt4.png -->
-      </figure>
-      <div class="container panel-body">
-        <ul class="panel-list">
-          <li><strong>Smart Money Flow:</strong> ติดตามเม็ดเงินรายใหญ่</li>
-          <li><strong>Buy/Sell Pressure:</strong> เห็นปริมาณและสัดส่วนชัดเจน</li>
-          <li><strong>Volume Profile:</strong> ปริมาณตามระดับราคา</li>
-          <li><strong>Whale Alert:</strong> แจ้งเตือนคำสั่งขนาดใหญ่</li>
-        </ul>
-        <div class="panel-stats">
-          <div class="ps"><span class="v">LIVE</span><span class="l">Monitoring</span></div>
-          <div class="ps"><span class="v">53/47</span><span class="l">ซื้อ/ขาย (%)</span></div>
+        <div class="feature">
+          <div class="feature__img placeholder">รูปภาพ</div>
+          <h3>Trend System</h3>
+          <p>บอกแนวโน้มตลาด UPTREND / DOWNTREND เรียลไทม์</p>
         </div>
-      </div>
-    </article>
-
-    <!-- Panel 5: Trend System -->
-    <article class="panel">
-      <figure class="panel-media full-bleed">
-        <img src="" alt="ระบบเทรนด์หลายกรอบเวลา" width="1920" height="1080" loading="lazy" decoding="async"><!-- PATH/irt5.png -->
-      </figure>
-      <div class="container panel-body">
-        <ul class="panel-list">
-          <li><strong>Color Bar System:</strong> เขียว=Up / แดง=Down</li>
-          <li><strong>3 Timeframes:</strong> วิเคราะห์ M5 / M15 / H1</li>
-          <li><strong>Strength Score:</strong> ค่าความแรงของเทรนด์ 1–10</li>
-          <li><strong>Reversal Alert:</strong> เตือนก่อนกลับตัว</li>
-        </ul>
-        <div class="panel-stats">
-          <div class="ps"><span class="v">3X</span><span class="l">Timeframes</span></div>
-          <div class="ps"><span class="v">92%</span><span class="l">Trend Accuracy</span></div>
-        </div>
-      </div>
-    </article>
-  </section>
-
-  <!-- RESULTS -->
-  <section class="results-section" id="results">
-    <div class="section-header">
-      <h2 class="section-title">ผลลัพธ์ที่พิสูจน์แล้วจากผู้ใช้จริง</h2>
-      <p class="section-subtitle">ผู้ใช้ IRT GOLD มากกว่า 1,000+ ราย</p>
-    </div>
-    <div class="stats-container">
-      <div class="stat-card"><div class="stat-number">85%+</div><div class="stat-label">อัตราการชนะเฉลี่ย</div></div>
-      <div class="stat-card"><div class="stat-number">1,000+</div><div class="stat-label">ผู้ใช้งานทั่วประเทศ</div></div>
-      <div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label">การสนับสนุนและการฝึกสอน</div></div>
-      <div class="stat-card"><div class="stat-number">100%</div><div class="stat-label">รับประกันความพึงพอใจ</div></div>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="features-section" id="features">
-    <div class="section-header">
-      <h2 class="section-title">คุณสมบัติโดดเด่น IRT GOLD V5.0</h2>
-      <p class="section-subtitle">รวบรวมทุกฟังก์ชันที่นักเทรดต้องการ</p>
-    </div>
-    <div class="features-container"><!-- วางรูปประกอบ/ไอคอนได้ตามหมวดที่นี่ --></div>
-
-    <div class="platform-section">
-      <h3 class="platform-title">รองรับทุกแพลตฟอร์ม</h3>
-      <div class="platforms-grid">
-        <!-- หากต้องการ ใส่โลโก้แพลตฟอร์ม: <img src="PATH/mt5.png" alt="MT5"> -->
-        <div class="platform-item"><span class="platform-icon">💻</span><h4>MT4/MT5 เดสก์ท็อป</h4><p>Windows และ Mac</p></div>
-        <div class="platform-item"><span class="platform-icon">📱</span><h4>MT5 มือถือ</h4><p>iOS และ Android</p></div>
-        <div class="platform-item"><span class="platform-icon">📊</span><h4>TradingView</h4><p>Pine Script V5</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VIDEO DEMO -->
-  <section class="video-demo-section" id="video-demo">
-    <div class="section-header">
-      <h2 class="section-title">การสาธิตการใช้งาน IRT GOLD</h2>
-      <p class="section-subtitle">เรียนรู้การใช้งานจริงจากโค้ชแบงค์</p>
-    </div>
-
-    <div class="video-container">
-      <div class="video-grid">
-        <div class="main-video">
-          <div class="video-wrapper">
-            <!-- แทนที่ YOUR_VIDEO_ID ด้วยรหัส YouTube -->
-            <iframe class="yt" width="560" height="315" srcdoc='<!doctype html><html><body style="margin:0"><a href="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1" style="position:relative;display:block;width:100%;height:100%"><img src="https://i.ytimg.com/vi/YOUR_VIDEO_ID/hqdefault.jpg" alt="IRT GOLD V5.0 Demo" style="width:100%;height:100%;object-fit:cover"><span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:700 22px system-ui;padding:14px 18px;background:#FACC15;color:#1E3A8A;border-radius:999px">▶ เล่นวิดีโอ</span></a></body></html>' loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="IRT GOLD V5.0 Demo"></iframe>
-          </div>
-          <div class="video-description">
-            <h3>คุณจะเรียนรู้จากวิดีโอนี้:</h3>
-            <ul>
-              <li>วิธีติดตั้ง IRT GOLD บน MT5 (PC และ Mobile)</li>
-              <li>แนวคิดการเทรดทองคำพื้นฐาน</li>
-              <li>อ่านสัญญาณ Buy/Sell จากระบบ</li>
-              <li>ใช้ Harmonic Pattern ร่วมกับ Volume</li>
-              <li>ตั้ง TP/SL อัตโนมัติ</li>
-            </ul>
-          </div>
-        </div>
-        <aside class="tutorial-videos">
-          <h3>วิดีโอสอนเพิ่มเติม</h3>
-          <!-- วางลิงก์/รูปวิดีโอย่อยที่นี่ -->
-        </aside>
-      </div>
-
-      <div class="live-sessions" id="contact">
-        <div class="session-header">
-          <h3>🔴 LIVE Trading Sessions ทุกวันพุธ 20:00 น.</h3>
-          <p>เทรดสดพร้อมโค้ชธนาคาร ดูการใช้งาน IRT GOLD แบบ Real-time</p>
-        </div>
-        <div class="session-stats">
-          <div class="stat"><span class="number">50+</span><span class="label">Sessions ที่จัดแล้ว</span></div>
-          <div class="stat"><span class="number">85%</span><span class="label">อัตราการชนะเฉลี่ย</span></div>
-          <div class="stat"><span class="number">500+</span><span class="label">ผู้เข้าร่วมต่อครั้ง</span></div>
-        </div>
-        <a href="#pricing" class="cta-secondary">📅 จองที่นั่ง LIVE Session ถัดไป</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="testimonials-section" id="testimonials" aria-label="เสียงจากผู้ใช้จริง">
-    <div class="section-header">
-      <h2 class="section-title" style="color:white;">เสียงจากผู้ใช้จริง</h2>
-      <p class="section-subtitle" style="color:var(--primary-light);">รีวิวจากนักเทรดที่ประสบความสำเร็จ</p>
-    </div>
-    <div class="testimonial-card">
-      <p class="testimonial-text">"ผมเพิ่งเทรดได้กำไรเพราะโค้ชครับ ... ระบบช่วยให้เทรดมีวินัยและไม่ใช้อารมณ์"</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">KS</div>
-        <div class="author-info">
-          <div class="author-name">คุณสมชาย</div>
-          <div class="author-title">นักเทรดทองคำ | กำไร 200% ใน 3 สัปดาห์</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <p class="testimonial-text">"IRT GOLD เปลี่ยนชีวิตการเทรดของฉันไปได้เลย ... ทำกำไรได้มากขึ้น"</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">NP</div>
-        <div class="author-info">
-          <div class="author-name">คุณนิภา</div>
-          <div class="author-title">นักลงทุนหุ้น | พอร์ตโฟลิโอโต 150% ใน 6 สัปดาห์</div>
+        <div class="feature">
+          <div class="feature__img placeholder">รูปภาพ</div>
+          <h3>Volume Analysis</h3>
+          <p>วัดแรงซื้อ-ขายของตลาด ช่วยประเมินโอกาสการเทรด</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PRICING -->
-  <section class="pricing-section" id="pricing">
-    <div class="section-header">
-      <h2 class="section-title">ราคาพิเศษ - จำกัดเวลา!</h2>
-      <p class="section-subtitle">จ่ายครั้งเดียวใช้ได้ตลอดชีวิต + อัปเดตฟรีตลอดการใช้งาน</p>
-    </div>
-
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <div class="pricing-badge">POPULAR</div>
-        <h3 class="center">MT5 มือถือ + TradingView</h3>
-        <p class="muted center">iOS / Android + Pine Script V5</p>
-        <div class="price-container">
-          <div class="price-current">฿2,390</div>
-          <div class="price-save">พร้อมอัปเดตฟรีตลอดชีพ</div>
-        </div>
-        <ul class="pricing-features">
-          <li>ระบบอินดิเคเตอร์ 5-in-1 ครบชุด</li>
-          <li>คำแนะนำ MT5 Mobile (iOS/Android)</li>
-          <li>TradingView Script (Pine V5)</li>
-          <li>สัญญาณแจ้งเตือน Real-time 24/7</li>
-          <li>คอร์สสอนการใช้งานแบบย่อ</li>
-          <li>เข้ากลุ่ม VIP Signal Room</li>
-          <li>อัปเดตฟรี</li>
-          <li>รับประกัน 30 วัน</li>
-        </ul>
-        <a href="#order-mobile" class="cta-primary center-block">📲 สั่งซื้อแพ็กเกจมือถือ</a>
-        <p class="muted center">🔒 ชำระเงินปลอดภัย 100% | 📞 ฝ่ายสนับสนุน 24/7</p>
+  <!-- Indicators Showcase -->
+  <section class="section" id="indicators">
+    <div class="container">
+      <h2 class="section__title">ตัวอย่างการทำงาน</h2>
+      <div class="indicators__grid">
+        <div class="indicator placeholder">พื้นที่รูป Indicator 1</div>
+        <div class="indicator placeholder">พื้นที่รูป Indicator 2</div>
+        <div class="indicator placeholder">พื้นที่รูป Indicator 3</div>
+        <div class="indicator placeholder">พื้นที่รูป Indicator 4</div>
+        <div class="indicator placeholder">พื้นที่รูป Indicator 5</div>
       </div>
+    </div>
+  </section>
 
-      <div class="pricing-card best">
-        <div class="pricing-badge alt">คุ้มค่าที่สุด</div>
-        <h3 class="center">MT5 PC + TradingView</h3>
-        <p class="muted center">Windows / Mac + Pine Script V5</p>
-        <div class="price-container">
-          <div class="price-current">฿4,590</div>
-          <div class="price-save">ครบทั้ง Desktop & TradingView</div>
+  <!-- Pricing Section -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <h2 class="section__title">แพ็กเกจราคา</h2>
+      <div class="pricing__grid">
+        <div class="pricing__card">
+          <h3>Mobile + TradingView</h3>
+          <div class="placeholder">ภาพแพ็กเกจ</div>
+          <p class="price">฿2,390</p>
+          <ul>
+            <li>MT5 Mobile</li>
+            <li>TradingView Pine Script</li>
+            <li>Signal แจ้งเตือนเรียลไทม์</li>
+          </ul>
+          <a href="#contact" class="btn btn--primary">สั่งซื้อ</a>
         </div>
-        <ul class="pricing-features">
-          <li>ระบบอินดิเคเตอร์ 5-in-1 ครบชุด</li>
-          <li>ชุด MT5 PC (Windows/Mac)</li>
-          <li>TradingView Script (Pine V5)</li>
-          <li>สัญญาณแจ้งเตือนแบบเรียลไทม์ 24/7</li>
-          <li>Live Coaching + คอร์สสอนเต็ม</li>
-          <li>VIP Signal Room ตลอดชีวิต</li>
-          <li>อัปเดตฟีเจอร์ใหม่ฟรี</li>
-          <li>รับประกัน 30 วัน</li>
-        </ul>
-        <a href="#order-pc" class="cta-primary center-block">💻 สั่งซื้อแพ็กเกจ PC</a>
-        <p class="muted center">🔒 ชำระเงินปลอดภัย 100% | 📞 Support 24/7</p>
+        <div class="pricing__card">
+          <h3>PC + TradingView</h3>
+          <div class="placeholder">ภาพแพ็กเกจ</div>
+          <p class="price">฿4,590</p>
+          <ul>
+            <li>MT5 PC (Windows/Mac)</li>
+            <li>TradingView Pine Script</li>
+            <li>Signal + Live Coaching</li>
+          </ul>
+          <a href="#contact" class="btn btn--primary">สั่งซื้อ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2 class="section__title">ติดต่อเรา</h2>
+      <div class="contact__info">
+        <p>📍 ที่อยู่: อุดรธานี, ประเทศไทย</p>
+        <p>📞 โทร: 099-999-9999</p>
+        <p>💬 Line: @irtgold</p>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="footer-content">
-      <h3>IRT GOLD</h3>
-      <p>สร้างจังหวะให้การเทรด - แบงค์โค้ชศุภวัสส์</p>
-      <p>📍 อุดรธานี, ประเทศไทย | 📞 ไลน์: <a href="https://line.me/R/ti/p/@irtgold" target="_blank" rel="noopener">@irtgold</a></p>
-      <div class="social-links">
-        <a href="#" aria-label="Facebook" rel="noopener" target="_blank">📘</a>
-        <a href="#" aria-label="Instagram" rel="noopener" target="_blank">📷</a>
-        <a href="#" aria-label="YouTube" rel="noopener" target="_blank">🎬</a>
-        <a href="#" aria-label="TikTok" rel="noopener" target="_blank">🎵</a>
-      </div>
-      <p class="copyright">© 2025 IRT GOLD สงวนลิขสิทธิ์ | <a href="#" class="muted">ความเป็นส่วนตัว</a></p>
+    <div class="container">
+      <p>© 2025 IRT GOLD — All Rights Reserved</p>
     </div>
   </footer>
-
-  <!-- FAB -->
-  <div class="fab">
-    <a class="fab-btn fab-line" href="https://line.me/R/ti/p/@irtgold" target="_blank" rel="noopener" aria-label="แชท LINE">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffffff" d="M19.5 10.5c0 3.59-3.58 6.5-8 6.5-.86 0-1.68-.11-2.45-.32L5 18.5l.89-3.11C5.32 14.42 5 13.49 5 12.5 5 8.91 8.58 6 13 6s6.5 2.91 6.5 4.5z"/></svg>
-    </a>
-    <a class="fab-btn fab-call" href="tel:+66999999999" aria-label="โทรหาเรา">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffffff" d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.32.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1C11.85 21 3 12.15 3 1a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.24 1.02l-2.2 2.2z"/></svg>
-    </a>
-    <a class="fab-btn fab-chat" href="#contact" aria-label="เปิดฟอร์มแชท">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffffff" d="M20 2H4a2 2 0 00-2 2v14l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2z"/></svg>
-    </a>
-  </div>
-
-  <!-- Sticky CTA (mobile) -->
-  <div class="sticky-cta" role="complementary">
-    <a href="#pricing" class="sticky-cta__btn">🚀 รับส่วนลด 50% วันนี้</a>
-  </div>
-
-  <!-- Modal (Video) -->
-  <dialog class="modal" id="videoModal" aria-label="ดูวิดีโอสาธิต">
-    <div class="modal__content">
-      <button class="modal__close" data-close-modal aria-label="ปิด">✕</button>
-      <div class="modal__frame">
-        <!-- แทนที่ YOUR_VIDEO_ID ด้วยรหัส YouTube -->
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="IRT GOLD V5.0 - Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-    </div>
-  </dialog>
-
-  <!-- Scripts: minimal interaction -->
-  <script>
-  const navToggle=document.querySelector('.nav-toggle');
-  const menu=document.getElementById('primary-menu');
-  if(navToggle){navToggle.addEventListener('click',()=>{const e=navToggle.getAttribute('aria-expanded')==='true';navToggle.setAttribute('aria-expanded',String(!e));document.body.classList.toggle('menu-open');menu.classList.toggle('open');});}
-
-  const modal=document.getElementById('videoModal');
-  document.querySelectorAll('[data-open-modal]').forEach(btn=>btn.addEventListener('click',(e)=>{e.preventDefault();if(typeof modal.showModal==='function'){modal.showModal();}else{modal.setAttribute('open','');}}));
-  document.querySelectorAll('[data-close-modal]').forEach(btn=>btn.addEventListener('click',()=>modal.close()));
-  modal && modal.addEventListener('click',(e)=>{ if(e.target===modal) modal.close(); });
-
-  const observer=new IntersectionObserver((entries)=>{entries.forEach(el=>{if(el.isIntersecting){el.target.classList.add('reveal');observer.unobserve(el.target);}})},{threshold:0.1});
-  document.querySelectorAll('.indicator-box, .perf-card, .stat-card, .features-category, .platform-item').forEach(el=>observer.observe(el));
-  </script>
 </body>
 </html>
