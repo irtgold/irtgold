@@ -72,8 +72,8 @@
     </div>
   </nav>
 
-  <!-- ================= HERO (HTML เท่านั้น – ใส่ CSS เอง) ================= -->
-  <!-- ใช้รูปแบนเนอร์เป็นพื้นหลังผ่าน CSS ที่ .hero-header/.hero-forex -->
+  <!-- ================= HERO ================= -->
+  <!-- ใส่รูปแบนเนอร์ผ่าน CSS: .hero-forex { background-image:url('PATH/your-hero.jpg'); } -->
   <header class="hero-header hero-forex" id="home">
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -92,38 +92,39 @@
     </div>
   </header>
 
-  <!-- Hero features (แยกจาก header เพื่อจัดกริดได้ง่าย) -->
+  <!-- Hero features (รูปไอคอนถ้ามี: ใส่ใน .feature-icon หรือปล่อยเป็นอิโมจิอย่างเดิม) -->
   <section class="hero-features">
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">📊</div>
+        <div class="feature-icon"><!-- วาง <img src="PATH/icon1.png" alt=""> ได้ที่นี่ --></div>
         <div class="feature-title">5 อินดิเคเตอร์ในตัวเดียว</div>
         <div class="feature-desc">Harmonic, Volume, Trend, S&R, Signal Alert</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🎯</div>
+        <div class="feature-icon"><!-- <img src="PATH/icon2.png" alt=""> --></div>
         <div class="feature-title">85%+ </div>
         <div class="feature-desc">จุดเข้า TP/SL อัตโนมัติ</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">📱</div>
+        <div class="feature-icon"><!-- <img src="PATH/icon3.png" alt=""> --></div>
         <div class="feature-title">แจ้งเตือน 24/7</div>
         <div class="feature-desc">ไม่พลาดทุกจังหวะการทำกำไร</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">💬</div>
+        <div class="feature-icon"><!-- <img src="PATH/icon4.png" alt=""> --></div>
         <div class="feature-title">เข้ากลุ่ม LINE VIP</div>
         <div class="feature-desc">ชุมชนนักเทรด + Signal Room ฟรี</div>
       </div>
     </div>
   </section>
 
-  <!-- ================= INDICATORS (คงโครงเดิม) ================= -->
+  <!-- ================= INDICATORS ================= -->
   <section id="indicators" class="indicators-alt" aria-label="Indicators">
     <!-- Panel 1: Harmonic -->
     <article class="panel">
       <figure class="panel-media full-bleed">
-        <img src="assets/Github-p/irtpc/irt1.png" alt="เครื่องตรวจจับรูปแบบฮาร์มอนิก" width="1920" height="1080" loading="lazy" decoding="async">
+        <!-- รูป 16:9 -->
+        <img src="" alt="เครื่องตรวจจับรูปแบบฮาร์มอนิก" width="1920" height="1080" loading="lazy" decoding="async"><!-- ใส่ PATH/irt1.png -->
       </figure>
       <div class="container panel-body">
         <ul class="panel-list">
@@ -142,7 +143,7 @@
     <!-- Panel 2: Signals -->
     <article class="panel">
       <figure class="panel-media full-bleed">
-        <img src="assets/Github-p/irtpc/irt2.png" alt="สัญญาณซื้อขาย AI" width="1920" height="1080" loading="lazy" decoding="async">
+        <img src="" alt="สัญญาณซื้อขาย AI" width="1920" height="1080" loading="lazy" decoding="async"><!-- PATH/irt2.png -->
       </figure>
       <div class="container panel-body">
         <ul class="panel-list">
@@ -161,7 +162,7 @@
     <!-- Panel 3: Support/Resistance -->
     <article class="panel">
       <figure class="panel-media full-bleed">
-        <img src="assets/Github-p/irtpc/irt3.png" alt="แนวรับแนวต้านแบบไดนามิก" width="1920" height="1080" loading="lazy" decoding="async">
+        <img src="" alt="แนวรับแนวต้านแบบไดนามิก" width="1920" height="1080" loading="lazy" decoding="async"><!-- PATH/irt3.png -->
       </figure>
       <div class="container panel-body">
         <ul class="panel-list">
@@ -180,7 +181,7 @@
     <!-- Panel 4: Volume/Pressure -->
     <article class="panel">
       <figure class="panel-media full-bleed">
-        <img src="assets/Github-p/irtpc/irt4.png" alt="ปริมาณซื้อขายและแรงกดดัน" width="1920" height="1080" loading="lazy" decoding="async">
+        <img src="" alt="ปริมาณซื้อขายและแรงกดดัน" width="1920" height="1080" loading="lazy" decoding="async"><!-- PATH/irt4.png -->
       </figure>
       <div class="container panel-body">
         <ul class="panel-list">
@@ -199,7 +200,7 @@
     <!-- Panel 5: Trend System -->
     <article class="panel">
       <figure class="panel-media full-bleed">
-        <img src="assets/Github-p/irtpc/irt5.png" alt="ระบบเทรนด์หลายกรอบเวลา" width="1920" height="1080" loading="lazy" decoding="async">
+        <img src="" alt="ระบบเทรนด์หลายกรอบเวลา" width="1920" height="1080" loading="lazy" decoding="async"><!-- PATH/irt5.png -->
       </figure>
       <div class="container panel-body">
         <ul class="panel-list">
@@ -236,11 +237,12 @@
       <h2 class="section-title">คุณสมบัติโดดเด่น IRT GOLD V5.0</h2>
       <p class="section-subtitle">รวบรวมทุกฟังก์ชันที่นักเทรดต้องการ</p>
     </div>
-    <div class="features-container"><!-- เพิ่มหมวดคุณสมบัติที่นี่ --></div>
+    <div class="features-container"><!-- วางรูปประกอบ/ไอคอนได้ตามหมวดที่นี่ --></div>
 
     <div class="platform-section">
       <h3 class="platform-title">รองรับทุกแพลตฟอร์ม</h3>
       <div class="platforms-grid">
+        <!-- หากต้องการ ใส่โลโก้แพลตฟอร์ม: <img src="PATH/mt5.png" alt="MT5"> -->
         <div class="platform-item"><span class="platform-icon">💻</span><h4>MT4/MT5 เดสก์ท็อป</h4><p>Windows และ Mac</p></div>
         <div class="platform-item"><span class="platform-icon">📱</span><h4>MT5 มือถือ</h4><p>iOS และ Android</p></div>
         <div class="platform-item"><span class="platform-icon">📊</span><h4>TradingView</h4><p>Pine Script V5</p></div>
@@ -259,7 +261,8 @@
       <div class="video-grid">
         <div class="main-video">
           <div class="video-wrapper">
-            <iframe class="yt" width="560" height="315" srcdoc='<!doctype html><html><body style="margin:0"><a href="https://www.youtube.com/embed/VIDEO_ID?autoplay=1" style="position:relative;display:block;width:100%;height:100%"><img src="https://i.ytimg.com/vi/VIDEO_ID/hqdefault.jpg" alt="IRT GOLD V5.0 Demo" style="width:100%;height:100%;object-fit:cover"><span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:700 22px system-ui;padding:14px 18px;background:#FACC15;color:#1E3A8A;border-radius:999px">▶ เล่นวิดีโอ</span></a></body></html>' loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="IRT GOLD V5.0 Demo"></iframe>
+            <!-- แทนที่ YOUR_VIDEO_ID ด้วยรหัส YouTube -->
+            <iframe class="yt" width="560" height="315" srcdoc='<!doctype html><html><body style="margin:0"><a href="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1" style="position:relative;display:block;width:100%;height:100%"><img src="https://i.ytimg.com/vi/YOUR_VIDEO_ID/hqdefault.jpg" alt="IRT GOLD V5.0 Demo" style="width:100%;height:100%;object-fit:cover"><span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:700 22px system-ui;padding:14px 18px;background:#FACC15;color:#1E3A8A;border-radius:999px">▶ เล่นวิดีโอ</span></a></body></html>' loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="IRT GOLD V5.0 Demo"></iframe>
           </div>
           <div class="video-description">
             <h3>คุณจะเรียนรู้จากวิดีโอนี้:</h3>
@@ -274,6 +277,7 @@
         </div>
         <aside class="tutorial-videos">
           <h3>วิดีโอสอนเพิ่มเติม</h3>
+          <!-- วางลิงก์/รูปวิดีโอย่อยที่นี่ -->
         </aside>
       </div>
 
@@ -413,12 +417,13 @@
     <div class="modal__content">
       <button class="modal__close" data-close-modal aria-label="ปิด">✕</button>
       <div class="modal__frame">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" title="IRT GOLD V5.0 - Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <!-- แทนที่ YOUR_VIDEO_ID ด้วยรหัส YouTube -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="IRT GOLD V5.0 - Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
     </div>
   </dialog>
 
-  <!-- Scripts: minimal interaction (เหมือนของเดิม) -->
+  <!-- Scripts: minimal interaction -->
   <script>
   const navToggle=document.querySelector('.nav-toggle');
   const menu=document.getElementById('primary-menu');
