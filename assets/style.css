@@ -284,4 +284,16 @@ grid-template-columns: 1fr; /* Extra small = 1 per row */
 .panel-list{list-style:none !important;display:inline-block !important;text-align:left !important;margin:0 auto !important;}
 .panel-list li{padding:8px 0 !important;}
 /* =========================================================== */
+/* Hero header (buy pawn ticket) */
+.hero-header{
+  position:relative;height:80vh;display:flex;justify-content:center;align-items:center;
+  background:url("assets/banner.jpg") center/cover no-repeat;color:#fff;text-align:center
+}
+.hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.hero-content{position:relative;z-index:2;max-width:800px;padding:20px}
+.hero-content h1{font-size:clamp(28px,6vw,56px);font-weight:800;margin:0 0 12px}
+.hero-content p{font-size:clamp(16px,2.2vw,20px);margin:0 0 20px}
+.btn-cta{display:inline-block;background:#FACC15;color:#1E3A8A;padding:12px 28px;border-radius:999px;
+  font-weight:700;text-decoration:none}
+.btn-cta:hover{background:#FBD024}
 
