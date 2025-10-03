@@ -574,3 +574,66 @@ body{ margin:0; }
   font-size:16px;
   color:#334155;
 }
+/* ===== PC section: card + floating caption (เหมือนมือถือ) ===== */
+.pc-stack{
+  display: grid;
+  gap: 28px;
+}
+
+/* หน้าจอใหญ่ให้กว้างเนียนขึ้น */
+@media (min-width: 1024px){
+  .pc-stack{
+    gap: 32px;
+  }
+}
+
+.pc-card{
+  position: relative;
+  width: 100%;
+}
+
+.pc-card__media{
+  margin: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(3, 23, 56, .16);
+  background: #0b1f3a; /* กันกระพริบขาวก่อนโหลดรูป */
+}
+
+.pc-card__media img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* กล่องข้อความลอยทับ (เหมือนฝั่งมือถือ) */
+.pc-caption{
+  position: relative;
+  width: min(880px, 92%);
+  margin: -24px auto 0;   /* ดันขึ้นให้ลอยจากรูป */
+  background: #fff;
+  padding: 20px 22px;
+  border-radius: 14px;
+  box-shadow: 0 14px 30px rgba(15, 30, 80, .15);
+  text-align: center;
+}
+
+.pc-caption__title{
+  font-weight: 700;
+  font-size: 1.15rem;      /* ใหญ่ขึ้นจากเดิมเล็กน้อย */
+  color: #0B2C6C;
+  margin: 0 0 6px 0;
+}
+
+.pc-caption__desc{
+  margin: 0;
+  color: #334155;
+  line-height: 1.65;
+  font-size: 0.98rem;
+}
+
+/* ปรับสำหรับจอใหญ่ให้ตัวอักษรดูเต็มขึ้น */
+@media (min-width: 1200px){
+  .pc-caption__title{ font-size: 1.25rem; }
+  .pc-caption__desc{  font-size: 1.05rem; }
+}
