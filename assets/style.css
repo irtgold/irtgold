@@ -438,3 +438,47 @@ body{ margin:0; }
   height: auto;
   display: block;
 }
+/* Mobile shots */
+.mobile-shots {
+  display: grid;
+  gap: 20px;
+}
+
+.mobile-shot img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+.mobile-cap {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-top: 12px;
+  box-shadow: 0 8px 18px rgba(16, 24, 40, 0.06);
+}
+
+.mobile-cap h3 {
+  margin: 0 0 6px;
+  font-weight: 700;
+  font-size: 1rem;           /* ~16px */
+  color: #0F2B5B;            /* โทนน้ำเงินเข้ม */
+}
+
+.mobile-cap p {
+  margin: 0;
+  color: #5B6B7C;            /* เทาอ่านง่าย */
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ให้ดูดีในจอใหญ่ */
+@media (min-width: 768px) {
+  .mobile-shots {
+    gap: 24px;
+  }
+  .mobile-cap {
+    padding: 18px 20px;
+  }
+}
