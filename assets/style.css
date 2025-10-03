@@ -336,3 +336,69 @@ body{ margin:0; }
   border-radius: 14px;
   display: block;
 }
+/* ===== Testimonials (t-*) ===== */
+.t-grid{
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap:24px;
+  margin-top:28px;
+}
+@media (max-width: 1024px){ .t-grid{ grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 640px){ .t-grid{ grid-template-columns: 1fr; } }
+
+.t-card{
+  background:#ffffff;
+  border-radius:16px;
+  padding:22px 22px 18px;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
+  border:1px solid rgba(2,6,23,0.06);
+}
+
+.t-stars{
+  font-size:18px;
+  line-height:1;
+  color:#FBBF24; /* สีดาว: ทอง */
+  letter-spacing:2px;
+  margin-bottom:10px;
+  font-weight:700;
+}
+.t-stars span{ font-family: ui-sans-serif, system-ui, -apple-system, "Prompt", Arial; }
+
+.t-text{
+  color:#1f2937;
+  font-size:15px;
+  line-height:1.7;
+  margin:0 0 14px 0;
+}
+
+.t-user{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:6px;
+}
+.avatar{
+  width:44px; height:44px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #fff;
+  box-shadow: 0 3px 8px rgba(2,6,23,.15);
+}
+/* ถ้าไม่มีรูป จะโชว์วงกลมเทาแทน */
+.avatar--ph{
+  background:linear-gradient(135deg,#e5e7eb,#d1d5db);
+  width:44px;height:44px;border-radius:50%;
+  display:inline-block;
+}
+
+.t-user__meta{ line-height:1.15; }
+.t-user__name{
+  font-weight:700;
+  color:#0f172a;
+  font-size:14px;
+}
+.t-user__role{
+  color:#6b7280;
+  font-size:12.5px;
+  margin-top:2px;
+}
