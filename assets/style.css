@@ -402,3 +402,19 @@ body{ margin:0; }
   font-size:12.5px;
   margin-top:2px;
 }
+/* จัดวิดีโอให้อยู่กึ่งกลาง + ให้ยืดหยุ่นกับหน้าจอ */
+.video{
+  display: flex;
+  justify-content: center;   /* จัดกลางแนวนอน */
+  align-items: center;       /* (เผื่อกรอบสูง) จัดกลางแนวตั้ง */
+  margin: 24px auto;         /* เว้นระยะบนล่าง และกลางภายในบรรทัด */
+  width: 100%;
+}
+
+.video iframe{
+  width: min(540px, 100%);   /* ไม่เกิน 540px แต่เล็กได้ตามหน้าจอ */
+  aspect-ratio: 9/16;        /* รักษาสัดส่วนแนวตั้ง 540x960 */
+  height: auto;              /* ให้คำนวณจาก aspect-ratio */
+  border: 0;
+  border-radius: 12px;       /* ถ้าอยากมีมุมโค้ง ลบได้ */
+}
