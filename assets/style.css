@@ -244,3 +244,14 @@ h1,h2,h3,h4,h5,h6 { font-weight: 800; }
   height:auto;
   display:block;
 }
+.pc-cover{
+  border-radius:0;
+  box-shadow:none;
+  margin:0;
+  padding:0;
+}
+.pc-cover img{
+  width:100%;
+  height:auto;
+  display:block;
+}
