@@ -742,3 +742,74 @@ body{ margin:0; }
   #irtpc .pc-card{ margin-bottom: 90px; }
   #irtpc .pc-caption{ bottom: -20px; padding: 18px 20px; }
 }
+/* ===== PC section : make caption float over the image (like MB) ===== */
+
+/* ภาชนะรวมของบัตรแต่ละใบ */
+.pc-card{
+  position: relative;               /* เพื่อให้ caption วางแบบ absolute อ้างอิงใบนี้ */
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ตัวรูป */
+.pc-card__media{
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 14px;               /* ขอบมนเหมือนภาพมือถือ */
+  box-shadow: 0 8px 28px rgba(20,35,90,.25);
+}
+
+.pc-card__media img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* กล่องคำอธิบายแบบลอยทับ (เหมือน MB) */
+.pc-caption{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(12px, 3vw, 28px);    /* ระยะห่างจากขอบล่างของรูป */
+  z-index: 3;
+
+  width: min(860px, 80%);            /* จำกัดความกว้างให้ดูพอดี */
+  padding: clamp(14px, 2.2vw, 22px) clamp(16px, 2.6vw, 28px);
+  border-radius: 18px;
+
+  background: #ffffff;
+  color: #0f2147;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(24, 39, 75, .25);
+}
+
+/* หัวข้อ & คำอธิบายให้ใหญ่ใกล้เคียงมือถือ */
+.pc-caption__title{
+  font-weight: 800;
+  font-size: clamp(18px, 1.6vw, 24px);
+  line-height: 1.25;
+  margin: 0 0 .35em;
+  color: #11336f;
+}
+
+.pc-caption__desc{
+  font-size: clamp(14px, 1.2vw, 18px);
+  line-height: 1.55;
+  margin: 0;
+  color: #243b6b;
+}
+
+/* ระยะห่างระหว่างบัตรแต่ละใบใน PC */
+.pc-stack{
+  display: grid;
+  gap: clamp(28px, 3.2vw, 44px);
+}
+
+/* ปรับบนจอเล็ก (กัน caption กว้างเกิน) */
+@media (max-width: 768px){
+  .pc-caption{
+    width: 88%;
+    bottom: 14px;
+  }
+}
