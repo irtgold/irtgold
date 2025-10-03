@@ -637,3 +637,49 @@ body{ margin:0; }
   .pc-caption__title{ font-size: 1.25rem; }
   .pc-caption__desc{  font-size: 1.05rem; }
 }
+/* ===== IRT PC: รูป + กล่องลอยติดรูป ===== */
+.pc-shot {
+  position: relative;
+  margin: 0 0 120px;                 /* เผื่อพื้นที่กล่องลอย */
+}
+
+.pc-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+
+.pc-cap {
+  position: absolute;
+  left: 50%;
+  bottom: -26px;                    /* ให้ลอยต่ำกว่าขอบล่างภาพเล็กน้อย */
+  transform: translateX(-50%);
+  width: min(900px, 88%);           /* คุมความกว้างกล่อง */
+  background: #fff;
+  border-radius: 18px;
+  padding: 18px 22px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
+}
+
+.pc-cap h3 {
+  margin: 0 0 .4rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.pc-cap p {
+  margin: 0;
+  color: #334155;
+  line-height: 1.55;
+}
+
+/* ระยะท้ายบล็อกสุดท้าย */
+#irtpc .pc-shot:last-child { margin-bottom: 80px; }
+
+/* Responsive */
+@media (max-width: 992px) {
+  .pc-shot { margin-bottom: 96px; }
+  .pc-cap  { width: 92%; bottom: -20px; }
+}
