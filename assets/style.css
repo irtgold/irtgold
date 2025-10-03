@@ -683,3 +683,62 @@ body{ margin:0; }
   .pc-shot { margin-bottom: 96px; }
   .pc-cap  { width: 92%; bottom: -20px; }
 }
+/* --- PC cards: make caption float over image like Mobile --- */
+#irtpc .pc-stack{
+  display: grid;
+  gap: 40px;
+  overflow: visible;             /* สำคัญ: ให้เห็นส่วนที่ล้น */
+}
+
+/* โครงการ์ดแต่ละใบ */
+#irtpc .pc-card{
+  position: relative;            /* ให้ .pc-caption อ้างอิง */
+  margin-bottom: 110px;          /* เผื่อพื้นที่กล่องที่ลอยทับด้านล่าง */
+  overflow: visible;             /* อย่าตัดส่วนล้น */
+}
+
+/* รูปให้เต็มกรอบเสมอ */
+#irtpc .pc-card__media img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* กล่องคำอธิบายที่ “ลอยทับ” เหมือนมือถือ */
+#irtpc .pc-caption{
+  position: absolute;
+  left: 50%;
+  bottom: -28px;                 /* เลื่อนให้ทับออกจากรูปนิดนึง */
+  transform: translateX(-50%);
+  width: min(900px, 88%);        /* กล่องกว้างแบบ responsive */
+  background: #fff;
+  color: #0b1d3a;
+  text-align: center;
+  padding: 22px 28px;
+  border-radius: 18px;
+  box-shadow: 0 14px 40px rgba(2,16,40,.18);
+  z-index: 3;
+}
+
+/* ตัวอักษรใหญ่ขึ้นเล็กน้อย */
+#irtpc .pc-caption__title{
+  font-size: clamp(18px, 2.2vw, 22px);
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+#irtpc .pc-caption__desc{
+  font-size: clamp(14px, 1.65vw, 16px);
+  margin: 0;
+  opacity: .9;
+}
+
+/* ป้องกัน parent ชั้นนอกตัดเงา/กล่องล้น */
+.section, #irtpc, #irtpc .container{
+  overflow: visible;
+}
+
+/* จอเล็ก: ขยับระยะให้พอดี */
+@media (max-width: 768px){
+  #irtpc .pc-card{ margin-bottom: 90px; }
+  #irtpc .pc-caption{ bottom: -20px; padding: 18px 20px; }
+}
