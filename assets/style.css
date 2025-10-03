@@ -115,3 +115,91 @@ body{font-family:'Prompt',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;col
   background-clip: text;
   color: transparent; /* ทำให้ไล่สีทำงานกับตัวอักษร */
 }
+/* ============ NAV / LOGO (Desktop) ============ */
+.nav__container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  height:72px;
+  padding:0 16px;
+}
+
+.logo{
+  text-decoration:none;
+  font-weight:900;
+  font-size:28px;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  display:flex;
+  align-items:center;
+  gap:0;
+  color:#FACC15;              /* สีทองล้วน */
+}
+
+/* ถ้ายังมีรูปโลโก้ค้างอยู่ ให้ซ่อนไป */
+.logo__img{ display:none !important; }
+
+/* เมนูปกติ (เดสก์ท็อป) */
+.nav__menu{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+.nav__menu a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  position:relative;
+  padding:6px 0;
+}
+.nav__menu a::after{
+  content:"";
+  position:absolute;
+  left:0; bottom:-6px;
+  width:0; height:2px;
+  background:#FACC15;
+  transition:width .25s ease;
+}
+.nav__menu a:hover::after{ width:100%; }
+
+/* ============ MOBILE (<=768px) ============ */
+@media (max-width:768px){
+  .nav__container{
+    height:auto;
+    padding:8px 12px;
+    flex-direction:column;     /* โลโก้บน เมนูใต้ */
+    align-items:flex-start;
+    gap:8px;
+  }
+  .logo{
+    font-size:20px;            /* ย่อให้พอดีจอ */
+    line-height:1.2;
+    color:#FACC15;             /* สีทองเช่นเดิม */
+  }
+
+  /* เมนูเป็น pill เลื่อนข้าง */
+  .nav__menu{
+    width:100%;
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    white-space:nowrap;
+    padding:6px 2px 10px;
+    margin:0 -6px;
+    scrollbar-width:none;      /* Firefox ซ่อนแถบเลื่อน */
+  }
+  .nav__menu::-webkit-scrollbar{ display:none; } /* iOS/Chrome */
+
+  .nav__menu a{
+    display:inline-block;
+    padding:8px 12px;
+    border-radius:999px;
+    background:rgba(255,255,255,.08);
+  }
+  .nav__menu a::after{ display:none; }          /* ตัดเส้น hover เดิม */
+  .nav__menu a:active{
+    outline:2px solid #FACC15;
+    outline-offset:2px;
+  }
+}
