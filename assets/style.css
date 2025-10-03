@@ -80,3 +80,38 @@ body{font-family:'Prompt',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;col
   .pricing__grid{grid-template-columns:1fr}
   .irtmb__grid{grid-template-columns:1fr}
 }
+/* เดิมอาจมีอยู่แล้ว — แก้ทับได้เลย */
+.nav__container{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  height:72px; /* สูงขึ้นเล็กน้อยให้บาลานซ์กับตัวอักษรใหญ่ */
+}
+
+/* โลโก้แบบข้อความ */
+.logo{
+  color:#fff;
+  text-decoration:none;
+  font-weight:900;          /* หนักแน่น */
+  font-size:28px;           /* ใหญ่ขึ้น */
+  letter-spacing:.5px;      /* ระยะห่างตัวอักษรเล็กน้อย */
+  text-transform:uppercase; /* เป็นตัวพิมพ์ใหญ่ทั้งหมด */
+  display:flex;align-items:center;gap:0;
+}
+
+/* เอฟเฟกต์ตอนโฟกัส/โฮเวอร์เล็กน้อยเพื่อความรู้สึกคลิกได้ */
+.logo:hover{
+  opacity:.95;
+  text-shadow:0 1px 0 rgba(0,0,0,.15);
+}
+
+/* มือถือ: ย่อขนาดให้พอดี */
+@media (max-width:768px){
+  .nav__container{height:64px;}
+  .logo{font-size:22px;}
+}
+/* ตัวเลือก: โลโก้ตัวอักษรไล่สีทอง */
+.logo{
+  background: linear-gradient(90deg, #fff 0%, #F5F3C4 40%, #FACC15 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* ทำให้ไล่สีทำงานกับตัวอักษร */
+}
