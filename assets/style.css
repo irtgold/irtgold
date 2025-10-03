@@ -304,12 +304,4 @@ body{ margin:0; }
     font-size: 1.05rem;
   }
 }
-.callout--wide{
-  display:block;
-  width:100vw;
-  position:relative;
-  left:50%;
-  margin-left:-50vw;
-  border-radius:0;     /* เอามุมโค้งออกถ้าอยากให้แนบขอบ */
-  padding:16px 24px;
-}
+
