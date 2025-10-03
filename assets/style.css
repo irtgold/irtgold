@@ -513,3 +513,64 @@ body{ margin:0; }
   max-width: 720px;  /* จำกัดความกว้างให้อ่านง่าย */
   color: #5B6B7C;
 }
+/* --- PC : ทำการ์ดเหมือนมือถือ + ขยายฟอนต์ & จัดกลาง --- */
+.pc__list{
+  display:grid;
+  gap:24px;
+}
+.pc__list li{
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(10,30,60,.07);
+  padding:20px 22px;
+  text-align:center;              /* จัดข้อความกึ่งกลาง */
+}
+.pc__list .feature__img{
+  margin-bottom:14px;
+}
+.pc__list .feature__img img{
+  width:100%;
+  height:auto;
+  border-radius:14px;
+  display:block;
+}
+
+/* ฟอนต์หัวข้อ/คำอธิบายให้ใหญ่ขึ้นนิดนึง */
+.pc__list h3{
+  font-size:clamp(20px, 2.2vw, 24px);
+  line-height:1.35;
+  margin:4px 0 8px;
+  font-weight:700;
+}
+.pc__list p{
+  font-size:clamp(14px, 1.6vw, 16px);
+  line-height:1.7;
+  color:var(--text-2, #4b5563);
+}
+
+/* --- Mobile big shots: จัดกลาง + ทำเป็นกล่องสวย ๆ เช่นกัน --- */
+.mobile-shots{
+  max-width:1080px;               /* ให้กว้างสุด 1080 */
+  margin:0 auto;
+}
+.mobile-shots figure{
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(10,30,60,.07);
+  padding:16px;
+  margin:0 0 20px;
+  text-align:center;              /* จัดข้อความกึ่งกลาง (เผื่อมีแคปชัน) */
+}
+.mobile-shots img{
+  width:100%;
+  height:auto;
+  border-radius:12px;
+  display:block;
+  margin:0 auto;
+}
+/* ถ้าจะมีแคปชันใต้ภาพ */
+.mobile-shots .caption{
+  margin-top:10px;
+  font-size:16px;
+  color:#334155;
+}
