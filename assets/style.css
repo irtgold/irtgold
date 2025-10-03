@@ -418,3 +418,23 @@ body{ margin:0; }
   border: 0;
   border-radius: 12px;       /* ถ้าอยากมีมุมโค้ง ลบได้ */
 }
+/* ===== Mobile shots (IRT MB) ===== */
+#irtmb .mobile-shots { 
+  display: block;
+  margin-top: 1.25rem;
+}
+
+#irtmb .mobile-shot {
+  width: 100%;
+  margin: 0 0 24px 0;          /* ระยะห่างระหว่างรูป */
+  border-radius: 16px;          /* มุมโค้ง (เอาออกได้ถ้าไม่ต้องการ) */
+  overflow: hidden;
+  background: #F3F5F7;          /* เผื่อรูปยังไม่โหลด */
+  box-shadow: 0 6px 18px rgba(16,24,40,.06);
+}
+
+#irtmb .mobile-shot img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
