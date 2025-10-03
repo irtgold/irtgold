@@ -203,3 +203,26 @@ body{font-family:'Prompt',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;col
     outline-offset:2px;
   }
 }
+/* ============ Global Font ============ */
+:root{
+  --font-sans: "Prompt", "Noto Sans Thai", "Noto Sans", -apple-system,
+               system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ใช้ Prompt ทั้งเว็บ */
+html{
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ให้ element พื้นฐานรับฟอนต์จาก <html> */
+body, button, input, select, textarea {
+  font-family: inherit;
+}
+
+/* ตั้งน้ำหนักมาตรฐาน (ปรับได้ตามดีไซน์) */
+body { font-weight: 400; }
+strong, b { font-weight: 700; }
+h1,h2,h3,h4,h5,h6 { font-weight: 800; }
