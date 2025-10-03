@@ -226,3 +226,21 @@ body, button, input, select, textarea {
 body { font-weight: 400; }
 strong, b { font-weight: 700; }
 h1,h2,h3,h4,h5,h6 { font-weight: 800; }
+/* ปกใหญ่: ให้รูปเต็มความกว้าง */
+.pc-cover img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* การ์ด: ให้รูปกินเต็มการ์ด (bleed) */
+.card__media{
+  margin:-16px -16px 12px;        /* ดึงรูปทะลุ padding การ์ด */
+  border-radius:16px 16px 0 0;    /* มุมบนมนให้เนียนกับการ์ด */
+  overflow:hidden;
+}
+.card__media img{
+  width:100%;
+  height:auto;
+  display:block;
+}
