@@ -204,3 +204,60 @@ img{max-width:100%;display:block}
   color: #334155;
   margin: 0;
 }
+/* ============ IRT PC : กรอบภาพ + กล่องคำอธิบายกว้างเท่ารูป ============ */
+
+/* กล่องรวมแต่ละใบ */
+.pc-stack{
+  display:grid;
+  gap:40px;
+}
+
+/* เฟรมของรูป + แคปชัน (ให้โค้งและมีเงาเป็นชิ้นเดียว) */
+.pc-frame{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;                          /* บังคับให้ขอบบน-ล่างโค้งเนียน */
+  box-shadow:0 10px 28px rgba(15,30,80,.16); /* เงาเดียวพอ ไม่ซ้อน */
+}
+
+/* รูปด้านบน */
+.pc-frame img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* แคปชัน “ใต้รูป” และกว้างเท่ารูปเสมอ */
+.pc-caption{
+  position:static;        /* 🔥 ยกเลิกลอย */
+  transform:none;
+  width:100%;
+  padding:18px 22px;
+  background:#fff;
+  text-align:center;
+  border-radius:0 0 18px 18px; /* มุมล่างโค้งเท่ากับเฟรม */
+  box-shadow:none;        /* เงาอยู่ที่ .pc-frame แล้ว */
+  margin:0;               /* ไม่มีช่องว่างด้านข้าง */
+}
+
+/* ฟอนต์ในแคปชัน */
+.pc-caption h3{
+  margin:0 0 6px;
+  font-weight:800;
+  font-size:clamp(18px, 2vw, 22px);
+  color:#0B2C6C;
+}
+.pc-caption p{
+  margin:0;
+  font-size:clamp(14px, 1.6vw, 16px);
+  line-height:1.65;
+  color:#334155;
+}
+
+/* ระยะห่างใต้แต่ละใบ */
+.pc-shot{ margin:0; }
+
+/* จอเล็กก็ยังโค้งและเต็มความกว้างเหมือนเดิม */
+@media (max-width:768px){
+  .pc-stack{ gap:28px; }
+}
