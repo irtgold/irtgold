@@ -311,3 +311,28 @@ body{ margin:0; }
   height: auto;
   object-fit: cover;   /* เติมเต็มบล็อกโดยไม่บีบ */
 }
+/* ==== IRT PC: กรอบรูปของการ์ด 2–6 ให้เป็นสี่เหลี่ยม 1080x1080 (อัตราส่วน 1:1) ==== */
+/* กรอบรูปของการ์ด */
+.pc__list .feature__img{
+  width: 100%;
+  aspect-ratio: 1 / 1;      /* สี่เหลี่ยมจัตุรัส 1:1 -> 1080x1080 */
+  border-radius: 16px;       /* ตามสไตล์เดิม จะปรับได้ */
+  overflow: hidden;          /* ตัดส่วนเกินของภาพ */
+  background: #f3f4f6;       /* สีพื้นหลังตอนรูปยังไม่มา */
+}
+
+/* รูปด้านในกรอบ */
+.pc__list .feature__img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* เติมเต็มกรอบแบบครอปพอดี */
+  display: block;
+}
+/* IRT Mobile thumbnails เป็นสี่เหลี่ยม */
+.irtmb__grid img{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
