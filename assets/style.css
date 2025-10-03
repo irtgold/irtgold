@@ -152,3 +152,55 @@ img{max-width:100%;display:block}
 /* ============ Video (ศูนย์กลาง + แนวตั้ง 9:16 ได้) ============ */
 .video{display:flex;justify-content:center;align-items:center;margin:24px auto;width:100%}
 .video iframe{width:min(540px,100%);aspect-ratio:9/16;height:auto;border:0;border-radius:12px}
+/* ============ RESET / BASE ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-family:var(--font-sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{color:var(--text);background:#fff;line-height:1.6}
+img{max-width:100%;display:block}
+
+/* ============ IRT PC : กล่อง + กล่องคำอธิบายลอย ============ */
+.pc-stack{
+  display: grid;
+  gap: 40px;
+}
+
+.pc-shot{
+  position: relative;
+  margin-bottom: 120px;
+}
+
+.pc-shot img{
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(10,30,60,.2); /* ✅ เงาเดียวพอ */
+}
+
+/* กล่องลอยใต้รูป */
+.pc-cap{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -28px;
+  width: min(880px, 90%);
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 22px;
+  text-align: center;
+  box-shadow: 0 14px 32px rgba(0,0,0,.15);
+}
+
+.pc-cap h3{
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+  color: #0B2C6C;
+}
+
+.pc-cap p{
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #334155;
+  margin: 0;
+}
