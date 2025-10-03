@@ -289,3 +289,27 @@ h1,h2,h3,h4,h5,h6 { font-weight: 800; }
 
 /* สำคัญ: ตัด margin เริ่มต้นของ body ออก เผื่อยังไม่ได้ใส่ */
 body{ margin:0; }
+/* ทำให้ callout กว้างเต็มคอนเทนเนอร์ */
+.callout--wide{
+  display: block;     /* ไม่ใช่ inline-block */
+  width: 100%;        /* เต็มความกว้าง .container */
+  max-width: 100%;
+  padding: 14px 28px; /* เพิ่มระยะซ้ายขวาให้ดูยาวขึ้น */
+}
+
+/* ขยาย padding นิดหน่อยบนจอใหญ่ */
+@media (min-width: 768px){
+  .callout--wide{
+    padding: 16px 36px;
+    font-size: 1.05rem;
+  }
+}
+.callout--wide{
+  display:block;
+  width:100vw;
+  position:relative;
+  left:50%;
+  margin-left:-50vw;
+  border-radius:0;     /* เอามุมโค้งออกถ้าอยากให้แนบขอบ */
+  padding:16px 24px;
+}
