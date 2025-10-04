@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IRT GOLD V5.0 - Indicator Rhythm Trading</title>
-  <!-- ชี้ไปที่ assets/style.css (อย่าใส่ / นำหน้า หากรันในโฟลเดอร์ย่อย) -->
-  <link rel="stylesheet" href="assets/style.css?v=2" />
+  <link rel="stylesheet" href="assets/style.css?v=3">
 </head>
 <body>
-  <!-- ================= NAVIGATION ================= -->
+  <!-- ============ NAV ============ -->
   <nav class="nav">
     <div class="container nav__container">
       <a href="#home" class="logo">IRT GOLD</a>
@@ -16,20 +15,22 @@
         <li><a href="#home">หน้าแรก</a></li>
         <li><a href="#irtpc">IRT PC</a></li>
         <li><a href="#irtmb">IRT MB</a></li>
-        <li><a href="#features">จุดเด่น</a></li>
-        <li><a href="#about">เกี่ยวกับ</a></li>
+        <li><a href="#about">จุดเด่น</a></li>
         <li><a href="#pricing">ราคา</a></li>
         <li><a href="#contact">ติดต่อเรา</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- ================= HERO (แบนเนอร์ + สรรพคุณ) ================= -->
+  <!-- ============ HERO ============ -->
   <header class="hero" id="home">
-    <img src="Github-p/bn/bn.png" alt="IRT GOLD Banner" class="hero__banner full-bleed">
+    <img src="Github-p/bn/bn.png" alt="IRT GOLD Banner" class="hero__banner">
     <div class="hero__content">
       <h1>IRT GOLD V.5.0</h1>
-      <p>อินดิเคเตอร์ 5-in-1 รวม <strong>Harmonic • Signal • Support/Resistance • Trend • Volume</strong> ในจอเดียว<br>ช่วยให้การวิเคราะห์กราฟง่ายขึ้น ตัดสินใจได้แม่นยำ และรวดเร็ว</p>
+      <p>
+        อินดิเคเตอร์ 5-in-1 รวม <strong>Harmonic • Signal • Support/Resistance • Trend • Volume</strong> ในจอเดียว<br>
+        ช่วยให้การวิเคราะห์กราฟง่ายขึ้น ตัดสินใจได้แม่นยำ และรวดเร็ว
+      </p>
       <div class="hero__cta">
         <a href="#pricing" class="btn btn--primary">🚀 สั่งซื้อ</a>
         <a href="#irtpc" class="btn btn--outline">ดู IRT PC</a>
@@ -37,7 +38,7 @@
     </div>
   </header>
 
-  <!-- ================= PROBLEM → SOLUTION ================= -->
+  <!-- ============ ปัญหา/แนวทางแก้ ============ -->
   <section class="section" id="about">
     <div class="container">
       <h2 class="section__title">ปัญหาที่เทรดเดอร์ส่วนใหญ่เจอ</h2>
@@ -46,195 +47,137 @@
     </div>
   </section>
 
-<!-- ================= IRT PC (ปก + 6 รายการ) ================= -->
-<section class="section" id="irtpc">
-  <div class="container">
-    <h2 class="section__title">IRT GOLD — เวอร์ชัน PC</h2>
+  <!-- ============ IRT PC (รูป 6 ใบ + คำบรรยายใต้รูปกึ่งกลาง) ============ -->
+  <section class="section" id="irtpc">
+    <div class="container">
+      <h2 class="section__title">IRT GOLD — เวอร์ชัน PC</h2>
 
-    <div class="pc-stack">
+      <div class="pc-stack">
+        <!-- 1 -->
+        <figure class="pc-shot">
+          <div class="pc-frame">
+            <img src="Github-p/irtpc/irtpc1.png" alt="Harmonic Pattern" loading="lazy">
+            <figcaption class="pc-caption">
+              <h3>1) Harmonic Pattern</h3>
+              <p>ตรวจจับรูปแบบอัตโนมัติ 7 แบบ พร้อมโซนเข้า–ออกที่ชัดเจน และตัวกรองเกรด A</p>
+            </figcaption>
+          </div>
+        </figure>
 
-      <!-- 1 -->
-      <figure class="pc-shot">
-        <div class="pc-frame">
-          <img src="Github-p/irtpc/irtpc1.png" alt="Harmonic Pattern" loading="lazy">
-          <figcaption class="pc-caption">
-            <h3>1) Harmonic Pattern</h3>
-            <p>ตรวจจับรูปแบบอัตโนมัติ 7 แบบ พร้อมโซนเข้า–ออกที่ชัดเจน และตัวกรองเกรด A</p>
+        <!-- 2 -->
+        <figure class="pc-shot">
+          <div class="pc-frame">
+            <img src="Github-p/irtpc/irtpc2.png" alt="Signal Buy/Sell" loading="lazy">
+            <figcaption class="pc-caption">
+              <h3>2) Signal Buy/Sell</h3>
+              <p>สัญญาณซื้อ–ขายแบบเรียลไทม์ พร้อมจุดเข้า TP/SL และแจ้งเตือนทันที</p>
+            </figcaption>
+          </div>
+        </figure>
+
+        <!-- 3 -->
+        <figure class="pc-shot">
+          <div class="pc-frame">
+            <img src="Github-p/irtpc/irtpc3.png" alt="Support &amp; Resistance" loading="lazy">
+            <figcaption class="pc-caption">
+              <h3>3) Support &amp; Resistance</h3>
+              <p>แสดงแนวรับ–แนวต้าน เมื่อราคาวิ่งไปถึงเองให้ชัดเจน</p>
+            </figcaption>
+          </div>
+        </figure>
+
+        <!-- 4 -->
+        <figure class="pc-shot">
+          <div class="pc-frame">
+            <img src="Github-p/irtpc/irtpc4.png" alt="Trend System" loading="lazy">
+            <figcaption class="pc-caption">
+              <h3>4) Trend System</h3>
+              <p>วิเคราะห์ทิศทางหลายกรอบเวลา พร้อมคะแนนความแรงของเทรนด์</p>
+            </figcaption>
+          </div>
+        </figure>
+
+        <!-- 5 -->
+        <figure class="pc-shot">
+          <div class="pc-frame">
+            <img src="Github-p/irtpc/irtpc5.png" alt="Volume / Pressure" loading="lazy">
+            <figcaption class="pc-caption">
+              <h3>5) Volume / Pressure</h3>
+              <p>วัดแรงซื้อ–ขาย ติดตามเม็ดเงินรายใหญ่ และ Volume Profile</p>
+            </figcaption>
+          </div>
+        </figure>
+
+        <!-- 6 -->
+        <figure class="pc-shot">
+          <div class="pc-frame">
+            <img src="Github-p/irtpc/irtpc6.png" alt="Extra Feature" loading="lazy">
+            <figcaption class="pc-caption">
+              <h3>6) Extra Feature</h3>
+              <p>จุดเด่นเพิ่มเติม/ภาพตัวอย่างใบที่ 6</p>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ สรุปคอม ============ -->
+  <div class="callout center">
+    <strong>สรุปคอม:</strong> ถ้าคุณเคยพลาดจังหวะเพราะสัญญาณไม่ชัด ลังเล หรืออ่านกราฟไม่ครบ
+    เวอร์ชัน <strong>PC</strong> จะช่วยรวมทุกเครื่องมือสำคัญไว้ในที่เดียว —
+    ตรวจจับ Harmonic, จุดเข้า–ออกพร้อม TP/SL, แนวรับ-แนวต้าน, วิเคราะห์เทรนด์หลายกรอบ และดูแรงซื้อ-ขายอย่างละเอียด
+  </div>
+
+  <!-- ============ วิดีโอสาธิต ============ -->
+  <div class="container" style="max-width:900px">
+    <div class="video" style="margin:24px auto">
+      <iframe width="540" height="960"
+        src="https://www.youtube.com/embed/jj_QuUuSg-c"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- ============ IRT MOBILE (รูป 3 ใบ + คำบรรยายใต้รูปกึ่งกลาง) ============ -->
+  <section class="section" id="irtmb">
+    <div class="container">
+      <h2 class="section__title">IRT GOLD — เวอร์ชันมือถือ</h2>
+      <p class="center">เหมาะกับคนต้องการความสะดวก คล่องตัว ใช้งานรวดเร็ว เช็คสัญญาณได้ทุกที่ทุกเวลา</p>
+
+      <div class="mobile-shots">
+        <figure class="mobile-shot">
+          <img src="Github-p/itrmb/mb1.png" alt="IRT MB - ปก" loading="lazy">
+          <figcaption class="mobile-cap">
+            <h3>ปก IRT MB</h3>
+            <p>ภาพรวมของชุดเครื่องมือบนมือถือ ใช้งานง่าย ครบในหน้าจอเดียว</p>
           </figcaption>
-        </div>
-      </figure>
+        </figure>
 
-      <!-- 2 -->
-      <figure class="pc-shot">
-        <div class="pc-frame">
-          <img src="Github-p/irtpc/irtpc2.png" alt="Signal Buy/Sell" loading="lazy">
-          <figcaption class="pc-caption">
-            <h3>2) Signal Buy/Sell</h3>
-            <p>สัญญาณซื้อ–ขายแบบเรียลไทม์ พร้อมจุดเข้า TP/SL และแจ้งเตือนทันที</p>
+        <figure class="mobile-shot">
+          <img src="Github-p/itrmb/mb2.png" alt="แนวรับ-แนวต้าน (Mobile)" loading="lazy">
+          <figcaption class="mobile-cap">
+            <h3>แนวรับ–แนวต้าน (Mobile)</h3>
+            <p>เห็นโซนสำคัญชัด วางแผนเข้า–ออกเป็นระบบ ช่วยตัดสินใจได้เร็วขึ้น</p>
           </figcaption>
-        </div>
-      </figure>
+        </figure>
 
-      <!-- 3 -->
-      <figure class="pc-shot">
-        <div class="pc-frame">
-          <img src="Github-p/irtpc/irtpc3.png" alt="Support &amp; Resistance" loading="lazy">
-          <figcaption class="pc-caption">
-            <h3>3) Support &amp; Resistance</h3>
-            <p>แสดงแนวรับ–แนวต้าน เมื่อราคาวิ่งไปถึงเองให้ชัดเจน</p>
+        <figure class="mobile-shot">
+          <img src="Github-p/itrmb/mb3.png" alt="จุดเข้า Buy/Sell (Mobile)" loading="lazy">
+          <figcaption class="mobile-cap">
+            <h3>จุดเข้า Buy/Sell (Mobile)</h3>
+            <p>รับสัญญาณจุดเข้า พร้อมแจ้งเตือนทันที ใช้งานสะดวกบนมือถือ</p>
           </figcaption>
-        </div>
-      </figure>
+        </figure>
+      </div>
 
-      <!-- 4 -->
-      <figure class="pc-shot">
-        <div class="pc-frame">
-          <img src="Github-p/irtpc/irtpc4.png" alt="Trend System" loading="lazy">
-          <figcaption class="pc-caption">
-            <h3>4) Trend System</h3>
-            <p>วิเคราะห์ทิศทางหลายกรอบเวลา พร้อมคะแนนความแรงของเทรนด์</p>
-          </figcaption>
-        </div>
-      </figure>
+      <div class="callout center" style="margin-top:22px">
+        สรุป: เวอร์ชันมือถือ เหมาะกับคนที่ต้องการความคล่องตัว เช็คสัญญาณไว และตัดสินใจได้ทันที
+      </div>
 
-      <!-- 5 -->
-      <figure class="pc-shot">
-        <div class="pc-frame">
-          <img src="Github-p/irtpc/irtpc5.png" alt="Volume / Pressure" loading="lazy">
-          <figcaption class="pc-caption">
-            <h3>5) Volume / Pressure</h3>
-            <p>วัดแรงซื้อ–ขาย ติดตามเม็ดเงินรายใหญ่ และ Volume Profile</p>
-          </figcaption>
-        </div>
-      </figure>
-
-      <!-- 6 -->
-      <figure class="pc-shot">
-        <div class="pc-frame">
-          <img src="Github-p/irtpc/irtpc6.png" alt="Extra Feature" loading="lazy">
-          <figcaption class="pc-caption">
-            <h3>6) Extra Feature</h3>
-            <p>จุดเด่นเพิ่มเติม/ภาพตัวอย่างใบที่ 6</p>
-          </figcaption>
-        </div>
-      </figure>
-
-    </div>
-  </div>
-</section>
-
-  
-<div class="callout center">
-  <strong>สรุปคอม:</strong> ถ้าคุณเคยพลาดจังหวะเพราะสัญญาณไม่ชัด ลังเล หรืออ่านกราฟไม่ครบ 
-  เวอร์ชัน <strong>PC</strong> จะช่วยรวมทุกเครื่องมือสำคัญไว้ในที่เดียว 
-  ด้วยชุดอินดิเคเตอร์ 5-in-1 ที่ทำงานร่วมกันแบบเรียลไทม์: 
-  ตรวจจับ Harmonic อัตโนมัติ, ให้จุดเข้า–ออกพร้อม TP/SL, วาดแนวรับ–ต้าน, 
-  วิเคราะห์เทรนด์หลายกรอบเวลา และดูแรงซื้อขายอย่างละเอียด 
-  ทำให้การวิเคราะห์ง่ายขึ้น มั่นใจในการตัดสินใจ และเห็นภาพรวมชัดเจนมากกว่าเดิม<br><br>
-  ผู้ใช้จริงกว่า <strong>1,000 คน</strong> เลือกใช้งานต่อเนื่อง 
-  ใช้งานง่าย มีทีมโค้ชให้คำแนะนำ และอัปเดตฟีเจอร์ใหม่ฟรีตลอดการใช้งาน — 
-  <strong>อย่าปล่อยจังหวะสำคัญผ่านไป กดดูรายละเอียดเวอร์ชัน PC ได้เลย!</strong>
-</div>
-
-<!-- วิดีโอสาธิตการทำงาน -->
-<div class="video">
-  <iframe width="540" height="960" 
-    src="https://www.youtube.com/embed/jj_QuUuSg-c" 
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-  </iframe>
-</div>
-
-  <!-- ================= คุณสมบัติ + รีวิว ================= -->
-<section id="reviews" class="section">
-  <div class="container">
-    <h2 class="section__title">ผู้ใช้จริงมากกว่า 1,000 คน</h2>
-    <p class="center">ได้รับความไว้วางใจจากนักเทรดทั่วประเทศ</p>
-
-<!-- รีวิวลูกค้า (ใส่แทน reviews__comments เดิม) -->
-<div class="t-grid">
-<!-- รีวิว 1 (ผู้หญิง) -->
-<div class="t-card">
-  <div class="t-stars">★★★★★</div>
-  <p class="t-text">รวดเร็วทันใจ บริการดีมากค่ะ ทีมงานช่วยแนะนำชัดเจน เข้าใจง่ายมากขึ้นค่ะ</p>
-  <div class="t-user">
-    <img src="Github-p/pprw/PP1.jpg" alt="ลูกค้า 1" class="avatar">
-    <div class="t-user__meta">
-      <div class="t-user__name">ลูกค้า 1</div>
-      <div class="t-user__role">ผู้ใช้ IRT GOLD (PC)</div>
-    </div>
-  </div>
-</div>
-
-<!-- รีวิว 2 (ผู้หญิง) -->
-<div class="t-card">
-  <div class="t-stars">★★★★★</div>
-  <p class="t-text">ไม่มีอะไรจะเเนะนำค่ะ นอกจากขอบคุณมาก ๆ ที่มีประโยชน์มาก ๆ ใช้งานแล้วช่วยให้ตัดสินใจได้ไวขึ้นจริง</p>
-  <div class="t-user">
-    <img src="Github-p/pprw/PP2.jpg" alt="ลูกค้า 2" class="avatar">
-    <div class="t-user__meta">
-      <div class="t-user__name">ลูกค้า 2</div>
-      <div class="t-user__role">ผู้ใช้ IRT GOLD (Mobile)</div>
-    </div>
-  </div>
-</div>
-
-<!-- รีวิว 3 (ผู้หญิง) -->
-<div class="t-card">
-  <div class="t-stars">★★★★★</div>
-  <p class="t-text">ทีมงานเป็นกันเองมาก ตอบไว แนะนำละเอียด ใช้งานไม่ยากอย่างที่คิดค่ะ</p>
-  <div class="t-user">
-    <img src="Github-p/pprw/PP3.jpg" alt="ลูกค้า 3" class="avatar">
-    <div class="t-user__meta">
-      <div class="t-user__name">ลูกค้า 3</div>
-      <div class="t-user__role">ผู้ใช้ IRT GOLD</div>
-    </div>
-  </div>
-</div>
-
-<!-- รีวิว 4 (ผู้ชาย) -->
-<div class="t-card">
-  <div class="t-stars">★★★★★</div>
-  <p class="t-text">ชอบสัญญาณกลับตัวและจุดเข้า ใช้คู่กับแนวรับ–แนวต้านแล้วชัดเจนมากครับ</p>
-  <div class="t-user">
-    <img src="Github-p/pprw/PP4.jpg" alt="ลูกค้า 4" class="avatar">
-    <div class="t-user__meta">
-      <div class="t-user__name">ลูกค้า 4</div>
-      <div class="t-user__role">ผู้ใช้ IRT GOLD (PC)</div>
-    </div>
-  </div>
-</div>
-
-<!-- รีวิว 5 (ผู้ชาย) -->
-<div class="t-card">
-  <div class="t-stars">★★★★★</div>
-  <p class="t-text">ใช้งานง่าย ฟีเจอร์ครบ ชอบที่รวมหลายอย่างไว้จอเดียว ประหยัดเวลาเยอะมากครับ</p>
-  <div class="t-user">
-    <img src="Github-p/pprw/PP5.jpg" alt="ลูกค้า 5" class="avatar">
-    <div class="t-user__meta">
-      <div class="t-user__name">ลูกค้า 5</div>
-      <div class="t-user__role">ผู้ใช้ IRT GOLD (PC + MB)</div>
-    </div>
-  </div>
-</div>
-
-<!-- รีวิว 6 (ผู้หญิง) -->
-<div class="t-card">
-  <div class="t-stars">★★★★★</div>
-  <p class="t-text">เหมาะกับคนทำงานไปด้วยเทรดไปด้วย มือถือแจ้งเตือนทันใจ ไม่พลาดโอกาสสำคัญค่ะ</p>
-  <div class="t-user">
-    <img src="Github-p/pprw/PP6.jpg" alt="ลูกค้า 6" class="avatar">
-    <div class="t-user__meta">
-      <div class="t-user__name">ลูกค้า 6</div>
-      <div class="t-user__role">ผู้ใช้ IRT GOLD (Mobile)</div>
-    </div>
-  </div>
-</div>
-
-      <!-- รูปรีวิว 4 ใบ -->
-      <div class="reviews__images">
+      <!-- ย้าย “รูปรีวิว 4 ใบ” ลงมาบริเวณนี้ ตามที่ขอ -->
+      <div class="reviews__images" style="margin-top:28px">
         <img src="Github-p/rw/rw1.png" alt="รีวิวภาพ 1">
         <img src="Github-p/rw/rw2.png" alt="รีวิวภาพ 2">
         <img src="Github-p/rw/rw3.png" alt="รีวิวภาพ 3">
@@ -243,56 +186,95 @@
     </div>
   </section>
 
-<!-- ================= IRT MOBILE ================= -->
-<section class="section" id="irtmb">
-  <div class="container">
-    <h2 class="section__title">IRT GOLD — เวอร์ชันมือถือ</h2>
-    <p class="center">เหมาะกับคนต้องการความสะดวก คล่องตัว ใช้งานรวดเร็ว เช็คสัญญาณได้ทุกที่ทุกเวลา</p>
+  <!-- ============ รีวิวตัวหนังสือ 6 ใบ (คงไว้ด้านล่าง) ============ -->
+  <section class="section" id="reviews">
+    <div class="container">
+      <h2 class="section__title">ผู้ใช้จริงมากกว่า 1,000 คน</h2>
+      <p class="center">ได้รับความไว้วางใจจากนักเทรดทั่วประเทศ</p>
 
-    <!-- รูปมือถือ: 3 รูปใหญ่ เต็มความกว้าง + ข้อความใต้รูป -->
-    <div class="mobile-shots">
-      <figure class="mobile-shot">
-        <img src="Github-p/itrmb/mb1.png" alt="IRT MB - ภาพที่ 1" loading="lazy">
-        <figcaption class="mobile-cap">
-          <h3>ปก IRT MB</h3>
-          <p>ภาพรวมของชุดเครื่องมือบนมือถือ ใช้งานง่าย ครบในหน้าจอเดียว</p>
-        </figcaption>
-      </figure>
+      <div class="t-grid">
+        <!-- 1 หญิง -->
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">รวดเร็วทันใจ บริการดีมากค่ะ ทีมงานช่วยแนะนำชัดเจน เข้าใจง่ายมากขึ้นค่ะ</p>
+          <div class="t-user">
+            <img src="Github-p/pprw/PP1.jpg" class="avatar" alt="ลูกค้า 1">
+            <div>
+              <div class="t-user__name">ลูกค้า 1</div>
+              <div class="t-user__role">ผู้ใช้ IRT GOLD (PC)</div>
+            </div>
+          </div>
+        </div>
 
-      <figure class="mobile-shot">
-        <img src="Github-p/itrmb/mb2.png" alt="IRT MB - ภาพที่ 2" loading="lazy">
-        <figcaption class="mobile-cap">
-          <h3>แนวรับ–แนวต้าน (Mobile)</h3>
-          <p>เห็นโซนสำคัญชัด วางแผนเข้า–ออกเป็นระบบ ช่วยตัดสินใจได้เร็วขึ้น</p>
-        </figcaption>
-      </figure>
+        <!-- 2 หญิง -->
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">ไม่มีอะไรจะเเนะนำค่ะ ขอบคุณมาก ๆ ใช้งานแล้วช่วยให้ตัดสินใจได้ไวขึ้นจริง</p>
+          <div class="t-user">
+            <img src="Github-p/pprw/PP2.jpg" class="avatar" alt="ลูกค้า 2">
+            <div>
+              <div class="t-user__name">ลูกค้า 2</div>
+              <div class="t-user__role">ผู้ใช้ IRT GOLD (Mobile)</div>
+            </div>
+          </div>
+        </div>
 
-      <figure class="mobile-shot">
-        <img src="Github-p/itrmb/mb3.png" alt="IRT MB - ภาพที่ 3" loading="lazy">
-        <figcaption class="mobile-cap">
-          <h3>จุดเข้า Buy/Sell (Mobile)</h3>
-          <p>รับสัญญาณจุดเข้า พร้อมแจ้งเตือนทันที ใช้งานสะดวกบนมือถือ</p>
-        </figcaption>
-      </figure>
-    </div>
+        <!-- 3 หญิง -->
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">ทีมงานเป็นกันเองมาก ตอบไว แนะนำละเอียด ใช้งานไม่ยากอย่างที่คิดค่ะ</p>
+          <div class="t-user">
+            <img src="Github-p/pprw/PP3.jpg" class="avatar" alt="ลูกค้า 3">
+            <div>
+              <div class="t-user__name">ลูกค้า 3</div>
+              <div class="t-user__role">ผู้ใช้ IRT GOLD</div>
+            </div>
+          </div>
+        </div>
 
-    <div class="callout center">สรุป: เวอร์ชันมือถือ เหมาะกับคนที่ต้องการความคล่องตัว เช็คสัญญาณไว และตัดสินใจได้ทันที</div>
-  </div>
-</section>
+        <!-- 4 ชาย -->
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">ชอบสัญญาณกลับตัวและจุดเข้า ใช้คู่กับแนวรับ–แนวต้านแล้วชัดเจนมากครับ</p>
+          <div class="t-user">
+            <img src="Github-p/pprw/PP4.jpg" class="avatar" alt="ลูกค้า 4">
+            <div>
+              <div class="t-user__name">ลูกค้า 4</div>
+              <div class="t-user__role">ผู้ใช้ IRT GOLD (PC)</div>
+            </div>
+          </div>
+        </div>
 
-      <!-- ช่องรีวิวผู้ใช้งานมือถือ (ว่าง 6 ช่อง) -->
-      <div class="reviews__comments">
-        <div class="placeholder">รีวิวผู้ใช้งาน 1</div>
-        <div class="placeholder">รีวิวผู้ใช้งาน 2</div>
-        <div class="placeholder">รีวิวผู้ใช้งาน 3</div>
-        <div class="placeholder">รีวิวผู้ใช้งาน 4</div>
-        <div class="placeholder">รีวิวผู้ใช้งาน 5</div>
-        <div class="placeholder">รีวิวผู้ใช้งาน 6</div>
+        <!-- 5 ชาย -->
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">ใช้งานง่าย ฟีเจอร์ครบ ชอบที่รวมหลายอย่างไว้จอเดียว ประหยัดเวลาเยอะมากครับ</p>
+          <div class="t-user">
+            <img src="Github-p/pprw/PP5.jpg" class="avatar" alt="ลูกค้า 5">
+            <div>
+              <div class="t-user__name">ลูกค้า 5</div>
+              <div class="t-user__role">ผู้ใช้ IRT GOLD (PC + MB)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 หญิง -->
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">เหมาะกับคนทำงานไปด้วยเทรดไปด้วย มือถือแจ้งเตือนทันใจ ไม่พลาดโอกาสสำคัญค่ะ</p>
+          <div class="t-user">
+            <img src="Github-p/pprw/PP6.jpg" class="avatar" alt="ลูกค้า 6">
+            <div>
+              <div class="t-user__name">ลูกค้า 6</div>
+              <div class="t-user__role">ผู้ใช้ IRT GOLD (Mobile)</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= PRICING ================= -->
+  <!-- ============ PRICING ============ -->
   <section class="section" id="pricing">
     <div class="container">
       <h2 class="section__title">แพ็กเกจราคา</h2>
@@ -321,7 +303,7 @@
     </div>
   </section>
 
-  <!-- ================= CONTACT ================= -->
+  <!-- ============ CONTACT ============ -->
   <section class="section" id="contact">
     <div class="container">
       <h2 class="section__title">ติดต่อเรา</h2>
@@ -332,7 +314,7 @@
     </div>
   </section>
 
-  <!-- ================= FOOTER ================= -->
+  <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <div class="container">
       <p>© 2025 IRT GOLD — All Rights Reserved</p>
