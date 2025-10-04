@@ -430,3 +430,114 @@ img{max-width:100%;display:block}
   .t-grid{ grid-template-columns:1fr; }
   .t-card{ padding:18px; }
 }
+/* ============ RESET / BASE (ตั้งต้น) ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary-dark:#0f1f4b;
+  --primary:#1E3A8A;
+  --gold:#FACC15;
+  --text:#0F172A;
+  --muted:#64748b;
+  --bg:#0b1534;
+  --container:1200px;
+
+  --font-sans:"Prompt","Noto Sans Thai","Noto Sans",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+html{font-family:var(--font-sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{color:var(--text);background:#fff;line-height:1.6}
+img{max-width:100%;display:block}
+
+/* ============ CONTAINER / SECTION ============ */
+.container{max-width:var(--container);margin:0 auto;padding:0 20px}
+.section{padding:80px 0;background:linear-gradient(180deg,#fff,#f8fafc)}
+.section:nth-of-type(even){background:#fff}
+.section__title{font-size:32px;font-weight:800;color:var(--primary);text-align:center;margin-bottom:24px}
+.center{text-align:center}
+
+/* ============ BUTTONS ============ */
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:700;text-decoration:none;transition:.25s}
+.btn--primary{background:var(--gold);color:#111;box-shadow:0 10px 24px rgba(250,204,21,.25)}
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(250,204,21,.35)}
+.btn--outline{border:2px solid #fff;color:#fff}
+.btn--outline:hover{background:#fff;color:var(--primary-dark)}
+
+/* ============ NAVIGATION ============ */
+.nav{position:sticky;top:0;z-index:50;background:rgba(15,31,75,.92);backdrop-filter:blur(8px)}
+.nav__container{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px;padding:0 16px}
+.logo{text-decoration:none;font-weight:900;font-size:28px;letter-spacing:.5px;text-transform:uppercase;color:#FACC15}
+.nav__menu{list-style:none;display:flex;gap:18px;align-items:center}
+.nav__menu a{color:#fff;text-decoration:none;font-weight:600;position:relative;padding:6px 0}
+.nav__menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--gold);transition:width .25s}
+.nav__menu a:hover::after{width:100%}
+@media (max-width:768px){
+  .nav__container{height:auto;padding:8px 12px;flex-direction:column;align-items:flex-start;gap:8px}
+  .logo{font-size:20px}
+  .nav__menu{width:100%;gap:10px;overflow-x:auto;white-space:nowrap;padding:6px 2px 10px;margin:0 -6px}
+  .nav__menu::-webkit-scrollbar{display:none}
+  .nav__menu a{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08)}
+  .nav__menu a::after{display:none}
+}
+
+/* ============ HERO ============ */
+.hero{position:relative}
+.hero__banner{width:100%;height:auto;object-fit:cover;max-height:70vh}
+.hero__content{position:relative;z-index:2;text-align:center;padding:24px 20px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg) 40%,transparent 100%);color:#fff}
+.hero__content h1{font-size:44px;line-height:1.15;margin-bottom:10px}
+.hero__content p{font-size:18px;color:#e2e8f0;margin-bottom:16px}
+.hero__cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ============ CALLOUT ============ */
+.callout{background:#fff3c4;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:16px 24px;margin:22px auto;max-width:760px}
+.callout.center{text-align:center}
+
+/* ============ PC SHOTS (รูป PC + คำบรรยายใต้รูป) ============ */
+.pc-stack{display:grid;gap:28px}
+.pc-shot{}
+.pc-frame{
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 10px 24px rgba(3,23,56,.12);
+  overflow:hidden;
+}
+.pc-frame img{width:100%;height:auto;display:block}
+.pc-caption{
+  padding:16px 18px;              /* กล่องอยู่ “ใต้รูป” และกว้างเท่ารูป */
+  text-align:center;
+}
+.pc-caption h3{margin:0 0 6px;font-weight:800;color:#0B2C6C;font-size:clamp(18px,2vw,22px)}
+.pc-caption p{margin:0;color:#334155;font-size:clamp(14px,1.6vw,16px);line-height:1.65}
+
+/* ============ MOBILE SHOTS (รูป MB + คำบรรยายใต้รูป) ============ */
+.mobile-shots{display:grid;gap:20px;max-width:1080px;margin:0 auto}
+.mobile-shot{background:#fff;border-radius:18px;box-shadow:0 10px 24px rgba(3,23,56,.12);overflow:hidden}
+.mobile-shot img{width:100%;height:auto;display:block}
+.mobile-cap{padding:16px 18px;text-align:center}
+.mobile-cap h3{margin:0 0 6px;font-weight:700;color:#0F2B5B}
+.mobile-cap p{margin:0;color:#5B6B7C}
+
+/* ============ TESTIMONIAL CARDS (ตัวหนังสือรีวิว 6 ใบ) ============ */
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:28px}
+@media (max-width:1024px){.t-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.t-grid{grid-template-columns:1fr}}
+.t-card{background:#fff;border-radius:16px;padding:22px 22px 18px;box-shadow:0 8px 24px rgba(2,6,23,.06);border:1px solid rgba(2,6,23,.06)}
+.t-stars{font-size:18px;line-height:1;color:#FBBF24;letter-spacing:2px;margin-bottom:10px;font-weight:700}
+.t-text{color:#1f2937;font-size:15px;line-height:1.7;margin:0 0 14px}
+.t-user{display:flex;align-items:center;gap:12px;margin-top:6px}
+.avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 3px 8px rgba(2,6,23,.15)}
+.t-user__name{font-weight:700;color:#0f172a;font-size:14px}
+.t-user__role{color:#6b7280;font-size:12.5px;margin-top:2px}
+
+/* ============ REVIEW IMAGES (รูปรวม 4 ใบ) ============ */
+.reviews__images{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.reviews__images img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+@media (max-width:1024px){.reviews__images{grid-template-columns:repeat(2,1fr)}}
+
+/* ============ PRICING ============ */
+.pricing__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.pricing__card{background:#fff;border-radius:18px;box-shadow:0 10px 34px rgba(2,6,23,.1);padding:24px;border:3px solid var(--gold)}
+.pricing__card .price{font-size:32px;font-weight:800;color:var(--gold);margin:10px 0}
+.pricing__card ul{list-style:none;display:grid;gap:10px;margin:14px 0 20px}
+.pricing__card ul li::before{content:"✓ ";color:#10B981;font-weight:700}
+
+/* ============ FOOTER ============ */
+.footer{background:var(--bg);color:#cbd5e1;padding:28px 0;text-align:center}
