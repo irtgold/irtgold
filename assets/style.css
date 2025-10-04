@@ -1262,3 +1262,155 @@ img{max-width:100%;display:block}
     font-size: 1.8em;
   }
 }
+/* ========== Problem Solution Box - เพิ่มเข้ามาใหม่ ========== */
+
+.problem-solution-box {
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  padding: 50px 60px !important;
+  margin: 20px auto 150px auto !important; /* เพิ่ม margin-bottom มากขึ้น */
+  max-width: 1400px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+  display: block !important;
+  clear: both !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.problem-box {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%) !important;
+  border-left: 4px solid #ff4444 !important;
+  border-radius: 12px !important;
+  padding: 30px !important;
+  margin-bottom: 40px !important;
+}
+
+.problem-title {
+  color: #d32f2f !important;
+  font-size: 2.2em !important;
+  font-weight: bold !important;
+  margin-bottom: 30px !important;
+  text-align: center !important;
+}
+
+.problem-item {
+  margin-bottom: 20px !important;
+  padding: 18px !important;
+  background: rgba(255, 255, 255, 0.7) !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+.problem-item:hover {
+  background: rgba(255, 255, 255, 1) !important;
+  transform: translateX(10px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.problem-item strong {
+  color: #d32f2f !important;
+  font-size: 1.15em !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+}
+
+.problem-item .emoji {
+  font-size: 1.4em !important;
+  margin-right: 10px !important;
+}
+
+.solution-box {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
+  border-left: 4px solid #0ea5e9 !important;
+  border-radius: 12px !important;
+  padding: 30px !important;
+}
+
+.solution-title {
+  color: #0369a1 !important;
+  font-size: 2.2em !important;
+  font-weight: bold !important;
+  margin-bottom: 20px !important;
+  text-align: center !important;
+}
+
+.solution-subtitle {
+  text-align: center !important;
+  font-size: 1.15em !important;
+  margin-bottom: 25px !important;
+  color: #334155 !important;
+}
+
+.features-list {
+  margin: 25px 0 !important;
+}
+
+.feature-item {
+  padding: 15px !important;
+  margin-bottom: 12px !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+.feature-item:hover {
+  background: rgba(255, 255, 255, 1) !important;
+  transform: translateX(10px) !important;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2) !important;
+}
+
+.feature-item strong {
+  color: #0369a1 !important;
+}
+
+.result-highlight {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
+  border-radius: 10px !important;
+  padding: 25px !important;
+  margin-top: 25px !important;
+  text-align: center !important;
+  font-weight: bold !important;
+  font-size: 1.1em !important;
+  color: #92400e !important;
+}
+
+.disclaimer {
+  margin-top: 30px !important;
+  padding: 18px !important;
+  background: #f8fafc !important;
+  border-radius: 8px !important;
+  text-align: center !important;
+  font-size: 0.95em !important;
+  color: #64748b !important;
+  border: 1px dashed #cbd5e1 !important;
+}
+
+/* Section ถัดไปให้มีระยะห่าง */
+#about + section,
+#about + .section {
+  margin-top: 100px !important;
+  clear: both !important;
+}
+
+/* Responsive */
+@media (max-width: 1450px) {
+  .problem-solution-box {
+    max-width: 95% !important;
+    padding: 40px 30px !important;
+    margin-bottom: 120px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .problem-solution-box {
+    padding: 30px 20px !important;
+    margin-bottom: 100px !important;
+  }
+  
+  .problem-title,
+  .solution-title {
+    font-size: 1.8em !important;
+  }
+}
