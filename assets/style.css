@@ -7,442 +7,11 @@
   --muted:#64748b;
   --bg:#0b1534;
   --container:1200px;
-
-  --font-sans: "Prompt","Noto Sans Thai","Noto Sans",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-}
-
-/* ============ RESET / BASE ============ */
-*{box-sizing:border-box;margin:0;padding:0}
-html{font-family:var(--font-sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{color:var(--text);background:#fff;line-height:1.6}
-img{max-width:100%;display:block}
-
-/* Layout helpers */
-.container{max-width:var(--container);margin:0 auto;padding:0 20px}
-.section{padding:80px 0;background:linear-gradient(180deg,#fff,#f8fafc)}
-.section:nth-of-type(even){background:#fff}
-.section,.container,#irtpc{overflow:visible}  /* สำคัญ: อย่าตัดเงาของ caption */
-
-.center{text-align:center}
-.section__title{font-size:32px;font-weight:800;color:var(--primary);text-align:center;margin-bottom:24px}
-
-/* Buttons */
-.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:700;text-decoration:none;transition:.25s}
-.btn--primary{background:var(--gold);color:#111;box-shadow:0 10px 24px rgba(250,204,21,.25)}
-.btn--primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(250,204,21,.35)}
-.btn--outline{border:2px solid #fff;color:#fff}
-.btn--outline:hover{background:#fff;color:var(--primary-dark)}
-
-/* Nav */
-.nav{position:sticky;top:0;z-index:50;background:rgba(15,31,75,.92);backdrop-filter:blur(8px)}
-.nav__container{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px;padding:0 16px}
-.logo{text-decoration:none;font-weight:900;font-size:28px;letter-spacing:.5px;text-transform:uppercase;color:#FACC15;display:flex;align-items:center}
-.logo__img{display:none!important}
-.nav__menu{list-style:none;display:flex;gap:18px;align-items:center}
-.nav__menu a{color:#fff;text-decoration:none;font-weight:600;position:relative;padding:6px 0}
-.nav__menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:#FACC15;transition:width .25s}
-.nav__menu a:hover::after{width:100%}
-@media (max-width:768px){
-  .nav__container{height:auto;flex-direction:column;align-items:flex-start;gap:8px;padding:8px 12px}
-  .logo{font-size:20px}
-  .nav__menu{width:100%;gap:10px;overflow-x:auto;white-space:nowrap;padding:6px 2px 10px;margin:0 -6px}
-  .nav__menu::-webkit-scrollbar{display:none}
-  .nav__menu a{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08)}
-  .nav__menu a::after{display:none}
-}
-
-/* Hero */
-.hero{position:relative;padding-left:0;padding-right:0}
-.hero__banner{width:100%;height:auto;object-fit:cover;max-height:70vh}
-.hero__content{position:relative;z-index:2;text-align:center;padding:24px 20px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg) 40%,transparent 100%);color:#fff}
-.hero__content h1{font-size:44px;line-height:1.15;margin-bottom:10px}
-.hero__content p{font-size:18px;color:#e2e8f0;margin-bottom:16px}
-.hero__cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-@media (max-width:768px){ .hero__content h1{font-size:34px} }
-
-/* Callout */
-.callout{background:#fff3c4;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:14px;margin:22px auto;max-width:760px}
-.callout--wide{width:100%;max-width:100%;padding:16px 32px}
-@media (min-width:768px){ .callout--wide{font-size:1.05rem} }
-
-/* Reviews image grid (4 ช่อง) */
-.reviews__images{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
-.reviews__images img{width:100%;height:100%;object-fit:cover;border-radius:12px}
-@media (max-width:1024px){ .reviews__images{grid-template-columns:repeat(2,1fr)} }
-
-/* Pricing (คงเดิม) */
-.pricing__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.pricing__card{background:#fff;border-radius:18px;box-shadow:0 10px 34px rgba(2,6,23,.1);padding:24px;border:3px solid var(--gold)}
-.pricing__card .price{font-size:32px;font-weight:800;color:var(--gold);margin:10px 0}
-.pricing__card ul{list-style:none;display:grid;gap:10px;margin:14px 0 20px}
-.pricing__card ul li::before{content:"✓ ";color:#10B981;font-weight:700}
-@media (max-width:768px){ .pricing__grid{grid-template-columns:1fr} }
-
-/* ============ IRT MB (รูป 3 ใบ) ============ */
-.mobile-shots{max-width:1080px;margin:0 auto;display:grid;gap:24px}
-.mobile-shot{background:#fff;border-radius:20px;box-shadow:0 10px 25px rgba(10,30,60,.07);padding:16px}
-.mobile-shot img{width:100%;height:auto;border-radius:12px}
-.mobile-cap{background:#fff;border-radius:16px;padding:16px 18px;margin-top:12px;box-shadow:0 8px 18px rgba(16,24,40,.06)}
-.mobile-cap h3{margin:0 0 6px;font-weight:700;font-size:1rem;color:#0F2B5B}
-.mobile-cap p{margin:0;color:#5B6B7C;font-size:.95rem;line-height:1.6}
-
-/* ============ IRT PC (6 ใบ) – ทำเหมือนมือถือ ============ */
-/* กล่องรวมของการ์ดทั้งหมด */
-#irtpc .pc-stack{
-  display:grid;
-  gap:40px;
-  overflow:visible;               /* ให้เงา/ส่วนล้นของ caption โผล่ได้ */
-}
-
-/* การ์ดแต่ละใบ */
-#irtpc .pc-card{
-  position:relative;              /* caption จะอ้างอิงการ์ดนี้ */
-  margin-bottom:110px;            /* เผื่อพื้นที่ caption ลอย */
-  overflow:visible;
-}
-
-/* ตัวรูป */
-#irtpc .pc-card__media{
-  overflow:hidden;
-  border-radius:18px;
-  background:#0b1f3a;
-  box-shadow:0 10px 24px rgba(3,23,56,.16);
-}
-#irtpc .pc-card__media img{
-  width:100%;height:auto;display:block;
-}
-
-/* กล่องคำอธิบาย “ลอยทับรูป” เหมือนมือถือ */
-#irtpc .pc-caption{
-  position:absolute;
-  left:50%;
-  bottom:-28px;                   /* ทะลุออกจากรูปนิดนึง */
-  transform:translateX(-50%);
-  width:min(900px,88%);
-  background:#fff;
-  color:#0b1d3a;
-  text-align:center;
-  padding:22px 28px;
-  border-radius:18px;
-  box-shadow:0 14px 40px rgba(2,16,40,.18);
-  z-index:3;
-}
-#irtpc .pc-caption__title{
-  font-size:clamp(18px,2.2vw,22px);
-  font-weight:800;
-  margin:0 0 8px;
-  color:#0B2C6C;
-}
-#irtpc .pc-caption__desc{
-  font-size:clamp(14px,1.65vw,16px);
-  margin:0;
-  color:#334155;
-  line-height:1.65;
-}
-
-/* ระยะท้ายบัตรสุดท้าย */
-#irtpc .pc-card:last-child{ margin-bottom:80px; }
-
-/* Responsive */
-@media (max-width:992px){
-  #irtpc .pc-card{ margin-bottom:96px; }
-  #irtpc .pc-caption{ width:92%; bottom:-20px; padding:18px 20px; }
-}
-
-/* ============ Video (ศูนย์กลาง + แนวตั้ง 9:16 ได้) ============ */
-.video{display:flex;justify-content:center;align-items:center;margin:24px auto;width:100%}
-.video iframe{width:min(540px,100%);aspect-ratio:9/16;height:auto;border:0;border-radius:12px}
-/* ============ RESET / BASE ============ */
-*{box-sizing:border-box;margin:0;padding:0}
-html{font-family:var(--font-sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{color:var(--text);background:#fff;line-height:1.6}
-img{max-width:100%;display:block}
-
-/* ============ IRT PC : กล่อง + กล่องคำอธิบายลอย ============ */
-.pc-stack{
-  display: grid;
-  gap: 40px;
-}
-
-.pc-shot{
-  position: relative;
-  margin-bottom: 120px;
-}
-
-.pc-shot img{
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 16px;
-  box-shadow: 0 10px 28px rgba(10,30,60,.2); /* ✅ เงาเดียวพอ */
-}
-
-/* กล่องลอยใต้รูป */
-.pc-cap{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -28px;
-  width: min(880px, 90%);
-  background: #fff;
-  border-radius: 16px;
-  padding: 20px 22px;
-  text-align: center;
-  box-shadow: 0 14px 32px rgba(0,0,0,.15);
-}
-
-.pc-cap h3{
-  font-weight: 700;
-  font-size: 1.2rem;
-  margin-bottom: 6px;
-  color: #0B2C6C;
-}
-
-.pc-cap p{
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #334155;
-  margin: 0;
-}
-/* ============ IRT PC : กรอบภาพ + กล่องคำอธิบายกว้างเท่ารูป ============ */
-
-/* กล่องรวมแต่ละใบ */
-.pc-stack{
-  display:grid;
-  gap:40px;
-}
-
-/* เฟรมของรูป + แคปชัน (ให้โค้งและมีเงาเป็นชิ้นเดียว) */
-.pc-frame{
-  background:#fff;
-  border-radius:18px;
-  overflow:hidden;                          /* บังคับให้ขอบบน-ล่างโค้งเนียน */
-  box-shadow:0 10px 28px rgba(15,30,80,.16); /* เงาเดียวพอ ไม่ซ้อน */
-}
-
-/* รูปด้านบน */
-.pc-frame img{
-  display:block;
-  width:100%;
-  height:auto;
-}
-
-/* แคปชัน “ใต้รูป” และกว้างเท่ารูปเสมอ */
-.pc-caption{
-  position:static;        /* 🔥 ยกเลิกลอย */
-  transform:none;
-  width:100%;
-  padding:18px 22px;
-  background:#fff;
-  text-align:center;
-  border-radius:0 0 18px 18px; /* มุมล่างโค้งเท่ากับเฟรม */
-  box-shadow:none;        /* เงาอยู่ที่ .pc-frame แล้ว */
-  margin:0;               /* ไม่มีช่องว่างด้านข้าง */
-}
-
-/* ฟอนต์ในแคปชัน */
-.pc-caption h3{
-  margin:0 0 6px;
-  font-weight:800;
-  font-size:clamp(18px, 2vw, 22px);
-  color:#0B2C6C;
-}
-.pc-caption p{
-  margin:0;
-  font-size:clamp(14px, 1.6vw, 16px);
-  line-height:1.65;
-  color:#334155;
-}
-
-/* ระยะห่างใต้แต่ละใบ */
-.pc-shot{ margin:0; }
-
-/* จอเล็กก็ยังโค้งและเต็มความกว้างเหมือนเดิม */
-@media (max-width:768px){
-  .pc-stack{ gap:28px; }
-}
-/* ============ IRT PC: กล่องอยู่ใต้รูป และกว้างเท่ารูป (แก้ทับแน่นอน) ============ */
-
-/* รีเซ็ต margin ของ figure */
-#irtpc .pc-shot{ margin:0; }
-
-/* เฟรมรวมรูป+แคปชัน เป็นชิ้นเดียว */
-#irtpc .pc-frame{
-  display:block;
-  padding:0;
-  background:#fff;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 10px 28px rgba(15,30,80,.16);
-}
-
-/* รูป */
-#irtpc .pc-frame img{
-  display:block;
-  width:100%;
-  height:auto;
-}
-
-/* แคปชัน “ใต้รูป” — ไม่ใช่ลอยทับ */
-#irtpc .pc-frame .pc-caption{
-  position:relative !important;
-  left:auto !important;
-  right:auto !important;
-  top:auto !important;
-  bottom:auto !important;
-  transform:none !important;
-
-  width:100% !important;
-  margin:0 !important;
-  padding:18px 22px;
-
-  background:#fff;
-  text-align:center;
-  box-shadow:none !important;
-  border-radius:0 0 18px 18px;
-}
-
-/* ฟอนต์ในแคปชัน */
-#irtpc .pc-frame .pc-caption h3{
-  margin:0 0 6px;
-  font-weight:800;
-  font-size:clamp(18px,2vw,22px);
-  color:#0B2C6C;
-}
-#irtpc .pc-frame .pc-caption p{
-  margin:0;
-  font-size:clamp(14px,1.6vw,16px);
-  line-height:1.65;
-  color:#334155;
-}
-
-/* ระยะห่างระหว่างใบ */
-#irtpc .pc-stack{ display:grid; gap:40px; }
-@media (max-width:768px){ #irtpc .pc-stack{ gap:28px; } }
-/* ================== แก้ Mobile ให้ไม่มีกรอบชั้นในสุด ================== */
-/* ล้างสไตล์การ์ดชั้นในของรูปมือถือให้ใส/ไม่มีเงา/ไม่มี padding */
-#irtmb .mobile-shots figure,
-#irtmb .mobile-shot {
-  background: transparent !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  overflow: visible !important;
-}
-
-/* ให้ตัว "รูป" เองโค้งนิดหน่อยและกินเต็มความกว้าง */
-#irtmb .mobile-shot img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 18px;           /* ปรับได้ตามชอบ */
-}
-
-/* กล่องคำอธิบาย (ยังคงลอยเหมือนเดิม) */
-#irtmb .mobile-cap {
-  background: #fff;
-  border-radius: 16px;
-  padding: 16px 18px;
-  margin-top: 12px;
-  box-shadow: 0 8px 18px rgba(16, 24, 40, 0.06);
-}
-
-/* ถ้าเคยมีสไตล์แบบนี้อยู่ให้มัน “ไม่ทำงาน” ด้วยการ override */
-.mobile-shots figure {
-  background: transparent !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-}
-/* ============= รีวิวลูกค้า: การ์ด & เลย์เอาต์ ============= */
-#reviews { overflow: visible; }
-
-/* กริด 3 คอลัมน์ (เดสก์ท็อป) */
-.t-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
-  margin-top:22px;
-}
-
-/* การ์ดรีวิว */
-.t-card{
-  background:#fff;
-  border-radius:16px;
-  padding:22px 22px 18px;
-  box-shadow:0 10px 26px rgba(15,23,42,.08);
-  border:1px solid rgba(2,6,23,.06);
-  transition:transform .2s ease, box-shadow .2s ease;
-}
-.t-card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 14px 34px rgba(15,23,42,.12);
-}
-
-/* ดาวรีวิว */
-.t-stars{
-  font-size:18px; line-height:1;
-  color:#FBBF24;              /* ทอง */
-  letter-spacing:2px;
-  margin-bottom:10px;
-  font-weight:700;
-}
-
-/* ข้อความรีวิว */
-.t-text{
-  color:#1f2937;
-  font-size:15px;
-  line-height:1.7;
-  margin:0 0 14px 0;
-}
-
-/* ผู้ใช้ */
-.t-user{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-top:6px;
-}
-.avatar{
-  width:44px; height:44px;
-  border-radius:50%;
-  object-fit:cover;
-  border:2px solid #fff;
-  box-shadow:0 3px 8px rgba(2,6,23,.15);
-}
-.t-user__meta{ line-height:1.15; }
-.t-user__name{
-  font-weight:700;
-  color:#0f172a;
-  font-size:14px;
-}
-.t-user__role{
-  color:#6b7280;
-  font-size:12.5px;
-  margin-top:2px;
-}
-
-/* ============= รีสปอนซีฟ ============= */
-@media (max-width:1024px){
-  .t-grid{ grid-template-columns:repeat(2,1fr); }
-}
-@media (max-width:640px){
-  .t-grid{ grid-template-columns:1fr; }
-  .t-card{ padding:18px; }
-}
-/* ============ RESET / BASE (ตั้งต้น) ============ */
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --primary-dark:#0f1f4b;
-  --primary:#1E3A8A;
-  --gold:#FACC15;
-  --text:#0F172A;
-  --muted:#64748b;
-  --bg:#0b1534;
-  --container:1200px;
-
   --font-sans:"Prompt","Noto Sans Thai","Noto Sans",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
+
+/* ============ RESET / BASE ============ */
+*{box-sizing:border-box;margin:0;padding:0}
 html{font-family:var(--font-sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 body{color:var(--text);background:#fff;line-height:1.6}
 img{max-width:100%;display:block}
@@ -451,6 +20,7 @@ img{max-width:100%;display:block}
 .container{max-width:var(--container);margin:0 auto;padding:0 20px}
 .section{padding:80px 0;background:linear-gradient(180deg,#fff,#f8fafc)}
 .section:nth-of-type(even){background:#fff}
+.section,.container,#irtpc{overflow:visible}
 .section__title{font-size:32px;font-weight:800;color:var(--primary);text-align:center;margin-bottom:24px}
 .center{text-align:center}
 
@@ -464,13 +34,15 @@ img{max-width:100%;display:block}
 /* ============ NAVIGATION ============ */
 .nav{position:sticky;top:0;z-index:50;background:rgba(15,31,75,.92);backdrop-filter:blur(8px)}
 .nav__container{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px;padding:0 16px}
-.logo{text-decoration:none;font-weight:900;font-size:28px;letter-spacing:.5px;text-transform:uppercase;color:#FACC15}
+.logo{text-decoration:none;font-weight:900;font-size:28px;letter-spacing:.5px;text-transform:uppercase;color:#FACC15;display:flex;align-items:center}
+.logo__img{display:none!important}
 .nav__menu{list-style:none;display:flex;gap:18px;align-items:center}
 .nav__menu a{color:#fff;text-decoration:none;font-weight:600;position:relative;padding:6px 0}
-.nav__menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--gold);transition:width .25s}
+.nav__menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:#FACC15;transition:width .25s}
 .nav__menu a:hover::after{width:100%}
+
 @media (max-width:768px){
-  .nav__container{height:auto;padding:8px 12px;flex-direction:column;align-items:flex-start;gap:8px}
+  .nav__container{height:auto;flex-direction:column;align-items:flex-start;gap:8px;padding:8px 12px}
   .logo{font-size:20px}
   .nav__menu{width:100%;gap:10px;overflow-x:auto;white-space:nowrap;padding:6px 2px 10px;margin:0 -6px}
   .nav__menu::-webkit-scrollbar{display:none}
@@ -479,649 +51,36 @@ img{max-width:100%;display:block}
 }
 
 /* ============ HERO ============ */
-.hero{position:relative}
+.hero{position:relative;padding-left:0;padding-right:0}
 .hero__banner{width:100%;height:auto;object-fit:cover;max-height:70vh}
 .hero__content{position:relative;z-index:2;text-align:center;padding:24px 20px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg) 40%,transparent 100%);color:#fff}
 .hero__content h1{font-size:44px;line-height:1.15;margin-bottom:10px}
 .hero__content p{font-size:18px;color:#e2e8f0;margin-bottom:16px}
 .hero__cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
+@media (max-width:768px){
+  .hero__content h1{font-size:34px}
+}
+
 /* ============ CALLOUT ============ */
-.callout{background:#fff3c4;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:16px 24px;margin:22px auto;max-width:760px}
-.callout.center{text-align:center}
-
-/* ============ PC SHOTS (รูป PC + คำบรรยายใต้รูป) ============ */
-.pc-stack{display:grid;gap:28px}
-.pc-shot{}
-.pc-frame{
-  background:#fff;
-  border-radius:18px;
-  box-shadow:0 10px 24px rgba(3,23,56,.12);
-  overflow:hidden;
-}
-.pc-frame img{width:100%;height:auto;display:block}
-.pc-caption{
-  padding:16px 18px;              /* กล่องอยู่ “ใต้รูป” และกว้างเท่ารูป */
-  text-align:center;
-}
-.pc-caption h3{margin:0 0 6px;font-weight:800;color:#0B2C6C;font-size:clamp(18px,2vw,22px)}
-.pc-caption p{margin:0;color:#334155;font-size:clamp(14px,1.6vw,16px);line-height:1.65}
-
-/* ============ MOBILE SHOTS (รูป MB + คำบรรยายใต้รูป) ============ */
-.mobile-shots{display:grid;gap:20px;max-width:1080px;margin:0 auto}
-.mobile-shot{background:#fff;border-radius:18px;box-shadow:0 10px 24px rgba(3,23,56,.12);overflow:hidden}
-.mobile-shot img{width:100%;height:auto;display:block}
-.mobile-cap{padding:16px 18px;text-align:center}
-.mobile-cap h3{margin:0 0 6px;font-weight:700;color:#0F2B5B}
-.mobile-cap p{margin:0;color:#5B6B7C}
-
-/* ============ TESTIMONIAL CARDS (ตัวหนังสือรีวิว 6 ใบ) ============ */
-.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:28px}
-@media (max-width:1024px){.t-grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:640px){.t-grid{grid-template-columns:1fr}}
-.t-card{background:#fff;border-radius:16px;padding:22px 22px 18px;box-shadow:0 8px 24px rgba(2,6,23,.06);border:1px solid rgba(2,6,23,.06)}
-.t-stars{font-size:18px;line-height:1;color:#FBBF24;letter-spacing:2px;margin-bottom:10px;font-weight:700}
-.t-text{color:#1f2937;font-size:15px;line-height:1.7;margin:0 0 14px}
-.t-user{display:flex;align-items:center;gap:12px;margin-top:6px}
-.avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 3px 8px rgba(2,6,23,.15)}
-.t-user__name{font-weight:700;color:#0f172a;font-size:14px}
-.t-user__role{color:#6b7280;font-size:12.5px;margin-top:2px}
-
-/* ============ REVIEW IMAGES (รูปรวม 4 ใบ) ============ */
-.reviews__images{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
-.reviews__images img{width:100%;height:100%;object-fit:cover;border-radius:12px}
-@media (max-width:1024px){.reviews__images{grid-template-columns:repeat(2,1fr)}}
-
-/* ============ PRICING ============ */
-.pricing__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.pricing__card{background:#fff;border-radius:18px;box-shadow:0 10px 34px rgba(2,6,23,.1);padding:24px;border:3px solid var(--gold)}
-.pricing__card .price{font-size:32px;font-weight:800;color:var(--gold);margin:10px 0}
-.pricing__card ul{list-style:none;display:grid;gap:10px;margin:14px 0 20px}
-.pricing__card ul li::before{content:"✓ ";color:#10B981;font-weight:700}
-
-/* ============ FOOTER ============ */
-.footer{background:var(--bg);color:#cbd5e1;padding:28px 0;text-align:center}
-/* ========== Problem Solution Box Styles ========== */
-
-.problem-solution-box {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 30px;
-  margin: 20px auto;
-  max-width: 800px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.problem-solution-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-}
-
-.problem-box {
-  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
-  border-left: 4px solid #ff4444;
-  border-radius: 12px;
-  padding: 25px;
-  margin-bottom: 30px;
-}
-
-.problem-item {
-  margin-bottom: 20px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.problem-item:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: translateX(5px);
-}
-
-.problem-item strong {
-  color: #d32f2f;
-  font-size: 1.1em;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.problem-item .emoji {
-  font-size: 1.3em;
-  margin-right: 10px;
-}
-
-.solution-box {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  border-left: 4px solid #0ea5e9;
-  border-radius: 12px;
-  padding: 25px;
-}
-
-.solution-title {
-  color: #0369a1;
-  font-size: 1.4em;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.solution-subtitle {
-  text-align: center;
-  font-size: 1.1em;
-  margin-bottom: 20px;
-  color: #334155;
-}
-
-.features-list {
-  margin: 20px 0;
-}
-
-.feature-item {
-  padding: 12px;
-  margin-bottom: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.feature-item:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: translateX(5px);
-}
-
-.feature-item strong {
-  color: #0369a1;
-}
-
-.result-highlight {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 20px;
-  text-align: center;
-  font-weight: bold;
-  color: #92400e;
-}
-
-.disclaimer {
-  margin-top: 25px;
-  padding: 15px;
-  background: #f8fafc;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 0.9em;
-  color: #64748b;
-  border: 1px dashed #cbd5e1;
-}
-
-/* ========== Review Card Style (Optional) ========== */
-
-.review-card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 15px auto;
-  max-width: 400px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-}
-
-.stars {
-  color: #fbbf24;
-  font-size: 1.2em;
-  margin-bottom: 10px;
-}
-
-.review-text {
-  color: #1f2937;
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-
-.reviewer-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.reviewer-avatar {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.reviewer-name {
-  font-weight: bold;
-  color: #111827;
-}
-
-.reviewer-product {
-  font-size: 0.9em;
-  color: #6b7280;
-}
-/* ========== Problem Solution Box Styles (Updated) ========== */
-
-.problem-solution-box {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 30px;
-  margin: 20px auto;
-  max-width: 800px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.problem-solution-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-}
-
-.problem-box {
-  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
-  border-left: 4px solid #ff4444;
-  border-radius: 12px;
-  padding: 25px;
-  margin-bottom: 30px;
-}
-
-/* ปรับขนาดหัวข้อให้ใหญ่และเด่น */
-.problem-title {
-  color: #d32f2f;
-  font-size: 2em; /* เพิ่มขนาดตัวหนังสือ */
-  font-weight: bold;
-  margin-bottom: 25px;
-  text-align: center;
-}
-
-.problem-item {
-  margin-bottom: 20px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.problem-item:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: translateX(5px);
-}
-
-.problem-item strong {
-  color: #d32f2f;
-  font-size: 1.1em;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.problem-item .emoji {
-  font-size: 1.3em;
-  margin-right: 10px;
-}
-
-.solution-box {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  border-left: 4px solid #0ea5e9;
-  border-radius: 12px;
-  padding: 25px;
-}
-
-/* ปรับหัวข้อ Solution ให้ใหญ่และเด่น */
-.solution-title {
-  color: #0369a1;
-  font-size: 2em; /* เพิ่มขนาดตัวหนังสือ */
-  font-weight: bold;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-.solution-subtitle {
-  text-align: center;
-  font-size: 1.1em;
-  margin-bottom: 20px;
-  color: #334155;
-}
-
-.features-list {
-  margin: 20px 0;
-}
-
-.feature-item {
-  padding: 12px;
-  margin-bottom: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.feature-item:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: translateX(5px);
-}
-
-.feature-item strong {
-  color: #0369a1;
-}
-
-.result-highlight {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 20px;
-  text-align: center;
-  font-weight: bold;
-  color: #92400e;
-}
-
-.disclaimer {
-  margin-top: 25px;
-  padding: 15px;
-  background: #f8fafc;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 0.9em;
-  color: #64748b;
-  border: 1px dashed #cbd5e1;
-}
-/* ========== Problem Solution Box Styles (Updated V2) ========== */
-
-.problem-solution-box {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 40px;
-  margin: 20px auto;
-  width: 1080px; /* กำหนดความกว้างเท่ากับรูปสีน้ำเงิน */
-  height: 1080px; /* กำหนดความสูงเท่ากับรูปสีน้ำเงิน */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  /* ลบ transition และ hover ออก */
-  overflow: auto; /* เผื่อเนื้อหาเยอะ */
-}
-
-/* ลบ hover effect ของกล่องใหญ่ออก */
-/* .problem-solution-box:hover ถูกลบออก */
-
-.problem-box {
-  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
-  border-left: 4px solid #ff4444;
-  border-radius: 12px;
-  padding: 25px;
-  margin-bottom: 30px;
-}
-
-/* ปรับขนาดหัวข้อให้ใหญ่และเด่น */
-.problem-title {
-  color: #d32f2f;
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 25px;
-  text-align: center;
-}
-
-/* เก็บ hover effect ไว้เฉพาะกรอบเล็กด้านใน */
-.problem-item {
-  margin-bottom: 20px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 8px;
-  transition: all 0.3s ease; /* เก็บ transition ไว้ */
-  cursor: pointer; /* แสดงว่าคลิกได้ */
-}
-
-.problem-item:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: translateX(5px); /* เก็บ hover effect ไว้ */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.problem-item strong {
-  color: #d32f2f;
-  font-size: 1.1em;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.problem-item .emoji {
-  font-size: 1.3em;
-  margin-right: 10px;
-}
-
-.solution-box {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  border-left: 4px solid #0ea5e9;
-  border-radius: 12px;
-  padding: 25px;
-}
-
-/* ปรับหัวข้อ Solution ให้ใหญ่และเด่น */
-.solution-title {
-  color: #0369a1;
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-.solution-subtitle {
-  text-align: center;
-  font-size: 1.1em;
-  margin-bottom: 20px;
-  color: #334155;
-}
-
-.features-list {
-  margin: 20px 0;
-}
-
-/* เก็บ hover effect ไว้เฉพาะกรอบเล็กด้านใน */
-.feature-item {
-  padding: 12px;
-  margin-bottom: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
-  transition: all 0.3s ease; /* เก็บ transition ไว้ */
-  cursor: pointer; /* แสดงว่าคลิกได้ */
-}
-
-.feature-item:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: translateX(5px); /* เก็บ hover effect ไว้ */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.feature-item strong {
-  color: #0369a1;
-}
-
-.result-highlight {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 20px;
-  text-align: center;
-  font-weight: bold;
-  color: #92400e;
-}
-
-.disclaimer {
-  margin-top: 25px;
-  padding: 15px;
-  background: #f8fafc;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 0.9em;
-  color: #64748b;
-  border: 1px dashed #cbd5e1;
-}
-
-/* สำหรับ Responsive - ปรับขนาดบนหน้าจอเล็ก */
-@media (max-width: 1100px) {
-  .problem-solution-box {
-    width: 95%;
-    height: auto;
-    padding: 30px 20px;
-  }
-}
-/* ========== Problem Solution Box - Final Version ========== */
-
-/* กล่องใหญ่สีขาว - ไม่ขยับ ไม่มี hover */
-.problem-solution-box {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 40px;
-  margin: 20px auto;
-  width: 1080px;
-  height: 1080px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  overflow: auto;
-  /* ไม่มี transition ไม่มี hover - กล่องใหญ่อยู่นิ่งๆ */
-}
-
-/* กล่องปัญหา - ไม่ขยับ */
-.problem-box {
-  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
-  border-left: 4px solid #ff4444;
-  border-radius: 12px;
-  padding: 25px;
-  margin-bottom: 30px;
-  /* ไม่มี transition */
-}
-
-.problem-title {
-  color: #d32f2f;
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 25px;
-  text-align: center;
-}
-
-/* กรอบเล็กปัญหา - ขยับได้ ✅ */
-.problem-item {
-  margin-bottom: 20px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.problem-item:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: translateX(10px); /* ขยับไปทางขวา */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.problem-item strong {
-  color: #d32f2f;
-  font-size: 1.1em;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.problem-item .emoji {
-  font-size: 1.3em;
-  margin-right: 10px;
-}
-
-/* กล่อง Solution - ไม่ขยับ */
-.solution-box {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  border-left: 4px solid #0ea5e9;
-  border-radius: 12px;
-  padding: 25px;
-  /* ไม่มี transition */
-}
-
-.solution-title {
-  color: #0369a1;
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-.solution-subtitle {
-  text-align: center;
-  font-size: 1.1em;
-  margin-bottom: 20px;
-  color: #334155;
-}
-
-.features-list {
-  margin: 20px 0;
-}
-
-/* กรอบเล็ก Feature - ขยับได้ ✅ */
-.feature-item {
-  padding: 12px;
-  margin-bottom: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.feature-item:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: translateX(10px); /* ขยับไปทางขวา */
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
-}
-
-.feature-item strong {
-  color: #0369a1;
-}
-
-/* กล่องผลลัพธ์ - ไม่ขยับ */
-.result-highlight {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 20px;
-  text-align: center;
-  font-weight: bold;
-  color: #92400e;
-  /* ไม่มี transition */
-}
-
-/* Disclaimer - ไม่ขยับ */
-.disclaimer {
-  margin-top: 25px;
-  padding: 15px;
-  background: #f8fafc;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 0.9em;
-  color: #64748b;
-  border: 1px dashed #cbd5e1;
-  /* ไม่มี transition */
-}
-
-/* Responsive */
-@media (max-width: 1100px) {
-  .problem-solution-box {
-    width: 95%;
-    height: auto;
-    padding: 30px 20px;
-  }
-}
-/* ========== Problem Solution Box - Fixed Overlap Issue ========== */
-
-/* กล่องใหญ่สีขาว - อยู่นิ่ง ไม่ทับรูปด้านล่าง */
+.callout{background:#fff3c4;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:14px;margin:22px auto;max-width:760px}
+.callout--wide{width:100%;max-width:100%;padding:16px 32px}
+@media (min-width:768px){.callout--wide{font-size:1.05rem}}
+
+/* ============ PROBLEM SOLUTION BOX - แก้ไขแล้ว ============ */
 .problem-solution-box {
   background: #ffffff;
   border-radius: 16px;
   padding: 50px 60px;
-  margin: 20px auto 60px auto; /* เพิ่ม margin-bottom 60px เพื่อไม่ให้ทับรูป */
+  margin: 20px auto 120px auto !important; /* เพิ่ม margin-bottom เป็น 120px */
   max-width: 1400px;
   min-height: auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  overflow: visible;
-  position: relative; /* เพิ่ม position */
-  z-index: 1; /* ให้อยู่ชั้นล่างกว่ารูป */
-  /* ไม่มี transition ไม่มี hover - อยู่นิ่งสนิท */
+  display: block;
+  clear: both;
+  position: relative;
+  z-index: 1;
 }
-
-/* ลบ hover effect ของกล่องใหญ่ทั้งหมด */
-/* ไม่มี :hover สำหรับ .problem-solution-box */
 
 .problem-box {
   background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
@@ -1139,7 +98,6 @@ img{max-width:100%;display:block}
   text-align: center;
 }
 
-/* กรอบเล็กปัญหา - ขยับได้ ✅ */
 .problem-item {
   margin-bottom: 20px;
   padding: 18px;
@@ -1193,7 +151,6 @@ img{max-width:100%;display:block}
   margin: 25px 0;
 }
 
-/* กรอบเล็ก Feature - ขยับได้ ✅ */
 .feature-item {
   padding: 15px;
   margin-bottom: 12px;
@@ -1235,26 +192,24 @@ img{max-width:100%;display:block}
   border: 1px dashed #cbd5e1;
 }
 
-/* รูปด้านล่าง - ให้อยู่เหนือกล่อง */
-.section img,
-#about + * {
-  position: relative;
-  z-index: 2; /* ให้อยู่เหนือกล่องขาว */
-  margin-top: 20px;
+/* Section ถัดจากกล่อง Problem Solution */
+.problem-solution-box + * {
+  margin-top: 60px !important;
+  clear: both;
 }
 
 @media (max-width: 1450px) {
   .problem-solution-box {
     max-width: 95%;
     padding: 40px 30px;
-    margin-bottom: 50px;
+    margin-bottom: 100px !important;
   }
 }
 
 @media (max-width: 768px) {
   .problem-solution-box {
     padding: 30px 20px;
-    margin-bottom: 40px;
+    margin-bottom: 80px !important;
   }
   
   .problem-title,
@@ -1262,3 +217,67 @@ img{max-width:100%;display:block}
     font-size: 1.8em;
   }
 }
+
+/* ============ IRT PC (6 ใบ) ============ */
+#irtpc .pc-stack{display:grid;gap:40px;overflow:visible}
+#irtpc .pc-card{position:relative;margin-bottom:110px;overflow:visible}
+#irtpc .pc-card__media{overflow:hidden;border-radius:18px;background:#0b1f3a;box-shadow:0 10px 24px rgba(3,23,56,.16)}
+#irtpc .pc-card__media img{width:100%;height:auto;display:block}
+#irtpc .pc-caption{position:absolute;left:50%;bottom:-28px;transform:translateX(-50%);width:min(900px,88%);background:#fff;color:#0b1d3a;text-align:center;padding:22px 28px;border-radius:18px;box-shadow:0 14px 40px rgba(2,16,40,.18);z-index:3}
+#irtpc .pc-caption__title{font-size:clamp(18px,2.2vw,22px);font-weight:800;margin:0 0 8px;color:#0B2C6C}
+#irtpc .pc-caption__desc{font-size:clamp(14px,1.65vw,16px);margin:0;color:#334155;line-height:1.65}
+#irtpc .pc-card:last-child{margin-bottom:80px}
+
+@media (max-width:992px){
+  #irtpc .pc-card{margin-bottom:96px}
+  #irtpc .pc-caption{width:92%;bottom:-20px;padding:18px 20px}
+}
+
+/* ============ IRT MB (3 ใบ) ============ */
+.mobile-shots{max-width:1080px;margin:0 auto;display:grid;gap:24px}
+.mobile-shot{background:#fff;border-radius:20px;box-shadow:0 10px 25px rgba(10,30,60,.07);padding:16px}
+.mobile-shot img{width:100%;height:auto;border-radius:12px}
+.mobile-cap{background:#fff;border-radius:16px;padding:16px 18px;margin-top:12px;box-shadow:0 8px 18px rgba(16,24,40,.06)}
+.mobile-cap h3{margin:0 0 6px;font-weight:700;font-size:1rem;color:#0F2B5B}
+.mobile-cap p{margin:0;color:#5B6B7C;font-size:.95rem;line-height:1.6}
+
+/* ============ TESTIMONIAL CARDS ============ */
+#reviews{overflow:visible}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:22px}
+.t-card{background:#fff;border-radius:16px;padding:22px 22px 18px;box-shadow:0 10px 26px rgba(15,23,42,.08);border:1px solid rgba(2,6,23,.06);transition:transform .2s ease,box-shadow .2s ease}
+.t-card:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(15,23,42,.12)}
+.t-stars{font-size:18px;line-height:1;color:#FBBF24;letter-spacing:2px;margin-bottom:10px;font-weight:700}
+.t-text{color:#1f2937;font-size:15px;line-height:1.7;margin:0 0 14px 0}
+.t-user{display:flex;align-items:center;gap:12px;margin-top:6px}
+.avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 3px 8px rgba(2,6,23,.15)}
+.t-user__meta{line-height:1.15}
+.t-user__name{font-weight:700;color:#0f172a;font-size:14px}
+.t-user__role{color:#6b7280;font-size:12.5px;margin-top:2px}
+
+@media (max-width:1024px){
+  .t-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:640px){
+  .t-grid{grid-template-columns:1fr}
+  .t-card{padding:18px}
+}
+
+/* ============ REVIEW IMAGES ============ */
+.reviews__images{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.reviews__images img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+@media (max-width:1024px){.reviews__images{grid-template-columns:repeat(2,1fr)}}
+
+/* ============ PRICING ============ */
+.pricing__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.pricing__card{background:#fff;border-radius:18px;box-shadow:0 10px 34px rgba(2,6,23,.1);padding:24px;border:3px solid var(--gold)}
+.pricing__card .price{font-size:32px;font-weight:800;color:var(--gold);margin:10px 0}
+.pricing__card ul{list-style:none;display:grid;gap:10px;margin:14px 0 20px}
+.pricing__card ul li::before{content:"✓ ";color:#10B981;font-weight:700}
+@media (max-width:768px){.pricing__grid{grid-template-columns:1fr}}
+
+/* ============ VIDEO ============ */
+.video{display:flex;justify-content:center;align-items:center;margin:24px auto;width:100%}
+.video iframe{width:min(540px,100%);aspect-ratio:9/16;height:auto;border:0;border-radius:12px}
+
+/* ============ FOOTER ============ */
+.footer{background:var(--bg);color:#cbd5e1;padding:28px 0;text-align:center}
