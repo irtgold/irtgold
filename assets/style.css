@@ -1414,3 +1414,48 @@ img{max-width:100%;display:block}
     font-size: 1.8em !important;
   }
 }
+/* ===== หัวข้อย่อย (ใช้กับ "รีวิวผู้ใช้โปรแกรม") ===== */
+.section__subtitle{
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 8px 0 14px;
+}
+
+/* ===== แกลเลอรีรีวิวภาพ ===== */
+.reviews__images{
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, 1fr);   /* มือถือ: 2 ต่อแถว */
+  margin-top: 10px;
+}
+
+.reviews__images img{
+  width: 100%;
+  aspect-ratio: 1 / 1;                    /* รูปสี่เหลี่ยมสวย ๆ */
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(2, 6, 23, .10);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.reviews__images img:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(2, 6, 23, .14);
+}
+
+/* แท็บเล็ต: 3 ต่อแถว (จะนุ่มตา) */
+@media (min-width: 768px){
+  .reviews__images{
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+/* เดสก์ท็อป: 4 ต่อแถว */
+@media (min-width: 1024px){
+  .reviews__images{
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+}
