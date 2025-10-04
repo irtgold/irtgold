@@ -541,3 +541,162 @@ img{max-width:100%;display:block}
 
 /* ============ FOOTER ============ */
 .footer{background:var(--bg);color:#cbd5e1;padding:28px 0;text-align:center}
+/* ========== Problem Solution Box Styles ========== */
+
+.problem-solution-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.problem-solution-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.problem-box {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+  border-left: 4px solid #ff4444;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.problem-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.problem-item:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateX(5px);
+}
+
+.problem-item strong {
+  color: #d32f2f;
+  font-size: 1.1em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.problem-item .emoji {
+  font-size: 1.3em;
+  margin-right: 10px;
+}
+
+.solution-box {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-left: 4px solid #0ea5e9;
+  border-radius: 12px;
+  padding: 25px;
+}
+
+.solution-title {
+  color: #0369a1;
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.solution-subtitle {
+  text-align: center;
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  color: #334155;
+}
+
+.features-list {
+  margin: 20px 0;
+}
+
+.feature-item {
+  padding: 12px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateX(5px);
+}
+
+.feature-item strong {
+  color: #0369a1;
+}
+
+.result-highlight {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #92400e;
+}
+
+.disclaimer {
+  margin-top: 25px;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #64748b;
+  border: 1px dashed #cbd5e1;
+}
+
+/* ========== Review Card Style (Optional) ========== */
+
+.review-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 15px auto;
+  max-width: 400px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.stars {
+  color: #fbbf24;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.review-text {
+  color: #1f2937;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reviewer-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.reviewer-name {
+  font-weight: bold;
+  color: #111827;
+}
+
+.reviewer-product {
+  font-size: 0.9em;
+  color: #6b7280;
+}
