@@ -1103,21 +1103,21 @@ img{max-width:100%;display:block}
     padding: 30px 20px;
   }
 }
-/* ========== Problem Solution Box - Fixed Size & No Scroll ========== */
+/* ========== Problem Solution Box - NO SCROLLBAR ========== */
 
-/* กล่องใหญ่สีขาว - ขยายขนาด ไม่มี scrollbar */
+/* กล่องใหญ่สีขาว - ไม่มี scrollbar เลย */
 .problem-solution-box {
   background: #ffffff;
   border-radius: 16px;
-  padding: 50px 60px; /* เพิ่ม padding */
+  padding: 50px 60px;
   margin: 20px auto;
-  max-width: 1400px; /* ขยายความกว้างจาก 1080 เป็น 1400px */
-  min-height: auto; /* ให้ความสูงปรับตามเนื้อหา */
+  max-width: 1400px;
+  min-height: auto; /* ปรับตามเนื้อหา */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  /* ลบ overflow: auto ออก - ไม่มี scrollbar */
+  /* ไม่มี overflow - ไม่มี scrollbar */
+  overflow: visible; /* แสดงเนื้อหาทั้งหมด ไม่ซ่อน */
 }
 
-/* กล่องปัญหา - ไม่ขยับ */
 .problem-box {
   background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
   border-left: 4px solid #ff4444;
@@ -1128,13 +1128,12 @@ img{max-width:100%;display:block}
 
 .problem-title {
   color: #d32f2f;
-  font-size: 2.2em; /* เพิ่มขนาดตัวหนังสือ */
+  font-size: 2.2em;
   font-weight: bold;
   margin-bottom: 30px;
   text-align: center;
 }
 
-/* กรอบเล็กปัญหา - ขยับได้ ✅ */
 .problem-item {
   margin-bottom: 20px;
   padding: 18px;
@@ -1162,7 +1161,6 @@ img{max-width:100%;display:block}
   margin-right: 10px;
 }
 
-/* กล่อง Solution - ไม่ขยับ */
 .solution-box {
   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
   border-left: 4px solid #0ea5e9;
@@ -1172,7 +1170,7 @@ img{max-width:100%;display:block}
 
 .solution-title {
   color: #0369a1;
-  font-size: 2.2em; /* เพิ่มขนาดตัวหนังสือ */
+  font-size: 2.2em;
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
@@ -1189,7 +1187,6 @@ img{max-width:100%;display:block}
   margin: 25px 0;
 }
 
-/* กรอบเล็ก Feature - ขยับได้ ✅ */
 .feature-item {
   padding: 15px;
   margin-bottom: 12px;
@@ -1209,7 +1206,6 @@ img{max-width:100%;display:block}
   color: #0369a1;
 }
 
-/* กล่องผลลัพธ์ - ไม่ขยับ */
 .result-highlight {
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
   border-radius: 10px;
@@ -1221,7 +1217,6 @@ img{max-width:100%;display:block}
   color: #92400e;
 }
 
-/* Disclaimer - ไม่ขยับ */
 .disclaimer {
   margin-top: 30px;
   padding: 18px;
@@ -1233,7 +1228,6 @@ img{max-width:100%;display:block}
   border: 1px dashed #cbd5e1;
 }
 
-/* Responsive */
 @media (max-width: 1450px) {
   .problem-solution-box {
     max-width: 95%;
