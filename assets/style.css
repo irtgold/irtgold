@@ -1459,3 +1459,7 @@ img{max-width:100%;display:block}
     gap: 18px;
   }
 }
+/* สำหรับกล่อง IRT GOLD V5.0 (PC) */
+.callout {
+  margin-bottom: 60px;   /* เพิ่มช่องว่างด้านล่าง */
+}
