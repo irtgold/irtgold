@@ -1103,20 +1103,25 @@ img{max-width:100%;display:block}
     padding: 30px 20px;
   }
 }
-/* ========== Problem Solution Box - NO SCROLLBAR ========== */
+/* ========== Problem Solution Box - Fixed Overlap Issue ========== */
 
-/* กล่องใหญ่สีขาว - ไม่มี scrollbar เลย */
+/* กล่องใหญ่สีขาว - อยู่นิ่ง ไม่ทับรูปด้านล่าง */
 .problem-solution-box {
   background: #ffffff;
   border-radius: 16px;
   padding: 50px 60px;
-  margin: 20px auto;
+  margin: 20px auto 60px auto; /* เพิ่ม margin-bottom 60px เพื่อไม่ให้ทับรูป */
   max-width: 1400px;
-  min-height: auto; /* ปรับตามเนื้อหา */
+  min-height: auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  /* ไม่มี overflow - ไม่มี scrollbar */
-  overflow: visible; /* แสดงเนื้อหาทั้งหมด ไม่ซ่อน */
+  overflow: visible;
+  position: relative; /* เพิ่ม position */
+  z-index: 1; /* ให้อยู่ชั้นล่างกว่ารูป */
+  /* ไม่มี transition ไม่มี hover - อยู่นิ่งสนิท */
 }
+
+/* ลบ hover effect ของกล่องใหญ่ทั้งหมด */
+/* ไม่มี :hover สำหรับ .problem-solution-box */
 
 .problem-box {
   background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
@@ -1134,6 +1139,7 @@ img{max-width:100%;display:block}
   text-align: center;
 }
 
+/* กรอบเล็กปัญหา - ขยับได้ ✅ */
 .problem-item {
   margin-bottom: 20px;
   padding: 18px;
@@ -1187,6 +1193,7 @@ img{max-width:100%;display:block}
   margin: 25px 0;
 }
 
+/* กรอบเล็ก Feature - ขยับได้ ✅ */
 .feature-item {
   padding: 15px;
   margin-bottom: 12px;
@@ -1228,16 +1235,26 @@ img{max-width:100%;display:block}
   border: 1px dashed #cbd5e1;
 }
 
+/* รูปด้านล่าง - ให้อยู่เหนือกล่อง */
+.section img,
+#about + * {
+  position: relative;
+  z-index: 2; /* ให้อยู่เหนือกล่องขาว */
+  margin-top: 20px;
+}
+
 @media (max-width: 1450px) {
   .problem-solution-box {
     max-width: 95%;
     padding: 40px 30px;
+    margin-bottom: 50px;
   }
 }
 
 @media (max-width: 768px) {
   .problem-solution-box {
     padding: 30px 20px;
+    margin-bottom: 40px;
   }
   
   .problem-title,
