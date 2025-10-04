@@ -354,3 +354,79 @@ img{max-width:100%;display:block}
   box-shadow: none !important;
   border-radius: 0 !important;
 }
+/* ============= รีวิวลูกค้า: การ์ด & เลย์เอาต์ ============= */
+#reviews { overflow: visible; }
+
+/* กริด 3 คอลัมน์ (เดสก์ท็อป) */
+.t-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  margin-top:22px;
+}
+
+/* การ์ดรีวิว */
+.t-card{
+  background:#fff;
+  border-radius:16px;
+  padding:22px 22px 18px;
+  box-shadow:0 10px 26px rgba(15,23,42,.08);
+  border:1px solid rgba(2,6,23,.06);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.t-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 34px rgba(15,23,42,.12);
+}
+
+/* ดาวรีวิว */
+.t-stars{
+  font-size:18px; line-height:1;
+  color:#FBBF24;              /* ทอง */
+  letter-spacing:2px;
+  margin-bottom:10px;
+  font-weight:700;
+}
+
+/* ข้อความรีวิว */
+.t-text{
+  color:#1f2937;
+  font-size:15px;
+  line-height:1.7;
+  margin:0 0 14px 0;
+}
+
+/* ผู้ใช้ */
+.t-user{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:6px;
+}
+.avatar{
+  width:44px; height:44px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #fff;
+  box-shadow:0 3px 8px rgba(2,6,23,.15);
+}
+.t-user__meta{ line-height:1.15; }
+.t-user__name{
+  font-weight:700;
+  color:#0f172a;
+  font-size:14px;
+}
+.t-user__role{
+  color:#6b7280;
+  font-size:12.5px;
+  margin-top:2px;
+}
+
+/* ============= รีสปอนซีฟ ============= */
+@media (max-width:1024px){
+  .t-grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:640px){
+  .t-grid{ grid-template-columns:1fr; }
+  .t-card{ padding:18px; }
+}
