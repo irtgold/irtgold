@@ -867,3 +867,56 @@ img{max-width:100%;display:block}
   transition: none !important;
   box-shadow: none !important;
 }
+/* ====== ลดช่องว่างรวมของทุก section ====== */
+.section{
+  padding: 56px 0 !important;   /* จาก 80px → 56px */
+}
+
+/* ถ้าบาง section อยากแน่นเป็นพิเศษ ให้เติม class="section section--tight" ที่ HTML */
+.section--tight{
+  padding: 40px 0 !important;
+}
+
+/* ====== หัวข้อหลักให้ชิดลงนิดนึง ====== */
+.section__title{
+  margin-bottom: 16px !important;  /* เดิม 24px */
+}
+
+/* ====== บล็อก Problem & Solution ให้ชิดลง ====== */
+.problem-solution-box{
+  margin-top: 24px !important;
+  margin-bottom: 36px !important;  /* เดิมบางช่วง > 60–120px */
+}
+
+/* ====== กลุ่มภาพ IRT PC ให้ระยะระหว่างการ์ดน้อยลง ====== */
+#irtpc .pc-stack{
+  gap: 24px !important;            /* เดิม 40px/28px */
+}
+#irtpc .pc-frame .pc-caption{
+  padding: 14px 16px !important;   /* กล่องคำอธิบายใต้รูปให้เตี้ยลง */
+}
+
+/* ====== กล่องสรุป (แถบเหลือง) ให้ชิดลง ====== */
+.callout{
+  margin: 14px auto !important;    /* เดิม 22px/60px */
+}
+
+/* ====== แกลเลอรีรูปรีวิวให้ชิดขึ้น ====== */
+.reviews__images{
+  margin-top: 8px !important;      /* เดิม 18–28px */
+  gap: 12px !important;            /* บีบช่องไฟในกริดเล็กน้อย */
+}
+
+/* ====== เฉพาะบาง section ที่ต้องการแน่นมาก ๆ ====== */
+/* PC */
+#irtpc.section{ padding: 48px 0 !important; }
+/* Pricing */
+#pricing.section{ padding: 48px 0 !important; }
+/* Contact */
+#contact.section{ padding: 48px 0 !important; }
+
+/* ====== เผื่อกรณีเฮดเดอร์/ส่วนบนยังดูห่าง ให้บีบเฉพาะบล็อกนี้เพิ่ม ====== */
+#about + .section{                 /* บล็อกถัดจาก Problem&Solution */
+  margin-top: 0 !important;
+  padding-top: 40px !important;
+}
