@@ -823,3 +823,141 @@ img{max-width:100%;display:block}
   color: #64748b;
   border: 1px dashed #cbd5e1;
 }
+/* ========== Problem Solution Box Styles (Updated V2) ========== */
+
+.problem-solution-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  margin: 20px auto;
+  width: 1080px; /* กำหนดความกว้างเท่ากับรูปสีน้ำเงิน */
+  height: 1080px; /* กำหนดความสูงเท่ากับรูปสีน้ำเงิน */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /* ลบ transition และ hover ออก */
+  overflow: auto; /* เผื่อเนื้อหาเยอะ */
+}
+
+/* ลบ hover effect ของกล่องใหญ่ออก */
+/* .problem-solution-box:hover ถูกลบออก */
+
+.problem-box {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+  border-left: 4px solid #ff4444;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+/* ปรับขนาดหัวข้อให้ใหญ่และเด่น */
+.problem-title {
+  color: #d32f2f;
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* เก็บ hover effect ไว้เฉพาะกรอบเล็กด้านใน */
+.problem-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  transition: all 0.3s ease; /* เก็บ transition ไว้ */
+  cursor: pointer; /* แสดงว่าคลิกได้ */
+}
+
+.problem-item:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateX(5px); /* เก็บ hover effect ไว้ */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.problem-item strong {
+  color: #d32f2f;
+  font-size: 1.1em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.problem-item .emoji {
+  font-size: 1.3em;
+  margin-right: 10px;
+}
+
+.solution-box {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-left: 4px solid #0ea5e9;
+  border-radius: 12px;
+  padding: 25px;
+}
+
+/* ปรับหัวข้อ Solution ให้ใหญ่และเด่น */
+.solution-title {
+  color: #0369a1;
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.solution-subtitle {
+  text-align: center;
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  color: #334155;
+}
+
+.features-list {
+  margin: 20px 0;
+}
+
+/* เก็บ hover effect ไว้เฉพาะกรอบเล็กด้านใน */
+.feature-item {
+  padding: 12px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  transition: all 0.3s ease; /* เก็บ transition ไว้ */
+  cursor: pointer; /* แสดงว่าคลิกได้ */
+}
+
+.feature-item:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateX(5px); /* เก็บ hover effect ไว้ */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item strong {
+  color: #0369a1;
+}
+
+.result-highlight {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #92400e;
+}
+
+.disclaimer {
+  margin-top: 25px;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #64748b;
+  border: 1px dashed #cbd5e1;
+}
+
+/* สำหรับ Responsive - ปรับขนาดบนหน้าจอเล็ก */
+@media (max-width: 1100px) {
+  .problem-solution-box {
+    width: 95%;
+    height: auto;
+    padding: 30px 20px;
+  }
+}
