@@ -319,3 +319,38 @@ img{max-width:100%;display:block}
 /* ระยะห่างระหว่างใบ */
 #irtpc .pc-stack{ display:grid; gap:40px; }
 @media (max-width:768px){ #irtpc .pc-stack{ gap:28px; } }
+/* ================== แก้ Mobile ให้ไม่มีกรอบชั้นในสุด ================== */
+/* ล้างสไตล์การ์ดชั้นในของรูปมือถือให้ใส/ไม่มีเงา/ไม่มี padding */
+#irtmb .mobile-shots figure,
+#irtmb .mobile-shot {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+
+/* ให้ตัว "รูป" เองโค้งนิดหน่อยและกินเต็มความกว้าง */
+#irtmb .mobile-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;           /* ปรับได้ตามชอบ */
+}
+
+/* กล่องคำอธิบาย (ยังคงลอยเหมือนเดิม) */
+#irtmb .mobile-cap {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-top: 12px;
+  box-shadow: 0 8px 18px rgba(16, 24, 40, 0.06);
+}
+
+/* ถ้าเคยมีสไตล์แบบนี้อยู่ให้มัน “ไม่ทำงาน” ด้วยการ override */
+.mobile-shots figure {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
