@@ -2379,3 +2379,68 @@ html { scroll-behavior: smooth; }
     font-size: 0.95rem;
   }
 }
+/* บรรทัดติดต่อให้ชิดกลาง และต่อกันบรรทัดเดียว */
+#contact .contact__row{
+  text-align:center;
+  margin: 10px auto 18px;
+  color:#0f2b5b;
+}
+#contact .contact__row a{ color:#1e3a8a; font-weight:700; text-decoration:none; }
+
+/* แถวปุ่มโซเชียล */
+.social-cta{
+  display:grid;
+  gap:12px;
+  justify-items:center;   /* ให้ปุ่มอยู่กลาง */
+  margin-top:10px;
+}
+
+/* ปุ่มแบบแคปซูลยาว */
+.sns-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;         /* ไอคอน + ข้อความอยู่กลางปุ่ม */
+  gap:10px;
+  width: min(520px, 92vw);         /* ยาวเท่ากันทุกปุ่ม / ยืดหยุ่นจอเล็ก */
+  padding: 12px 18px;
+  border-radius: 999px;
+  color:#fff;
+  font-weight: 800;
+  text-decoration:none;
+  box-shadow: 0 10px 24px rgba(2,6,23,.15);
+  transition: transform .15s ease, box-shadow .15s ease, filter .2s ease;
+}
+
+.sns-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(2,6,23,.2);
+  filter: brightness(1.02);
+}
+
+/* วงไอคอนเล็กในปุ่ม */
+.sns-btn .icon{
+  display:grid;
+  place-items:center;
+  width:28px; height:28px;
+  border-radius:999px;
+  background: rgba(255,255,255,.18);
+  font-size:14px;
+  line-height:1;
+}
+
+/* สีพื้นของแต่ละแพลตฟอร์ม */
+.sns-btn.fb{
+  background: linear-gradient(90deg,#1877F2,#2D9CFF);
+}
+.sns-btn.line{
+  background: linear-gradient(90deg,#00C300,#00E676);
+}
+.sns-btn.yt{
+  background: linear-gradient(90deg,#FF0033,#FF4D4D);
+}
+.sns-btn.tiktok{
+  background: linear-gradient(90deg,#0F0F0F,#1F1F1F);
+}
+
+/* (ถ้ามีพื้นหลังส่วนนี้อ่อน ๆ อยู่) เว้นระยะนิดหน่อย */
+#contact .social-cta .sns-btn{ margin-top: 0; }
