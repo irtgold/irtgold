@@ -1445,3 +1445,63 @@ img{max-width:100%;display:block}
     padding: 0.75rem 0;
   }
 }
+/* ปุ่ม Facebook – รีวิวเพิ่มเติม */
+:root{
+  --fb1:#1877F2;      /* สีหลัก FB */
+  --fb2:#0f63d9;      /* สีเข้มตอน hover */
+  --fbGlow: rgba(24,119,242,.35);
+}
+
+.reviews-cta{
+  display:flex;
+  justify-content:center;
+  margin: 18px 0 8px;
+}
+
+.btn-fb{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 18px;
+  border-radius:999px;
+  background: linear-gradient(135deg, var(--fb1), #1f8bff);
+  color:#fff;
+  font-weight:800;
+  text-decoration:none;
+  box-shadow: 0 10px 22px var(--fbGlow);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.btn-fb:hover{
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--fb2), #1f7bfd);
+  box-shadow: 0 14px 30px var(--fbGlow);
+}
+
+.btn-fb:active{
+  transform: translateY(0);
+}
+
+.btn-fb__icon{
+  display:grid;
+  place-items:center;
+  width:28px; height:28px;
+  border-radius:50%;
+  background: rgba(255,255,255,.15);
+  color:#fff;
+}
+
+.btn-fb__text{
+  letter-spacing:.2px;
+}
+
+/* แบบเต็มความกว้าง */
+.btn-fb--full{
+  width:100%;
+  justify-content:center;
+  padding:14px 20px;
+  border-radius:14px;
+}
+
+/* ถ้าปุ่มอยู่บนพื้นหลังอ่อน ๆ ให้เว้นช่องไฟ */
+#pricing .btn-fb--full { margin-top: 10px; }
