@@ -2742,3 +2742,50 @@ html { scroll-behavior: smooth; }
   padding:10px 12px;
   font-weight:600;
 }
+/* โครงปุ่มโซเชียล */
+.social-cta{
+  display: grid;
+  gap: 14px;
+  justify-items: center;            /* ให้ปุ่มแต่ละอันอยู่กลางคอลัมน์ */
+}
+
+/* ปุ่มยาว */
+.sns-btn{
+  width: clamp(320px, 68vw, 780px); /* ความกว้างยืดนิดหน่อยตามที่ขอ */
+  min-height: 64px;
+  border-radius: 9999px;
+  color: #fff;
+  text-decoration: none;
+
+  /* จัด “ไอคอน + ข้อความ” ให้อยู่กึ่งกลางจริง ๆ */
+  display: flex;
+  align-items: center;              /* กลางแนวตั้ง */
+  justify-content: center;          /* กลางแนวนอน */
+  gap: 12px;                        /* ช่องไฟระหว่างไอคอนกับข้อความ */
+  padding: 12px 20px;               /* ตัด padding ซ้าย/ขวาที่มากไปเพื่อไม่ให้เอน */
+  text-align: center;
+
+  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.12);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.sns-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(2, 6, 23, 0.18);
+}
+
+/* ไอคอนที่เป็น <img> หรือ <span class="icon"> ให้จัดกลางและขนาดเท่ากัน */
+.sns-btn img,
+.sns-btn .icon{
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;                   /* ไม่ยืด/หด */
+}
+
+/* สีพื้นแต่ละปุ่ม */
+.sns-btn.fb   { background:#2E72F6; }
+.sns-btn.line { background:#22C55E; }
+.sns-btn.yt   { background:#EF4444; }
+.sns-btn.tiktok{background:#0B1324;}
