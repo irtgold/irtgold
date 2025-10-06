@@ -1959,3 +1959,48 @@ img{max-width:100%;display:block}
 /* ตัวช่วยสีของไอคอนที่คุณจะใส่เอง (ใช้หรือไม่ใช้ก็ได้) */
 .chk { color:#10B981; font-weight:700; }  /* ✔ เขียว */
 .x   { color:#EF4444; font-weight:700; }  /* ✕ แดง  */
+/* ====== Contact: ปุ่มโซเชียลให้ยาวขึ้นนิดนึง ====== */
+.social-links {
+  display: grid;
+  place-items: center;
+  gap: 10px;
+}
+
+.social-links .sbtn{
+  /* เดิม ~360px → ยาวขึ้นเล็กน้อย แต่ไม่เกิน 440px */
+  width: clamp(320px, 50vw, 440px);
+  height: 44px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;   /* ไอคอน + ข้อความอยู่ตรงกลางปุ่มจริง ๆ */
+  gap: 10px;
+  font-weight: 800;
+}
+
+/* เผื่อหน้าจอกว้าง ให้ปุ่มยาวขึ้นอีกนิด */
+@media (min-width: 1100px){
+  .social-links .sbtn { width: 460px; }
+}
+
+/* ====== Contact: บรรทัดข้อมูลให้อยู่บรรทัดเดียว ====== */
+.contact-inline {
+  display: flex;
+  flex-wrap: nowrap;           /* ไม่ให้ตัดบรรทัด */
+  align-items: center;
+  justify-content: center;
+  gap: 18px;                   /* ระยะห่างระหว่างแต่ละชิ้น */
+  line-height: 1.65;
+  text-align: center;
+  white-space: nowrap;         /* บังคับไม่ให้ขึ้นบรรทัดใหม่ */
+}
+
+/* ถ้าจอเล็กมาก ๆ ค่อยยอมแตกบรรทัดแบบสุภาพ */
+@media (max-width: 420px){
+  .contact-inline {
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    white-space: normal;
+  }
+}
+
