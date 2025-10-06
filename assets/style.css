@@ -1862,3 +1862,41 @@ img{max-width:100%;display:block}
   .social-cta{ max-width:92%; }
   .btn-social{ padding:12px 18px; }
 }
+/* จัดแถวคุณสมบัติให้อยู่กึ่งกลาง (ทั้งไอคอนและข้อความ) */
+.pricing__card .features-list{
+  display: grid;
+  gap: 12px;                  /* ระยะบรรทัด */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pricing__card .features-list li{
+  display: flex;
+  align-items: center;        /* จัด vertical center */
+  justify-content: center;    /* จัด horizontal center */
+  gap: 10px;                  /* ระยะไอคอน-ข้อความ */
+  text-align: center;
+  min-height: 40px;           /* ให้บรรทัดสูงเท่ากัน */
+  border-bottom: 1px solid rgba(2,6,23,.06);
+  padding: 8px 12px;
+}
+
+/* สัญลักษณ์ ✔ เริ่มต้น */
+.pricing__card .features-list li::before{
+  content: "✔";
+  color: #10B981;             /* เขียว */
+  font-weight: 800;
+  font-size: 16px;
+}
+
+/* สำหรับรายการที่เป็น “X” (ไม่รองรับ) */
+.pricing__card .features-list li.is-neg::before{
+  content: "✕";
+  color: #EF4444;             /* แดง */
+}
+
+/* เอาเส้นคั่นบรรทัดสุดท้ายออกให้ดูเรียบ */
+.pricing__card .features-list li:last-child{
+  border-bottom: 0;
+}
