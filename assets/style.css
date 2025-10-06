@@ -1900,3 +1900,41 @@ img{max-width:100%;display:block}
 .pricing__card .features-list li:last-child{
   border-bottom: 0;
 }
+/* ความกว้างและจัดกึ่งกลาง เหมือนปุ่มรีวิวเพิ่มเติม */
+.btn-wide {
+  width: clamp(260px, 42vw, 360px);
+  height: 44px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 16px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ไอคอนในปุ่มอยู่กลางสวย ๆ */
+.btn-wide .ico {
+  display: inline-flex;
+  width: 22px; height: 22px;
+  align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+}
+
+/* วางปุ่มกึ่งกลาง */
+#contact .social-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* สีพื้นหลังแต่ละปุ่ม (คุณปรับได้ตามต้องการ) */
+.btn-fb2  { background: linear-gradient(90deg,#1877F2,#3aa0ff); }
+.btn-line { background: #06C755; }
+.btn-yt   { background: #FF0000; }
+.btn-tt   { background: #000; }
