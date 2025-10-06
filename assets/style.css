@@ -1938,3 +1938,24 @@ img{max-width:100%;display:block}
 .btn-line { background: #06C755; }
 .btn-yt   { background: #FF0000; }
 .btn-tt   { background: #000; }
+/* ----- ปิดไอคอนติ๊กเดิมที่มาจาก CSS ----- */
+.features-list li::before{
+  content: none !important;   /* ปิด content เดิม */
+}
+
+/* คืนระยะซ้ายให้ปกติ (เคยเผื่อพื้นที่ไว้สำหรับไอคอน) */
+.features-list li{
+  padding-left: 0 !important;
+}
+
+/* จัดแถวให้สวย ถ้าคุณจะใส่ไอคอนเองใน HTML */
+.features-list li{
+  display: flex;
+  align-items: center;
+  gap: 10px;          /* ระยะห่างระหว่างไอคอนกับข้อความ */
+  line-height: 1.6;
+}
+
+/* ตัวช่วยสีของไอคอนที่คุณจะใส่เอง (ใช้หรือไม่ใช้ก็ได้) */
+.chk { color:#10B981; font-weight:700; }  /* ✔ เขียว */
+.x   { color:#EF4444; font-weight:700; }  /* ✕ แดง  */
