@@ -2954,3 +2954,121 @@ html { scroll-behavior: smooth; }
   border-radius: 14px;
   padding: 16px 18px;
 }
+/* ========== #1 ปัญหาที่เทรดเดอร์ส่วนใหญ่เจอ — จัดให้อยู่กึ่งกลาง + ลบ space เกิน ========== */
+.problem-solution-box,
+#problems,
+.problem-box-wrap {
+  max-width: 980px;         /* ให้กล่องจำกัดความกว้างแบบอ่านสบาย */
+  margin-left: auto;
+  margin-right: auto;       /* อยู่กึ่งกลางหน้าจอจริง */
+}
+
+/* ตัดขอบ/เงาที่เคยทำให้ดูเหมือนมีกรอบเล็กๆ ล้นออกมาด้านล่าง */
+.problem-solution-box,
+#problems {
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(2,6,23,.06);
+  border: 1px solid rgba(2,6,23,.06);
+  overflow: hidden;         /* กันชิ้นส่วนล้นกรอบ */
+}
+
+/* เว้นระยะรอบๆ ไม่ให้ชิดเกินไป แต่ไม่มี bottom space เกิน */
+.problem-solution-box { 
+  padding: 18px 20px; 
+  margin-top: 16px; 
+  margin-bottom: 22px; 
+  background: #fff; 
+}
+
+/* หัวข้อด้านในให้กลาง */
+.problem-title,
+.problem-solution-box > h2,
+.problem-solution-box .solution-title {
+  text-align: center;
+}
+/* ========== #2 Blue-frame — ขยับ/กระชับช่องไฟ ========== */
+.blue-frame {
+  max-width: 980px;
+  margin: 12px auto 18px auto;   /* เดิมอาจห่างเยอะไป */
+  padding: 16px 20px;
+}
+
+.blue-frame .features-list .feature-item {
+  margin: 8px 0;                 /* แต่ละแถวกระชับขึ้นนิด */
+}
+/* ========== #4 Reviews — บีบระยะหัว/ท้าย ========== */
+#reviews, .reviews, section.reviews {
+  max-width: 1100px;
+  margin: 18px auto;             /* ขยับเข้ามาชิด */
+}
+
+#reviews .section__title, 
+.reviews .section__title {
+  margin-top: 6px;               /* เดิมห่างเกิน */
+  margin-bottom: 10px;
+}
+
+/* ไพ่รีวิวกระชับขึ้นเล็กน้อย */
+.reviews .t-grid { 
+  gap: 16px; 
+}
+/* ========== #5 ลบพื้นหลังโซนรีวิว/แกลเลอรี ========== */
+#reviews, .reviews, .reviews-wrap, .gallery, .reviews__images {
+  background: #fff !important;   /* ขาวล้วน */
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ถ้า section สลับสีพื้นหลังแบบ :nth-of-type ให้บังคับเป็นขาวในสองโซนนี้ */
+#reviews.section:nth-of-type(even),
+.reviews.section:nth-of-type(even) {
+  background: #fff;
+}
+/* ========== #6 ปุ่มโซเชียล — จัดกลางจริง และกว้างเท่ากัน ========== */
+.social-cta {
+  max-width: 780px;
+  margin: 14px auto 28px;
+  display: grid;
+  gap: 12px;
+}
+
+/* ปุ่มยาว */
+.sns-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;           /* จัดทั้งไอคอนและข้อความให้อยู่กึ่งกลาง */
+  gap: 12px;
+  width: min(100%, 780px);
+  margin: 0 auto;
+  padding: 14px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(2,6,23,.12);
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+
+.sns-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(2,6,23,.16); }
+
+.sns-btn .icon {
+  width: 22px; height: 22px;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+}
+
+/* สีพื้นแบรนด์ */
+.sns-btn.fb      { background: #2d6df6; }
+.sns-btn.line    { background: #17c05b; }
+.sns-btn.yt      { background: #ea4335; }
+.sns-btn.tiktok  { background: #0e1625; }
+/* ช่องว่างก่อนหัวข้อ IRT GOLD PC */
+#irtpc, #irtpc + .section__title, h2.section__title#irtpcTitle {
+  margin-top: 12px !important;
+}
+
+/* ระยะก่อน Reviews */
+#reviews, .reviews { 
+  padding-top: 8px; 
+}
+
