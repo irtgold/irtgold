@@ -1556,3 +1556,58 @@ img{max-width:100%;display:block}
 .pricing__card .btn{
   margin-top:12px;
 }
+/* ห่อปุ่มให้ปุ่มอยู่กลางแถว */
+.reviews-cta{
+  display:flex;
+  justify-content:center;
+}
+
+/* ปุ่มรีวิว — ใช้ flex จัดศูนย์, ความกว้างคุมด้วย clamp */
+.btn-fb{
+  display:inline-flex;
+  align-items:center;              /* กึ่งกลางแนวตั้งของไอคอน+ข้อความ */
+  justify-content:center;          /* กึ่งกลางแนวนอนของไอคอน+ข้อความ */
+  gap:10px;                        /* ระยะห่างระหว่างไอคอนกับข้อความ */
+  height:44px;
+  width:clamp(260px, 42vw, 360px); /* ความยาวตามที่ต้องการ */
+  padding:0 18px;                  /* ซ้าย/ขวาเท่ากัน เพื่อไม่เอียง */
+  border-radius:999px;
+  background:linear-gradient(90deg,#1e66ff,#1ea1ff);
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+  letter-spacing:.2px;
+  box-shadow:0 8px 20px rgba(30,102,255,.25);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+
+/* ยกเลิกสไตล์ absolute ของไอคอน (ถ้ามีจากที่อื่น) */
+.btn-fb .fb-ico{
+  position:static !important;
+  margin:0 !important;
+  display:grid;                    /* จัดไอคอนให้อยู่กลางวงกลม */
+  place-items:center;
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  background:rgba(255,255,255,.18);/* วงกลมรองไอคอน */
+  flex:0 0 auto;                   /* ไม่ให้ดึงพื้นที่เกิน */
+}
+
+.btn-fb .fb-ico svg,
+.btn-fb .fb-ico img{
+  display:block;                   /* ไม่ยึด baseline */
+  width:16px;
+  height:16px;
+}
+
+.btn-fb .fb-text{
+  line-height:1;
+  display:inline-block;
+}
+
+/* hover เล็กน้อย */
+.btn-fb:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 24px rgba(30,102,255,.32);
+}
