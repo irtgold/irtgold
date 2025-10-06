@@ -2533,4 +2533,59 @@ html { scroll-behavior: smooth; }
 .blue-frame .solution-title{ margin-top: 0; }
 .blue-frame .features-list{ margin: 12px 0 16px; }
 .blue-frame .result-highlight{ margin: 0 0 12px; }
+/* ปุ่มโซเชียลแบบยาว */
+.social-cta{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  margin-top:16px;
+}
 
+/* ยืดให้ยาวขึ้นอีกนิด:  */
+.social-cta .sns-btn{
+  width:100%;
+  max-width: 560px;             /* เดิม ~480–520 -> ยืดออกอีกนิด */
+  padding: 12px 26px;           /* ขยายระยะข้างให้ดูโปร่ง */
+  border-radius: 999px;
+  color:#fff;
+  font-weight: 800;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  justify-content: flex-start;
+  box-shadow: 0 6px 16px rgba(0,0,0,.14);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+/* ไอคอนให้บาลานซ์กับความกว้างใหม่ */
+.social-cta .sns-btn .icon{
+  width: 20px; height: 20px;
+  display:inline-grid; place-items:center;
+  border-radius:6px;
+  background: rgba(255,255,255,.18);
+  color:#fff;
+  font-weight:900;
+  font-size:12px;
+}
+
+/* สีพื้นแต่ละแพลตฟอร์ม */
+.sns-btn.fb    { background: linear-gradient(90deg,#2563eb,#3b82f6); }
+.sns-btn.line  { background: linear-gradient(90deg,#16a34a,#22c55e); }
+.sns-btn.yt    { background: linear-gradient(90deg,#dc2626,#ef4444); }
+.sns-btn.tiktok{ background: linear-gradient(90deg,#0b1220,#111827); }
+
+/* hover ให้เด้งนิดๆ */
+.social-cta .sns-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+  filter: brightness(1.03);
+}
+
+/* จอใหญ่ยืดได้อีกหน่อย */
+@media (min-width: 992px){
+  .social-cta .sns-btn{
+    max-width: 600px;           /* เดสก์ท็อปกว้างขึ้นอีกนิด */
+  }
+}
