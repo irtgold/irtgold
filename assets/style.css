@@ -2877,3 +2877,17 @@ html { scroll-behavior: smooth; }
 .sns-btn.line{  background: #16c05e; }
 .sns-btn.yt{    background: #ef4444; }
 .sns-btn.tiktok{background: #0f172a; }
+/* ให้กล่องเหลืองอยู่กึ่งกลางและความกว้างพอดี */
+.callout{
+  max-width: 860px;          /* คุมความกว้าง */
+  margin: 22px auto;         /* auto = กึ่งกลาง */
+  text-align: left;          /* เนื้อหา list ให้อ่านซ้าย */
+}
+
+/* จัดหัวข้อในกล่องให้กึ่งกลางและเด่น */
+.callout .callout__title{
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.12rem;
+  margin: 0 0 10px;
+}
