@@ -2004,4 +2004,81 @@ img{max-width:100%;display:block}
   }
 }
 html { scroll-behavior: smooth; }
+/* เพิ่ม CSS สำหรับส่วนใหม่ */
 
+.signal-highlight {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-left: 4px solid #2563eb;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+}
+
+.signal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e40af;
+  margin: 0 0 1rem 0;
+}
+
+.signal-highlight p {
+  margin: 0.75rem 0;
+  line-height: 1.6;
+  color: #1f2937;
+}
+
+.signal-details {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  line-height: 1.8;
+}
+
+.signal-cta {
+  font-size: 1.1rem;
+  margin-top: 1rem !important;
+}
+
+.result-highlight {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-left: 5px solid #f59e0b;
+  padding: 1.5rem;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #78350f;
+}
+
+.result-highlight strong {
+  color: #92400e;
+  font-size: 1.15rem;
+}
+
+.urgent {
+  display: block;
+  margin-top: 0.75rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #dc2626;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.disclaimer {
+  background: #fef2f2;
+  border-left: 3px solid #ef4444;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #7f1d1d;
+}
