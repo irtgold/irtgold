@@ -2662,3 +2662,83 @@ html { scroll-behavior: smooth; }
 
 /* กันกรอบฟ้าไม่ไหลไปกินหัวข้อถัดไป */
 .section__title{ margin-top:26px; }
+/* ========= กรอบหลัก: ทำให้แดง/ฟ้าเป็นสไตล์เดียวกัน ========= */
+.problem-solution-box,
+.blue-frame{
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 8px 24px rgba(15,30,80,.06);
+}
+
+/* สีพื้น/เส้นขอบต่างกันเฉพาะธีม */
+.problem-solution-box{            /* กรอบสีแดง (ปัญหา) */
+  background:#FFF5F5;
+  border:1px solid #FFD6D6;
+}
+.blue-frame{                      /* กรอบสีฟ้า (ทางแก้/คุณสมบัติ) */
+  background:#F3F8FF;
+  border:1px solid #D9E8FF;
+}
+
+/* ========= จัดตัวหนังสือให้กึ่งกลาง ========= */
+.problem-title,
+.solution-title,
+.solution-subtitle,
+.result-highlight,
+.disclaimer{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* ========= แถวนโยบาย/ฟีเจอร์/ปัญหา ให้ดูเหมือนกัน และจัดกึ่งกลาง ========= */
+.problem-item,
+.feature-item{
+  display:flex;
+  justify-content:center;    /* จัดกลางแนวนอน */
+  align-items:center;        /* จัดกลางแนวตั้ง */
+  gap:8px;                   /* ช่องไฟระหว่างไอคอน/ข้อความ */
+  text-align:center;
+
+  background:#fff;
+  border:1px solid #EEF4FF;  /* เส้นขอบเริ่มต้นสำหรับฟ้า */
+  border-radius:12px;
+  padding:10px 12px;
+  margin:0 0 10px 0;
+  box-shadow:0 4px 12px rgba(2,6,23,.06);
+}
+
+/* ปรับสีขอบให้ฝั่งกรอบแดง */
+.problem-solution-box .problem-item{
+  border-color:#FFE3E3;
+}
+
+/* ปรับสีขอบให้ฝั่งกรอบฟ้า */
+.blue-frame .feature-item{
+  border-color:#E6EEFF;
+}
+
+/* ========= กล่องบิ้ว & คำเตือน ========= */
+.result-highlight{
+  background:#FFF4CC;
+  border:1px solid #FFE08A;
+  color:#8B5E00;
+  border-radius:12px;
+  padding:14px 16px;
+  font-weight:700;
+  margin:12px 0;
+}
+.result-highlight .urgent{
+  display:block;
+  margin-top:6px;
+  color:#E11D48;         /* แดงดึงสายตา */
+  font-weight:900;
+}
+.disclaimer{
+  background:#F8FAFC;
+  border:1px dashed #CBD5E1;
+  color:#64748B;
+  border-radius:10px;
+  padding:10px 12px;
+  font-weight:600;
+}
