@@ -2444,3 +2444,74 @@ html { scroll-behavior: smooth; }
 
 /* (ถ้ามีพื้นหลังส่วนนี้อ่อน ๆ อยู่) เว้นระยะนิดหน่อย */
 #contact .social-cta .sns-btn{ margin-top: 0; }
+/* ================= Contact row ================= */
+.contact__row{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:10px 14px;                 /* เว้นช่องไฟสวย ๆ */
+  text-align:center;
+  color:#0f172a;
+  margin-top:6px;
+}
+
+.contact__row .ico{
+  width:18px;
+  height:18px;
+  object-fit:contain;
+  transform:translateY(2px);     /* ให้ไอคอนอยู่กึ่งกลางบรรทัด */
+  margin-right:4px;
+}
+
+.contact__row a{
+  color:#1E3A8A;
+  font-weight:800;
+  text-decoration:none;
+}
+
+.contact__row .sep{
+  color:#94a3b8;
+}
+
+/* ================= Social long buttons ================= */
+.social-cta{
+  display:grid;
+  gap:10px;
+  margin:16px auto 0;
+  width:min(480px, 92%);
+}
+
+.sns-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  height:46px;
+  border-radius:999px;
+  font-weight:800;
+  color:#fff;
+  text-decoration:none;
+  width:clamp(260px, 60vw, 380px);   /* กว้างเท่ากันทุกปุ่ม */
+  margin-inline:auto;
+  box-shadow:0 8px 18px rgba(2,6,23,.20);
+  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.sns-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 12px 28px rgba(2,6,23,.28);
+  filter:saturate(1.05);
+}
+
+.sns-icon{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+}
+
+/* ไล่เฉดสีพื้นหลังปุ่ม */
+.sns-btn.fb     { background:linear-gradient(90deg,#1e3a8a,#3b82f6); }
+.sns-btn.line   { background:linear-gradient(90deg,#0ea34d,#22c55e); }
+.sns-btn.yt     { background:linear-gradient(90deg,#b91c1c,#ef4444); }
+.sns-btn.tiktok { background:linear-gradient(90deg,#0f172a,#111827); }
