@@ -2003,4 +2003,5 @@ img{max-width:100%;display:block}
     white-space: normal;
   }
 }
+html { scroll-behavior: smooth; }
 
