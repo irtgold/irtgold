@@ -1055,3 +1055,89 @@ img{max-width:100%;display:block}
   transform:translateY(-2px);
   box-shadow:0 14px 28px rgba(250,204,21,.40);
 }
+/* --------- ให้ฉากหลังอ่อนลงนิด เพื่อเห็นเงาชัด --------- */
+#pricing{
+  background: #f7f9ff;           /* ถ้าพื้นหลังขาว เงาจะจาง */
+}
+
+/* --------- การ์ดแพ็กเกจ: เงาหลัก + ขอบบาง --------- */
+.pricing__card{
+  position: relative;
+  border-radius: 22px;
+  border: 1px solid rgba(2, 6, 23, .08);
+  background: #fff;
+  /* เงาหลักสองชั้น ให้มีมิติลึก */
+  box-shadow:
+    0 14px 30px rgba(17, 24, 39, .12),
+    0 3px 8px rgba(17, 24, 39, .06);
+  transition: transform .25s ease, box-shadow .25s ease;
+  overflow: hidden;
+}
+
+/* ยกตัวตอน hover */
+.pricing__card:hover{
+  transform: translateY(-6px);
+  box-shadow:
+    0 24px 56px rgba(17, 24, 39, .18),
+    0 8px 18px rgba(17, 24, 39, .10);
+}
+
+/* แถบหัวการ์ด (เพิ่มมิติด้วย drop-shadow) */
+.pricing__card::before{
+  content: "";
+  display: block;
+  height: 64px;
+  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+  filter: drop-shadow(0 8px 16px rgba(30, 58, 138, .22));
+}
+.pricing__card.is-mb::before{
+  background: linear-gradient(135deg, #0F766E 0%, #10B981 100%);
+  filter: drop-shadow(0 8px 16px rgba(16, 185, 129, .22));
+}
+
+/* เนื้อในการ์ด – ให้เงาใน/นูนเล็กน้อย */
+.pricing__body{
+  background: linear-gradient(#ffffff, #fbfdff);
+  padding: 22px 24px 18px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),  /* ไฮไลต์บาง ๆ */
+    0 1px 0 rgba(2,6,23,.04);
+}
+
+/* ป้ายชื่อแพ็กเกจลอยจากแถบหัวเล็กน้อย */
+.pricing__title{
+  margin-top: -40px;
+  background: #fff;
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  color: #0f172a;
+  box-shadow: 0 6px 18px rgba(2,6,23,.10);
+}
+
+/* กล่องฟีเจอร์แบบเม็ดนูน */
+.features li{
+  display:flex; align-items:flex-start; gap:10px;
+  color:#1f2937; font-size:15.5px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow:
+    0 6px 14px rgba(2,6,23,.06),
+    inset 0 1px 0 rgba(255,255,255,.9);
+}
+.features li::before{
+  content:"✓";
+  color:#10B981; font-weight:900; margin-top:1px;
+}
+
+/* ปุ่มให้มีเงาและยกตัว */
+.btn-buy{
+  box-shadow: 0 10px 20px rgba(250,204,21,.30);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn-buy:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(250,204,21,.40);
+}
