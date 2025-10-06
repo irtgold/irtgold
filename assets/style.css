@@ -2515,3 +2515,22 @@ html { scroll-behavior: smooth; }
 .sns-btn.line   { background:linear-gradient(90deg,#0ea34d,#22c55e); }
 .sns-btn.yt     { background:linear-gradient(90deg,#b91c1c,#ef4444); }
 .sns-btn.tiktok { background:linear-gradient(90deg,#0f172a,#111827); }
+/* กรอบเส้นฟ้า ครอบเฉพาะส่วนสรุป */
+.blue-frame{
+  border: 3px solid #BEE3FF;         /* เส้นฟ้าอ่อน */
+  background: #F6FAFF;               /* พื้นหลังฟ้าอ่อนมาก */
+  border-radius: 14px;
+  padding: 18px 18px 16px;
+  max-width: 980px;
+  margin: 0 auto 24px;               /* เว้นช่องว่างก่อนหัวข้อถัดไป */
+  box-shadow: 0 4px 14px rgba(30,58,138,.06);
+}
+
+/* อย่าให้กล่องสุดท้ายดันกรอบยืด */
+.blue-frame .disclaimer{ margin-bottom: 0; }
+
+/* ปรับระยะข้างในให้กระชับสวย */
+.blue-frame .solution-title{ margin-top: 0; }
+.blue-frame .features-list{ margin: 12px 0 16px; }
+.blue-frame .result-highlight{ margin: 0 0 12px; }
+
