@@ -920,3 +920,16 @@ img{max-width:100%;display:block}
   margin-top: 0 !important;
   padding-top: 40px !important;
 }
+/* ชิดบรรทัดในคำบรรยายของ IRT PC */
+#irtpc .pc-caption{
+  padding: 14px 16px !important;    /* กล่องเตี้ยลงนิดนึง */
+}
+#irtpc .pc-caption p{
+  line-height: 1.55 !important;     /* เดิมคุณใส่ 1.8 → ลดลงให้ชิด */
+  margin: 0 !important;
+}
+
+/* ถ้ามี <br><br> อยู่ติดกัน ให้แสดงแค่บรรทัดว่างเดียว */
+#irtpc .pc-caption p br+br{
+  display: none;
+}
