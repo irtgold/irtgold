@@ -1,44 +1,46 @@
-/* ====== THEME ====== */
+/* ============ THEME VARS ============ */
 :root{
-  --primary:#1E3A8A;
   --primary-dark:#0f1f4b;
-  --green:#10b981;
-  --red:#ef4444;
+  --primary:#1E3A8A;
   --gold:#FACC15;
   --text:#0F172A;
   --muted:#64748b;
   --bg:#0b1534;
   --container:1200px;
 
-  --font:"Prompt","Noto Sans Thai","Noto Sans",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-sans: "Prompt","Noto Sans Thai","Noto Sans",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 
-/* ====== RESET / BASE ====== */
+/* ============ RESET / BASE ============ */
 *{box-sizing:border-box;margin:0;padding:0}
-html{font-family:var(--font);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html{font-family:var(--font-sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 body{color:var(--text);background:#fff;line-height:1.6}
 img{max-width:100%;display:block}
 
+/* Layout helpers */
 .container{max-width:var(--container);margin:0 auto;padding:0 20px}
-.section{padding:56px 0;background:#fff}         /* #5 ลบพื้นหลังไล่สี ออกเป็นขาวล้วน */
-.section--tight{padding:40px 0}
-.section__title{font-size:32px;font-weight:800;color:var(--primary);text-align:center;margin-bottom:16px}
-.center{text-align:center}
+.section{padding:80px 0;background:linear-gradient(180deg,#fff,#f8fafc)}
+.section:nth-of-type(even){background:#fff}
+.section,.container,#irtpc{overflow:visible}  /* สำคัญ: อย่าตัดเงาของ caption */
 
-/* ====== BUTTONS ====== */
+.center{text-align:center}
+.section__title{font-size:32px;font-weight:800;color:var(--primary);text-align:center;margin-bottom:24px}
+
+/* Buttons */
 .btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:700;text-decoration:none;transition:.25s}
 .btn--primary{background:var(--gold);color:#111;box-shadow:0 10px 24px rgba(250,204,21,.25)}
 .btn--primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(250,204,21,.35)}
 .btn--outline{border:2px solid #fff;color:#fff}
 .btn--outline:hover{background:#fff;color:var(--primary-dark)}
 
-/* ====== NAV ====== */
+/* Nav */
 .nav{position:sticky;top:0;z-index:50;background:rgba(15,31,75,.92);backdrop-filter:blur(8px)}
 .nav__container{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px;padding:0 16px}
-.logo{text-decoration:none;font-weight:900;font-size:28px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold)}
+.logo{text-decoration:none;font-weight:900;font-size:28px;letter-spacing:.5px;text-transform:uppercase;color:#FACC15;display:flex;align-items:center}
+.logo__img{display:none!important}
 .nav__menu{list-style:none;display:flex;gap:18px;align-items:center}
 .nav__menu a{color:#fff;text-decoration:none;font-weight:600;position:relative;padding:6px 0}
-.nav__menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--gold);transition:width .25s}
+.nav__menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:#FACC15;transition:width .25s}
 .nav__menu a:hover::after{width:100%}
 @media (max-width:768px){
   .nav__container{height:auto;flex-direction:column;align-items:flex-start;gap:8px;padding:8px 12px}
@@ -49,8 +51,8 @@ img{max-width:100%;display:block}
   .nav__menu a::after{display:none}
 }
 
-/* ====== HERO ====== */
-.hero{position:relative}
+/* Hero */
+.hero{position:relative;padding-left:0;padding-right:0}
 .hero__banner{width:100%;height:auto;object-fit:cover;max-height:70vh}
 .hero__content{position:relative;z-index:2;text-align:center;padding:24px 20px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg) 40%,transparent 100%);color:#fff}
 .hero__content h1{font-size:44px;line-height:1.15;margin-bottom:10px}
@@ -58,50 +60,463 @@ img{max-width:100%;display:block}
 .hero__cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 @media (max-width:768px){ .hero__content h1{font-size:34px} }
 
-/* ====== PROBLEM (แดง) – #1 จัดกลาง, ไม่มีกรอบเล็กใต้ ๆ ====== */
-.problem-box{
-  max-width:980px;margin:0 auto;           /* กึ่งกลาง */
-  background:#fff5f5;border:1px solid #fecaca;border-radius:14px;
-  padding:18px 18px 10px;
-  box-shadow:0 6px 18px rgba(255,0,0,.06);
+/* Callout */
+.callout{background:#fff3c4;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:14px;margin:22px auto;max-width:760px}
+.callout--wide{width:100%;max-width:100%;padding:16px 32px}
+@media (min-width:768px){ .callout--wide{font-size:1.05rem} }
+
+/* Reviews image grid (4 ช่อง) */
+.reviews__images{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.reviews__images img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+@media (max-width:1024px){ .reviews__images{grid-template-columns:repeat(2,1fr)} }
+
+/* Pricing (คงเดิม) */
+.pricing__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.pricing__card{background:#fff;border-radius:18px;box-shadow:0 10px 34px rgba(2,6,23,.1);padding:24px;border:3px solid var(--gold)}
+.pricing__card .price{font-size:32px;font-weight:800;color:var(--gold);margin:10px 0}
+.pricing__card ul{list-style:none;display:grid;gap:10px;margin:14px 0 20px}
+.pricing__card ul li::before{content:"✓ ";color:#10B981;font-weight:700}
+@media (max-width:768px){ .pricing__grid{grid-template-columns:1fr} }
+
+/* ============ IRT MB (รูป 3 ใบ) ============ */
+.mobile-shots{max-width:1080px;margin:0 auto;display:grid;gap:24px}
+.mobile-shot{background:#fff;border-radius:20px;box-shadow:0 10px 25px rgba(10,30,60,.07);padding:16px}
+.mobile-shot img{width:100%;height:auto;border-radius:12px}
+.mobile-cap{background:#fff;border-radius:16px;padding:16px 18px;margin-top:12px;box-shadow:0 8px 18px rgba(16,24,40,.06)}
+.mobile-cap h3{margin:0 0 6px;font-weight:700;font-size:1rem;color:#0F2B5B}
+.mobile-cap p{margin:0;color:#5B6B7C;font-size:.95rem;line-height:1.6}
+
+/* ============ IRT PC (6 ใบ) – ทำเหมือนมือถือ ============ */
+/* กล่องรวมของการ์ดทั้งหมด */
+#irtpc .pc-stack{
+  display:grid;
+  gap:40px;
+  overflow:visible;               /* ให้เงา/ส่วนล้นของ caption โผล่ได้ */
 }
-.problem-title{color:#b91c1c;font-weight:900;font-size:clamp(20px,2.2vw,24px);text-align:center;margin:2px 0 12px}
-.problem-item{
-  display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;
-  background:#fff;border:1px solid #ffe2e2;border-radius:10px;padding:10px 12px;margin:8px 0;
+
+/* การ์ดแต่ละใบ */
+#irtpc .pc-card{
+  position:relative;              /* caption จะอ้างอิงการ์ดนี้ */
+  margin-bottom:110px;            /* เผื่อพื้นที่ caption ลอย */
+  overflow:visible;
 }
-.problem-item .emoji{font-size:20px;line-height:1}
-.problem-item strong{display:block;margin-bottom:2px;color:#0f172a}
 
-/* ====== SOLUTION (ฟ้า) – ให้สไตล์เข้าชุดกับแดง ====== */
-.blue-frame{
-  max-width:980px;margin:0 auto;border:1px solid #dbeafe;background:#eff6ff;border-radius:14px;
-  padding:16px 18px;box-shadow:0 8px 24px rgba(15,30,80,.06)
+/* ตัวรูป */
+#irtpc .pc-card__media{
+  overflow:hidden;
+  border-radius:18px;
+  background:#0b1f3a;
+  box-shadow:0 10px 24px rgba(3,23,56,.16);
 }
-.solution-title{margin:0 0 6px;font-size:26px;line-height:1.25;font-weight:800;color:#0B3B8D;text-align:center}
-.solution-subtitle{margin:0 0 12px;color:#334155;font-weight:600;text-align:center}
-.features-list{display:grid;gap:10px;margin:0 0 14px}
-.feature-item{background:#fff;border:1px solid #E6EEFF;border-radius:12px;padding:10px 12px;box-shadow:0 4px 12px rgba(2,6,23,.06);font-weight:600;text-align:center}
+#irtpc .pc-card__media img{
+  width:100%;height:auto;display:block;
+}
 
-.result-highlight{background:#FFF4CC;border:1px solid #FFE08A;color:#8B5E00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:700;margin:10px 0}
-.result-highlight .urgent{display:block;margin-top:6px;color:#E11D48;font-weight:900}
-.disclaimer{background:#F8FAFC;border:1px dashed #CBD5E1;color:#64748B;border-radius:10px;padding:10px 12px;text-align:center}
+/* กล่องคำอธิบาย “ลอยทับรูป” เหมือนมือถือ */
+#irtpc .pc-caption{
+  position:absolute;
+  left:50%;
+  bottom:-28px;                   /* ทะลุออกจากรูปนิดนึง */
+  transform:translateX(-50%);
+  width:min(900px,88%);
+  background:#fff;
+  color:#0b1d3a;
+  text-align:center;
+  padding:22px 28px;
+  border-radius:18px;
+  box-shadow:0 14px 40px rgba(2,16,40,.18);
+  z-index:3;
+}
+#irtpc .pc-caption__title{
+  font-size:clamp(18px,2.2vw,22px);
+  font-weight:800;
+  margin:0 0 8px;
+  color:#0B2C6C;
+}
+#irtpc .pc-caption__desc{
+  font-size:clamp(14px,1.65vw,16px);
+  margin:0;
+  color:#334155;
+  line-height:1.65;
+}
 
-/* ====== PC SHOTS (รูป + คำบรรยาย “ใต้รูป”) — #2, #3 บีบช่องไฟและชิดกลาง ====== */
-.pc-stack{display:grid;gap:24px}
-.pc-shot{margin:0}
-.pc-frame{background:#fff;border-radius:18px;box-shadow:0 10px 24px rgba(3,23,56,.12);overflow:hidden}
-.pc-frame img{width:100%;height:auto;display:block}
-.pc-caption{padding:14px 16px;text-align:center}
-.pc-caption h3{margin:0 0 6px;font-weight:800;color:#0B2C6C;font-size:clamp(18px,2vw,22px)}
-.pc-caption p{margin:0;color:#334155;font-size:clamp(14px,1.6vw,16px);line-height:1.55}
+/* ระยะท้ายบัตรสุดท้าย */
+#irtpc .pc-card:last-child{ margin-bottom:80px; }
 
-/* ====== VIDEO ====== */
-.video{display:flex;justify-content:center;align-items:center;margin:18px auto}
+/* Responsive */
+@media (max-width:992px){
+  #irtpc .pc-card{ margin-bottom:96px; }
+  #irtpc .pc-caption{ width:92%; bottom:-20px; padding:18px 20px; }
+}
+
+/* ============ Video (ศูนย์กลาง + แนวตั้ง 9:16 ได้) ============ */
+.video{display:flex;justify-content:center;align-items:center;margin:24px auto;width:100%}
 .video iframe{width:min(540px,100%);aspect-ratio:9/16;height:auto;border:0;border-radius:12px}
+/* ============ RESET / BASE ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-family:var(--font-sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{color:var(--text);background:#fff;line-height:1.6}
+img{max-width:100%;display:block}
 
-/* ====== TESTIMONIAL CARDS ====== */
-.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:18px}
+/* ============ IRT PC : กล่อง + กล่องคำอธิบายลอย ============ */
+.pc-stack{
+  display: grid;
+  gap: 40px;
+}
+
+.pc-shot{
+  position: relative;
+  margin-bottom: 120px;
+}
+
+.pc-shot img{
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(10,30,60,.2); /* ✅ เงาเดียวพอ */
+}
+
+/* กล่องลอยใต้รูป */
+.pc-cap{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -28px;
+  width: min(880px, 90%);
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 22px;
+  text-align: center;
+  box-shadow: 0 14px 32px rgba(0,0,0,.15);
+}
+
+.pc-cap h3{
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+  color: #0B2C6C;
+}
+
+.pc-cap p{
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #334155;
+  margin: 0;
+}
+/* ============ IRT PC : กรอบภาพ + กล่องคำอธิบายกว้างเท่ารูป ============ */
+
+/* กล่องรวมแต่ละใบ */
+.pc-stack{
+  display:grid;
+  gap:40px;
+}
+
+/* เฟรมของรูป + แคปชัน (ให้โค้งและมีเงาเป็นชิ้นเดียว) */
+.pc-frame{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;                          /* บังคับให้ขอบบน-ล่างโค้งเนียน */
+  box-shadow:0 10px 28px rgba(15,30,80,.16); /* เงาเดียวพอ ไม่ซ้อน */
+}
+
+/* รูปด้านบน */
+.pc-frame img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* แคปชัน “ใต้รูป” และกว้างเท่ารูปเสมอ */
+.pc-caption{
+  position:static;        /* 🔥 ยกเลิกลอย */
+  transform:none;
+  width:100%;
+  padding:18px 22px;
+  background:#fff;
+  text-align:center;
+  border-radius:0 0 18px 18px; /* มุมล่างโค้งเท่ากับเฟรม */
+  box-shadow:none;        /* เงาอยู่ที่ .pc-frame แล้ว */
+  margin:0;               /* ไม่มีช่องว่างด้านข้าง */
+}
+
+/* ฟอนต์ในแคปชัน */
+.pc-caption h3{
+  margin:0 0 6px;
+  font-weight:800;
+  font-size:clamp(18px, 2vw, 22px);
+  color:#0B2C6C;
+}
+.pc-caption p{
+  margin:0;
+  font-size:clamp(14px, 1.6vw, 16px);
+  line-height:1.65;
+  color:#334155;
+}
+
+/* ระยะห่างใต้แต่ละใบ */
+.pc-shot{ margin:0; }
+
+/* จอเล็กก็ยังโค้งและเต็มความกว้างเหมือนเดิม */
+@media (max-width:768px){
+  .pc-stack{ gap:28px; }
+}
+/* ============ IRT PC: กล่องอยู่ใต้รูป และกว้างเท่ารูป (แก้ทับแน่นอน) ============ */
+
+/* รีเซ็ต margin ของ figure */
+#irtpc .pc-shot{ margin:0; }
+
+/* เฟรมรวมรูป+แคปชัน เป็นชิ้นเดียว */
+#irtpc .pc-frame{
+  display:block;
+  padding:0;
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 28px rgba(15,30,80,.16);
+}
+
+/* รูป */
+#irtpc .pc-frame img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* แคปชัน “ใต้รูป” — ไม่ใช่ลอยทับ */
+#irtpc .pc-frame .pc-caption{
+  position:relative !important;
+  left:auto !important;
+  right:auto !important;
+  top:auto !important;
+  bottom:auto !important;
+  transform:none !important;
+
+  width:100% !important;
+  margin:0 !important;
+  padding:18px 22px;
+
+  background:#fff;
+  text-align:center;
+  box-shadow:none !important;
+  border-radius:0 0 18px 18px;
+}
+
+/* ฟอนต์ในแคปชัน */
+#irtpc .pc-frame .pc-caption h3{
+  margin:0 0 6px;
+  font-weight:800;
+  font-size:clamp(18px,2vw,22px);
+  color:#0B2C6C;
+}
+#irtpc .pc-frame .pc-caption p{
+  margin:0;
+  font-size:clamp(14px,1.6vw,16px);
+  line-height:1.65;
+  color:#334155;
+}
+
+/* ระยะห่างระหว่างใบ */
+#irtpc .pc-stack{ display:grid; gap:40px; }
+@media (max-width:768px){ #irtpc .pc-stack{ gap:28px; } }
+/* ================== แก้ Mobile ให้ไม่มีกรอบชั้นในสุด ================== */
+/* ล้างสไตล์การ์ดชั้นในของรูปมือถือให้ใส/ไม่มีเงา/ไม่มี padding */
+#irtmb .mobile-shots figure,
+#irtmb .mobile-shot {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+
+/* ให้ตัว "รูป" เองโค้งนิดหน่อยและกินเต็มความกว้าง */
+#irtmb .mobile-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;           /* ปรับได้ตามชอบ */
+}
+
+/* กล่องคำอธิบาย (ยังคงลอยเหมือนเดิม) */
+#irtmb .mobile-cap {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-top: 12px;
+  box-shadow: 0 8px 18px rgba(16, 24, 40, 0.06);
+}
+
+/* ถ้าเคยมีสไตล์แบบนี้อยู่ให้มัน “ไม่ทำงาน” ด้วยการ override */
+.mobile-shots figure {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+/* ============= รีวิวลูกค้า: การ์ด & เลย์เอาต์ ============= */
+#reviews { overflow: visible; }
+
+/* กริด 3 คอลัมน์ (เดสก์ท็อป) */
+.t-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  margin-top:22px;
+}
+
+/* การ์ดรีวิว */
+.t-card{
+  background:#fff;
+  border-radius:16px;
+  padding:22px 22px 18px;
+  box-shadow:0 10px 26px rgba(15,23,42,.08);
+  border:1px solid rgba(2,6,23,.06);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.t-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 34px rgba(15,23,42,.12);
+}
+
+/* ดาวรีวิว */
+.t-stars{
+  font-size:18px; line-height:1;
+  color:#FBBF24;              /* ทอง */
+  letter-spacing:2px;
+  margin-bottom:10px;
+  font-weight:700;
+}
+
+/* ข้อความรีวิว */
+.t-text{
+  color:#1f2937;
+  font-size:15px;
+  line-height:1.7;
+  margin:0 0 14px 0;
+}
+
+/* ผู้ใช้ */
+.t-user{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:6px;
+}
+.avatar{
+  width:44px; height:44px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #fff;
+  box-shadow:0 3px 8px rgba(2,6,23,.15);
+}
+.t-user__meta{ line-height:1.15; }
+.t-user__name{
+  font-weight:700;
+  color:#0f172a;
+  font-size:14px;
+}
+.t-user__role{
+  color:#6b7280;
+  font-size:12.5px;
+  margin-top:2px;
+}
+
+/* ============= รีสปอนซีฟ ============= */
+@media (max-width:1024px){
+  .t-grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:640px){
+  .t-grid{ grid-template-columns:1fr; }
+  .t-card{ padding:18px; }
+}
+/* ============ RESET / BASE (ตั้งต้น) ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary-dark:#0f1f4b;
+  --primary:#1E3A8A;
+  --gold:#FACC15;
+  --text:#0F172A;
+  --muted:#64748b;
+  --bg:#0b1534;
+  --container:1200px;
+
+  --font-sans:"Prompt","Noto Sans Thai","Noto Sans",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+html{font-family:var(--font-sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{color:var(--text);background:#fff;line-height:1.6}
+img{max-width:100%;display:block}
+
+/* ============ CONTAINER / SECTION ============ */
+.container{max-width:var(--container);margin:0 auto;padding:0 20px}
+.section{padding:80px 0;background:linear-gradient(180deg,#fff,#f8fafc)}
+.section:nth-of-type(even){background:#fff}
+.section__title{font-size:32px;font-weight:800;color:var(--primary);text-align:center;margin-bottom:24px}
+.center{text-align:center}
+
+/* ============ BUTTONS ============ */
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:700;text-decoration:none;transition:.25s}
+.btn--primary{background:var(--gold);color:#111;box-shadow:0 10px 24px rgba(250,204,21,.25)}
+.btn--primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(250,204,21,.35)}
+.btn--outline{border:2px solid #fff;color:#fff}
+.btn--outline:hover{background:#fff;color:var(--primary-dark)}
+
+/* ============ NAVIGATION ============ */
+.nav{position:sticky;top:0;z-index:50;background:rgba(15,31,75,.92);backdrop-filter:blur(8px)}
+.nav__container{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px;padding:0 16px}
+.logo{text-decoration:none;font-weight:900;font-size:28px;letter-spacing:.5px;text-transform:uppercase;color:#FACC15}
+.nav__menu{list-style:none;display:flex;gap:18px;align-items:center}
+.nav__menu a{color:#fff;text-decoration:none;font-weight:600;position:relative;padding:6px 0}
+.nav__menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--gold);transition:width .25s}
+.nav__menu a:hover::after{width:100%}
+@media (max-width:768px){
+  .nav__container{height:auto;padding:8px 12px;flex-direction:column;align-items:flex-start;gap:8px}
+  .logo{font-size:20px}
+  .nav__menu{width:100%;gap:10px;overflow-x:auto;white-space:nowrap;padding:6px 2px 10px;margin:0 -6px}
+  .nav__menu::-webkit-scrollbar{display:none}
+  .nav__menu a{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08)}
+  .nav__menu a::after{display:none}
+}
+
+/* ============ HERO ============ */
+.hero{position:relative}
+.hero__banner{width:100%;height:auto;object-fit:cover;max-height:70vh}
+.hero__content{position:relative;z-index:2;text-align:center;padding:24px 20px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg) 40%,transparent 100%);color:#fff}
+.hero__content h1{font-size:44px;line-height:1.15;margin-bottom:10px}
+.hero__content p{font-size:18px;color:#e2e8f0;margin-bottom:16px}
+.hero__cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ============ CALLOUT ============ */
+.callout{background:#fff3c4;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:16px 24px;margin:22px auto;max-width:760px}
+.callout.center{text-align:center}
+
+/* ============ PC SHOTS (รูป PC + คำบรรยายใต้รูป) ============ */
+.pc-stack{display:grid;gap:28px}
+.pc-shot{}
+.pc-frame{
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 10px 24px rgba(3,23,56,.12);
+  overflow:hidden;
+}
+.pc-frame img{width:100%;height:auto;display:block}
+.pc-caption{
+  padding:16px 18px;              /* กล่องอยู่ “ใต้รูป” และกว้างเท่ารูป */
+  text-align:center;
+}
+.pc-caption h3{margin:0 0 6px;font-weight:800;color:#0B2C6C;font-size:clamp(18px,2vw,22px)}
+.pc-caption p{margin:0;color:#334155;font-size:clamp(14px,1.6vw,16px);line-height:1.65}
+
+/* ============ MOBILE SHOTS (รูป MB + คำบรรยายใต้รูป) ============ */
+.mobile-shots{display:grid;gap:20px;max-width:1080px;margin:0 auto}
+.mobile-shot{background:#fff;border-radius:18px;box-shadow:0 10px 24px rgba(3,23,56,.12);overflow:hidden}
+.mobile-shot img{width:100%;height:auto;display:block}
+.mobile-cap{padding:16px 18px;text-align:center}
+.mobile-cap h3{margin:0 0 6px;font-weight:700;color:#0F2B5B}
+.mobile-cap p{margin:0;color:#5B6B7C}
+
+/* ============ TESTIMONIAL CARDS (ตัวหนังสือรีวิว 6 ใบ) ============ */
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:28px}
 @media (max-width:1024px){.t-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.t-grid{grid-template-columns:1fr}}
 .t-card{background:#fff;border-radius:16px;padding:22px 22px 18px;box-shadow:0 8px 24px rgba(2,6,23,.06);border:1px solid rgba(2,6,23,.06)}
@@ -112,61 +527,2430 @@ img{max-width:100%;display:block}
 .t-user__name{font-weight:700;color:#0f172a;font-size:14px}
 .t-user__role{color:#6b7280;font-size:12.5px;margin-top:2px}
 
-/* ====== REVIEW IMAGES GRID ====== */
-.reviews__images{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}
-.reviews__images img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;box-shadow:0 6px 16px rgba(2,6,23,.10)}
+/* ============ REVIEW IMAGES (รูปรวม 4 ใบ) ============ */
+.reviews__images{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.reviews__images img{width:100%;height:100%;object-fit:cover;border-radius:12px}
 @media (max-width:1024px){.reviews__images{grid-template-columns:repeat(2,1fr)}}
 
-/* ปุ่มรีวิวเพิ่มเติม (ชิดกลาง + ยาวเท่ากัน) */
-.reviews-cta{display:flex;justify-content:center;margin:18px 0 8px}
-.btn-fb{display:inline-flex;align-items:center;gap:10px;height:44px;width:clamp(260px,42vw,360px);padding:0 18px;border-radius:999px;background:linear-gradient(135deg,#1877F2,#1f8bff);color:#fff;font-weight:800;text-decoration:none;box-shadow:0 10px 22px rgba(24,119,242,.35)}
-.btn-fb .fb-ico{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.15)}
+/* ============ PRICING ============ */
+.pricing__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.pricing__card{background:#fff;border-radius:18px;box-shadow:0 10px 34px rgba(2,6,23,.1);padding:24px;border:3px solid var(--gold)}
+.pricing__card .price{font-size:32px;font-weight:800;color:var(--gold);margin:10px 0}
+.pricing__card ul{list-style:none;display:grid;gap:10px;margin:14px 0 20px}
+.pricing__card ul li::before{content:"✓ ";color:#10B981;font-weight:700}
 
-/* ====== PRICING – #3 ฟีเจอร์กึ่งกลาง, #4 บีบช่องไฟ ====== */
-.pricing__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
-@media(max-width:900px){.pricing__grid{grid-template-columns:1fr}}
-.pricing__card{position:relative;background:#fff;border:1px solid #e5e7eb;border-radius:20px;box-shadow:0 16px 36px rgba(2,6,23,.10);overflow:hidden;padding:22px 22px 16px}
-.pricing__card--pc .pricing__header{background:linear-gradient(135deg,#1E3A8A,#3B82F6);color:#fff}
-.pricing__card--mb .pricing__header{background:linear-gradient(135deg,#047857,#10B981);color:#fff}
-.pricing__header{padding:18px 16px 14px;text-align:center}
-.package-name{margin:0 0 6px;font-weight:800;letter-spacing:.5px;font-size:clamp(18px,2.2vw,22px)}
-.price-box{display:flex;align-items:baseline;justify-content:center;gap:10px}
-.price-main{font-weight:900;font-size:clamp(28px,4.2vw,42px);line-height:1}
-.price-unit{opacity:.9;font-weight:700}
-.price-note{margin-top:4px;opacity:.9}
-.old-price{text-decoration:line-through;font-weight:700}
-
-.pricing__body{padding:16px 6px 8px}
-.features-list{list-style:none;display:grid;gap:10px;margin:0;padding:0}
-.features-list li{display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;min-height:40px;border-bottom:1px solid rgba(2,6,23,.06);padding:8px 12px}
-.features-list li:last-child{border-bottom:0}
-.chk{color:#10B981;font-weight:800}
-.x{color:#EF4444;font-weight:800;opacity:.9}
-.is-neg .chk{color:#EF4444}
-
-.pricing__footer{padding:0 8px 12px}
-.btn-buy{display:block;width:100%;text-align:center;border-radius:12px;padding:12px 18px;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;background:linear-gradient(135deg,#1E3A8A,#3B82F6);box-shadow:0 10px 24px rgba(37,99,235,.25)}
-.pricing__card--mb .btn-buy{background:linear-gradient(135deg,#047857,#10B981);box-shadow:0 10px 24px rgba(5,150,105,.25)}
-
-/* ====== CONTACT – #6 ปุ่มยาว/ไอคอน+ตัวอักษรกลางจริง ๆ ====== */
-.contact__row{
-  display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 14px;text-align:center;color:#0f172a;margin-top:6px
-}
-.contact__row .ico{width:18px;height:18px;object-fit:contain;transform:translateY(2px);margin-right:4px}
-.contact__row a{color:#1E3A8A;font-weight:800;text-decoration:none}
-.contact__row .sep{color:#94a3b8}
-
-.social-cta{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:16px}
-.sns-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:clamp(320px,70vw,680px);min-height:64px;padding:10px 18px;border-radius:999px;font-weight:800;color:#fff;text-decoration:none;box-shadow:0 10px 22px rgba(2,6,23,.18)}
-.sns-btn .icon{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;overflow:hidden}
-.sns-btn .icon img{width:100%;height:100%;object-fit:contain}
-.sns-btn.fb{background:#2d6df6}
-.sns-btn.line{background:#16c05e}
-.sns-btn.yt{background:#ef4444}
-.sns-btn.tiktok{background:#0f172a}
-
-/* ====== FOOTER ====== */
+/* ============ FOOTER ============ */
 .footer{background:var(--bg);color:#cbd5e1;padding:28px 0;text-align:center}
+/* ========== Problem Solution Box Styles ========== */
 
-/* ====== Smooth scroll ====== */
+.problem-solution-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.problem-solution-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.problem-box {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+  border-left: 4px solid #ff4444;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.problem-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.problem-item:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateX(5px);
+}
+
+.problem-item strong {
+  color: #d32f2f;
+  font-size: 1.1em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.problem-item .emoji {
+  font-size: 1.3em;
+  margin-right: 10px;
+}
+
+.solution-box {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-left: 4px solid #0ea5e9;
+  border-radius: 12px;
+  padding: 25px;
+}
+
+.solution-title {
+  color: #0369a1;
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.solution-subtitle {
+  text-align: center;
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  color: #334155;
+}
+
+.features-list {
+  margin: 20px 0;
+}
+
+.feature-item {
+  padding: 12px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateX(5px);
+}
+
+.feature-item strong {
+  color: #0369a1;
+}
+
+.result-highlight {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #92400e;
+}
+
+.disclaimer {
+  margin-top: 25px;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #64748b;
+  border: 1px dashed #cbd5e1;
+}
+
+/* ========== Review Card Style (Optional) ========== */
+
+.review-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 15px auto;
+  max-width: 400px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.stars {
+  color: #fbbf24;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.review-text {
+  color: #1f2937;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reviewer-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.reviewer-name {
+  font-weight: bold;
+  color: #111827;
+}
+
+.reviewer-product {
+  font-size: 0.9em;
+  color: #6b7280;
+}
+
+/* ===== หัวข้อย่อย (ใช้กับ "รีวิวผู้ใช้โปรแกรม") ===== */
+.section__subtitle{
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 8px 0 14px;
+}
+
+/* ===== แกลเลอรีรีวิวภาพ ===== */
+.reviews__images{
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, 1fr);   /* มือถือ: 2 ต่อแถว */
+  margin-top: 10px;
+}
+
+.reviews__images img{
+  width: 100%;
+  aspect-ratio: 1 / 1;                    /* รูปสี่เหลี่ยมสวย ๆ */
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(2, 6, 23, .10);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.reviews__images img:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(2, 6, 23, .14);
+}
+
+/* แท็บเล็ต: 3 ต่อแถว (จะนุ่มตา) */
+@media (min-width: 768px){
+  .reviews__images{
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+/* เดสก์ท็อป: 4 ต่อแถว */
+@media (min-width: 1024px){
+  .reviews__images{
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+}
+/* สำหรับกล่อง IRT GOLD V5.0 (PC) */
+.callout {
+  margin-bottom: 60px;   /* เพิ่มช่องว่างด้านล่าง */
+}
+
+/* ========== Problem / Solution Box ========== */
+/* กล่องใหญ่: อยู่นิ่ง ไม่ทับรูปถัดไป */
+.problem-solution-box{
+  background:#fff;
+  border-radius:16px;
+  padding:48px 56px;
+  margin:24px auto 80px;   /* เว้นล่างกันทับรูป */
+  max-width:1080px;
+  box-shadow:0 6px 24px rgba(2,6,23,.10);
+  position:relative;
+  z-index:1;               /* ให้อยู่ชั้นปกติ */
+  overflow:visible;
+}
+
+/* ส่วน “ปัญหา” */
+.problem-box{
+  background:linear-gradient(135deg,#fff5f5 0%,#ffe5e5 100%);
+  border-left:4px solid #ff4444;
+  border-radius:12px;
+  padding:28px;
+  margin-bottom:32px;
+}
+.problem-title{
+  color:#d32f2f;
+  font-size:2rem;
+  font-weight:800;
+  text-align:center;
+  margin:0 0 22px;
+}
+.problem-item{
+  background:rgba(255,255,255,.75);
+  border-radius:10px;
+  padding:14px 16px;
+  margin-bottom:12px;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  cursor:pointer;
+}
+.problem-item:hover{
+  background:#fff;
+  transform:translateX(8px);
+  box-shadow:0 4px 12px rgba(0,0,0,.12);
+}
+.problem-item .emoji{font-size:1.25rem;margin-right:8px;}
+.problem-item strong{color:#d32f2f;display:block;margin:4px 0 2px}
+
+/* ส่วน “แนวทางแก้” */
+.solution-box{
+  background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);
+  border-left:4px solid #0ea5e9;
+  border-radius:12px;
+  padding:28px;
+}
+.solution-title{
+  color:#0369a1;
+  font-size:2rem;
+  font-weight:800;
+  text-align:center;
+  margin:0 0 16px;
+}
+.solution-subtitle{
+  text-align:center;
+  color:#334155;
+  margin:0 0 18px;
+}
+.features-list{margin:18px 0}
+.feature-item{
+  background:rgba(255,255,255,.85);
+  border-radius:10px;
+  padding:12px 14px;
+  margin-bottom:10px;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  cursor:pointer;
+}
+.feature-item:hover{
+  background:#fff;
+  transform:translateX(8px);
+  box-shadow:0 4px 12px rgba(14,165,233,.18);
+}
+.feature-item strong{color:#0369a1}
+
+/* ไฮไลท์/ดิสคลेमเมอร์ */
+.result-highlight{
+  background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%);
+  color:#92400e;
+  border-radius:10px;
+  padding:20px;
+  text-align:center;
+  font-weight:700;
+  margin-top:18px;
+}
+.disclaimer{
+  margin-top:22px;
+  padding:14px;
+  background:#f8fafc;
+  border:1px dashed #cbd5e1;
+  border-radius:8px;
+  text-align:center;
+  color:#64748b;
+  font-size:.95rem;
+}
+
+/* Responsive */
+@media (max-width:1100px){
+  .problem-solution-box{max-width:95%;padding:36px 24px;margin-bottom:70px}
+  .problem-title,.solution-title{font-size:1.75rem}
+}
+@media (max-width:768px){
+  .problem-solution-box{padding:28px 18px;margin-bottom:56px}
+  .problem-title,.solution-title{font-size:1.5rem}
+}
+/* ปิดเอฟเฟกต์ hover และลอยทั้งหมดในบล็อกนี้ */
+.no-float * {
+  transform: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+}
+/* ====== ลดช่องว่างรวมของทุก section ====== */
+.section{
+  padding: 56px 0 !important;   /* จาก 80px → 56px */
+}
+
+/* ถ้าบาง section อยากแน่นเป็นพิเศษ ให้เติม class="section section--tight" ที่ HTML */
+.section--tight{
+  padding: 40px 0 !important;
+}
+
+/* ====== หัวข้อหลักให้ชิดลงนิดนึง ====== */
+.section__title{
+  margin-bottom: 16px !important;  /* เดิม 24px */
+}
+
+/* ====== บล็อก Problem & Solution ให้ชิดลง ====== */
+.problem-solution-box{
+  margin-top: 24px !important;
+  margin-bottom: 36px !important;  /* เดิมบางช่วง > 60–120px */
+}
+
+/* ====== กลุ่มภาพ IRT PC ให้ระยะระหว่างการ์ดน้อยลง ====== */
+#irtpc .pc-stack{
+  gap: 24px !important;            /* เดิม 40px/28px */
+}
+#irtpc .pc-frame .pc-caption{
+  padding: 14px 16px !important;   /* กล่องคำอธิบายใต้รูปให้เตี้ยลง */
+}
+
+/* ====== กล่องสรุป (แถบเหลือง) ให้ชิดลง ====== */
+.callout{
+  margin: 14px auto !important;    /* เดิม 22px/60px */
+}
+
+/* ====== แกลเลอรีรูปรีวิวให้ชิดขึ้น ====== */
+.reviews__images{
+  margin-top: 8px !important;      /* เดิม 18–28px */
+  gap: 12px !important;            /* บีบช่องไฟในกริดเล็กน้อย */
+}
+
+/* ====== เฉพาะบาง section ที่ต้องการแน่นมาก ๆ ====== */
+/* PC */
+#irtpc.section{ padding: 48px 0 !important; }
+/* Pricing */
+#pricing.section{ padding: 48px 0 !important; }
+/* Contact */
+#contact.section{ padding: 48px 0 !important; }
+
+/* ====== เผื่อกรณีเฮดเดอร์/ส่วนบนยังดูห่าง ให้บีบเฉพาะบล็อกนี้เพิ่ม ====== */
+#about + .section{                 /* บล็อกถัดจาก Problem&Solution */
+  margin-top: 0 !important;
+  padding-top: 40px !important;
+}
+/* ชิดบรรทัดในคำบรรยายของ IRT PC */
+#irtpc .pc-caption{
+  padding: 14px 16px !important;    /* กล่องเตี้ยลงนิดนึง */
+}
+#irtpc .pc-caption p{
+  line-height: 1.55 !important;     /* เดิมคุณใส่ 1.8 → ลดลงให้ชิด */
+  margin: 0 !important;
+}
+
+/* ถ้ามี <br><br> อยู่ติดกัน ให้แสดงแค่บรรทัดว่างเดียว */
+#irtpc .pc-caption p br+br{
+  display: none;
+}
+/* ===== PRICING (แพ็กเกจ) – การ์ดสวยแบบยกตัว ===== */
+#pricing { padding: 80px 0; }
+#pricing .section__title{
+  font-size: 34px;
+  font-weight: 900;
+  color: #1E3A8A;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.pricing__grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:26px;
+}
+@media(max-width:900px){ .pricing__grid{ grid-template-columns:1fr; }}
+
+/* การ์ดแพ็กเกจ */
+.pricing__card{
+  position:relative;
+  background:#fff;
+  border-radius:22px;
+  border:1px solid rgba(2,6,23,.08);
+  box-shadow:0 10px 28px rgba(2,6,23,.08);
+  overflow:hidden;
+  transition:transform .25s ease, box-shadow .25s ease;
+  padding:0;               /* เราจะจัด layout ภายในเอง */
+}
+.pricing__card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(2,6,23,.12);
+}
+
+/* แถบหัวการ์ด (gradient) */
+.pricing__card::before{
+  content:"";
+  display:block;
+  height:64px;
+  background:linear-gradient(135deg,#1E3A8A 0%, #3B82F6 100%);
+}
+.pricing__card.is-mb::before{
+  background:linear-gradient(135deg,#0F766E 0%, #10B981 100%);
+}
+
+/* เนื้อในการ์ด */
+.pricing__body{
+  padding:22px 24px 18px;
+}
+
+/* ชื่อแพ็กเกจ */
+.pricing__title{
+  margin-top:-40px; /* ซ้อนกับแถบหัว */
+  background:#fff;
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:12px;
+  font-weight:800;
+  color:#0f172a;
+  box-shadow:0 6px 18px rgba(2,6,23,.08);
+}
+
+/* ราคา (ปกติขีดทับ + ปัจจุบัน) */
+.price-wrap{ margin:14px 2px 6px; line-height:1.1; }
+.price-old{
+  display:inline-block;
+  font-size:16px;
+  font-weight:700;
+  color:#64748b;
+  text-decoration:line-through;
+  opacity:.9;
+  margin-right:10px;
+  vertical-align:middle;
+}
+.price{
+  display:inline-block;
+  font-size:42px;
+  font-weight:900;
+  color:#111827;
+  vertical-align:middle;
+}
+.price::after{
+  content:"/ครั้ง";
+  font-size:13px;
+  font-weight:700;
+  color:#64748b;
+  margin-left:8px;
+}
+@media(max-width:600px){ .price{ font-size:36px; }}
+
+/* รายการฟีเจอร์ */
+.features{ list-style:none; margin:14px 2px 18px; padding:0; display:grid; gap:12px; }
+.features li{
+  display:flex; align-items:flex-start; gap:10px;
+  color:#1f2937; font-size:15.5px;
+}
+.features li::before{
+  content:"✓";
+  flex:0 0 auto;
+  font-weight:900;
+  color:#10B981;
+  margin-top:1px;
+}
+
+/* ปุ่ม */
+.pricing__actions{ padding:0 24px 24px; }
+.btn-buy{
+  display:inline-block;
+  width:120px;
+  text-align:center;
+  padding:12px 18px;
+  border-radius:999px;
+  background:#FACC15;
+  color:#111;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 10px 20px rgba(250,204,21,.30);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.btn-buy:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(250,204,21,.40);
+}
+/* --------- ให้ฉากหลังอ่อนลงนิด เพื่อเห็นเงาชัด --------- */
+#pricing{
+  background: #f7f9ff;           /* ถ้าพื้นหลังขาว เงาจะจาง */
+}
+
+/* --------- การ์ดแพ็กเกจ: เงาหลัก + ขอบบาง --------- */
+.pricing__card{
+  position: relative;
+  border-radius: 22px;
+  border: 1px solid rgba(2, 6, 23, .08);
+  background: #fff;
+  /* เงาหลักสองชั้น ให้มีมิติลึก */
+  box-shadow:
+    0 14px 30px rgba(17, 24, 39, .12),
+    0 3px 8px rgba(17, 24, 39, .06);
+  transition: transform .25s ease, box-shadow .25s ease;
+  overflow: hidden;
+}
+
+/* ยกตัวตอน hover */
+.pricing__card:hover{
+  transform: translateY(-6px);
+  box-shadow:
+    0 24px 56px rgba(17, 24, 39, .18),
+    0 8px 18px rgba(17, 24, 39, .10);
+}
+
+/* แถบหัวการ์ด (เพิ่มมิติด้วย drop-shadow) */
+.pricing__card::before{
+  content: "";
+  display: block;
+  height: 64px;
+  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+  filter: drop-shadow(0 8px 16px rgba(30, 58, 138, .22));
+}
+.pricing__card.is-mb::before{
+  background: linear-gradient(135deg, #0F766E 0%, #10B981 100%);
+  filter: drop-shadow(0 8px 16px rgba(16, 185, 129, .22));
+}
+
+/* เนื้อในการ์ด – ให้เงาใน/นูนเล็กน้อย */
+.pricing__body{
+  background: linear-gradient(#ffffff, #fbfdff);
+  padding: 22px 24px 18px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),  /* ไฮไลต์บาง ๆ */
+    0 1px 0 rgba(2,6,23,.04);
+}
+
+/* ป้ายชื่อแพ็กเกจลอยจากแถบหัวเล็กน้อย */
+.pricing__title{
+  margin-top: -40px;
+  background: #fff;
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  color: #0f172a;
+  box-shadow: 0 6px 18px rgba(2,6,23,.10);
+}
+
+/* กล่องฟีเจอร์แบบเม็ดนูน */
+.features li{
+  display:flex; align-items:flex-start; gap:10px;
+  color:#1f2937; font-size:15.5px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow:
+    0 6px 14px rgba(2,6,23,.06),
+    inset 0 1px 0 rgba(255,255,255,.9);
+}
+.features li::before{
+  content:"✓";
+  color:#10B981; font-weight:900; margin-top:1px;
+}
+
+/* ปุ่มให้มีเงาและยกตัว */
+.btn-buy{
+  box-shadow: 0 10px 20px rgba(250,204,21,.30);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn-buy:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(250,204,21,.40);
+}
+<!-- ============ PRICING ============ -->
+<section class="section" id="pricing">
+  <div class="container">
+    <h2 class="section__title">เลือกแพ็กเกจ</h2>
+    <div class="pricing__grid">
+      
+      <!-- ===== การ์ด IRT PC ===== -->
+      <div class="pricing__card">
+        <div class="pricing__header">
+          <h3 class="package-name">IRT PC</h3>
+          <div class="price-box">
+            <span class="price-main">4,590.-</span>
+            <span class="price-unit">/ ตลอดชีพ</span>
+          </div>
+        </div>
+        
+        <div class="pricing__body">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <strong>MT5 PC Version</strong>
+              <p>รองรับ Windows/Mac</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2"/>
+                <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <strong>TradingView</strong>
+              <p>Pine Script สำเร็จรูป</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <strong>Live Coaching</strong>
+              <p>คำแนะนำแบบเรียลไทม์</p>
+            </div>
+          </div>
+          
+          <div class="price-note">
+            ราคาปกติ <span class="old-price">฿6,980</span><br>
+            <span class="discount">ลด 34%</span>
+          </div>
+        </div>
+        
+        <div class="pricing__footer">
+          <a href="#contact" class="btn-buy">สั่งซื้อเลย</a>
+        </div>
+      </div>
+      
+      <!-- ===== การ์ด IRT MB ===== -->
+      <div class="pricing__card">
+        <div class="pricing__header">
+          <h3 class="package-name">IRT MB</h3>
+          <div class="price-box">
+            <span class="price-main">2,390.-</span>
+            <span class="price-unit">/ ตลอดชีพ</span>
+          </div>
+        </div>
+        
+        <div class="pricing__body">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" stroke-width="2"/>
+                <line x1="12" y1="18" x2="12" y2="18" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <strong>MT5 Mobile</strong>
+              <p>รองรับ iOS/Android</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2"/>
+                <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <strong>TradingView</strong>
+              <p>Pine Script สำเร็จรูป</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <strong>แจ้งเตือน</strong>
+              <p>แบบเรียลไทม์</p>
+            </div>
+          </div>
+          
+          <div class="price-note">
+            ราคาปกติ <span class="old-price">฿4,980</span><br>
+            <span class="discount">ลด 52%</span>
+          </div>
+        </div>
+        
+        <div class="pricing__footer">
+          <a href="#contact" class="btn-buy">สั่งซื้อเลย</a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+/* ============ PRICING SECTION ============ */
+.pricing__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.pricing__card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.pricing__card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* สี PC (น้ำเงิน) */
+.pricing__card--pc {
+  border-color: #1e40af;
+}
+
+.pricing__card--pc .pricing__header {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+}
+
+.pricing__card--pc .btn-buy {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+.pricing__card--pc .btn-buy:hover {
+  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+/* สี MB (เขียว) */
+.pricing__card--mb {
+  border-color: #059669;
+}
+
+.pricing__card--mb .pricing__header {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.pricing__card--mb .btn-buy {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.pricing__card--mb .btn-buy:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* Header */
+.pricing__header {
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+  color: white;
+}
+
+.package-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  letter-spacing: 1px;
+}
+
+.price-box {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.price-main {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.price-unit {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.price-note {
+  margin-top: 0.5rem;
+}
+
+.old-price {
+  text-decoration: line-through;
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+/* Body */
+.pricing__body {
+  padding: 2rem 1.5rem;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features-list li {
+  padding: 0.85rem 0;
+  font-size: 1rem;
+  color: #374151;
+  border-bottom: 1px solid #f3f4f6;
+  line-height: 1.6;
+}
+
+.features-list li:last-child {
+  border-bottom: none;
+}
+
+.features-list li:before {
+  content: '✓';
+  color: #10b981;
+  font-weight: bold;
+  margin-right: 0.75rem;
+  font-size: 1.2rem;
+}
+
+.pricing__card--pc .features-list li:before {
+  color: #2563eb;
+}
+
+/* Footer */
+.pricing__footer {
+  padding: 0 1.5rem 2rem;
+}
+
+.btn-buy {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pricing__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .price-main {
+    font-size: 2.5rem;
+  }
+  
+  .features-list li {
+    font-size: 0.95rem;
+    padding: 0.75rem 0;
+  }
+}
+/* ปุ่ม Facebook – รีวิวเพิ่มเติม */
+:root{
+  --fb1:#1877F2;      /* สีหลัก FB */
+  --fb2:#0f63d9;      /* สีเข้มตอน hover */
+  --fbGlow: rgba(24,119,242,.35);
+}
+
+.reviews-cta{
+  display:flex;
+  justify-content:center;
+  margin: 18px 0 8px;
+}
+
+.btn-fb{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 18px;
+  border-radius:999px;
+  background: linear-gradient(135deg, var(--fb1), #1f8bff);
+  color:#fff;
+  font-weight:800;
+  text-decoration:none;
+  box-shadow: 0 10px 22px var(--fbGlow);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.btn-fb:hover{
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--fb2), #1f7bfd);
+  box-shadow: 0 14px 30px var(--fbGlow);
+}
+
+.btn-fb:active{
+  transform: translateY(0);
+}
+
+.btn-fb__icon{
+  display:grid;
+  place-items:center;
+  width:28px; height:28px;
+  border-radius:50%;
+  background: rgba(255,255,255,.15);
+  color:#fff;
+}
+
+.btn-fb__text{
+  letter-spacing:.2px;
+}
+
+/* แบบเต็มความกว้าง */
+.btn-fb--full{
+  width:100%;
+  justify-content:center;
+  padding:14px 20px;
+  border-radius:14px;
+}
+
+/* ถ้าปุ่มอยู่บนพื้นหลังอ่อน ๆ ให้เว้นช่องไฟ */
+#pricing .btn-fb--full { margin-top: 10px; }
+/* ขยายปุ่มรีวิวให้ยาวขึ้น และยังอยู่กึ่งกลางเหมือนเดิม */
+
+.reviews-cta .btn-fb{
+  width: clamp(260px, 42vw, 360px);  /* ยาวขึ้นเฉพาะจอใหญ่ แต่ไม่เกิน 360px */
+}
+
+/* 1) พื้นหลังของ Section แพ็กเกจให้เป็นขาวล้วน */
+#pricing.section{
+  background:#fff !important;
+}
+
+/* 2) เอาแถบบาร์/พื้นหลังหัวการ์ดที่อยู่บนสุดออก (กากบาท) */
+.pricing__card::before,
+.pricing__card .card__bar,
+.pricing__card .pricing__bar{
+  content:none !important;
+  display:none !important;
+}
+
+/* สไตล์การ์ดให้เป็นกล่องขาวมีมิติ */
+.pricing__card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:20px;
+  box-shadow:0 16px 36px rgba(2,6,23,.10);
+  padding:22px 22px 16px;            /* ลดช่องว่างด้านล่างด้วย */
+}
+
+/* ระยะหัวข้อ/ราคาให้บาลานซ์ขึ้น */
+.pricing__card h3{
+  margin:6px 0 6px;                  /* หัวข้อ IRT PC / IRT MB */
+}
+
+/* ราคา */
+.pricing__card .price{
+  line-height:1.1;
+  margin:6px 0 10px;                 /* ปรับระยะทั่วไป */
+}
+
+/* 3) ขยับ "ราคาสีเขียว" (การ์ดใบที่ 2) ลงมาอีกเล็กน้อย */
+#pricing .pricing__grid > :nth-child(2) .price{
+  margin-top:12px;                   /* เพิ่มจาก 6px เป็น 12px เฉพาะใบที่ 2 */
+}
+
+/* รายการคุณสมบัติและปุ่ม – จัดช่องไฟให้กระชับ */
+.pricing__card ul{
+  margin:10px 0 12px;
+}
+.pricing__card .btn{
+  margin-top:12px;
+}
+/* ห่อปุ่มให้ปุ่มอยู่กลางแถว */
+.reviews-cta{
+  display:flex;
+  justify-content:center;
+}
+
+/* ปุ่มรีวิว — ใช้ flex จัดศูนย์, ความกว้างคุมด้วย clamp */
+.btn-fb{
+  display:inline-flex;
+  align-items:center;              /* กึ่งกลางแนวตั้งของไอคอน+ข้อความ */
+  justify-content:center;          /* กึ่งกลางแนวนอนของไอคอน+ข้อความ */
+  gap:10px;                        /* ระยะห่างระหว่างไอคอนกับข้อความ */
+  height:44px;
+  width:clamp(260px, 42vw, 360px); /* ความยาวตามที่ต้องการ */
+  padding:0 18px;                  /* ซ้าย/ขวาเท่ากัน เพื่อไม่เอียง */
+  border-radius:999px;
+  background:linear-gradient(90deg,#1e66ff,#1ea1ff);
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+  letter-spacing:.2px;
+  box-shadow:0 8px 20px rgba(30,102,255,.25);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+
+/* ยกเลิกสไตล์ absolute ของไอคอน (ถ้ามีจากที่อื่น) */
+.btn-fb .fb-ico{
+  position:static !important;
+  margin:0 !important;
+  display:grid;                    /* จัดไอคอนให้อยู่กลางวงกลม */
+  place-items:center;
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  background:rgba(255,255,255,.18);/* วงกลมรองไอคอน */
+  flex:0 0 auto;                   /* ไม่ให้ดึงพื้นที่เกิน */
+}
+
+.btn-fb .fb-ico svg,
+.btn-fb .fb-ico img{
+  display:block;                   /* ไม่ยึด baseline */
+  width:16px;
+  height:16px;
+}
+
+.btn-fb .fb-text{
+  line-height:1;
+  display:inline-block;
+}
+
+/* hover เล็กน้อย */
+.btn-fb:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 24px rgba(30,102,255,.32);
+}
+/* ================== THEME VARS ================== */
+:root{
+  /* สีหลัก */
+  --blue-600:#2563EB;
+  --blue-700:#1D4ED8;
+  --green-600:#059669;
+  --green-700:#047857;
+
+  /* โทนจาง (พื้นหลังการ์ด) + เส้นขอบ + เงา */
+  --tint-blue: rgba(37, 99, 235, .06);
+  --tint-blue-brd: rgba(37, 99, 235, .18);
+  --tint-blue-shadow: 0 14px 34px rgba(37, 99, 235, .16);
+
+  --tint-green: rgba(5, 150, 105, .06);
+  --tint-green-brd: rgba(5, 150, 105, .18);
+  --tint-green-shadow: 0 14px 34px rgba(5, 150, 105, .16);
+
+  /* ข้อความ */
+  --text:#0F172A;
+  --muted:#475569;
+}
+
+/* ================== SECTION BASE ================== */
+#pricing .section__title{
+  text-align:center;
+  color:var(--blue-700);
+  font-weight:800;
+  font-size:clamp(22px, 2.6vw, 32px);
+  margin-bottom:20px;
+}
+
+#pricing .pricing__grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:28px;
+}
+
+@media (max-width: 820px){
+  #pricing .pricing__grid{ grid-template-columns:1fr; }
+}
+
+/* ================== CARD BASE ================== */
+#pricing .pricing__card{
+  border-radius:22px;
+  overflow:hidden;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  will-change: transform;
+}
+
+/* โทนจาง + เงา */
+#pricing .pricing__card--pc{
+  background: var(--tint-blue);
+  border:1.5px solid var(--tint-blue-brd);
+  box-shadow: var(--tint-blue-shadow);
+}
+#pricing .pricing__card--mb{
+  background: var(--tint-green);
+  border:1.5px solid var(--tint-green-brd);
+  box-shadow: var(--tint-green-shadow);
+}
+
+/* เด้งขึ้นเมื่อชี้ */
+#pricing .pricing__card:hover{ transform:translateY(-6px); }
+#pricing .pricing__card--pc:hover{
+  box-shadow:0 22px 60px rgba(37, 99, 235, .26);
+  border-color:rgba(37, 99, 235, .28);
+}
+#pricing .pricing__card--mb:hover{
+  box-shadow:0 22px 60px rgba(5, 150, 105, .26);
+  border-color:rgba(5, 150, 105, .28);
+}
+
+/* ================== HEADER (ไล่สี) ================== */
+#pricing .pricing__header{
+  padding:18px 22px;
+  color:#fff;
+}
+
+#pricing .pricing__card--pc .pricing__header{
+  background: linear-gradient(135deg, var(--blue-700), var(--blue-600));
+}
+#pricing .pricing__card--mb .pricing__header{
+  background: linear-gradient(135deg, var(--green-700), var(--green-600));
+}
+
+#pricing .package-name{
+  margin:0 0 8px;
+  font-weight:800;
+  letter-spacing:.5px;
+  font-size:clamp(18px, 2.2vw, 22px);
+}
+
+#pricing .price-box{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+}
+#pricing .price-main{
+  font-weight:900;
+  font-size:clamp(28px, 4.2vw, 42px);
+  line-height:1;
+}
+#pricing .price-unit{
+  opacity:.9;
+  font-weight:700;
+}
+
+#pricing .price-note{
+  margin-top:6px;
+  opacity:.9;
+}
+#pricing .old-price{
+  font-weight:700;
+  text-decoration: line-through;
+  opacity:.9;
+}
+
+/* ================== BODY (ฟีเจอร์) ================== */
+#pricing .pricing__body{ padding:18px 22px 6px; }
+
+#pricing .features-list{
+  list-style:none;
+  display:grid;
+  gap:12px;
+  margin:0; padding:0;
+}
+
+#pricing .features-list li{
+  color:var(--text);
+  font-size:clamp(14px, 1.8vw, 16px);
+  line-height:1.6;
+  display:flex; align-items:flex-start; gap:10px;
+  position:relative; padding-left:28px;
+}
+
+/* ไอคอน ✓ แตกต่างตามการ์ด */
+#pricing .pricing__card--pc .features-list li::before{
+  content:"✓";
+  position:absolute; left:8px; top:0;
+  color:var(--blue-600);
+  font-weight:900;
+}
+#pricing .pricing__card--mb .features-list li::before{
+  content:"✓";
+  position:absolute; left:8px; top:0;
+  color:var(--green-600);
+  font-weight:900;
+}
+
+/* ================== FOOTER (ปุ่ม) ================== */
+#pricing .pricing__footer{
+  padding:0 22px 22px;
+}
+#pricing .btn-buy{
+  display:block;
+  width:100%;
+  text-align:center;
+  border-radius:12px;
+  padding:14px 18px;
+  color:#fff; text-decoration:none; font-weight:800;
+  letter-spacing:.2px;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+/* สีกลมกลืนกับหัวการ์ด */
+#pricing .pricing__card--pc .btn-buy{
+  background: linear-gradient(135deg, var(--blue-700), var(--blue-600));
+  box-shadow:0 10px 24px rgba(37, 99, 235, .25);
+}
+#pricing .pricing__card--mb .btn-buy{
+  background: linear-gradient(135deg, var(--green-700), var(--green-600));
+  box-shadow:0 10px 24px rgba(5, 150, 105, .25);
+}
+
+#pricing .btn-buy:hover{
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+#pricing .btn-buy:active{ transform: translateY(0); }
+/* ===== CONTACT (กึ่งกลางทุกอย่าง) ===== */
+.contact .section__title{
+  text-align:center;
+  margin-bottom:18px;
+}
+
+.contact__list{
+  list-style:none;
+  padding:0;
+  margin:0 auto 16px;
+  display:grid;
+  gap:8px;
+  text-align:center;
+}
+.contact__list a{ color:#1E3A8A; text-decoration:none; font-weight:700 }
+.contact__list a:hover{ text-decoration:underline }
+
+/* ===== ปุ่มโซเชียลแบบแคปซูล ยาว เหมือนปุ่มรีวิว FB ===== */
+.social-cta{
+  max-width:640px;            /* ความกว้างสูงสุดของชุดปุ่ม */
+  margin:18px auto 0;         /* กึ่งกลาง */
+  display:grid;
+  gap:12px;                   /* ระยะห่างระหว่างปุ่ม */
+}
+
+/* โครงปุ่มร่วม */
+.btn-social{
+  display:flex;
+  align-items:center;
+  justify-content:center;     /* ไอคอน+ข้อความอยู่กลางปุ่ม */
+  gap:10px;
+  width:100%;
+  padding:14px 22px;
+  border-radius:999px;
+  color:#fff;
+  font-weight:800;
+  text-decoration:none;
+  box-shadow:0 10px 26px rgba(2, 6, 23, .14);
+  transform:translateY(0);
+  transition:transform .18s ease, box-shadow .18s ease, opacity .18s;
+}
+.btn-social:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 36px rgba(2, 6, 23, .18);
+  opacity:.98;
+}
+.btn-social .ico{
+  display:inline-flex;
+  width:28px;height:28px;
+  align-items:center;justify-content:center;
+}
+
+/* แบรนด์สีพื้นหลังแต่ละปุ่ม */
+.btn-fb{
+  background:linear-gradient(90deg,#2266ff,#2ea0ff);
+}
+.btn-line{
+  background:linear-gradient(90deg,#00b900,#00d85a);
+}
+.btn-yt{
+  background:linear-gradient(90deg,#ff2244,#ff5544);
+}
+.btn-tt{
+  background:linear-gradient(90deg,#111,#2b2b2b);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+/* ปรับขนาดบนจอเล็กให้ยังดูดี */
+@media (max-width:480px){
+  .social-cta{ max-width:92%; }
+  .btn-social{ padding:12px 18px; }
+}
+/* จัดแถวคุณสมบัติให้อยู่กึ่งกลาง (ทั้งไอคอนและข้อความ) */
+.pricing__card .features-list{
+  display: grid;
+  gap: 12px;                  /* ระยะบรรทัด */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pricing__card .features-list li{
+  display: flex;
+  align-items: center;        /* จัด vertical center */
+  justify-content: center;    /* จัด horizontal center */
+  gap: 10px;                  /* ระยะไอคอน-ข้อความ */
+  text-align: center;
+  min-height: 40px;           /* ให้บรรทัดสูงเท่ากัน */
+  border-bottom: 1px solid rgba(2,6,23,.06);
+  padding: 8px 12px;
+}
+
+/* สัญลักษณ์ ✔ เริ่มต้น */
+.pricing__card .features-list li::before{
+  content: "✔";
+  color: #10B981;             /* เขียว */
+  font-weight: 800;
+  font-size: 16px;
+}
+
+/* สำหรับรายการที่เป็น “X” (ไม่รองรับ) */
+.pricing__card .features-list li.is-neg::before{
+  content: "✕";
+  color: #EF4444;             /* แดง */
+}
+
+/* เอาเส้นคั่นบรรทัดสุดท้ายออกให้ดูเรียบ */
+.pricing__card .features-list li:last-child{
+  border-bottom: 0;
+}
+/* ความกว้างและจัดกึ่งกลาง เหมือนปุ่มรีวิวเพิ่มเติม */
+.btn-wide {
+  width: clamp(260px, 42vw, 360px);
+  height: 44px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 16px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ไอคอนในปุ่มอยู่กลางสวย ๆ */
+.btn-wide .ico {
+  display: inline-flex;
+  width: 22px; height: 22px;
+  align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+}
+
+/* วางปุ่มกึ่งกลาง */
+#contact .social-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* สีพื้นหลังแต่ละปุ่ม (คุณปรับได้ตามต้องการ) */
+.btn-fb2  { background: linear-gradient(90deg,#1877F2,#3aa0ff); }
+.btn-line { background: #06C755; }
+.btn-yt   { background: #FF0000; }
+.btn-tt   { background: #000; }
+/* ----- ปิดไอคอนติ๊กเดิมที่มาจาก CSS ----- */
+.features-list li::before{
+  content: none !important;   /* ปิด content เดิม */
+}
+
+/* คืนระยะซ้ายให้ปกติ (เคยเผื่อพื้นที่ไว้สำหรับไอคอน) */
+.features-list li{
+  padding-left: 0 !important;
+}
+
+/* จัดแถวให้สวย ถ้าคุณจะใส่ไอคอนเองใน HTML */
+.features-list li{
+  display: flex;
+  align-items: center;
+  gap: 10px;          /* ระยะห่างระหว่างไอคอนกับข้อความ */
+  line-height: 1.6;
+}
+
+/* ตัวช่วยสีของไอคอนที่คุณจะใส่เอง (ใช้หรือไม่ใช้ก็ได้) */
+.chk { color:#10B981; font-weight:700; }  /* ✔ เขียว */
+.x   { color:#EF4444; font-weight:700; }  /* ✕ แดง  */
+/* ====== Contact: ปุ่มโซเชียลให้ยาวขึ้นนิดนึง ====== */
+.social-links {
+  display: grid;
+  place-items: center;
+  gap: 10px;
+}
+
+.social-links .sbtn{
+  /* เดิม ~360px → ยาวขึ้นเล็กน้อย แต่ไม่เกิน 440px */
+  width: clamp(320px, 50vw, 440px);
+  height: 44px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;   /* ไอคอน + ข้อความอยู่ตรงกลางปุ่มจริง ๆ */
+  gap: 10px;
+  font-weight: 800;
+}
+
+/* เผื่อหน้าจอกว้าง ให้ปุ่มยาวขึ้นอีกนิด */
+@media (min-width: 1100px){
+  .social-links .sbtn { width: 460px; }
+}
+
+/* ====== Contact: บรรทัดข้อมูลให้อยู่บรรทัดเดียว ====== */
+.contact-inline {
+  display: flex;
+  flex-wrap: nowrap;           /* ไม่ให้ตัดบรรทัด */
+  align-items: center;
+  justify-content: center;
+  gap: 18px;                   /* ระยะห่างระหว่างแต่ละชิ้น */
+  line-height: 1.65;
+  text-align: center;
+  white-space: nowrap;         /* บังคับไม่ให้ขึ้นบรรทัดใหม่ */
+}
+
+/* ถ้าจอเล็กมาก ๆ ค่อยยอมแตกบรรทัดแบบสุภาพ */
+@media (max-width: 420px){
+  .contact-inline {
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    white-space: normal;
+  }
+}
 html { scroll-behavior: smooth; }
+/* เพิ่ม CSS สำหรับส่วนใหม่ */
+
+.signal-highlight {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-left: 4px solid #2563eb;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+}
+
+.signal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e40af;
+  margin: 0 0 1rem 0;
+}
+
+.signal-highlight p {
+  margin: 0.75rem 0;
+  line-height: 1.6;
+  color: #1f2937;
+}
+
+.signal-details {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  line-height: 1.8;
+}
+
+.signal-cta {
+  font-size: 1.1rem;
+  margin-top: 1rem !important;
+}
+
+.result-highlight {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-left: 5px solid #f59e0b;
+  padding: 1.5rem;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #78350f;
+}
+
+.result-highlight strong {
+  color: #92400e;
+  font-size: 1.15rem;
+}
+
+.urgent {
+  display: block;
+  margin-top: 0.75rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #dc2626;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.disclaimer {
+  background: #fef2f2;
+  border-left: 3px solid #ef4444;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #7f1d1d;
+}
+/* ============ PRICING SECTION ============ */
+.pricing__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2.5rem;
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.pricing__card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 3px solid transparent;
+  position: relative;
+}
+
+.pricing__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pricing__card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.pricing__card:hover::before {
+  opacity: 1;
+}
+
+/* สี PC (น้ำเงิน) */
+.pricing__card--pc {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.pricing__card--pc .pricing__header {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1e40af 100%);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+}
+
+.pricing__card--pc .btn-buy {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+}
+
+.pricing__card--pc .btn-buy:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.45);
+  transform: translateY(-3px);
+}
+
+.pricing__card--pc .chk {
+  color: #3b82f6;
+}
+
+/* สี MB (เขียว) */
+.pricing__card--mb {
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.pricing__card--mb .pricing__header {
+  background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+}
+
+.pricing__card--mb .btn-buy {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+}
+
+.pricing__card--mb .btn-buy:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+  transform: translateY(-3px);
+}
+
+.pricing__card--mb .chk {
+  color: #10b981;
+}
+
+/* Header */
+.pricing__header {
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing__header::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.package-name {
+  font-size: 1.9rem;
+  font-weight: 800;
+  margin: 0 0 1.25rem 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+.price-box {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.price-main {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.price-unit {
+  font-size: 1.05rem;
+  opacity: 0.95;
+  font-weight: 500;
+}
+
+.price-note {
+  margin-top: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.old-price {
+  text-decoration: line-through;
+  font-size: 1.25rem;
+  opacity: 0.85;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Body */
+.pricing__body {
+  padding: 2.5rem 2rem;
+  background: linear-gradient(to bottom, #ffffff 0%, #f9fafb 100%);
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features-list li {
+  padding: 1rem 0;
+  font-size: 1.05rem;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.features-list li:last-child {
+  border-bottom: none;
+}
+
+.features-list li:hover {
+  padding-left: 0.5rem;
+  background: rgba(59, 130, 246, 0.03);
+}
+
+.chk, .x {
+  font-size: 1.4rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.x {
+  color: #ef4444;
+  opacity: 0.5;
+}
+
+/* Footer */
+.pricing__footer {
+  padding: 0 2rem 2.5rem;
+  background: linear-gradient(to bottom, #f9fafb 0%, #ffffff 100%);
+}
+
+.btn-buy {
+  display: block;
+  width: 100%;
+  padding: 1.25rem;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.15rem;
+  border-radius: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-buy::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-buy:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-buy:active {
+  transform: scale(0.97);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pricing__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1.5rem 1rem;
+  }
+  
+  .pricing__header {
+    padding: 2rem 1.5rem 1.75rem;
+  }
+  
+  .package-name {
+    font-size: 1.6rem;
+  }
+  
+  .price-main {
+    font-size: 2.8rem;
+  }
+  
+  .pricing__body {
+    padding: 2rem 1.5rem;
+  }
+  
+  .features-list li {
+    font-size: 1rem;
+    padding: 0.85rem 0;
+  }
+  
+  .pricing__footer {
+    padding: 0 1.5rem 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .price-main {
+    font-size: 2.5rem;
+  }
+  
+  .features-list li {
+    font-size: 0.95rem;
+  }
+}
+/* บรรทัดติดต่อให้ชิดกลาง และต่อกันบรรทัดเดียว */
+#contact .contact__row{
+  text-align:center;
+  margin: 10px auto 18px;
+  color:#0f2b5b;
+}
+#contact .contact__row a{ color:#1e3a8a; font-weight:700; text-decoration:none; }
+
+/* แถวปุ่มโซเชียล */
+.social-cta{
+  display:grid;
+  gap:12px;
+  justify-items:center;   /* ให้ปุ่มอยู่กลาง */
+  margin-top:10px;
+}
+
+/* ปุ่มแบบแคปซูลยาว */
+.sns-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;         /* ไอคอน + ข้อความอยู่กลางปุ่ม */
+  gap:10px;
+  width: min(520px, 92vw);         /* ยาวเท่ากันทุกปุ่ม / ยืดหยุ่นจอเล็ก */
+  padding: 12px 18px;
+  border-radius: 999px;
+  color:#fff;
+  font-weight: 800;
+  text-decoration:none;
+  box-shadow: 0 10px 24px rgba(2,6,23,.15);
+  transition: transform .15s ease, box-shadow .15s ease, filter .2s ease;
+}
+
+.sns-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(2,6,23,.2);
+  filter: brightness(1.02);
+}
+
+/* วงไอคอนเล็กในปุ่ม */
+.sns-btn .icon{
+  display:grid;
+  place-items:center;
+  width:28px; height:28px;
+  border-radius:999px;
+  background: rgba(255,255,255,.18);
+  font-size:14px;
+  line-height:1;
+}
+
+/* สีพื้นของแต่ละแพลตฟอร์ม */
+.sns-btn.fb{
+  background: linear-gradient(90deg,#1877F2,#2D9CFF);
+}
+.sns-btn.line{
+  background: linear-gradient(90deg,#00C300,#00E676);
+}
+.sns-btn.yt{
+  background: linear-gradient(90deg,#FF0033,#FF4D4D);
+}
+.sns-btn.tiktok{
+  background: linear-gradient(90deg,#0F0F0F,#1F1F1F);
+}
+
+/* (ถ้ามีพื้นหลังส่วนนี้อ่อน ๆ อยู่) เว้นระยะนิดหน่อย */
+#contact .social-cta .sns-btn{ margin-top: 0; }
+/* ================= Contact row ================= */
+.contact__row{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:10px 14px;                 /* เว้นช่องไฟสวย ๆ */
+  text-align:center;
+  color:#0f172a;
+  margin-top:6px;
+}
+
+.contact__row .ico{
+  width:18px;
+  height:18px;
+  object-fit:contain;
+  transform:translateY(2px);     /* ให้ไอคอนอยู่กึ่งกลางบรรทัด */
+  margin-right:4px;
+}
+
+.contact__row a{
+  color:#1E3A8A;
+  font-weight:800;
+  text-decoration:none;
+}
+
+.contact__row .sep{
+  color:#94a3b8;
+}
+
+/* ================= Social long buttons ================= */
+.social-cta{
+  display:grid;
+  gap:10px;
+  margin:16px auto 0;
+  width:min(480px, 92%);
+}
+
+.sns-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  height:46px;
+  border-radius:999px;
+  font-weight:800;
+  color:#fff;
+  text-decoration:none;
+  width:clamp(260px, 60vw, 380px);   /* กว้างเท่ากันทุกปุ่ม */
+  margin-inline:auto;
+  box-shadow:0 8px 18px rgba(2,6,23,.20);
+  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.sns-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 12px 28px rgba(2,6,23,.28);
+  filter:saturate(1.05);
+}
+
+.sns-icon{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+}
+
+/* ไล่เฉดสีพื้นหลังปุ่ม */
+.sns-btn.fb     { background:linear-gradient(90deg,#1e3a8a,#3b82f6); }
+.sns-btn.line   { background:linear-gradient(90deg,#0ea34d,#22c55e); }
+.sns-btn.yt     { background:linear-gradient(90deg,#b91c1c,#ef4444); }
+.sns-btn.tiktok { background:linear-gradient(90deg,#0f172a,#111827); }
+/* กรอบเส้นฟ้า ครอบเฉพาะส่วนสรุป */
+.blue-frame{
+  border: 3px solid #BEE3FF;         /* เส้นฟ้าอ่อน */
+  background: #F6FAFF;               /* พื้นหลังฟ้าอ่อนมาก */
+  border-radius: 14px;
+  padding: 18px 18px 16px;
+  max-width: 980px;
+  margin: 0 auto 24px;               /* เว้นช่องว่างก่อนหัวข้อถัดไป */
+  box-shadow: 0 4px 14px rgba(30,58,138,.06);
+}
+
+/* อย่าให้กล่องสุดท้ายดันกรอบยืด */
+.blue-frame .disclaimer{ margin-bottom: 0; }
+
+/* ปรับระยะข้างในให้กระชับสวย */
+.blue-frame .solution-title{ margin-top: 0; }
+.blue-frame .features-list{ margin: 12px 0 16px; }
+.blue-frame .result-highlight{ margin: 0 0 12px; }
+/* ปุ่มโซเชียลแบบยาว */
+.social-cta{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  margin-top:16px;
+}
+
+/* ยืดให้ยาวขึ้นอีกนิด:  */
+.social-cta .sns-btn{
+  width:100%;
+  max-width: 560px;             /* เดิม ~480–520 -> ยืดออกอีกนิด */
+  padding: 12px 26px;           /* ขยายระยะข้างให้ดูโปร่ง */
+  border-radius: 999px;
+  color:#fff;
+  font-weight: 800;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  justify-content: flex-start;
+  box-shadow: 0 6px 16px rgba(0,0,0,.14);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+/* ไอคอนให้บาลานซ์กับความกว้างใหม่ */
+.social-cta .sns-btn .icon{
+  width: 20px; height: 20px;
+  display:inline-grid; place-items:center;
+  border-radius:6px;
+  background: rgba(255,255,255,.18);
+  color:#fff;
+  font-weight:900;
+  font-size:12px;
+}
+
+/* สีพื้นแต่ละแพลตฟอร์ม */
+.sns-btn.fb    { background: linear-gradient(90deg,#2563eb,#3b82f6); }
+.sns-btn.line  { background: linear-gradient(90deg,#16a34a,#22c55e); }
+.sns-btn.yt    { background: linear-gradient(90deg,#dc2626,#ef4444); }
+.sns-btn.tiktok{ background: linear-gradient(90deg,#0b1220,#111827); }
+
+/* hover ให้เด้งนิดๆ */
+.social-cta .sns-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+  filter: brightness(1.03);
+}
+
+/* จอใหญ่ยืดได้อีกหน่อย */
+@media (min-width: 992px){
+  .social-cta .sns-btn{
+    max-width: 600px;           /* เดสก์ท็อปกว้างขึ้นอีกนิด */
+  }
+}
+/* ====== BLUE FRAME (กรอบฟ้า) ====== */
+.blue-frame{
+  background:#F3F8FF;
+  border:1px solid #D9E8FF;
+  border-radius:18px;
+  padding:22px 24px;
+  max-width:980px;
+  margin: 0 auto 28px;           /* มีระยะห่างจากส่วนถัดไป */
+  box-shadow:0 8px 24px rgba(15,30,80,.06);
+}
+
+/* หัวเรื่อง */
+.solution-title{
+  margin:0 0 6px;
+  font-size:26px;
+  line-height:1.25;
+  font-weight:800;
+  color:#0B3B8D;
+  text-align:left;
+}
+.solution-subtitle{
+  margin:0 0 12px;
+  color:#334155;
+  font-weight:600;
+}
+
+/* รายการฟีเจอร์ */
+.features-list{
+  display:grid;
+  gap:10px;
+  margin:0 0 16px;
+}
+.feature-item{
+  background:#fff;
+  border:1px solid #EEF4FF;
+  border-radius:12px;
+  padding:10px 12px;
+  color:#0f172a;
+  box-shadow:0 4px 12px rgba(2,6,23,.06);
+  font-weight:600;
+}
+
+/* กล่องบิ้วสั่งซื้อ */
+.result-highlight{
+  background:#FFF4CC;
+  border:1px solid #FFE08A;
+  color:#8B5E00;
+  border-radius:12px;
+  padding:14px 16px;
+  text-align:center;
+  font-weight:700;
+  margin:12px 0;
+}
+.result-highlight .urgent{
+  display:block;
+  margin-top:6px;
+  color:#E11D48;                 /* แดงดึงสายตา */
+  font-weight:900;
+}
+
+/* คำเตือนความเสี่ยง */
+.disclaimer{
+  background:#F8FAFC;
+  border:1px dashed #CBD5E1;
+  color:#64748B;
+  border-radius:10px;
+  padding:10px 12px;
+  text-align:center;
+  font-weight:600;
+}
+
+/* กันกรอบฟ้าไม่ไหลไปกินหัวข้อถัดไป */
+.section__title{ margin-top:26px; }
+/* ========= กรอบหลัก: ทำให้แดง/ฟ้าเป็นสไตล์เดียวกัน ========= */
+.problem-solution-box,
+.blue-frame{
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 8px 24px rgba(15,30,80,.06);
+}
+
+/* สีพื้น/เส้นขอบต่างกันเฉพาะธีม */
+.problem-solution-box{            /* กรอบสีแดง (ปัญหา) */
+  background:#FFF5F5;
+  border:1px solid #FFD6D6;
+}
+.blue-frame{                      /* กรอบสีฟ้า (ทางแก้/คุณสมบัติ) */
+  background:#F3F8FF;
+  border:1px solid #D9E8FF;
+}
+
+/* ========= จัดตัวหนังสือให้กึ่งกลาง ========= */
+.problem-title,
+.solution-title,
+.solution-subtitle,
+.result-highlight,
+.disclaimer{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* ========= แถวนโยบาย/ฟีเจอร์/ปัญหา ให้ดูเหมือนกัน และจัดกึ่งกลาง ========= */
+.problem-item,
+.feature-item{
+  display:flex;
+  justify-content:center;    /* จัดกลางแนวนอน */
+  align-items:center;        /* จัดกลางแนวตั้ง */
+  gap:8px;                   /* ช่องไฟระหว่างไอคอน/ข้อความ */
+  text-align:center;
+
+  background:#fff;
+  border:1px solid #EEF4FF;  /* เส้นขอบเริ่มต้นสำหรับฟ้า */
+  border-radius:12px;
+  padding:10px 12px;
+  margin:0 0 10px 0;
+  box-shadow:0 4px 12px rgba(2,6,23,.06);
+}
+
+/* ปรับสีขอบให้ฝั่งกรอบแดง */
+.problem-solution-box .problem-item{
+  border-color:#FFE3E3;
+}
+
+/* ปรับสีขอบให้ฝั่งกรอบฟ้า */
+.blue-frame .feature-item{
+  border-color:#E6EEFF;
+}
+
+/* ========= กล่องบิ้ว & คำเตือน ========= */
+.result-highlight{
+  background:#FFF4CC;
+  border:1px solid #FFE08A;
+  color:#8B5E00;
+  border-radius:12px;
+  padding:14px 16px;
+  font-weight:700;
+  margin:12px 0;
+}
+.result-highlight .urgent{
+  display:block;
+  margin-top:6px;
+  color:#E11D48;         /* แดงดึงสายตา */
+  font-weight:900;
+}
+.disclaimer{
+  background:#F8FAFC;
+  border:1px dashed #CBD5E1;
+  color:#64748B;
+  border-radius:10px;
+  padding:10px 12px;
+  font-weight:600;
+}
+/* โครงปุ่มโซเชียล */
+.social-cta{
+  display: grid;
+  gap: 14px;
+  justify-items: center;            /* ให้ปุ่มแต่ละอันอยู่กลางคอลัมน์ */
+}
+
+/* ปุ่มยาว */
+.sns-btn{
+  width: clamp(320px, 68vw, 780px); /* ความกว้างยืดนิดหน่อยตามที่ขอ */
+  min-height: 64px;
+  border-radius: 9999px;
+  color: #fff;
+  text-decoration: none;
+
+  /* จัด “ไอคอน + ข้อความ” ให้อยู่กึ่งกลางจริง ๆ */
+  display: flex;
+  align-items: center;              /* กลางแนวตั้ง */
+  justify-content: center;          /* กลางแนวนอน */
+  gap: 12px;                        /* ช่องไฟระหว่างไอคอนกับข้อความ */
+  padding: 12px 20px;               /* ตัด padding ซ้าย/ขวาที่มากไปเพื่อไม่ให้เอน */
+  text-align: center;
+
+  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.12);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.sns-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(2, 6, 23, 0.18);
+}
+
+/* ไอคอนที่เป็น <img> หรือ <span class="icon"> ให้จัดกลางและขนาดเท่ากัน */
+.sns-btn img,
+.sns-btn .icon{
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;                   /* ไม่ยืด/หด */
+}
+
+/* สีพื้นแต่ละปุ่ม */
+.sns-btn.fb   { background:#2E72F6; }
+.sns-btn.line { background:#22C55E; }
+.sns-btn.yt   { background:#EF4444; }
+.sns-btn.tiktok{background:#0B1324;}
+/* กรอบแดง: ครอบเฉพาะหัวข้อ + 5 ปัญหา */
+.problem-frame{
+  max-width: 980px;
+  margin: 24px auto 24px;
+  padding: 18px;
+  background: #fff5f5;           /* แดงอ่อน */
+  border: 1px solid #fecaca;     /* เส้นกรอบแดงอ่อน */
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(255, 0, 0, .06); /* เงาบาง ๆ */
+}
+
+/* หัวข้อกรอบแดง */
+.problem-title{
+  font-weight: 900;
+  color: #b91c1c;
+  font-size: clamp(18px, 2.2vw, 22px);
+  margin: 2px 4px 14px;
+}
+
+/* รายการปัญหาแต่ละข้อ */
+.problem-item{
+  background: #fff;
+  border: 1px solid #fcdada;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 10px 0;
+}
+
+.problem-item .emoji{
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.problem-item strong{
+  display: inline-block;
+  margin-bottom: 4px;
+  color: #991b1b;
+}
+
+.problem-item p{
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.6;
+}
+/* กล่องรวมปุ่ม */
+.social-cta{
+  display: grid;
+  gap: 12px;
+  justify-items: center;            /* กึ่งกลางทั้งกริด */
+}
+
+/* ปุ่มโซเชียล */
+.sns-btn{
+  display: inline-flex;
+  align-items: center;              /* จัดกลางแนวตั้ง */
+  justify-content: center;          /* จัดกลางแนวนอน (ไอคอน+ข้อความ) */
+  gap: 14px;                        /* ระยะห่างไอคอน-ข้อความ */
+  width: clamp(320px, 70vw, 680px); /* ยืดอีกนิดตามที่ขอ */
+  min-height: 64px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 10px 22px rgba(2,6,23,.18);
+}
+
+/* ไอคอนในปุ่ม – ใช้ไฟล์ไอคอนที่คุณมี */
+.sns-btn .icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.sns-btn .icon img{           /* รองรับภาพจาก /Github-p/icon/*.png */
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+/* สีปุ่ม */
+.sns-btn.fb{    background: #2d6df6; }
+.sns-btn.line{  background: #16c05e; }
+.sns-btn.yt{    background: #ef4444; }
+.sns-btn.tiktok{background: #0f172a; }
+/* ให้กล่องเหลืองอยู่กึ่งกลางและความกว้างพอดี */
+.callout{
+  max-width: 860px;          /* คุมความกว้าง */
+  margin: 22px auto;         /* auto = กึ่งกลาง */
+  text-align: left;          /* เนื้อหา list ให้อ่านซ้าย */
+}
+
+/* จัดหัวข้อในกล่องให้กึ่งกลางและเด่น */
+.callout .callout__title{
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.12rem;
+  margin: 0 0 10px;
+}
+/* ❌ ล้างสไตล์กรอบนอกที่เผลอไปครอบทั้งชุด */
+.problem-solution-box,
+.ps-wrap,
+.ps-box {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ✅ กรอบแดงเฉพาะบล็อก “ปัญหา” */
+.problem-box{
+  max-width: 980px;
+  margin: 0 auto 24px;               /* ให้อยู่กึ่งกลาง + มีช่องว่างด้านล่าง */
+  padding: 16px 18px;
+  border: 1px solid #fecaca;         /* ขอบแดงอ่อน */
+  background: #fff5f5;               /* พื้นชมพูอ่อน */
+  border-radius: 14px;
+}
+
+/* ข้อความหัวเรื่องของบล็อกปัญหา */
+.problem-title{
+  margin: 4px 0 12px;
+  font-weight: 800;
+  color: #b91c1c;                    /* แดงเข้าโทนเดียวกับกรอบ */
+  text-align: center;                /* จัดให้อยู่กลาง */
+}
+
+/* แถวปัญหาแต่ละบรรทัด */
+.problem-item{
+  background: #ffffff;
+  border: 1px solid #ffe2e2;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 8px 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+/* อีโมจิ */
+.problem-item .emoji{
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* หัวข้อย่อย (ตัวหนา) ให้ดูกลืนไปกับบรรทัด */
+.problem-item strong{
+  display: block;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+/* ✅ กรอบฟ้า (IRT GOLD) คงเดิม แต่อยู่นอกกรอบแดง */
+.blue-frame{
+  max-width: 980px;
+  margin: 0 auto 28px;              /* อยู่กลางหน้า */
+  border: 1px solid #dbeafe;
+  background: #eff6ff;
+  border-radius: 14px;
+  padding: 16px 18px;
+}
