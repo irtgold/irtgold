@@ -1790,3 +1790,75 @@ img{max-width:100%;display:block}
   filter: brightness(1.03);
 }
 #pricing .btn-buy:active{ transform: translateY(0); }
+/* ===== CONTACT (กึ่งกลางทุกอย่าง) ===== */
+.contact .section__title{
+  text-align:center;
+  margin-bottom:18px;
+}
+
+.contact__list{
+  list-style:none;
+  padding:0;
+  margin:0 auto 16px;
+  display:grid;
+  gap:8px;
+  text-align:center;
+}
+.contact__list a{ color:#1E3A8A; text-decoration:none; font-weight:700 }
+.contact__list a:hover{ text-decoration:underline }
+
+/* ===== ปุ่มโซเชียลแบบแคปซูล ยาว เหมือนปุ่มรีวิว FB ===== */
+.social-cta{
+  max-width:640px;            /* ความกว้างสูงสุดของชุดปุ่ม */
+  margin:18px auto 0;         /* กึ่งกลาง */
+  display:grid;
+  gap:12px;                   /* ระยะห่างระหว่างปุ่ม */
+}
+
+/* โครงปุ่มร่วม */
+.btn-social{
+  display:flex;
+  align-items:center;
+  justify-content:center;     /* ไอคอน+ข้อความอยู่กลางปุ่ม */
+  gap:10px;
+  width:100%;
+  padding:14px 22px;
+  border-radius:999px;
+  color:#fff;
+  font-weight:800;
+  text-decoration:none;
+  box-shadow:0 10px 26px rgba(2, 6, 23, .14);
+  transform:translateY(0);
+  transition:transform .18s ease, box-shadow .18s ease, opacity .18s;
+}
+.btn-social:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 36px rgba(2, 6, 23, .18);
+  opacity:.98;
+}
+.btn-social .ico{
+  display:inline-flex;
+  width:28px;height:28px;
+  align-items:center;justify-content:center;
+}
+
+/* แบรนด์สีพื้นหลังแต่ละปุ่ม */
+.btn-fb{
+  background:linear-gradient(90deg,#2266ff,#2ea0ff);
+}
+.btn-line{
+  background:linear-gradient(90deg,#00b900,#00d85a);
+}
+.btn-yt{
+  background:linear-gradient(90deg,#ff2244,#ff5544);
+}
+.btn-tt{
+  background:linear-gradient(90deg,#111,#2b2b2b);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+/* ปรับขนาดบนจอเล็กให้ยังดูดี */
+@media (max-width:480px){
+  .social-cta{ max-width:92%; }
+  .btn-social{ padding:12px 18px; }
+}
