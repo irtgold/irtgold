@@ -2789,3 +2789,47 @@ html { scroll-behavior: smooth; }
 .sns-btn.line { background:#22C55E; }
 .sns-btn.yt   { background:#EF4444; }
 .sns-btn.tiktok{background:#0B1324;}
+/* กรอบแดง: ครอบเฉพาะหัวข้อ + 5 ปัญหา */
+.problem-frame{
+  max-width: 980px;
+  margin: 24px auto 24px;
+  padding: 18px;
+  background: #fff5f5;           /* แดงอ่อน */
+  border: 1px solid #fecaca;     /* เส้นกรอบแดงอ่อน */
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(255, 0, 0, .06); /* เงาบาง ๆ */
+}
+
+/* หัวข้อกรอบแดง */
+.problem-title{
+  font-weight: 900;
+  color: #b91c1c;
+  font-size: clamp(18px, 2.2vw, 22px);
+  margin: 2px 4px 14px;
+}
+
+/* รายการปัญหาแต่ละข้อ */
+.problem-item{
+  background: #fff;
+  border: 1px solid #fcdada;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 10px 0;
+}
+
+.problem-item .emoji{
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.problem-item strong{
+  display: inline-block;
+  margin-bottom: 4px;
+  color: #991b1b;
+}
+
+.problem-item p{
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.6;
+}
