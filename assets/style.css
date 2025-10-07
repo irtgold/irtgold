@@ -170,7 +170,7 @@ img{max-width:100%;display:block}
 .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:28px}
 @media (max-width:1024px){.t-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.t-grid{grid-template-columns:1fr}}
-.t-card{background:#fff;border-radius:16px;padding:22px 22px 18px;box-shadow:0 8px 24px rgba(2,6,23,.06);border:1px solid rgba(2,6,23,.06)}
+.t-card{border-radius:16px;padding:22px 22px 18px;box-shadow:0 8px 24px rgba(2,6,23,.06);border:1px solid rgba(2,6,23,.06)}
 .t-stars{font-size:18px;line-height:1;color:#FBBF24;letter-spacing:2px;margin-bottom:10px;font-weight:700}
 .t-text{color:#1f2937;font-size:15px;line-height:1.7;margin:0 0 14px}
 .t-user{display:flex;align-items:center;gap:12px;margin-top:6px}
@@ -183,7 +183,7 @@ img{max-width:100%;display:block}
 .pricing__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;max-width:950px;margin:0 auto}
 @media(max-width:900px){.pricing__grid{grid-template-columns:1fr}}
 
-.pricing__card{position:relative;background:#fff;border-radius:22px;border:1px solid rgba(2,6,23,.08);
+.pricing__card{position:relative;border-radius:22px;border:1px solid rgba(2,6,23,.08);
 box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:hidden;transition:transform .25s,box-shadow .25s}
 .pricing__card:hover{transform:translateY(-6px);box-shadow:0 24px 56px rgba(17,24,39,.18),0 8px 18px rgba(17,24,39,.10)}
 
