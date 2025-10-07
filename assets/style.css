@@ -69,7 +69,7 @@ img{max-width:100%;display:block}
 .callout .callout__title{ text-align:center;font-weight:800;font-size:1.12rem;margin:0 0 10px;}
 
 
-/* ========== 🖥️ IRT PC (รูป + แคปชันใต้รูป) ========== */
+/* ========== 🖥️ IRT PC (รูป + แคปชั่นใต้รูป) ========== */
 .pc-stack{display:grid;gap:28px}
 .pc-frame{background:#fff;border-radius:18px;box-shadow:0 10px 24px rgba(3,23,56,.12);overflow:hidden}
 .pc-frame img{width:100%;height:auto;display:block}
@@ -88,7 +88,7 @@ img{max-width:100%;display:block}
 
 
 /* ========== ⚠️ ปัญหาที่เทรดเดอร์ส่วนใหญ่เจอ ========== */
-/* กรอบแดง — ครอบเฉพาะหัวข้อ + รายการปัญหา */
+/* กรอบแดง – ครอบเฉพาะหัวข้อ + รายการปัญหา */
 .problem-box{
   max-width:980px;margin:0 auto 24px;padding:16px 18px;
   border:1px solid #fecaca;background:#fff5f5;border-radius:14px;
@@ -96,7 +96,7 @@ img{max-width:100%;display:block}
 .problem-title{
   margin:4px 0 12px;font-weight:800;color:#b91c1c;text-align:center;
 }
-/* รายการปัญหา: อีโมจิอยู่ “หน้า” หัวข้อ (บรรทัดเดียวกัน) แล้วขึ้นบรรทัดใหม่เป็นคำอธิบาย */
+/* รายการปัญหา: อีโมจิอยู่ "หน้า" หัวข้อ (บรรทัดเดียวกัน) แล้วขึ้นบรรทัดใหม่เป็นคำอธิบาย */
 .problem-item{
   background:#fff;border:1px solid #ffe2e2;border-radius:10px;
   padding:16px 18px;margin:10px 0;text-align:center;
@@ -186,7 +186,7 @@ img{max-width:100%;display:block}
   display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;
   min-height:40px;border-bottom:1px solid rgba(2,6,23,.06);padding:8px 12px;line-height:1.6;
 }
-/* หากต้องการแสดง ✔/✕ ให้ใส่ใน HTML เอง — ปิด before เดิม */
+/* หากต้องการแสดง ✓/✕ ให้ใส่ใน HTML เอง – ปิด before เดิม */
 .features-list li::before{content:none}
 .features-list li:last-child{border-bottom:0}
 
@@ -202,22 +202,122 @@ img{max-width:100%;display:block}
 
 
 /* ========== 📞 CONTACT ========== */
-#contact .contact__row{ text-align:center;margin:10px auto 18px;color:#0f2b5b }
-#contact .contact__row a{ color:#1E3A8A;font-weight:700;text-decoration:none }
-
-/* ปุ่มโซเชียลแบบยาว (กึ่งกลาง + ยาวเท่ากัน) */
-.social-cta{ max-width:780px;margin:14px auto 28px;display:grid;gap:12px;justify-items:center }
-.sns-btn{
-  display:flex;align-items:center;justify-content:center;gap:12px;
-  width:min(100%,780px);padding:14px 18px;border-radius:999px;font-weight:800;color:#fff;text-decoration:none;
-  box-shadow:0 8px 24px rgba(2,6,23,.12);transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+#contact{
+  padding:80px 0;
+  background:linear-gradient(135deg,#f8fafc 0%,#e0f2fe 100%);
+  text-align:center;
 }
-.sns-btn:hover{ transform:translateY(-1px); box-shadow:0 12px 28px rgba(2,6,23,.16) }
-.sns-btn .icon{ width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center }
-.sns-btn.fb{background:#2d6df6}
-.sns-btn.line{background:#17c05b}
-.sns-btn.yt{background:#ea4335}
-.sns-btn.tiktok{background:#0e1625}
+#contact .section__title{
+  font-size:clamp(28px,4vw,38px);
+  font-weight:900;
+  color:#0B3B8D;
+  margin-bottom:16px;
+}
+#contact .contact__intro{
+  max-width:680px;
+  margin:0 auto 32px;
+  font-size:clamp(15px,1.8vw,18px);
+  line-height:1.7;
+  color:#334155;
+}
+#contact .contact__row{
+  text-align:center;
+  margin:12px auto 24px;
+  color:#0f2b5b;
+  font-size:clamp(14px,1.6vw,16px);
+}
+#contact .contact__row a{
+  color:#1E3A8A;
+  font-weight:700;
+  text-decoration:none;
+  transition:color .2s ease;
+}
+#contact .contact__row a:hover{
+  color:#3B82F6;
+  text-decoration:underline;
+}
+
+/* ปุ่มโซเชียลแบบสวยงาม */
+.social-cta{
+  max-width:520px;
+  margin:24px auto;
+  display:grid;
+  gap:16px;
+  padding:0 20px;
+}
+.sns-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  padding:16px 24px;
+  border-radius:14px;
+  font-weight:700;
+  font-size:clamp(15px,1.7vw,17px);
+  color:#fff;
+  text-decoration:none;
+  box-shadow:0 6px 20px rgba(2,6,23,.15);
+  transition:all .25s cubic-bezier(.4,0,.2,1);
+  position:relative;
+  overflow:hidden;
+}
+.sns-btn::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
+  opacity:0;
+  transition:opacity .25s ease;
+}
+.sns-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 32px rgba(2,6,23,.25);
+}
+.sns-btn:hover::before{
+  opacity:1;
+}
+.sns-btn:active{
+  transform:translateY(-1px);
+}
+.sns-btn .icon{
+  width:20px;
+  height:20px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.sns-btn .icon svg{
+  width:100%;
+  height:100%;
+}
+.sns-btn.fb{
+  background:linear-gradient(135deg,#2d6df6,#4a90ff);
+}
+.sns-btn.line{
+  background:linear-gradient(135deg,#17c05b,#25d366);
+}
+.sns-btn.yt{
+  background:linear-gradient(135deg,#ea4335,#ff5845);
+}
+.sns-btn.tiktok{
+  background:linear-gradient(135deg,#0e1625,#1a2332);
+}
+
+@media (max-width:600px){
+  .sns-btn{
+    padding:14px 20px;
+    font-size:15px;
+  }
+  .sns-btn .icon{
+    width:18px;
+    height:18px;
+  }
+}
 
 
 /* ========== ▶️ วิดีโอ 9:16 ========== */
