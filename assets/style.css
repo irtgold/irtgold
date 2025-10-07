@@ -285,3 +285,27 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 /* ========== FOOTER ========== */
 .footer{background:#0f1f4b;color:#e0f2fe;padding:40px 20px;text-align:center}
 .footer p{margin:0;font-size:14px;opacity:0.9}
+
+/* ========== รีวิวเพิ่มเติม ========== */
+/* กล่องรวมปุ่ม (เหมือนเดิม) */
+.social-cta{max-width:600px;margin:0 auto;display:grid;gap:16px;padding:0 20px}
+
+/* ปุ่มพื้นฐาน (ใช้ร่วมกับทั้ง FB และ รีวิว) */
+.sns-btn{
+  display:flex;align-items:center;justify-content:center;gap:12px;width:100%;
+  padding:14px 18px;border-radius:16px;font-weight:700;font-size:16px;
+  color:#fff;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.15);
+  transition:transform .2s ease
+}
+.sns-btn:hover{transform:translateY(-2px)}
+
+/* กล่องไอคอน (ถ้าไม่ใส่ก็ได้) */
+.sns-btn .icon{
+  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;background:rgba(255,255,255,.2);border-radius:8px;padding:4px
+}
+
+/* ไล่เฉดน้ำเงินแบบเดียวกับปุ่ม Facebook */
+.sns-btn.fb,
+.sns-btn.review{background:linear-gradient(135deg,#1877f2,#0c63d4)}
+
