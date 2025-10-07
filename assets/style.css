@@ -214,27 +214,87 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 @media(max-width:600px){.price-main{font-size:36px}}
 
 /* ========== 📞 CONTACT (รื้อใหม่ทั้งหมด - Modern Card Style) ========== */
-#contact{padding:80px 0;background:linear-gradient(135deg,#e0f2fe 0%,#bae6fd 50%,#7dd3fc 100%);position:relative}
-#contact .container{position:relative;z-index:2}
-#contact .section__title{font-size:clamp(32px,5vw,42px);font-weight:900;color:#0c4a6e;margin-bottom:16px;text-align:center}
+/* 1) ตัดพื้นหลังฟ้าออกจาก #contact */
+#contact{ background:none !important; }
 
-.contact__card{max-width:680px;margin:0 auto 40px;background:#fff;border-radius:20px;padding:32px 28px;box-shadow:0 20px 60px rgba(0,0,0,.15);border:1px solid rgba(255,255,255,.8)}
-.contact__row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
-.contact__item{display:flex;align-items:center;gap:10px;padding:12px 16px;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border-radius:12px;border:1px solid rgba(14,165,233,.1)}
-.contact__item .ico{width:20px;height:20px}
-.contact__item span{font-size:14px;color:#0c4a6e;font-weight:600}
-.contact__item a{color:#0369a1;font-weight:700;text-decoration:none}
+/* 2) แถวข้อมูลบรรทัดเดียว + จัดกึ่งกลาง */
+#contact .contact__row{
+  max-width: 980px;
+  margin: 8px auto 28px;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;               /* จอเล็กให้ตัดบรรทัด */
+  justify-content: center;       /* ชิดกลาง */
+  align-items: center;
+  gap: 10px 16px;                /* ช่องไฟแนวคอลัมน์ x แถว */
+  font-size: 14px;               /* ย่อขนาดลงตามที่ขอ */
+  color: #0c4a6e;
+  line-height: 1.7;
+  text-align: center;
+}
 
-.social__header{text-align:center;margin:28px 0 16px}
-.social__header h3{font-size:clamp(20px,3vw,26px);font-weight:800;color:#0c4a6e}
-.social__header p{font-size:15px;color:#0369a1;font-weight:500}
+/* ไอคอนรูปภาพเล็กลงและชิดข้อความพอดี */
+#contact .contact__row .ico{
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin: -2px 6px 0 0;          /* ขยับเล็กน้อยให้เสมอ baseline */
+}
 
-/* ปุ่มโซเชียล: จัดทั้ง “ไอคอน+ข้อความ” ให้อยู่กึ่งกลาง */
-.social-cta{max-width:600px;margin:0 auto;display:grid;gap:16px;padding:0 20px}
+/* ตัวแบ่งจุด • ที่คุณใส่มาเป็น <span class="sep">•</span> */
+#contact .contact__row .sep{
+  opacity: .45;
+  user-select: none;
+}
+
+/* ลิงก์ให้เด่นขึ้นเล็กน้อย */
+#contact .contact__row a{
+  color: #0369a1;
+  font-weight: 700;
+  text-decoration: none;
+}
+#contact .contact__row a:hover{ text-decoration: underline }
+
+/* 3) ปุ่มโซเชียลให้ตรงแบบ (ชิดกลางทั้งไอคอน+ข้อความ) */
+.social-cta{
+  max-width: 600px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+  padding: 0 20px;
+}
 .sns-btn{
-  display:flex;align-items:center;justify-content:center;      /* 🔴 แก้จาก flex-start → center */
-  gap:12px;width:100%;padding:18px 24px;border-radius:16px;font-weight:700;font-size:16px;color:#fff;text-decoration:none;
-  box-shadow:0 8px 24px rgba(0,0,0,.18);transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;border:2px solid rgba(255,255,255,.2)
+  display: flex;
+  align-items: center;
+  justify-content: center;       /* ชิดกลางทั้งปุ่ม */
+  gap: 12px;
+  width: 100%;
+  padding: 18px 24px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,.18);
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,.2);
+}
+.sns-btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+
+.sns-btn .icon{
+  width: 28px; height: 28px;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  flex-shrink: 0;
+  background: rgba(255,255,255,.18);
+  border-radius: 8px;
+  padding: 4px;
+}
+.sns-btn .icon img{
+  width: 100%; height: 100%; object-fit: contain;
 }
 .sns-btn .icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,.2);border-radius:8px;padding:4px}
 .sns-btn.fb{background:linear-gradient(135deg,#1877f2,#0c63d4)}
