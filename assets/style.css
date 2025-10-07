@@ -3091,3 +3091,37 @@ html { scroll-behavior: smooth; }
   display: block;              /* ให้ขึ้นบรรทัดของตัวเอง */
   margin: 0;                   /* ชิดกลางตาม text-align */
 }
+/* ========= ปรับอีโมจิให้อยู่หน้าหัวข้อในบล็อกปัญหา ========= */
+.problem-box .problem-item{
+  text-align: center;          /* จัดทุกอย่างกึ่งกลาง */
+  padding: 16px 18px;
+}
+
+/* เอาอีโมจิกับหัวข้อให้อยู่บรรทัดเดียวกัน */
+.problem-box .problem-item .emoji{
+  display: inline-flex;        /* อยู่บรรทัดเดียวกับหัวข้อ */
+  align-items: center;
+  margin: 0 8px 0 0;           /* เว้นขวานิดหน่อยก่อนหัวข้อ */
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.problem-box .problem-item strong{
+  display: inline;             /* ให้หัวข้ออยู่บรรทัดเดียวกับอีโมจิ */
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+/* บังคับขึ้นบรรทัดใหม่หลังหัวข้อ เพื่อให้คำอธิบายลงบรรทัดถัดไป */
+.problem-box .problem-item strong::after{
+  content: "";
+  display: block;
+  height: 6px;                 /* ระยะห่างเล็กน้อยระหว่างหัวข้อกับข้อความ */
+}
+
+/* เผื่อมีสไตล์เดิมบังคับ block อยู่ ให้ reset ทับ */
+.problem-box .problem-item .emoji,
+.problem-box .problem-item strong{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
