@@ -322,8 +322,8 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 .video iframe{width:min(540px,100%);aspect-ratio:9/16;height:auto;border:0;border-radius:12px}
 
 /* ========== 🦶 ส่วนท้ายเว็บไซต์ (FOOTER) ========== */
-.footer{background:#0f1f4b;color:#e0f2fe;padding:16px 20px;text-align:center;margin-top:auto}
-.footer p{margin:0;font-size:14px;opacity:0.9}
+.footer{background:#0f1f4b;color:#e0f2fe;padding:16px 20px 0;text-align:center;margin-top:auto}
+.footer p{margin:0;font-size:14px;opacity:0.9;padding-bottom:16px}
 
 /* ========== 🔵 ปุ่มโซเชียลและรีวิวเพิ่มเติม (SOCIAL & REVIEW BUTTONS) ========== */
 /* หมายเหตุ: ใช้สไตล์เดียวกันกับปุ่ม Facebook (น้ำเงิน Gradient) */
