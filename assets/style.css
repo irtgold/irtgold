@@ -60,11 +60,11 @@ img{max-width:100%;display:block}
 .callout .callout__title{text-align:center;font-weight:800;font-size:1.12rem;margin:0 0 10px}
 
 /* ========== 🖥️ IRT PC ========== */
-.pc-stack{display:grid;gap:28px}
+.pc-stack{display:grid;gap:16px}
 .pc-frame{background:#fff;border-radius:18px;box-shadow:0 10px 24px rgba(3,23,56,.12);overflow:hidden}
 .pc-frame img{width:100%;display:block}
-.pc-caption{text-align:center;padding:14px 16px}
-.pc-caption h3{margin:0 0 6px;font-weight:800;color:#0B2C6C;font-size:clamp(18px,2vw,22px)}
+.pc-caption{text-align:center;padding:10px 14px}
+.pc-caption h3{margin:0 0 4px;font-weight:800;color:#0B2C6C;font-size:clamp(18px,2vw,22px)}
 .pc-caption p{margin:0;color:#334155;font-size:clamp(14px,1.6vw,16px);line-height:1.55}
 
 /* ========== 📱 IRT MB ========== */
