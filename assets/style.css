@@ -3071,3 +3071,23 @@ html { scroll-behavior: smooth; }
 #reviews, .reviews { 
   padding-top: 8px; 
 }
+/* ==== Center text & content inside problem items ==== */
+.problem-box .problem-item{
+  display: flex;
+  flex-direction: column;      /* เรียงเป็นแนวตั้ง */
+  align-items: center;         /* จัดกึ่งกลางตามแกนขวาง */
+  justify-content: center;     /* จัดกึ่งกลางตามแกนหลัก */
+  text-align: center;          /* จัดตัวหนังสือให้อยู่กลาง */
+  gap: 6px;                    /* ระยะห่างระหว่างอีโมจิ/หัวข้อ/ข้อความ */
+  min-height: 64px;            /* สูงขึ้นเล็กน้อยให้ดูโปร่ง */
+}
+
+.problem-box .problem-item .emoji{
+  margin: 0;                   /* ไม่ต้องดันซ้าย/ขวา */
+  font-size: 18px;
+}
+
+.problem-box .problem-item strong{
+  display: block;              /* ให้ขึ้นบรรทัดของตัวเอง */
+  margin: 0;                   /* ชิดกลางตาม text-align */
+}
