@@ -183,7 +183,7 @@ img{max-width:100%;display:block}
 .btn-buy:hover{transform:translateY(-2px);filter:brightness(1.03)}
 @media(max-width:600px){ .price-main{font-size:36px}}
 
-/* ========== 📞 CONTACT (ปรับใหม่หมด) ========== */
+/* ========== 📞 CONTACT ========== */
 #contact{
   padding:80px 0;
   background:linear-gradient(135deg,#f0f9ff 0%,#dbeafe 100%);
@@ -192,21 +192,26 @@ img{max-width:100%;display:block}
   font-size:clamp(28px,4vw,36px);
   font-weight:900;
   color:#0B3B8D;
-  margin-bottom:12px;
-}
-#contact .contact__intro{
-  max-width:640px;
-  margin:0 auto 36px;
-  font-size:clamp(15px,1.8vw,17px);
-  line-height:1.7;
-  color:#475569;
+  margin-bottom:20px;
   text-align:center;
 }
+
+/* แถวข้อมูลติดต่อ */
 #contact .contact__row{
-  text-align:center;
-  margin:12px auto 28px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:8px 16px;
+  max-width:900px;
+  margin:0 auto 40px;
   color:#1e293b;
   font-size:15px;
+  line-height:1.8;
+}
+#contact .contact__row .sep{
+  color:#94a3b8;
+  font-weight:400;
 }
 #contact .contact__row a{
   color:#1E3A8A;
@@ -219,9 +224,18 @@ img{max-width:100%;display:block}
   text-decoration:underline;
 }
 
-/* ปุ่มโซเชียล - ขนาดกลาง อยู่กึ่งกลาง */
+/* ไอคอนเล็กในแถวข้อมูล */
+#contact .contact__row .ico{
+  width:16px;
+  height:16px;
+  display:inline-block;
+  vertical-align:middle;
+  margin:0 4px 0 0;
+}
+
+/* ปุ่มโซเชียล */
 .social-cta{
-  max-width:480px;
+  max-width:520px;
   margin:0 auto;
   display:grid;
   gap:14px;
@@ -259,7 +273,7 @@ img{max-width:100%;display:block}
 .sns-btn:hover::before{opacity:1}
 .sns-btn:active{transform:translateY(-1px)}
 
-/* ไอคอนขนาดเล็กลง */
+/* ไอคอนในปุ่มโซเชียล */
 .sns-btn .icon{
   width:18px;
   height:18px;
@@ -268,9 +282,10 @@ img{max-width:100%;display:block}
   justify-content:center;
   flex-shrink:0;
 }
-.sns-btn .icon svg{
+.sns-btn .icon img{
   width:100%;
   height:100%;
+  object-fit:contain;
 }
 
 /* สีแต่ละปุ่ม */
@@ -280,6 +295,11 @@ img{max-width:100%;display:block}
 .sns-btn.tiktok{background:linear-gradient(135deg,#0e1625,#1a2635)}
 
 @media (max-width:600px){
+  #contact .contact__row{
+    flex-direction:column;
+    text-align:center;
+    font-size:14px;
+  }
   .sns-btn{padding:13px 18px;font-size:15px}
   .sns-btn .icon{width:17px;height:17px}
 }
