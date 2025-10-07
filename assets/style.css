@@ -56,7 +56,7 @@ img{max-width:100%;display:block}
 @media (max-width:768px){ .hero__content h1{font-size:34px} }
 
 /* ========== 🟨 กล่องเตือน/ประกาศ (CALLOUT BOX) ========== */
-.callout{background:#fff3c4;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:16px 24px;margin:22px auto;max-width:860px}
+.callout{background:#fff3c4;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:16px 24px;margin:22px auto;max-width:1150px;text-align:center}
 .callout .callout__title{text-align:center;font-weight:800;font-size:1.12rem;margin:0 0 10px}
 
 /* ========== 🖥️ ส่วนแสดงผล IRT GOLD คอมพิวเตอร์ (IRT PC) ========== */
