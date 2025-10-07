@@ -189,6 +189,35 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
   .sns-btn .icon{width:24px;height:24px}
 }
 
+/* ========== SPACING TUNING (4 จุด) ========== */
+
+/* (สำรอง) ถ้าหลัง .blue-frame เจอ section/บล็อกใหม่ ให้ลด padding-top ลง */
+.blue-frame + :is(.section, section){ padding-top: 36px; }
+
+/* 1) ลดช่องว่าง “ก่อน” หัวข้อ IRT GOLD PC */
+#irtpc:is(.section, section){ padding-top: 36px; }        /* เดิม 80px */
+#irtpc .section__title{ margin-top: 0; }                  /* กันหัวข้อดันลง */
+
+/* 2) จัดช่วงว่างระหว่างแพ็กเกจกับบล็อกถัดไป (ติดต่อเรา) ให้พอดี */
+#pricing{ padding-bottom: 48px; }                         /* เดิม 80px จาก .section */
+#contact{ padding-top: 48px; }                            /* เดิม 80px จาก .section */
+
+/* 3) ลดช่องว่าง “ก่อน” หัวข้อ IRT GOLD มือถือ */
+#irtmb:is(.section, section){ padding-top: 36px; }
+#irtmb .section__title{ margin-top: 0; }
+
+/* 4) จัดช่วงว่าง “ก่อน” ส่วนรีวิวผู้ใช้ ให้โปร่งขึ้นเล็กน้อย */
+#reviews:is(.section, section){ padding-top: 64px; }      /* ถ้าต้องการมาก/น้อย ปรับ 56–72px */
+#reviews .section__title{ margin-bottom: 28px; }
+
+/* (เลือกใช้ได้) ยูทิลิตี้เผื่อปรับทีละจุดโดยไม่แตะ HTML
+   ใส่กับ section/บล็อกไหนก็ได้ผ่าน devtools */
+.section--tight-top{ padding-top: 32px !important; }
+.section--tight-bottom{ padding-bottom: 32px !important; }
+.section--roomy-top{ padding-top: 64px !important; }
+.section--roomy-bottom{ padding-bottom: 64px !important; }
+
+
 /* ========== ▶️ VIDEO ========== */
 .video{display:flex;justify-content:center;align-items:center;margin:24px auto;width:100%}
 .video iframe{width:min(540px,100%);aspect-ratio:9/16;height:auto;border:0;border-radius:12px}
