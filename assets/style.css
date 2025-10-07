@@ -76,7 +76,7 @@ img{max-width:100%;display:block}
 .mobile-cap p{margin:0;color:#5B6B7C}
 
 /* ========== ⚠️ PROBLEM BOX ========== */
-.problem-box{max-width:980px;margin:0 auto 24px;padding:16px 18px;border:1px solid #fecaca;background:#fff5f5;border-radius:14px}
+.problem-box{max-width:1200px;margin:0 auto 24px;padding:16px 18px;border:1px solid #fecaca;background:#fff5f5;border-radius:14px}
 .problem-title{margin:4px 0 12px;font-weight:800;color:#b91c1c;text-align:center}
 .problem-item{background:#fff;border:1px solid #ffe2e2;border-radius:10px;padding:16px 18px;margin:10px 0;text-align:center}
 .problem-item .emoji{display:inline-flex;align-items:center;font-size:18px;margin:0 8px 0 0;vertical-align:middle}
@@ -86,7 +86,7 @@ img{max-width:100%;display:block}
 
 /* ========== 🟦 BLUE FRAME (ให้หน้าตาเหมือนกรอบแดง แต่โทนฟ้า) ========== */
 .blue-frame{
-  max-width:980px;
+  max-width:1200px;
   margin:0 auto 24px;
   padding:16px 18px;
   border:1px solid #DBEAFE;          /* ขอบฟ้าอ่อน */
