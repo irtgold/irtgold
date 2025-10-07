@@ -183,127 +183,252 @@ img{max-width:100%;display:block}
 .btn-buy:hover{transform:translateY(-2px);filter:brightness(1.03)}
 @media(max-width:600px){ .price-main{font-size:36px}}
 
-/* ========== 📞 CONTACT ========== */
+/* ========== 📞 CONTACT (รื้อใหม่ทั้งหมด - Modern Card Style) ========== */
 #contact{
   padding:80px 0;
-  background:linear-gradient(135deg,#f0f9ff 0%,#dbeafe 100%);
+  background:linear-gradient(135deg,#e0f2fe 0%,#bae6fd 50%,#7dd3fc 100%);
+  position:relative;
 }
-#contact .section__title{
-  font-size:clamp(28px,4vw,36px);
-  font-weight:900;
-  color:#0B3B8D;
-  margin-bottom:20px;
-  text-align:center;
+#contact::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23fff" fill-opacity="0.08" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+  background-size:cover;
+  opacity:0.5;
+  pointer-events:none;
 }
 
-/* แถวข้อมูลติดต่อ */
-#contact .contact__row{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-items:center;
-  gap:8px 16px;
-  max-width:900px;
+#contact .container{
+  position:relative;
+  z-index:2;
+}
+
+#contact .section__title{
+  font-size:clamp(32px,5vw,42px);
+  font-weight:900;
+  color:#0c4a6e;
+  margin-bottom:16px;
+  text-align:center;
+  text-shadow:2px 2px 4px rgba(0,0,0,.1);
+}
+
+/* Card สำหรับข้อมูลติดต่อ */
+.contact__card{
+  max-width:680px;
   margin:0 auto 40px;
-  color:#1e293b;
-  font-size:15px;
-  line-height:1.8;
+  background:#fff;
+  border-radius:20px;
+  padding:32px 28px;
+  box-shadow:0 20px 60px rgba(0,0,0,.15);
+  border:1px solid rgba(255,255,255,.8);
 }
-#contact .contact__row .sep{
-  color:#94a3b8;
-  font-weight:400;
+
+.contact__row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  margin-bottom:0;
 }
-#contact .contact__row a{
-  color:#1E3A8A;
+
+.contact__item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 16px;
+  background:linear-gradient(135deg,#f0f9ff,#e0f2fe);
+  border-radius:12px;
+  transition:all .25s ease;
+  border:1px solid rgba(14,165,233,.1);
+}
+
+.contact__item:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(14,165,233,.2);
+  background:linear-gradient(135deg,#dbeafe,#bae6fd);
+}
+
+.contact__item .ico{
+  width:20px;
+  height:20px;
+  flex-shrink:0;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.1));
+}
+
+.contact__item span{
+  font-size:14px;
+  color:#0c4a6e;
+  font-weight:600;
+}
+
+.contact__item a{
+  color:#0369a1;
   font-weight:700;
   text-decoration:none;
   transition:color .2s ease;
 }
-#contact .contact__row a:hover{
-  color:#3B82F6;
+
+.contact__item a:hover{
+  color:#0284c7;
   text-decoration:underline;
 }
 
-/* ไอคอนเล็กในแถวข้อมูล */
-#contact .contact__row .ico{
-  width:16px;
-  height:16px;
-  display:inline-block;
-  vertical-align:middle;
-  margin:0 4px 0 0;
+/* ส่วนหัว "ติดต่อผ่าน" */
+.social__header{
+  text-align:center;
+  margin-bottom:28px;
 }
 
-/* ปุ่มโซเชียล */
+.social__header h3{
+  font-size:clamp(20px,3vw,26px);
+  font-weight:800;
+  color:#0c4a6e;
+  margin-bottom:8px;
+}
+
+.social__header p{
+  font-size:15px;
+  color:#0369a1;
+  font-weight:500;
+}
+
+/* ปุ่มโซเชียลแบบ Card */
 .social-cta{
-  max-width:520px;
+  max-width:600px;
   margin:0 auto;
   display:grid;
-  gap:14px;
+  gap:16px;
   padding:0 20px;
 }
+
 .sns-btn{
   display:flex;
   align-items:center;
-  justify-content:center;
-  gap:10px;
+  justify-content:flex-start;
+  gap:16px;
   width:100%;
-  padding:14px 20px;
-  border-radius:12px;
+  padding:18px 24px;
+  border-radius:16px;
   font-weight:700;
   font-size:16px;
   color:#fff;
   text-decoration:none;
-  box-shadow:0 4px 14px rgba(0,0,0,.15);
-  transition:all .22s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+  transition:all .3s cubic-bezier(.4,0,.2,1);
   position:relative;
   overflow:hidden;
+  border:2px solid rgba(255,255,255,.2);
 }
+
 .sns-btn::before{
   content:"";
   position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.2),transparent);
-  opacity:0;
-  transition:opacity .22s;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+  transition:left .5s ease;
 }
-.sns-btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 24px rgba(0,0,0,.22);
-}
-.sns-btn:hover::before{opacity:1}
-.sns-btn:active{transform:translateY(-1px)}
 
-/* ไอคอนในปุ่มโซเชียล */
+.sns-btn:hover::before{
+  left:100%;
+}
+
+.sns-btn:hover{
+  transform:translateY(-4px) scale(1.02);
+  box-shadow:0 16px 40px rgba(0,0,0,.25);
+}
+
+.sns-btn:active{
+  transform:translateY(-2px) scale(1.01);
+}
+
+/* ไอคอนในปุ่ม */
 .sns-btn .icon{
-  width:18px;
-  height:18px;
-  display:inline-flex;
+  width:28px;
+  height:28px;
+  display:flex;
   align-items:center;
   justify-content:center;
   flex-shrink:0;
+  background:rgba(255,255,255,.2);
+  border-radius:8px;
+  padding:4px;
 }
+
 .sns-btn .icon img{
   width:100%;
   height:100%;
   object-fit:contain;
+  filter:brightness(1.2);
 }
 
 /* สีแต่ละปุ่ม */
-.sns-btn.fb{background:linear-gradient(135deg,#2d6df6,#4a8fff)}
-.sns-btn.line{background:linear-gradient(135deg,#17c05b,#25d366)}
-.sns-btn.yt{background:linear-gradient(135deg,#ea4335,#ff5845)}
-.sns-btn.tiktok{background:linear-gradient(135deg,#0e1625,#1a2635)}
+.sns-btn.fb{
+  background:linear-gradient(135deg,#1877f2,#0c63d4);
+}
+.sns-btn.line{
+  background:linear-gradient(135deg,#06c755,#05a847);
+}
+.sns-btn.yt{
+  background:linear-gradient(135deg,#ff0000,#cc0000);
+}
+.sns-btn.tiktok{
+  background:linear-gradient(135deg,#000,#111);
+}
 
-@media (max-width:600px){
-  #contact .contact__row{
-    flex-direction:column;
-    text-align:center;
-    font-size:14px;
+/* Responsive */
+@media (max-width:768px){
+  .contact__card{
+    padding:24px 20px;
   }
-  .sns-btn{padding:13px 18px;font-size:15px}
-  .sns-btn .icon{width:17px;height:17px}
+  
+  .contact__row{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  
+  .contact__item{
+    padding:10px 14px;
+  }
+  
+  .contact__item .ico{
+    width:18px;
+    height:18px;
+  }
+  
+  .contact__item span{
+    font-size:13px;
+  }
+  
+  .sns-btn{
+    padding:16px 20px;
+    font-size:15px;
+  }
+  
+  .sns-btn .icon{
+    width:24px;
+    height:24px;
+  }
 }
 
 /* ========== ▶️ VIDEO ========== */
 .video{display:flex;justify-content:center;align-items:center;margin:24px auto;width:100%}
 .video iframe{width:min(540px,100%);aspect-ratio:9/16;height:auto;border:0;border-radius:12px}
+
+/* ========== FOOTER ========== */
+.footer{
+  background:#0f1f4b;
+  color:#e0f2fe;
+  padding:40px 20px;
+  text-align:center;
+}
+.footer p{
+  margin:0;
+  font-size:14px;
+  opacity:0.9;
+}
