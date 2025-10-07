@@ -330,3 +330,39 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 /* หมายเหตุ: ใช้สไตล์เดียวกันกับปุ่ม Facebook (น้ำเงิน Gradient) */
 .sns-btn.review{background:linear-gradient(135deg,#1877f2,#0c63d4);margin-top:32px}
 
+/* ========== ลบพื้นหลังเฉพาะช่วงที่กำหนด ========== */
+/* 1) ลบพื้นหลังเฉพาะช่วงที่กำหนด */
+#testimonials.section,
+#pricing.section,
+#contact.section {
+  background: none !important;   /* ล้างไล่เฉด/สีพื้น */
+}
+
+/* ถ้ามีสไตล์สลับสีด้วย nth-of-type ให้กันไว้ด้วย */
+#testimonials.section:nth-of-type(even),
+#pricing.section:nth-of-type(even),
+#contact.section:nth-of-type(even) {
+  background: none !important;
+}
+
+/* เผื่อมี .section เองที่ไปตั้ง gradient ไว้ ให้มี utility ใช้ได้กับจุดอื่นด้วย */
+.section--plain { background: none !important; }
+
+/* ฟุตเตอร์กินเต็มความกว้างหน้าจอ */
+.footer{
+  background:#0f1f4b;
+  color:#e0f2fe;
+  padding:40px 20px;
+  text-align:center;
+
+  /* break-out จาก container ให้เต็มจอ */
+  width:100vw;
+  position:relative;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+}
+
+/* เผื่อข้อความกว้างมาก ให้ตัดบรรทัดสวยๆ */
+.footer p{ margin:0; font-size:14px; opacity:.9; }
