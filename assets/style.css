@@ -18,8 +18,7 @@ body{color:var(--text);background:#fff;line-height:1.6}
 img{max-width:100%;display:block}
 
 .container{max-width:var(--container);margin:0 auto;padding:0 20px}
-.section{padding:80px 0;background:linear-gradient(180deg,#fff,#f8fafc)}
-.section:nth-of-type(even){background:#fff}
+.section{padding:80px 0}
 .section__title{font-size:32px;font-weight:800;color:var(--primary);text-align:center;margin-bottom:24px}
 .center{text-align:center}
 
