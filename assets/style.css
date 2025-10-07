@@ -329,4 +329,4 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 
 /* ========== 🔵 ปุ่มโซเชียลและรีวิวเพิ่มเติม (SOCIAL & REVIEW BUTTONS) ========== */
 /* หมายเหตุ: ใช้สไตล์เดียวกันกับปุ่ม Facebook (น้ำเงิน Gradient) */
-.sns-btn.review{background:linear-gradient(135deg,#1877f2,#0c63d4)}
+.sns-btn.review{background:linear-gradient(135deg,#1877f2,#0c63d4);margin-top:32px}
