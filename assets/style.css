@@ -85,6 +85,47 @@ img{max-width:100%;display:block}
 .problem-item p{margin:0;color:#4b5563;line-height:1.6}
 
 /* ========== ✅ BLUE FRAME ========== */
+/* กล่องรายการ */
+.blue-frame .features-list{
+  margin: 0 0 16px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+/* แต่ละบรรทัด: บังคับกึ่งกลางแนวนอน+แนวตั้ง */
+.blue-frame .features-list li{
+  list-style: none;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important; /* << กึ่งกลางแนวนอน */
+  gap: 10px;
+  text-align: center;
+  padding: 10px 12px;
+  border: 1px solid #E6EEFF;
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* ตัดสไตล์เดิมที่ทำให้ชิดซ้าย */
+.blue-frame .features-list li::before{ content: none !important; }
+.blue-frame .features-list li{ padding-left: 0 !important; }
+
+/* ไม่ให้ child ขยายเต็มแถว (จะไปดันให้ชิดซ้าย) */
+.blue-frame .features-list li > *{
+  flex: 0 0 auto;         /* กว้างเท่าที่จำเป็น */
+  margin: 0;
+}
+
+/* เผื่อใช้จุดสี/ไอคอน */
+.blue-frame .features-list .dot,
+.blue-frame .features-list .ico{
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  flex: 0 0 12px;
+}
+
 .blue-frame{
   background:#F3F8FF;border:1px solid #D9E8FF;border-radius:18px;
   padding:22px 24px;max-width:980px;margin:0 auto 28px;
