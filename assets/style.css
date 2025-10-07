@@ -118,6 +118,50 @@ img{max-width:100%;display:block}
   font-weight:600;
   text-align:center;
 }
+/* กล่องรายการ */
+.blue-frame .features-list{
+  margin: 0 0 16px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+/* แต่ละบรรทัด = กรอบขาว + เงาอ่อน + จัดกึ่งกลาง */
+.blue-frame .features-list li{
+  list-style: none;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px;
+  text-align: center;
+
+  background: #fff;
+  border: 1px solid rgba(2,6,23,.06);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow:
+    0 6px 14px rgba(2,6,23,.06),
+    inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+/* ปิด before เดิม/ระยะซ้ายเดิมที่ทำให้ชิดซ้าย */
+.blue-frame .features-list li::before{ content: none !important; }
+.blue-frame .features-list li{ padding-left: 0 !important; }
+
+/* กัน child ขยายเต็มบรรทัด */
+.blue-frame .features-list li > *{
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+/* จุดสี/ไอคอน (ถ้าใช้) */
+.blue-frame .features-list .dot,
+.blue-frame .features-list .ico{
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  flex: 0 0 12px;
+}
 
 /* กล่องรายการ (5 บรรทัด) */
 .blue-frame .features-list{
@@ -125,7 +169,6 @@ img{max-width:100%;display:block}
   padding:0;
   display:grid;
   gap:10px;
-  justify-items:center;     /* ให้แต่ละรายการมาอยู่กลางคอลัมน์ */
 }
 
 /* แต่ละบรรทัด: กึ่งกลางแนวนอน/แนวตั้ง */
