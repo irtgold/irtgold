@@ -63,9 +63,9 @@ img{max-width:100%;display:block}
 .pc-stack{display:grid;gap:16px}
 .pc-frame{background:#fff;border-radius:18px;box-shadow:0 10px 24px rgba(3,23,56,.12);overflow:hidden}
 .pc-frame img{width:100%;display:block}
-.pc-caption{text-align:center;padding:10px 14px}
-.pc-caption h3{margin:0 0 4px;font-weight:800;color:#0B2C6C;font-size:clamp(18px,2vw,22px)}
-.pc-caption p{margin:0;color:#334155;font-size:clamp(14px,1.6vw,16px);line-height:1.55}
+.pc-caption{text-align:center;padding:8px 12px}
+.pc-caption h3{margin:0 0 2px;font-weight:800;color:#0B2C6C;font-size:clamp(18px,2vw,22px)}
+.pc-caption p{margin:0;color:#334155;font-size:clamp(14px,1.6vw,16px);line-height:1.4}
 
 /* ========== 📱 ส่วนแสดงผล IRT GOLD มือถือ (IRT MOBILE) ========== */
 .mobile-shots{display:grid;gap:20px;max-width:1080px;margin:0 auto}
