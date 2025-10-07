@@ -85,14 +85,41 @@ img{max-width:100%;display:block}
 .problem-item p{margin:0;color:#4b5563;line-height:1.6}
 
 /* ========== ✅ BLUE FRAME ========== */
-.blue-frame{background:#F3F8FF;border:1px solid #D9E8FF;border-radius:18px;padding:22px 24px;max-width:980px;margin:0 auto 28px;box-shadow:0 8px 24px rgba(15,30,80,.06)}
-.blue-frame .solution-title{margin:0 0 6px;font-size:26px;line-height:1.25;font-weight:800;color:#0B3B8D;text-align:left}
+.blue-frame{
+  background:#F3F8FF;border:1px solid #D9E8FF;border-radius:18px;
+  padding:22px 24px;max-width:980px;margin:0 auto 28px;
+  box-shadow:0 8px 24px rgba(15,30,80,.06)
+}
+.blue-frame .solution-title{
+  margin:0 0 6px;font-size:26px;line-height:1.25;
+  font-weight:800;color:#0B3B8D;text-align:left
+}
 .blue-frame .solution-subtitle{margin:0 0 12px;color:#334155;font-weight:600}
+
+/* รายการฟีเจอร์ */
 .features-list{display:grid;gap:10px;margin:0 0 16px}
-.feature-item{background:#fff;border:1px solid #EEF4FF;border-radius:12px;padding:10px 12px;color:#0f172a;box-shadow:0 4px 12px rgba(2,6,23,.06);font-weight:600}
-.result-highlight{background:#FFF4CC;border:1px solid #FFE08A;color:#8B5E00;border-radius:12px;padding:14px 16px;text-align:center;font-weight:700;margin:12px 0}
+.feature-item{
+  background:#fff;border:1px solid #EEF4FF;border-radius:12px;
+  padding:10px 12px;color:#0f172a;box-shadow:0 4px 12px rgba(2,6,23,.06);
+  font-weight:600;
+
+  /* ⬇️ จัดให้อยู่ “กึ่งกลาง” ตามที่ต้องการ */
+  display:flex;               /* วางอีโมจิกับข้อความในแถวเดียว */
+  align-items:center;         /* กลางแนวตั้ง */
+  justify-content:center;     /* กลางแนวนอน */
+  gap:8px;                    /* ระยะห่างระหว่างอีโมจิกับข้อความ */
+  text-align:center;          /* ตัวหนังสือกลาง */
+}
+
+.result-highlight{
+  background:#FFF4CC;border:1px solid #FFE08A;color:#8B5E00;border-radius:12px;
+  padding:14px 16px;text-align:center;font-weight:700;margin:12px 0
+}
 .result-highlight .urgent{display:block;margin-top:6px;color:#E11D48;font-weight:900}
-.disclaimer{background:#F8FAFC;border:1px dashed #CBD5E1;color:#64748B;border-radius:10px;padding:10px 12px;text-align:center;font-weight:600}
+.disclaimer{
+  background:#F8FAFC;border:1px dashed #CBD5E1;color:#64748B;border-radius:10px;
+  padding:10px 12px;text-align:center;font-weight:600
+}
 
 /* ========== 🖼️ REVIEWS ========== */
 .reviews__images{display:grid;gap:14px;grid-template-columns:repeat(4,1fr);margin-top:18px}
