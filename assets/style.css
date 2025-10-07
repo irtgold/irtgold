@@ -1,4 +1,4 @@
-/* ========== 🧩 THEME & BASE ========== */
+/* ========== 🧩 ธีมและตัวแปรพื้นฐาน (THEME & BASE) ========== */
 :root{
   --primary-dark:#0f1f4b;
   --primary:#1E3A8A;
@@ -29,7 +29,7 @@ img{max-width:100%;display:block}
 .btn--outline{border:2px solid #fff;color:#fff}
 .btn--outline:hover{background:#fff;color:var(--primary-dark)}
 
-/* ========== 🧭 NAV ========== */
+/* ========== 🧭 เมนูนำทาง (NAVIGATION) ========== */
 .nav{position:sticky;top:0;z-index:50;background:rgba(15,31,75,.92);backdrop-filter:blur(8px)}
 .nav__container{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px;padding:0 16px}
 .logo{text-decoration:none;font-weight:900;font-size:28px;letter-spacing:.5px;text-transform:uppercase;color:#FACC15}
@@ -46,7 +46,7 @@ img{max-width:100%;display:block}
   .nav__menu a::after{display:none}
 }
 
-/* ========== 🖼️ HERO ========== */
+/* ========== 🖼️ แบนเนอร์หน้าแรก (HERO BANNER) ========== */
 .hero{position:relative}
 .hero__banner{width:100%;max-height:70vh;object-fit:cover}
 .hero__content{position:relative;z-index:2;text-align:center;padding:24px 20px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg) 40%,transparent 100%);color:#fff}
@@ -55,11 +55,11 @@ img{max-width:100%;display:block}
 .hero__cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 @media (max-width:768px){ .hero__content h1{font-size:34px} }
 
-/* ========== 🟨 CALLOUT ========== */
+/* ========== 🟨 กล่องเตือน/ประกาศ (CALLOUT BOX) ========== */
 .callout{background:#fff3c4;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:16px 24px;margin:22px auto;max-width:860px}
 .callout .callout__title{text-align:center;font-weight:800;font-size:1.12rem;margin:0 0 10px}
 
-/* ========== 🖥️ IRT PC ========== */
+/* ========== 🖥️ ส่วนแสดงผล IRT GOLD คอมพิวเตอร์ (IRT PC) ========== */
 .pc-stack{display:grid;gap:16px}
 .pc-frame{background:#fff;border-radius:18px;box-shadow:0 10px 24px rgba(3,23,56,.12);overflow:hidden}
 .pc-frame img{width:100%;display:block}
@@ -67,7 +67,7 @@ img{max-width:100%;display:block}
 .pc-caption h3{margin:0 0 4px;font-weight:800;color:#0B2C6C;font-size:clamp(18px,2vw,22px)}
 .pc-caption p{margin:0;color:#334155;font-size:clamp(14px,1.6vw,16px);line-height:1.55}
 
-/* ========== 📱 IRT MB ========== */
+/* ========== 📱 ส่วนแสดงผล IRT GOLD มือถือ (IRT MOBILE) ========== */
 .mobile-shots{display:grid;gap:20px;max-width:1080px;margin:0 auto}
 .mobile-shot{background:#fff;border-radius:18px;box-shadow:0 10px 24px rgba(3,23,56,.12);overflow:hidden}
 .mobile-shot img{width:100%}
@@ -75,7 +75,7 @@ img{max-width:100%;display:block}
 .mobile-cap h3{margin:0 0 6px;font-weight:700;color:#0F2B5B}
 .mobile-cap p{margin:0;color:#5B6B7C}
 
-/* ========== ⚠️ PROBLEM BOX ========== */
+/* ========== ⚠️ กรอบแสดงปัญหา สีแดง (PROBLEM BOX) ========== */
 .problem-box{max-width:1180px;margin:0 auto 24px;padding:16px 18px;border:1px solid #fecaca;background:#fff5f5;border-radius:14px}
 .problem-title{margin:4px 0 12px;font-weight:800;color:#b91c1c;text-align:center}
 .problem-item{background:#fff;border:1px solid #ffe2e2;border-radius:10px;padding:16px 18px;margin:10px 0;text-align:center}
@@ -84,18 +84,17 @@ img{max-width:100%;display:block}
 .problem-item strong::after{content:"";display:block;height:6px}
 .problem-item p{margin:0;color:#4b5563;line-height:1.6}
 
-/* ========== 🟦 BLUE FRAME (ให้หน้าตาเหมือนกรอบแดง แต่โทนฟ้า) ========== */
+/* ========== 🟦 กรอบแสดงโซลูชัน สีฟ้า (SOLUTION / BLUE FRAME) ========== */
 .blue-frame{
   max-width:1180px;
   margin:0 auto 24px;
   padding:16px 18px;
-  border:1px solid #DBEAFE;          /* ขอบฟ้าอ่อน */
-  background:#F3F8FF;                 /* พื้นฟ้าอ่อน */
+  border:1px solid #DBEAFE;
+  background:#F3F8FF;
   border-radius:14px;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.85);
 }
 
-/* หัวข้อ + ไอคอน กึ่งกลางจริง */
 .blue-frame .solution-title{
   margin:4px 0 12px;
   font-weight:800;
@@ -113,7 +112,6 @@ img{max-width:100%;display:block}
   text-align:center;
 }
 
-/* กล่องรายการ */
 .blue-frame .features-list{
   list-style:none;
   margin:0;
@@ -122,17 +120,15 @@ img{max-width:100%;display:block}
   gap:10px;
 }
 
-/* แต่ละรายการ = กรอบขาว เหมือน problem-item */
 .blue-frame .feature-item,
 .blue-frame .features-list > li{
   background:#fff;
-  border:1px solid #E5E7EB;          /* โทนเทาอ่อนแบบกรอบแดง */
+  border:1px solid #E5E7EB;
   border-radius:10px;
   padding:16px 18px;
   text-align:center;
 }
 
-/* ไอคอน/อีโมจิ + ตัวหนาให้จัดบรรทัดสวย */
 .blue-frame .feature-item .emoji,
 .blue-frame .features-list > li .emoji{
   display:inline-flex;
@@ -152,10 +148,9 @@ img{max-width:100%;display:block}
 .blue-frame .features-list > li strong::after{
   content:"";
   display:block;
-  height:6px;    /* กันตัวอักษรติดแน่นเกิน */
+  height:6px;
 }
 
-/* กล่องเหลือง + กล่องเส้นประ (ถ้ายังใช้อยู่ ให้คงไว้) */
 .blue-frame .result-highlight{
   background:#FFF4CC; border:1px solid #FFE08A; color:#8B5E00;
   border-radius:12px; padding:14px 16px; text-align:center; font-weight:700; margin:12px 0;
@@ -167,7 +162,7 @@ img{max-width:100%;display:block}
   border-radius:10px; padding:10px 12px; text-align:center; font-weight:600;
 }
 
-/* ========== 🖼️ REVIEWS ========== */
+/* ========== ⭐ ส่วนรีวิวและคำติชมจากผู้ใช้ (REVIEWS & TESTIMONIALS) ========== */
 .reviews__images{display:grid;gap:14px;grid-template-columns:repeat(4,1fr);margin-top:18px}
 .reviews__images img{width:100%;height:100%;object-fit:cover;border-radius:12px;box-shadow:0 6px 16px rgba(2,6,23,.10)}
 @media (max-width:1024px){.reviews__images{grid-template-columns:repeat(2,1fr)}}
@@ -181,7 +176,8 @@ img{max-width:100%;display:block}
 .t-user{display:flex;align-items:center;gap:12px;margin-top:6px}
 .avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 3px 8px rgba(2,6,23,.15)}
 
-/* ========== 💰 PRICING ========== */
+/* ========== 💰 ส่วนแสดงแพ็กเกจและราคา (PRICING SECTION) ========== */
+/* หมายเหตุ: มี 2 การ์ด (PC และ Mobile) แสดงเคียงกัน */
 #pricing{padding:80px 0;background:#fff}
 #pricing .section__title{font-size:34px;font-weight:900;color:#1E3A8A;margin-bottom:28px}
 .pricing__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;max-width:950px;margin:0 auto}
@@ -204,7 +200,7 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 .features-list{list-style:none;display:grid;gap:12px;margin:0;padding:0}
 .features-list li{display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;min-height:40px;border-bottom:1px solid rgba(2,6,23,.06);padding:8px 12px;line-height:1.6}
 .features-list li::before{content:none}
-.features-list li:last-child
+.features-list li:last-child{border-bottom:none}
 
 .pricing__footer{padding:0 24px 24px}
 .btn-buy{display:block;width:100%;text-align:center;border-radius:12px;padding:14px 18px;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.2px;transition:transform .18s,box-shadow .18s,filter .18s}
@@ -213,42 +209,38 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 .btn-buy:hover{transform:translateY(-2px);filter:brightness(1.03)}
 @media(max-width:600px){.price-main{font-size:36px}}
 
-/* ========== 📞 CONTACT (รื้อใหม่ทั้งหมด - Modern Card Style) ========== */
-/* 1) ตัดพื้นหลังฟ้าออกจาก #contact */
+/* ========== 📞 ส่วนติดต่อและโซเชียลมีเดีย (CONTACT SECTION) ========== */
+/* หมายเหตุ: แถวข้อมูลติดต่อ + ปุ่มโซเชียลแบบ Modern Card Style */
 #contact{ background:none !important; }
 
-/* 2) แถวข้อมูลบรรทัดเดียว + จัดกึ่งกลาง */
 #contact .contact__row{
   max-width: 980px;
   margin: 8px auto 28px;
   padding: 0 20px;
   display: flex;
-  flex-wrap: wrap;               /* จอเล็กให้ตัดบรรทัด */
-  justify-content: center;       /* ชิดกลาง */
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 10px 16px;                /* ช่องไฟแนวคอลัมน์ x แถว */
-  font-size: 14px;               /* ย่อขนาดลงตามที่ขอ */
+  gap: 10px 16px;
+  font-size: 14px;
   color: #0c4a6e;
   line-height: 1.7;
   text-align: center;
 }
 
-/* ไอคอนรูปภาพเล็กลงและชิดข้อความพอดี */
 #contact .contact__row .ico{
   width: 18px;
   height: 18px;
   object-fit: contain;
   vertical-align: middle;
-  margin: -2px 6px 0 0;          /* ขยับเล็กน้อยให้เสมอ baseline */
+  margin: -2px 6px 0 0;
 }
 
-/* ตัวแบ่งจุด • ที่คุณใส่มาเป็น <span class="sep">•</span> */
 #contact .contact__row .sep{
   opacity: .45;
   user-select: none;
 }
 
-/* ลิงก์ให้เด่นขึ้นเล็กน้อย */
 #contact .contact__row a{
   color: #0369a1;
   font-weight: 700;
@@ -256,7 +248,6 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 }
 #contact .contact__row a:hover{ text-decoration: underline }
 
-/* 3) ปุ่มโซเชียลให้ตรงแบบ (ชิดกลางทั้งไอคอน+ข้อความ) */
 .social-cta{
   max-width: 600px;
   margin: 0 auto;
@@ -267,7 +258,7 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 .sns-btn{
   display: flex;
   align-items: center;
-  justify-content: center;       /* ชิดกลางทั้งปุ่ม */
+  justify-content: center;
   gap: 12px;
   width: 100%;
   padding: 18px 24px;
@@ -296,76 +287,46 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 .sns-btn .icon img{
   width: 100%; height: 100%; object-fit: contain;
 }
-.sns-btn .icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,.2);border-radius:8px;padding:4px}
 .sns-btn.fb{background:linear-gradient(135deg,#1877f2,#0c63d4)}
 .sns-btn.line{background:linear-gradient(135deg,#06c755,#05a847)}
 .sns-btn.yt{background:linear-gradient(135deg,#ff0000,#cc0000)}
 .sns-btn.tiktok{background:linear-gradient(135deg,#000,#111)}
 
-@media (max-width:768px){
-  .contact__card{padding:24px 20px}
-  .contact__row{grid-template-columns:1fr;gap:12px}
-  .sns-btn{padding:16px 20px;font-size:15px}
-  .sns-btn .icon{width:24px;height:24px}
+@media (max-width: 768px){
+  #contact .contact__row{ font-size: 13.5px; gap: 8px 12px; }
+  .sns-btn{ padding:16px 20px; font-size:15px; }
+  .sns-btn .icon{ width:24px; height:24px; }
 }
 
-/* ========== SPACING TUNING (4 จุด) ========== */
-
-/* (สำรอง) ถ้าหลัง .blue-frame เจอ section/บล็อกใหม่ ให้ลด padding-top ลง */
+/* ========== 📏 ปรับระยะห่างระหว่างบล็อก (SPACING TUNING) ========== */
+/* หมายเหตุ: ใช้สำหรับปรับ padding-top และ padding-bottom ให้พอดีกับเลย์เอาต์ */
 .blue-frame + :is(.section, section){ padding-top: 36px; }
 
-/* 1) ลดช่องว่าง “ก่อน” หัวข้อ IRT GOLD PC */
-#irtpc:is(.section, section){ padding-top: 36px; }        /* เดิม 80px */
-#irtpc .section__title{ margin-top: 0; }                  /* กันหัวข้อดันลง */
+#irtpc:is(.section, section){ padding-top: 36px; }
+#irtpc .section__title{ margin-top: 0; }
 
-/* 2) จัดช่วงว่างระหว่างแพ็กเกจกับบล็อกถัดไป (ติดต่อเรา) ให้พอดี */
-#pricing{ padding-bottom: 48px; }                         /* เดิม 80px จาก .section */
-#contact{ padding-top: 48px; }                            /* เดิม 80px จาก .section */
+#pricing{ padding-bottom: 48px; }
+#contact{ padding-top: 48px; }
 
-/* 3) ลดช่องว่าง “ก่อน” หัวข้อ IRT GOLD มือถือ */
 #irtmb:is(.section, section){ padding-top: 36px; }
 #irtmb .section__title{ margin-top: 0; }
 
-/* 4) จัดช่วงว่าง “ก่อน” ส่วนรีวิวผู้ใช้ ให้โปร่งขึ้นเล็กน้อย */
-#reviews:is(.section, section){ padding-top: 64px; }      /* ถ้าต้องการมาก/น้อย ปรับ 56–72px */
+#reviews:is(.section, section){ padding-top: 64px; }
 #reviews .section__title{ margin-bottom: 28px; }
 
-/* (เลือกใช้ได้) ยูทิลิตี้เผื่อปรับทีละจุดโดยไม่แตะ HTML
-   ใส่กับ section/บล็อกไหนก็ได้ผ่าน devtools */
 .section--tight-top{ padding-top: 32px !important; }
 .section--tight-bottom{ padding-bottom: 32px !important; }
 .section--roomy-top{ padding-top: 64px !important; }
 .section--roomy-bottom{ padding-bottom: 64px !important; }
 
-
-/* ========== ▶️ VIDEO ========== */
+/* ========== ▶️ ส่วนฝังวิดีโอ (VIDEO SECTION) ========== */
 .video{display:flex;justify-content:center;align-items:center;margin:24px auto;width:100%}
 .video iframe{width:min(540px,100%);aspect-ratio:9/16;height:auto;border:0;border-radius:12px}
 
-/* ========== FOOTER ========== */
+/* ========== 🦶 ส่วนท้ายเว็บไซต์ (FOOTER) ========== */
 .footer{background:#0f1f4b;color:#e0f2fe;padding:40px 20px;text-align:center}
 .footer p{margin:0;font-size:14px;opacity:0.9}
 
-/* ========== รีวิวเพิ่มเติม ========== */
-/* กล่องรวมปุ่ม (เหมือนเดิม) */
-.social-cta{max-width:600px;margin:0 auto;display:grid;gap:16px;padding:0 20px}
-
-/* ปุ่มพื้นฐาน (ใช้ร่วมกับทั้ง FB และ รีวิว) */
-.sns-btn{
-  display:flex;align-items:center;justify-content:center;gap:12px;width:100%;
-  padding:14px 18px;border-radius:16px;font-weight:700;font-size:16px;
-  color:#fff;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.15);
-  transition:transform .2s ease
-}
-.sns-btn:hover{transform:translateY(-2px)}
-
-/* กล่องไอคอน (ถ้าไม่ใส่ก็ได้) */
-.sns-btn .icon{
-  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;background:rgba(255,255,255,.2);border-radius:8px;padding:4px
-}
-
-/* ไล่เฉดน้ำเงินแบบเดียวกับปุ่ม Facebook */
-.sns-btn.fb,
+/* ========== 🔵 ปุ่มโซเชียลและรีวิวเพิ่มเติม (SOCIAL & REVIEW BUTTONS) ========== */
+/* หมายเหตุ: ใช้สไตล์เดียวกันกับปุ่ม Facebook (น้ำเงิน Gradient) */
 .sns-btn.review{background:linear-gradient(135deg,#1877f2,#0c63d4)}
-
