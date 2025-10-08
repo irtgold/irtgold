@@ -330,38 +330,24 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 .sns-btn.review{background:linear-gradient(135deg,#1877f2,#0c63d4);margin-top:32px}
 
 /* ========== ลบพื้นหลังเฉพาะช่วงที่กำหนด ========== */
-/* 1) ลบพื้นหลังเฉพาะช่วงที่กำหนด */
+/* 1) ไม่ให้หน้ามี margin/padding ท้ายเพจ และกันแถบเลื่อนแนวนอน */
+html, body { margin:0; padding:0; overflow-x:hidden; }
+
+/* 2) ตัด padding/margin ท้ายของ section ตัวสุดท้ายให้ชิดกับฟุตเตอร์ */
+.section:last-of-type { padding-bottom:0 !important; margin-bottom:0 !important; }
+
+/* ถ้าใช้ id เหล่านี้เป็นบล็อกท้าย ๆ ให้กันไว้ด้วย */
 #testimonials.section,
 #pricing.section,
-#contact.section {
-  background: none !important;   /* ล้างไล่เฉด/สีพื้น */
-}
+#contact.section { padding-bottom:0 !important; }
 
-/* ถ้ามีสไตล์สลับสีด้วย nth-of-type ให้กันไว้ด้วย */
-#testimonials.section:nth-of-type(even),
-#pricing.section:nth-of-type(even),
-#contact.section:nth-of-type(even) {
-  background: none !important;
-}
-
-/* เผื่อมี .section เองที่ไปตั้ง gradient ไว้ ให้มี utility ใช้ได้กับจุดอื่นด้วย */
-.section--plain { background: none !important; }
-
-/* ฟุตเตอร์กินเต็มความกว้างหน้าจอ */
+/* 3) ฟุตเตอร์ให้เต็มจอแบบไม่ทำ overflow (เลิกใช้ hack 100vw) */
 .footer{
+  width:100%;
   background:#0f1f4b;
   color:#e0f2fe;
   padding:40px 20px;
   text-align:center;
-
-  /* break-out จาก container ให้เต็มจอ */
-  width:100vw;
-  position:relative;
-  left:50%;
-  right:50%;
-  margin-left:-50vw;
-  margin-right:-50vw;
+  margin:0;           /* ป้องกันเว้นวรรคด้านล่าง */
 }
-
-/* เผื่อข้อความกว้างมาก ให้ตัดบรรทัดสวยๆ */
-.footer p{ margin:0; font-size:14px; opacity:.9; }
+.footer p{ margin:0; }
