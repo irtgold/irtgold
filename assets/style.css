@@ -330,53 +330,43 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 .sns-btn.review{background:linear-gradient(135deg,#1877f2,#0c63d4);margin-top:32px}
 
 /* ========== ลบพื้นหลังเฉพาะช่วงที่กำหนด ========== */
-/* ========== 1) STICKY HEADER (ให้หัวเว็บติดบนตอนสกอร์ล) ========== */
-/* ถ้าเมนูคุณใช้คลาส .nav อยู่แล้ว แค่วางทับก้อนนี้พอ */
+/* 1) เมนูหัวเว็บให้เลื่อนตามสกอร์ และไม่หาย */
 .nav{
-  position: sticky;   /* หัวเว็บติดบนเวลาเลื่อน */
-  top: 0;
-  z-index: 1000;      /* ลอยทับคอนเทนต์อื่น */
+  position: fixed;       /* เดิม sticky → fixed จะตรงไปตรงมาที่สุด */
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
 }
+body{ padding-top: 72px; }   /* ชดเชยความสูงของแถบหัวไม่ให้ทับคอนเทนต์ */
 
-/* ป้องกันเนื้อหาถูกหัวเว็บทับเวลาคลิกเลื่อนไปยัง anchor */
-html{ scroll-padding-top: 72px; }  /* ใส่ความสูงจริงของ .nav (เช่น 72px) */
-/* ========== 2) FOOTER FULL-WIDTH + จัดให้อยู่กึ่งกลางจริง ========== */
-/* ใช้เทคนิค full-bleed ที่ไม่ทำให้เกิดสกรอลล์แนวนอน */
+/* 2) เอาพื้นหลังไล่เฉดของพาร์ตท้าย ๆ ออก (เหลือพื้นขาวล้วน) */
+#testimonials.section,
+#pricing.section,
+#contact.section{ background: none !important; }
+
+/* ถ้าบางที่ใช้ .section สลับสีไว้ */
+.section--plain{ background: none !important; }
+
+/* 3) ตัดช่องว่างก่อน–หลังฟุตเตอร์ให้พอดี */
+.section:last-of-type{ padding-bottom: 24px; }   /* หรือ 0 ถ้าอยากชิดฟุตเตอร์เลย */
+
+/* 4) ฟุตเตอร์ให้กินเต็มจอและอยู่กึ่งกลาง โดยไม่ใช้ 100vw/negative margin */
 .footer{
   background:#0f1f4b;
   color:#e0f2fe;
   text-align:center;
-  padding:40px 20px;
-
-  /* กินเต็มจอและ “กึ่งกลาง” จริง โดยไม่ต้องใช้ left:-50vw */
-  width:100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-
-  /* ระยะห่างด้านบนเล็กน้อยให้ดูโล่ง */
-  margin-top: 24px;
+  padding: 24px 20px;
+  width:100%;
+  margin:0;               /* กันเหตุมี margin โผล่ */
+  border-radius:0;
 }
+.footer .container{ max-width: 1200px; margin: 0 auto; }
+.footer p{ margin:0; }    /* ตัด margin ของ <p> ที่ทำให้ดูมีช่องว่างเกิน */
 
-/* เนื้อหาข้างในฟุตเตอร์ (ถ้ามี) ให้อยู่กลางตาม max width ของเว็บ */
-.footer .container{ max-width: var(--container); margin: 0 auto; }
-
-/* กันพื้นที่ขาวล่างสุดของหน้า */
-html, body{ height:auto; min-height:100%; margin:0; }
-
-/* ปิด overflow แนวนอนจาก 100vw เพื่อไม่ให้มีแถบขาวใต้ฟุตเตอร์ */
-html, body { overflow-x: hidden; margin: 0; }
-
-/* ลดช่องไฟช่วงท้ายของ section สุดท้าย */
-#contact.section { padding-bottom: 16px; }   /* หรือ 0 ตามต้องการ */
-
-/* ฟุตเตอร์กินเต็มจอและไม่เผื่อระยะเกิน */
-.footer{
-  background:#0f1f4b;
-  color:#e0f2fe;
-  text-align:center;
-  padding:40px 20px;
-  width:100vw;
-  margin-left:calc(50% - 50vw);
-  margin-right:calc(50% - 50vw);
-  margin-bottom:0;               /* กันเผื่อระยะล่าง */
+/* 5) กัน “ช่องขาวล่างสุด” บนเพจสั้น ๆ */
+html, body{ height:100%; }
+.page{                     /* ถ้ามี div ครอบทั้งหน้า ให้ตั้ง class="page" */
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
 }
+.footer{ margin-top:auto; }  /* ดันฟุตเตอร์ไปชิดก้นหน้าจอเมื่อคอนเทนต์สั้น */
