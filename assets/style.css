@@ -362,3 +362,21 @@ html{ scroll-padding-top: 72px; }  /* ใส่ความสูงจริง
 
 /* กันพื้นที่ขาวล่างสุดของหน้า */
 html, body{ height:auto; min-height:100%; margin:0; }
+
+/* ปิด overflow แนวนอนจาก 100vw เพื่อไม่ให้มีแถบขาวใต้ฟุตเตอร์ */
+html, body { overflow-x: hidden; margin: 0; }
+
+/* ลดช่องไฟช่วงท้ายของ section สุดท้าย */
+#contact.section { padding-bottom: 16px; }   /* หรือ 0 ตามต้องการ */
+
+/* ฟุตเตอร์กินเต็มจอและไม่เผื่อระยะเกิน */
+.footer{
+  background:#0f1f4b;
+  color:#e0f2fe;
+  text-align:center;
+  padding:40px 20px;
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  margin-bottom:0;               /* กันเผื่อระยะล่าง */
+}
