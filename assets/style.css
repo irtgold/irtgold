@@ -330,37 +330,35 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 .sns-btn.review{background:linear-gradient(135deg,#1877f2,#0c63d4);margin-top:32px}
 
 /* ========== ลบพื้นหลังเฉพาะช่วงที่กำหนด ========== */
-/* ========== 1) แถบหัว (Sticky เหมือนเดิม) ========== */
-.nav{ position:sticky; top:0; z-index:50; }
+/* ========== 1) STICKY HEADER (ให้หัวเว็บติดบนตอนสกอร์ล) ========== */
+/* ถ้าเมนูคุณใช้คลาส .nav อยู่แล้ว แค่วางทับก้อนนี้พอ */
+.nav{
+  position: sticky;   /* หัวเว็บติดบนเวลาเลื่อน */
+  top: 0;
+  z-index: 1000;      /* ลอยทับคอนเทนต์อื่น */
+}
 
-/* ========== 2) กันช่องว่างขาวล่างสุด ========== */
-html,body{ margin:0; padding:0; overflow-x:hidden; }   /* กันแถบขาว/สกรอลล์แนวนอน */
-.section:last-of-type{ margin-bottom:0 !important; padding-bottom:0 !important; }
-#contact.section{ padding-bottom:12px !important; margin-bottom:0 !important; } /* ให้ฟุตเตอร์ชิดขึ้น */
-
-/* ========== 3) ฟุตเตอร์: ยาวเต็มจอเท่าหัว และชิดคอนเทนต์ ========== */
-footer.footer{
+/* ป้องกันเนื้อหาถูกหัวเว็บทับเวลาคลิกเลื่อนไปยัง anchor */
+html{ scroll-padding-top: 72px; }  /* ใส่ความสูงจริงของ .nav (เช่น 72px) */
+/* ========== 2) FOOTER FULL-WIDTH + จัดให้อยู่กึ่งกลางจริง ========== */
+/* ใช้เทคนิค full-bleed ที่ไม่ทำให้เกิดสกรอลล์แนวนอน */
+.footer{
   background:#0f1f4b;
   color:#e0f2fe;
   text-align:center;
-  padding:24px 0;          /* สูงฟุตเตอร์ */
-  margin:0 !important;     /* ไม่เหลือระยะล่าง */
-  /* ทำเป็น full-bleed (ยาวจริงเท่าหัว) */
-  width:100vw;             /* กว้างเท่าหน้าจอ */
-  position:relative;
-  left:50%;
-  right:50%;
-  margin-left:-50vw;       /* ดึงออกจากข้อจำกัด container */
-  margin-right:-50vw;
+  padding:40px 20px;
+
+  /* กินเต็มจอและ “กึ่งกลาง” จริง โดยไม่ต้องใช้ left:-50vw */
+  width:100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  /* ระยะห่างด้านบนเล็กน้อยให้ดูโล่ง */
+  margin-top: 24px;
 }
 
-/* เนื้อหาข้างในคุมกว้างให้อ่านง่าย */
-footer.footer .container{
-  max-width:var(--container, 1200px);
-  margin:0 auto;
-  padding:0 20px;
-}
+/* เนื้อหาข้างในฟุตเตอร์ (ถ้ามี) ให้อยู่กลางตาม max width ของเว็บ */
+.footer .container{ max-width: var(--container); margin: 0 auto; }
 
-/* เผื่อธีม/ปลั๊กอินใส่ margin ให้ลูกคนสุดท้ายของ body */
-body > :last-child{ margin-bottom:0 !important; }
-
+/* กันพื้นที่ขาวล่างสุดของหน้า */
+html, body{ height:auto; min-height:100%; margin:0; }
