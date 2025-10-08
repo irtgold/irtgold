@@ -330,24 +330,38 @@ box-shadow:0 14px 30px rgba(17,24,39,.12),0 3px 8px rgba(17,24,39,.06);overflow:
 .sns-btn.review{background:linear-gradient(135deg,#1877f2,#0c63d4);margin-top:32px}
 
 /* ========== ลบพื้นหลังเฉพาะช่วงที่กำหนด ========== */
-/* 1) ไม่ให้หน้ามี margin/padding ท้ายเพจ และกันแถบเลื่อนแนวนอน */
-html, body { margin:0; padding:0; overflow-x:hidden; }
+/* ========== 1) HEADER: กลับมาเป็น sticky ========== */
+.nav{
+  position: sticky;         /* ติดหัวจอ */
+  top: 0;
+  z-index: 1000;            /* ให้อยู่เหนือคอนเทนต์อื่น */
+  width: 100%;
+}
 
-/* 2) ตัด padding/margin ท้ายของ section ตัวสุดท้ายให้ชิดกับฟุตเตอร์ */
-.section:last-of-type { padding-bottom:0 !important; margin-bottom:0 !important; }
+/* กันเนื้อหาถูกบังเวลาเลื่อนลิงก์ภายในหน้า (ถ้ามี anchor) */
+html{ scroll-padding-top: 72px; }   /* เท่าความสูงแถบหัว */
 
-/* ถ้าใช้ id เหล่านี้เป็นบล็อกท้าย ๆ ให้กันไว้ด้วย */
-#testimonials.section,
-#pricing.section,
-#contact.section { padding-bottom:0 !important; }
 
-/* 3) ฟุตเตอร์ให้เต็มจอแบบไม่ทำ overflow (เลิกใช้ hack 100vw) */
+/* ========== 2) FOOTER: เต็มจอ + เว้นระยะบนเล็กน้อย ========== */
 .footer{
-  width:100%;
   background:#0f1f4b;
   color:#e0f2fe;
-  padding:40px 20px;
   text-align:center;
-  margin:0;           /* ป้องกันเว้นวรรคด้านล่าง */
+  padding:40px 20px;
+  width:100%;               /* ใช้ 100% แทน 100vw เพื่อไม่ให้เกิดแถบขาว */
+  margin-top:24px;          /* เว้นห่างจากคอนเทนต์ด้านบนเล็กน้อย */
 }
-.footer p{ margin:0; }
+
+/* ถ้ามี .container ข้างในฟุตเตอร์ อยากให้จัดกึ่งกลาง/จำกัดความกว้างให้สวย */
+.footer .container{
+  max-width: var(--container, 1200px);
+  margin:0 auto;
+  padding:0 20px;
+}
+
+
+/* ========== 3) ป้องกันแถบขาว/สกรอลล์แนวนอน ========== */
+/* ตัดทริกเก่า ๆ ที่เคยใช้ 100vw + margin ลบ */
+.footer{ left:auto; right:auto; margin-left:auto; margin-right:auto; }
+/* กันเผื่อมีคอมโพเนนต์ไหนหลุดกว้างเกิน */
+body{ overflow-x:hidden; }
