@@ -1,10 +1,10 @@
 /** assets/purchase.jsx (UMD + Babel) */
 const { useState, useEffect } = React;
 
-/* ====== URL ปลายทาง API (ถ้าต่อ Apps Script) ====== */
+// ====== ปลายทาง API (ถ้าต่อ Apps Script ให้ใส่ URL ที่นี่) ======
 const WEB_APP_URL = "https://script.google.com/macros/s/PASTE_YOUR_WEB_APP_ID/exec";
 
-/* ---------- ตรวจสอบฟอร์ม ---------- */
+// ---------- ตัวช่วยตรวจสอบฟอร์ม ----------
 function validatePurchaseForm(selectedPackage, values) {
   const e = {};
   if (!values.fullName || !values.fullName.trim()) e.fullName = "กรุณากรอกชื่อ-นามสกุล";
@@ -17,14 +17,14 @@ function validatePurchaseForm(selectedPackage, values) {
   return e;
 }
 
-/* ---------- รูปเริ่มต้น (ใช้รูปใน repo) ---------- */
+// ---------- รูปเริ่มต้น (ใช้รูปใน repo) ----------
 const DEFAULTS = {
-  heroUrl: "Github-p/bn/bn.png",          // แบนเนอร์บนสุด
-  pcImgUrl: "Github-p/irtpc/irtpc1.png",  // การ์ด PC
-  mbImgUrl: "Github-p/itrmb/mb1.png",     // การ์ด MB
+  heroUrl: "Github-p/bn/bn.png",          // แบนเนอร์ด้านบน
+  pcImgUrl: "Github-p/irtpc/irtpc1.png",  // รูปการ์ด IRT GOLD PC
+  mbImgUrl: "Github-p/itrmb/mb1.png",     // รูปการ์ด IRT GOLD MB
 };
 
-/* ---------- ฟอร์มสั่งซื้อ ---------- */
+// ---------- ฟอร์มสั่งซื้อ ----------
 function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [form, setForm] = useState({
     fullName: "",
@@ -50,18 +50,18 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
       // DEMO: หน่วงเวลาแทนส่งจริง
       await new Promise((r) => setTimeout(r, 700));
 
-      // ใช้งานจริง: เปิดคอมเมนต์เพื่อส่งเข้า Apps Script
+      // (ใช้งานจริง) ส่งไป Apps Script:
       // const fd = new FormData();
-      // fd.append('selectedPackage', selectedPackage);
-      // fd.append('fullName', form.fullName);
-      // fd.append('email', form.email);
-      // fd.append('phone', form.phone);
-      // fd.append('mt5', selectedPackage === 'IRT GOLD PC' ? form.mt5 : '');
-      // fd.append('purchaseDate', form.purchaseDate);
-      // if (form.slip) fd.append('slip', form.slip, form.slip.name);
-      // const res = await fetch(WEB_APP_URL, { method: 'POST', body: fd });
+      // fd.append("selectedPackage", selectedPackage);
+      // fd.append("fullName", form.fullName);
+      // fd.append("email", form.email);
+      // fd.append("phone", form.phone);
+      // fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
+      // fd.append("purchaseDate", form.purchaseDate);
+      // if (form.slip) fd.append("slip", form.slip, form.slip.name);
+      // const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
       // const data = await res.json();
-      // if (!data.ok) throw new Error(data.error || 'Upload failed');
+      // if (!data.ok) throw new Error(data.error || "Upload failed");
 
       setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
       setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
@@ -229,12 +229,11 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   );
 }
 
-/* ---------- หน้า Page (แบนเนอร์ + การ์ด + ฟอร์ม) ---------- */
+// ---------- หน้า Page (ปรับ Layout ตาม 6 ข้อ) ----------
 function Page({ initPackage }) {
   const [selectedPackage, setSelectedPackage] = useState(initPackage || "IRT GOLD PC");
   const [urls] = useState(DEFAULTS);
 
-  // รองรับ event จากหน้าแรก (ถ้ากดปุ่มสั่งซื้อในหน้า index แล้วยิง CustomEvent มา)
   useEffect(() => {
     const onSelect = (e) => e && e.detail && setSelectedPackage(e.detail);
     window.addEventListener("irt:select-package", onSelect);
@@ -242,40 +241,31 @@ function Page({ initPackage }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* 2) แบนเนอร์บนสุด (ย้ายขึ้นบน + กำหนดสูงพอดี) */}
-      <div
-        className="w-full h-[220px] md:h-[300px] lg:h-[340px] bg-center bg-cover flex items-center justify-center"
-        style={{ backgroundImage: `url(${urls.heroUrl})` }}
-      >
-        {/* 3) ลบหัว/โอเวอร์เลย์เดิมออกทั้งหมด (เหลือเฉพาะกล่องนี้) */}
-        <div className="bg-black/40 text-white px-6 py-3 rounded-xl shadow-lg">
-          <h1 className="text-2xl md:text-3xl font-bold tracking-wide">IRT GOLD</h1>
-          <p className="text-xs md:text-sm text-white/90 mt-1">
-            อัปโหลดสลิปและยืนยันการสั่งซื้อได้ภายในไม่กี่คลิก
-          </p>
+    <div className="bg-white">
+      {/* 2) แบนเนอร์อยู่บนสุด + สัดส่วนพอดี */}
+      <div className="w-full">
+        <div className="max-w-6xl mx-auto px-4 pt-6">
+          <img
+            src={urls.heroUrl}
+            alt="IRT GOLD Banner"
+            className="w-full rounded-xl object-cover aspect-[21/8] shadow"
+          />
         </div>
       </div>
 
-      {/* 4–5) การ์ด 2 ช่อง ขนาดวัตถุเท่ากัน ภาพชัด เท่ากันทั้งซ้าย/ขวา */}
-      <div className="max-w-6xl mx-auto px-4 -mt-10 relative z-10">
+      {/* 4+5) การ์ด 2 ช่อง ขนาดสัดส่วนคงที่ */}
+      <div className="max-w-6xl mx-auto px-4 mt-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* การ์ด PC */}
           <div className="rounded-2xl overflow-hidden shadow border">
-            <div className="w-full h-48">
-              <img src={urls.pcImgUrl} alt="IRT GOLD PC" className="w-full h-full object-cover" />
-            </div>
+            <img src={urls.pcImgUrl} alt="IRT GOLD PC" className="w-full aspect-[16/9] object-cover" />
             <div className="p-4">
               <h3 className="text-xl md:text-2xl font-extrabold text-indigo-700">IRT GOLD PC</h3>
               <p className="text-sm text-gray-600 mt-1">สำหรับใช้งานบนคอมพิวเตอร์ • ฿4,590</p>
             </div>
           </div>
 
-          {/* การ์ด MB */}
           <div className="rounded-2xl overflow-hidden shadow border">
-            <div className="w-full h-48">
-              <img src={urls.mbImgUrl} alt="IRT GOLD MB" className="w-full h-full object-cover" />
-            </div>
+            <img src={urls.mbImgUrl} alt="IRT GOLD MB" className="w-full aspect-[16/9] object-cover" />
             <div className="p-4">
               <h3 className="text-xl md:text-2xl font-extrabold text-green-700">IRT GOLD MB</h3>
               <p className="text-sm text-gray-600 mt-1">สำหรับใช้งานบนมือถือ • ฿2,390</p>
@@ -284,15 +274,13 @@ function Page({ initPackage }) {
         </div>
       </div>
 
-      {/* 6) ขยายกรอบฟอร์มให้กว้างขึ้น */}
-      <div className="max-w-4xl mx-auto px-4 mt-8">
+      {/* 6) ขยายฟอร์มให้กว้างเท่าคอนเทนเนอร์ */}
+      <div className="max-w-6xl mx-auto px-4 mt-8 mb-10">
         <PurchaseForm selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} />
       </div>
-
-      <div className="h-10" />
     </div>
   );
 }
 
-/* ให้หน้า HTML (purchase.html) เรียกเรนเดอร์ได้ */
+// ให้ไฟล์ HTML เรียกใช้ได้
 window.Page = Page;
