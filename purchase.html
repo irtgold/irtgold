@@ -39,4 +39,26 @@
     root.render(<Page initPackage={pkg} />);
   </script>
 </body>
+  <!-- คอมโพเนนต์ฟอร์ม -->
+<script
+  type="text/babel"
+  data-presets="typescript,react"
+  src="assets/purchase.jsx">
+</script>
+
+<!-- เรนเดอร์ลง #irt-purchase-root -->
+<script type="text/babel">
+  // อ่านพารามิเตอร์ ?pkg= จาก URL (เช่น purchase.html?pkg=IRT%20GOLD%20MB)
+  const url = new URL(location.href);
+  const initPkg = url.searchParams.get('pkg') || 'IRT GOLD PC';
+
+  const rootEl = document.getElementById('irt-purchase-root');
+  const root = ReactDOM.createRoot(rootEl);
+
+  // ถ้าไฟล์ assets/purchase.jsx “ผูก” คอมโพเนนต์ไว้ที่ window.Page (แบบ UMD)
+  // ให้ใช้:  root.render(<Page initPackage={initPkg} />);
+  // (ซึ่งโค้ดใน purchase.jsx เวอร์ชัน UMD ต้องจบด้วย: window.Page = Page)
+  root.render(<Page initPackage={initPkg} />);
+</script>
+
 </html>
