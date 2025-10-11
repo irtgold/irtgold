@@ -370,3 +370,7 @@ html, body{ height:100%; }
   flex-direction:column;
 }
 .footer{ margin-top:auto; }  /* ดันฟุตเตอร์ไปชิดก้นหน้าจอเมื่อคอนเทนต์สั้น */
+
+
+/* kill default browser margin/padding so the banner can touch the top */
+html, body { margin: 0; padding: 0; }
