@@ -465,7 +465,7 @@
     <div class="pricing__grid">
       
       <!-- ===== การ์ด IRT GOLD PC (สีน้ำเงิน) ===== -->
-      <div class="pricing__card pricing__card--pc">
+      <div class="pricing__card pricing__card--pc" data-pkg="IRT GOLD PC" tabindex="0" role="button">
         <div class="pricing__header">
           <h3 class="package-name">IRT GOLD PC</h3>
           <div class="price-box">
@@ -490,12 +490,12 @@
         </div>
         
         <div class="pricing__footer">
-          <a href="#contact" class="btn-buy">สั่งซื้อเลย</a>
+          <a href="#purchase" class="btn-buy" data-pkg="IRT GOLD PC">สั่งซื้อเลย</a>
         </div>
       </div>
       
       <!-- ===== การ์ด IRT GOLD MB (สีเขียว) ===== -->
-      <div class="pricing__card pricing__card--mb">
+      <div class="pricing__card pricing__card--mb" data-pkg="IRT GOLD MB" tabindex="0" role="button">
         <div class="pricing__header">
           <h3 class="package-name">IRT GOLD MB</h3>
           <div class="price-box">
@@ -508,25 +508,54 @@
         </div>
         
         <div class="pricing__body">
-<ul class="features-list">
-  <li><span class="chk">✔</span> ระบบอินดิเคเตอร์ 2 ตัว</li>
-  <li><span class="x">✕</span> ใช้กับ MT5 PC (Windows/Mac)</li>
-  <li><span class="chk">✔</span> ใช้กับ TradingView</li>
-  <li><span class="chk">✔</span> สัญญาณแจ้งเตือน Real-time</li>
-  <li><span class="chk">✔</span> คอร์สสอนแบบเต็ม + Live Coaching</li>
-  <li><span class="chk">✔</span> เข้ากลุ่ม VIP Signal Room ตลอดชีพ</li>
-  <li><span class="chk">✔</span> อัพเดตเวอร์ชันใหม่ฟรี</li>
-</ul>
+          <ul class="features-list">
+            <li><span class="chk">✔</span> ระบบอินดิเคเตอร์ 2 ตัว</li>
+            <li><span class="x">✕</span> ใช้กับ MT5 PC (Windows/Mac)</li>
+            <li><span class="chk">✔</span> ใช้กับ TradingView</li>
+            <li><span class="chk">✔</span> สัญญาณแจ้งเตือน Real-time</li>
+            <li><span class="chk">✔</span> คอร์สสอนแบบเต็ม + Live Coaching</li>
+            <li><span class="chk">✔</span> เข้ากลุ่ม VIP Signal Room ตลอดชีพ</li>
+            <li><span class="chk">✔</span> อัพเดตเวอร์ชันใหม่ฟรี</li>
+          </ul>
         </div>
         
         <div class="pricing__footer">
-          <a href="#contact" class="btn-buy">สั่งซื้อเลย</a>
+          <a href="#purchase" class="btn-buy" data-pkg="IRT GOLD MB">สั่งซื้อเลย</a>
         </div>
       </div>
-      
+
     </div>
   </div>
 </section>
+      
+<script>
+  // ให้กดปุ่ม "สั่งซื้อเลย" หรือคลิกทั้งการ์ดแล้วเลื่อนลงไปยังฟอร์ม
+  // พร้อมส่งชื่อแพ็กเกจไปให้ React ตั้งค่าอัตโนมัติ
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest('a.btn-buy[data-pkg], .pricing__card[data-pkg]');
+    if (!el) return;
+
+    const pkg = el.dataset.pkg || '';
+    // เลื่อนลงไปยังส่วนฟอร์ม
+    const formSection = document.querySelector('#purchase');
+    if (formSection) formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // ส่ง event ไปให้ React ตั้งค่า selectedPackage
+    if (pkg) {
+      window.dispatchEvent(new CustomEvent('irt:select-package', { detail: pkg }));
+    }
+  });
+
+  // กด Enter/Space บนการ์ดได้ (เพื่อการเข้าถึง)
+  document.addEventListener('keydown', (e) => {
+    const card = e.target.closest('.pricing__card[data-pkg]');
+    if (!card) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      card.click();
+    }
+  });
+</script>
       
 <!-- ================= CONTACT ================= -->
 <section class="section" id="contact">
