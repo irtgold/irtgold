@@ -27,7 +27,7 @@ const DEFAULTS = {
     "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop",
 };
 
-// ---------- ฟอร์มสั่งซื้อ ----------
+// ---------- สั่งซื้อ ----------
 function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [form, setForm] = useState({
     fullName: "",
@@ -78,7 +78,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
 
   return (
     <div className="w-full bg-white rounded-2xl shadow-lg p-6 border-t-4 border-indigo-500">
-      <h2 className="text-2xl font-semibold text-center mb-2 text-indigo-700">ฟอร์มสั่งซื้อแพ็กเกจ</h2>
+      <h2 className="text-2xl font-semibold text-center mb-2 text-indigo-700">สั่งซื้อแพ็กเกจ</h2>
       <p className="text-center text-sm text-gray-500 mb-6">เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ</p>
 
       <div className="grid grid-cols-2 gap-4 mb-6">
