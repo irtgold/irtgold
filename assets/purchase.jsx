@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// ใช้ React แบบ UMD (โหลดจาก CDN ใน index.html) จึงไม่ต้อง import\n// และดึง useState จากตัวแปร global แทน\nconst { useState } = React;
 
 /**
  * Fix: removed accidental escape characters (\" and <\/p>) that broke TSX parsing
@@ -7,10 +7,10 @@ import React, { useState } from "react";
  */
 
 // ---------- URL Apps Script (ใส่ของคุณแทน) ----------
-export const WEB_APP_URL = "https://script.google.com/macros/s/PASTE_YOUR_WEB_APP_ID/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/PASTE_YOUR_WEB_APP_ID/exec";
 
 // ---------- Types ----------
-export type FormState = {
+type FormState = {
   fullName: string;
   email: string;
   phone: string;
@@ -19,10 +19,10 @@ export type FormState = {
   slip: File | null;
 };
 
-export type ValidateResult = Record<string, string>;
+type ValidateResult = Record<string, string>;
 
 // Pure function (แยกไว้เพื่อให้ทดสอบได้ง่าย)
-export function validatePurchaseForm(selectedPackage: string, values: FormState): ValidateResult {
+function validatePurchaseForm(selectedPackage: string, values: FormState): ValidateResult {
   const e: ValidateResult = {};
   if (!values.fullName.trim()) e.fullName = "กรุณากรอกชื่อ-นามสกุล";
   if (!values.email) e.email = "กรุณากรอกอีเมล";
@@ -246,7 +246,7 @@ function PurchaseForm({
 }
 
 // ---------- หน้าเว็บหลัก (มีส่วนแก้ URL รูปแบบเร็ว) ----------
-export default function Page() {
+function Page() {
   const [selectedPackage, setSelectedPackage] = useState("IRT GOLD PC");
   const [urls, setUrls] = useState(DEFAULTS);
 
@@ -354,7 +354,4 @@ if (typeof window !== "undefined" && (window as any).__RUN_PURCHASE_PAGE_TESTS__
   // TC3: PC ต้องมี mt5
   const pcNoMt5: FormState = { ...okMB, mt5: "", slip: new File(["x"], "s.png") };
   const r3 = validatePurchaseForm("IRT GOLD PC", pcNoMt5);
-  console.assert(!!r3.mt5, "TC3 failed");
-
-  console.groupEnd();
-}
+  console.assert(!!r3.mt5, "TC3 failed");\n  console.groupEnd();\n}\n\n// โยนคอมโพเนนต์ Page ไปไว้ที่ window เพื่อให้ index.html เรียกใช้งานได้\nwindow.Page = Page;\n
