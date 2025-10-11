@@ -74,7 +74,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
 
   return (
     <div className="w-full bg-white rounded-2xl shadow-lg p-6 border-t-4 border-indigo-500">
-      <h2 className="text-2xl font-semibold text-center mb-2 text-indigo-700">ฟอร์มสั่งซื้อแพ็กเกจ</h2>
+      <h2 className="text-2xl font-semibold text-center mb-2 text-indigo-700">สั่งซื้อแพ็กเกจ</h2>
       <p className="text-center text-sm text-gray-500 mb-6">
         เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ
       </p>
