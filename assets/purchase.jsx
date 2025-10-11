@@ -19,11 +19,9 @@ function validatePurchaseForm(selectedPackage, values) {
 
 // ---------- รูปตัวอย่างปรับได้ ----------
 const DEFAULTS = {
-  heroUrl:
-const DEFAULTS = {
-  heroUrl: "Github-p/bn/bn.png",
-  pcImgUrl: "Github-p/irtpc/irtpc1.png",
-  mbImgUrl: "Github-p/itrmb/mb1.png",
+  heroUrl: "Github-p/bn/bn.png",          // แบนเนอร์ด้านบน
+  pcImgUrl: "Github-p/irtpc/irtpc1.png",  // รูปการ์ด IRT GOLD PC
+  mbImgUrl: "Github-p/itrmb/mb1.png",     // รูปการ์ด IRT GOLD MB
 };
 
 // ---------- สั่งซื้อ ----------
@@ -244,29 +242,6 @@ function Page({ initPackage }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* แถบแก้ URL รูปแบบเร็ว */}
-      <div className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
-          <span className="text-sm font-medium text-gray-700">🔧 เปลี่ยนรูป (วางเป็น URL):</span>
-          <input
-            className="w-full md:w-1/3 rounded-lg border px-3 py-1.5 text-sm"
-            placeholder="Hero URL"
-            value={urls.heroUrl}
-            onChange={(e) => setUrls({ ...urls, heroUrl: e.target.value })}
-          />
-          <input
-            className="w-full md:w-1/4 rounded-lg border px-3 py-1.5 text-sm"
-            placeholder="PC Image URL"
-            value={urls.pcImgUrl}
-            onChange={(e) => setUrls({ ...urls, pcImgUrl: e.target.value })}
-          />
-          <input
-            className="w-full md:w-1/4 rounded-lg border px-3 py-1.5 text-sm"
-            placeholder="MB Image URL"
-            value={urls.mbImgUrl}
-            onChange={(e) => setUrls({ ...urls, mbImgUrl: e.target.value })}
-          />
-        </div>
       </div>
 
       {/* Hero */}
