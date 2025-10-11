@@ -1,26 +1,13 @@
-/** UMD version for CDN React + Babel in-browser **/
-/** ใช้ React global จาก <script> UMD แทน import  **/
+/** assets/purchase.jsx (UMD + Babel) */
 const { useState, useEffect } = React;
 
-// ---------- URL Apps Script (ใส่ของคุณแทน) ----------
+// ====== ปลายทาง API (ถ้าต่อ Apps Script ให้ใส่ URL ที่นี่) ======
 const WEB_APP_URL = "https://script.google.com/macros/s/PASTE_YOUR_WEB_APP_ID/exec";
 
-// ---------- Types (Babel preset: typescript เปิดไว้ใน HTML แล้ว) ----------
-type FormState = {
-  fullName: string;
-  email: string;
-  phone: string;
-  mt5: string;
-  purchaseDate: string; // yyyy-mm-dd
-  slip: File | null;
-};
-
-type ValidateResult = Record<string, string>;
-
-// Pure function (แยกไว้เพื่อให้ทดสอบได้ง่าย)
-function validatePurchaseForm(selectedPackage: string, values: FormState): ValidateResult {
-  const e: ValidateResult = {};
-  if (!values.fullName.trim()) e.fullName = "กรุณากรอกชื่อ-นามสกุล";
+// ---------- ตัวช่วยตรวจสอบฟอร์ม ----------
+function validatePurchaseForm(selectedPackage, values) {
+  const e = {};
+  if (!values.fullName || !values.fullName.trim()) e.fullName = "กรุณากรอกชื่อ-นามสกุล";
   if (!values.email) e.email = "กรุณากรอกอีเมล";
   else if (!/^([^\s@]+)@([^\s@]+)\.[^\s@]+$/.test(values.email)) e.email = "อีเมลไม่ถูกต้อง";
   if (!values.phone) e.phone = "กรุณากรอกเบอร์โทร";
@@ -30,7 +17,7 @@ function validatePurchaseForm(selectedPackage: string, values: FormState): Valid
   return e;
 }
 
-// ---------- รูปเริ่มต้น ----------
+// ---------- รูปตัวอย่างปรับได้ ----------
 const DEFAULTS = {
   heroUrl:
     "https://images.unsplash.com/photo-1601597111158-d1a2169d7b2b?q=80&w=1600&auto=format&fit=crop",
@@ -40,15 +27,9 @@ const DEFAULTS = {
     "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop",
 };
 
-// ---------- ฟอร์ม ----------
-function PurchaseForm({
-  selectedPackage,
-  setSelectedPackage,
-}: {
-  selectedPackage: string;
-  setSelectedPackage: (v: string) => void;
-}) {
-  const [form, setForm] = useState<FormState>({
+// ---------- ฟอร์มสั่งซื้อ ----------
+function PurchaseForm({ selectedPackage, setSelectedPackage }) {
+  const [form, setForm] = useState({
     fullName: "",
     email: "",
     phone: "",
@@ -56,11 +37,11 @@ function PurchaseForm({
     purchaseDate: "",
     slip: null,
   });
-  const [errors, setErrors] = useState<ValidateResult>({});
+  const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState<string | null>(null);
+  const [success, setSuccess] = useState(null);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const validation = validatePurchaseForm(selectedPackage, form);
     setErrors(validation);
@@ -70,8 +51,22 @@ function PurchaseForm({
     setSuccess(null);
 
     try {
-      // TODO: fetch ไปหา WEB_APP_URL ตามที่ต้องการ
-      await new Promise((r) => setTimeout(r, 800));
+      // ===== (เดโม) หน่วงเวลาแทนส่งจริง =====
+      await new Promise((r) => setTimeout(r, 700));
+
+      // ===== (ใช้งานจริง) ส่งไป Apps Script =====
+      // const fd = new FormData();
+      // fd.append('selectedPackage', selectedPackage);
+      // fd.append('fullName', form.fullName);
+      // fd.append('email', form.email);
+      // fd.append('phone', form.phone);
+      // fd.append('mt5', selectedPackage === 'IRT GOLD PC' ? form.mt5 : '');
+      // fd.append('purchaseDate', form.purchaseDate);
+      // if (form.slip) fd.append('slip', form.slip, form.slip.name);
+      // const res = await fetch(WEB_APP_URL, { method: 'POST', body: fd });
+      // const data = await res.json();
+      // if (!data.ok) throw new Error(data.error || 'Upload failed');
+
       setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
       setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
     } catch (err) {
@@ -84,9 +79,7 @@ function PurchaseForm({
   return (
     <div className="w-full bg-white rounded-2xl shadow-lg p-6 border-t-4 border-indigo-500">
       <h2 className="text-2xl font-semibold text-center mb-2 text-indigo-700">ฟอร์มสั่งซื้อแพ็กเกจ</h2>
-      <p className="text-center text-sm text-gray-500 mb-6">
-        เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ
-      </p>
+      <p className="text-center text-sm text-gray-500 mb-6">เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ</p>
 
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div
@@ -126,7 +119,6 @@ function PurchaseForm({
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* ชื่อ */}
         <div>
           <label className="block text-sm font-medium text-gray-700">ชื่อ-นามสกุล</label>
           <input
@@ -140,7 +132,6 @@ function PurchaseForm({
           {errors.fullName && <p className="text-xs text-red-600">{errors.fullName}</p>}
         </div>
 
-        {/* อีเมล */}
         <div>
           <label className="block text-sm font-medium text-gray-700">อีเมล</label>
           <input
@@ -155,7 +146,6 @@ function PurchaseForm({
           {errors.email && <p className="text-xs text-red-600">{errors.email}</p>}
         </div>
 
-        {/* โทร */}
         <div>
           <label className="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
           <input
@@ -169,7 +159,6 @@ function PurchaseForm({
           {errors.phone && <p className="text-xs text-red-600">{errors.phone}</p>}
         </div>
 
-        {/* MT5 เฉพาะ PC */}
         {selectedPackage === "IRT GOLD PC" && (
           <div>
             <label className="block text-sm font-medium text-gray-700">หมายเลขพอร์ต MT5</label>
@@ -185,7 +174,6 @@ function PurchaseForm({
           </div>
         )}
 
-        {/* วันที่ซื้อ */}
         <div>
           <label className="block text-sm font-medium text-gray-700">วันที่ซื้อ</label>
           <input
@@ -199,15 +187,12 @@ function PurchaseForm({
           {errors.purchaseDate && <p className="text-xs text-red-600">{errors.purchaseDate}</p>}
         </div>
 
-        {/* สลิป */}
         <div>
           <label className="block text-sm font-medium text-gray-700">อัปโหลดสลิปโอนเงิน</label>
           <input
             type="file"
             accept="image/*"
-            onChange={(e /** @type {React.ChangeEvent<HTMLInputElement>} */) =>
-              setForm({ ...form, slip: e.target.files?.[0] ?? null })
-            }
+            onChange={(e) => setForm({ ...form, slip: e.target.files?.[0] ?? null })}
             className="mt-1 block w-full text-sm text-gray-700 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border file:border-gray-300 file:bg-indigo-50 hover:file:bg-indigo-100"
           />
           {errors.slip && <p className="text-xs text-red-600">{errors.slip}</p>}
@@ -228,7 +213,6 @@ function PurchaseForm({
         </button>
       </form>
 
-      {/* success overlay */}
       {success && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-green-50 border border-green-300 text-green-800 px-6 py-4 rounded-xl shadow-xl text-center">
@@ -247,37 +231,57 @@ function PurchaseForm({
   );
 }
 
-// ---------- หน้าเว็บหลัก ----------
-function Page({ initPackage }: { initPackage?: string }) {
+// ---------- หน้า Page (รวมแบนเนอร์ + การ์ด + ฟอร์ม) ----------
+function Page({ initPackage }) {
   const [selectedPackage, setSelectedPackage] = useState(initPackage || "IRT GOLD PC");
   const [urls, setUrls] = useState(DEFAULTS);
 
-  // รับ event จากปุ่ม “สั่งซื้อเลย”/การ์ด
+  // รองรับ event จากหน้าแรก (ถ้ากดการ์ด/ปุ่มแล้วส่ง CustomEvent มาก่อนเด้งหน้า)
   useEffect(() => {
-    const onSelect = (e: any) => e?.detail && setSelectedPackage(e.detail);
+    const onSelect = (e) => e && e.detail && setSelectedPackage(e.detail);
     window.addEventListener("irt:select-package", onSelect);
     return () => window.removeEventListener("irt:select-package", onSelect);
   }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* แถบแก้ URL รูป */}
+      {/* แถบแก้ URL รูปแบบเร็ว */}
       <div className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur">
         <div className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
           <span className="text-sm font-medium text-gray-700">🔧 เปลี่ยนรูป (วางเป็น URL):</span>
-          <input className="w-full md:w-1/3 rounded-lg border px-3 py-1.5 text-sm"
-            placeholder="Hero URL" value={urls.heroUrl}
-            onChange={(e) => setUrls({ ...urls, heroUrl: e.target.value })} />
-          <input className="w-full md:w-1/4 rounded-lg border px-3 py-1.5 text-sm"
-            placeholder="PC Image URL" value={urls.pcImgUrl}
-            onChange={(e) => setUrls({ ...urls, pcImgUrl: e.target.value })} />
-          <input className="w-full md:w-1/4 rounded-lg border px-3 py-1.5 text-sm"
-            placeholder="MB Image URL" value={urls.mbImgUrl}
-            onChange={(e) => setUrls({ ...urls, mbImgUrl: e.target.value })} />
+          <input
+            className="w-full md:w-1/3 rounded-lg border px-3 py-1.5 text-sm"
+            placeholder="Hero URL"
+            value={urls.heroUrl}
+            onChange={(e) => setUrls({ ...urls, heroUrl: e.target.value })}
+          />
+          <input
+            className="w-full md:w-1/4 rounded-lg border px-3 py-1.5 text-sm"
+            placeholder="PC Image URL"
+            value={urls.pcImgUrl}
+            onChange={(e) => setUrls({ ...urls, pcImgUrl: e.target.value })}
+          />
+          <input
+            className="w-full md:w-1/4 rounded-lg border px-3 py-1.5 text-sm"
+            placeholder="MB Image URL"
+            value={urls.mbImgUrl}
+            onChange={(e) => setUrls({ ...urls, mbImgUrl: e.target.value })}
+          />
         </div>
       </div>
 
-      {/* การ์ดรูป */}
+      {/* Hero */}
+      <div
+        className="w-full h-56 md:h-72 lg:h-80 bg-center bg-cover flex items-center justify-center"
+        style={{ backgroundImage: `url(${urls.heroUrl})` }}
+      >
+        <div className="bg-black/40 text-white px-6 py-3 rounded-xl shadow-lg">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-wide">IRT GOLD Purchase System</h1>
+          <p className="text-xs md:text-sm text-white/90 mt-1">อัปโหลดสลิปและยืนยันการสั่งซื้อได้ภายในไม่กี่คลิก</p>
+        </div>
+      </div>
+
+      {/* การ์ด 2 ช่อง + ฟอร์ม */}
       <div className="max-w-6xl mx-auto px-4 -mt-10 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="rounded-2xl overflow-hidden shadow border">
@@ -298,7 +302,6 @@ function Page({ initPackage }: { initPackage?: string }) {
         </div>
       </div>
 
-      {/* ฟอร์ม */}
       <div className="max-w-3xl mx-auto px-4 mt-8">
         <PurchaseForm selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} />
       </div>
@@ -308,57 +311,5 @@ function Page({ initPackage }: { initPackage?: string }) {
   );
 }
 
-/** --- Dev Test Harness (optional) --- */
-if (typeof window !== "undefined" && window.__RUN_PURCHASE_PAGE_TESTS__) {
-  const base: FormState = {
-    fullName: "",
-    email: "bad@email",
-    phone: "",
-    mt5: "",
-    purchaseDate: "",
-    slip: null,
-  };
-
-  console.group("PurchaseForm validate tests");
-  const r1 = validatePurchaseForm("IRT GOLD PC", base);
-  console.assert(
-    !!r1.fullName && !!r1.email && !!r1.phone && !!r1.mt5 && !!r1.purchaseDate && !!r1.slip,
-    "TC1 failed"
-  );
-
-  const okMB: FormState = {
-    fullName: "สมชาย ใจดี",
-    email: "ok@example.com",
-    phone: "0812345678",
-    mt5: "",
-    purchaseDate: "2025-01-01",
-    slip: new File(["x"], "slip.png"),
-  };
-  const r2 = validatePurchaseForm("IRT GOLD MB", okMB);
-  console.assert(Object.keys(r2).length === 0, "TC2 failed");
-
-  const pcNoMt5: FormState = { ...okMB, mt5: "", slip: new File(["x"], "s.png") };
-  const r3 = validatePurchaseForm("IRT GOLD PC", pcNoMt5);
-  console.assert(!!r3.mt5, "TC3 failed");
-
-  const noSlip: FormState = { ...okMB, slip: null };
-  const r4 = validatePurchaseForm("IRT GOLD MB", noSlip);
-  console.assert(!!r4.slip, "TC4 failed");
-
-  const okPC: FormState = {
-    fullName: "A B",
-    email: "a@b.com",
-    phone: "0123456789",
-    mt5: "123456",
-    purchaseDate: "2025-02-01",
-    slip: new File(["x"], "ok.png"),
-  };
-  const r5 = validatePurchaseForm("IRT GOLD PC", okPC);
-  console.assert(Object.keys(r5).length === 0, "TC5 failed");
-
-  console.groupEnd();
-}
-
-// 👇 สำคัญ: ให้ HTML เรียก root.render(<Page />) ได้
-// ห้ามใช้ export default เมื่อรันผ่าน CDN+UMD
+// ผูกคอมโพเนนต์ให้หน้า HTML เรียกเรนเดอร์ได้
 window.Page = Page;
