@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IRT GOLD V5.0 - Indicator Rhythm Trading</title>
   <link rel="stylesheet" href="assets/style.css?v=3">
+  <!-- ปิด preflight เพื่อไม่ให้ Tailwind reset CSS เดิมของคุณ -->
+<script>
+  window.tailwind = { config: { corePlugins: { preflight: false } } };
+</script>
+<!-- Tailwind CDN (ใช้คลาสของฟอร์ม) -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- React + ReactDOM + Babel (รัน JSX/TSX จาก purchase.jsx) -->
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
 </head>
 <body>
   <!-- ============ NAV ============ -->
