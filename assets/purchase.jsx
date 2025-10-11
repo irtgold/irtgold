@@ -1,15 +1,11 @@
-// ใช้ React แบบ UMD (โหลดจาก CDN ใน index.html) จึงไม่ต้อง import\n// และดึง useState จากตัวแปร global แทน\nconst { useState } = React;
-
-/**
- * Fix: removed accidental escape characters (\" and <\/p>) that broke TSX parsing
- * and caused: "Expecting Unicode escape sequence \\uXXXX".
- * Added TypeScript-friendly types and a small dev test harness.
- */
+/** UMD version for CDN React + Babel in-browser **/
+/** ใช้ React global จาก <script> UMD แทน import  **/
+const { useState, useEffect } = React;
 
 // ---------- URL Apps Script (ใส่ของคุณแทน) ----------
 const WEB_APP_URL = "https://script.google.com/macros/s/PASTE_YOUR_WEB_APP_ID/exec";
 
-// ---------- Types ----------
+// ---------- Types (Babel preset: typescript เปิดไว้ใน HTML แล้ว) ----------
 type FormState = {
   fullName: string;
   email: string;
@@ -34,7 +30,7 @@ function validatePurchaseForm(selectedPackage: string, values: FormState): Valid
   return e;
 }
 
-// ---------- Config รูปเริ่มต้น (เปลี่ยน URL ได้จากกล่องด้านบนหน้า) ----------
+// ---------- รูปเริ่มต้น ----------
 const DEFAULTS = {
   heroUrl:
     "https://images.unsplash.com/photo-1601597111158-d1a2169d7b2b?q=80&w=1600&auto=format&fit=crop",
@@ -44,7 +40,7 @@ const DEFAULTS = {
     "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop",
 };
 
-// ---------- ฟอร์มสั่งซื้อ (คอมโพเนนต์ย่อย) ----------
+// ---------- ฟอร์ม ----------
 function PurchaseForm({
   selectedPackage,
   setSelectedPackage,
@@ -74,7 +70,7 @@ function PurchaseForm({
     setSuccess(null);
 
     try {
-      // เดโม: หน่วงเวลาแทนการส่งจริง
+      // TODO: fetch ไปหา WEB_APP_URL ตามที่ต้องการ
       await new Promise((r) => setTimeout(r, 800));
       setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
       setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
@@ -88,9 +84,10 @@ function PurchaseForm({
   return (
     <div className="w-full bg-white rounded-2xl shadow-lg p-6 border-t-4 border-indigo-500">
       <h2 className="text-2xl font-semibold text-center mb-2 text-indigo-700">ฟอร์มสั่งซื้อแพ็กเกจ</h2>
-      <p className="text-center text-sm text-gray-500 mb-6">เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ</p>
+      <p className="text-center text-sm text-gray-500 mb-6">
+        เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ
+      </p>
 
-      {/* รายละเอียดแพ็กเกจ */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div
           className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
@@ -119,7 +116,6 @@ function PurchaseForm({
         </div>
       </div>
 
-      {/* บัญชีธนาคาร */}
       <div className="bg-gray-50 border rounded-xl p-4 mb-6">
         <p className="font-medium text-gray-800">💳 ธนาคารกสิกรไทย</p>
         <p className="text-gray-700">ชื่อบัญชี: บริษัท ไออาร์ที เทรดดิ้ง จำกัด</p>
@@ -129,8 +125,8 @@ function PurchaseForm({
         <p className="text-gray-500 text-sm mt-1">(โปรดตรวจสอบยอดก่อนโอน)</p>
       </div>
 
-      {/* ฟอร์มข้อมูลลูกค้า */}
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* ชื่อ */}
         <div>
           <label className="block text-sm font-medium text-gray-700">ชื่อ-นามสกุล</label>
           <input
@@ -144,6 +140,7 @@ function PurchaseForm({
           {errors.fullName && <p className="text-xs text-red-600">{errors.fullName}</p>}
         </div>
 
+        {/* อีเมล */}
         <div>
           <label className="block text-sm font-medium text-gray-700">อีเมล</label>
           <input
@@ -158,6 +155,7 @@ function PurchaseForm({
           {errors.email && <p className="text-xs text-red-600">{errors.email}</p>}
         </div>
 
+        {/* โทร */}
         <div>
           <label className="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
           <input
@@ -171,6 +169,7 @@ function PurchaseForm({
           {errors.phone && <p className="text-xs text-red-600">{errors.phone}</p>}
         </div>
 
+        {/* MT5 เฉพาะ PC */}
         {selectedPackage === "IRT GOLD PC" && (
           <div>
             <label className="block text-sm font-medium text-gray-700">หมายเลขพอร์ต MT5</label>
@@ -186,6 +185,7 @@ function PurchaseForm({
           </div>
         )}
 
+        {/* วันที่ซื้อ */}
         <div>
           <label className="block text-sm font-medium text-gray-700">วันที่ซื้อ</label>
           <input
@@ -199,12 +199,13 @@ function PurchaseForm({
           {errors.purchaseDate && <p className="text-xs text-red-600">{errors.purchaseDate}</p>}
         </div>
 
+        {/* สลิป */}
         <div>
           <label className="block text-sm font-medium text-gray-700">อัปโหลดสลิปโอนเงิน</label>
           <input
             type="file"
             accept="image/*"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onChange={(e /** @type {React.ChangeEvent<HTMLInputElement>} */) =>
               setForm({ ...form, slip: e.target.files?.[0] ?? null })
             }
             className="mt-1 block w-full text-sm text-gray-700 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border file:border-gray-300 file:bg-indigo-50 hover:file:bg-indigo-100"
@@ -227,6 +228,7 @@ function PurchaseForm({
         </button>
       </form>
 
+      {/* success overlay */}
       {success && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-green-50 border border-green-300 text-green-800 px-6 py-4 rounded-xl shadow-xl text-center">
@@ -245,52 +247,39 @@ function PurchaseForm({
   );
 }
 
-// ---------- หน้าเว็บหลัก (มีส่วนแก้ URL รูปแบบเร็ว) ----------
-function Page() {
-  const [selectedPackage, setSelectedPackage] = useState("IRT GOLD PC");
+// ---------- หน้าเว็บหลัก ----------
+function Page({ initPackage }: { initPackage?: string }) {
+  const [selectedPackage, setSelectedPackage] = useState(initPackage || "IRT GOLD PC");
   const [urls, setUrls] = useState(DEFAULTS);
+
+  // รับ event จากปุ่ม “สั่งซื้อเลย”/การ์ด
+  useEffect(() => {
+    const onSelect = (e: any) => e?.detail && setSelectedPackage(e.detail);
+    window.addEventListener("irt:select-package", onSelect);
+    return () => window.removeEventListener("irt:select-package", onSelect);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* แถบแก้ URL รูปแบบเร็ว */}
+      {/* แถบแก้ URL รูป */}
       <div className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur">
         <div className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
           <span className="text-sm font-medium text-gray-700">🔧 เปลี่ยนรูป (วางเป็น URL):</span>
-          <input
-            className="w-full md:w-1/3 rounded-lg border px-3 py-1.5 text-sm"
-            placeholder="Hero URL"
-            value={urls.heroUrl}
-            onChange={(e) => setUrls({ ...urls, heroUrl: e.target.value })}
-          />
-          <input
-            className="w-full md:w-1/4 rounded-lg border px-3 py-1.5 text-sm"
-            placeholder="PC Image URL"
-            value={urls.pcImgUrl}
-            onChange={(e) => setUrls({ ...urls, pcImgUrl: e.target.value })}
-          />
-          <input
-            className="w-full md:w-1/4 rounded-lg border px-3 py-1.5 text-sm"
-            placeholder="MB Image URL"
-            value={urls.mbImgUrl}
-            onChange={(e) => setUrls({ ...urls, mbImgUrl: e.target.value })}
-          /></div>
-      </div>
-
-      {/* Hero Banner */}
-      <div
-        className="w-full h-56 md:h-72 lg:h-80 bg-center bg-cover flex items-center justify-center"
-        style={{ backgroundImage: `url(${urls.heroUrl})` }}
-      >
-        <div className="bg-black/40 text-white px-6 py-3 rounded-xl shadow-lg">
-          <h1 className="text-2xl md:text-3xl font-bold tracking-wide">IRT GOLD Purchase System</h1>
-          <p className="text-xs md:text-sm text-white/90 mt-1">อัปโหลดสลิปและยืนยันการสั่งซื้อได้ภายในไม่กี่คลิก</p>
+          <input className="w-full md:w-1/3 rounded-lg border px-3 py-1.5 text-sm"
+            placeholder="Hero URL" value={urls.heroUrl}
+            onChange={(e) => setUrls({ ...urls, heroUrl: e.target.value })} />
+          <input className="w-full md:w-1/4 rounded-lg border px-3 py-1.5 text-sm"
+            placeholder="PC Image URL" value={urls.pcImgUrl}
+            onChange={(e) => setUrls({ ...urls, pcImgUrl: e.target.value })} />
+          <input className="w-full md:w-1/4 rounded-lg border px-3 py-1.5 text-sm"
+            placeholder="MB Image URL" value={urls.mbImgUrl}
+            onChange={(e) => setUrls({ ...urls, mbImgUrl: e.target.value })} />
         </div>
       </div>
 
-      {/* Content */}
+      {/* การ์ดรูป */}
       <div className="max-w-6xl mx-auto px-4 -mt-10 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* การ์ด PC */}
           <div className="rounded-2xl overflow-hidden shadow border">
             <img src={urls.pcImgUrl} alt="IRT GOLD PC" className="w-full h-48 object-cover" />
             <div className="p-4">
@@ -299,7 +288,6 @@ function Page() {
             </div>
           </div>
 
-          {/* การ์ด MB */}
           <div className="rounded-2xl overflow-hidden shadow border">
             <img src={urls.mbImgUrl} alt="IRT GOLD MB" className="w-full h-48 object-cover" />
             <div className="p-4">
@@ -309,7 +297,8 @@ function Page() {
           </div>
         </div>
       </div>
-      {/* ฟอร์มกรอกข้อมูลลูกค้า (แสดงใต้การ์ด 2 ช่อง) */}
+
+      {/* ฟอร์ม */}
       <div className="max-w-3xl mx-auto px-4 mt-8">
         <PurchaseForm selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} />
       </div>
@@ -319,12 +308,8 @@ function Page() {
   );
 }
 
-/**
- * --- Dev Test Harness (optional) ---
- * เปิดคอนโซลแล้วรัน:  window.__RUN_PURCHASE_PAGE_TESTS__ = true
- * จะได้ผลการทดสอบ validatePurchaseForm แบบง่าย ๆ ใน Console
- */
-if (typeof window !== "undefined" && (window as any).__RUN_PURCHASE_PAGE_TESTS__) {
+/** --- Dev Test Harness (optional) --- */
+if (typeof window !== "undefined" && window.__RUN_PURCHASE_PAGE_TESTS__) {
   const base: FormState = {
     fullName: "",
     email: "bad@email",
@@ -335,26 +320,45 @@ if (typeof window !== "undefined" && (window as any).__RUN_PURCHASE_PAGE_TESTS__
   };
 
   console.group("PurchaseForm validate tests");
-  // TC1: invalid for PC (ควรมีหลาย error รวม mt5)
   const r1 = validatePurchaseForm("IRT GOLD PC", base);
-  console.assert(!!r1.fullName && !!r1.email && !!r1.phone && !!r1.mt5 && !!r1.purchaseDate && !!r1.slip, "TC1 failed");
+  console.assert(
+    !!r1.fullName && !!r1.email && !!r1.phone && !!r1.mt5 && !!r1.purchaseDate && !!r1.slip,
+    "TC1 failed"
+  );
 
-  // TC2: valid for MB (ไม่ต้องมี mt5)
   const okMB: FormState = {
     fullName: "สมชาย ใจดี",
     email: "ok@example.com",
     phone: "0812345678",
-    mt5: "", // MB ไม่บังคับ
+    mt5: "",
     purchaseDate: "2025-01-01",
     slip: new File(["x"], "slip.png"),
   };
   const r2 = validatePurchaseForm("IRT GOLD MB", okMB);
   console.assert(Object.keys(r2).length === 0, "TC2 failed");
 
-  // TC3: PC ต้องมี mt5
   const pcNoMt5: FormState = { ...okMB, mt5: "", slip: new File(["x"], "s.png") };
   const r3 = validatePurchaseForm("IRT GOLD PC", pcNoMt5);
-  console.assert(!!r3.mt5, "TC3 failed");\n  console.groupEnd();\n}\n\n
-  
-  // โยนคอมโพเนนต์ Page ไปไว้ที่ window เพื่อให้ index.html เรียกใช้งานได้
+  console.assert(!!r3.mt5, "TC3 failed");
+
+  const noSlip: FormState = { ...okMB, slip: null };
+  const r4 = validatePurchaseForm("IRT GOLD MB", noSlip);
+  console.assert(!!r4.slip, "TC4 failed");
+
+  const okPC: FormState = {
+    fullName: "A B",
+    email: "a@b.com",
+    phone: "0123456789",
+    mt5: "123456",
+    purchaseDate: "2025-02-01",
+    slip: new File(["x"], "ok.png"),
+  };
+  const r5 = validatePurchaseForm("IRT GOLD PC", okPC);
+  console.assert(Object.keys(r5).length === 0, "TC5 failed");
+
+  console.groupEnd();
+}
+
+// 👇 สำคัญ: ให้ HTML เรียก root.render(<Page />) ได้
+// ห้ามใช้ export default เมื่อรันผ่าน CDN+UMD
 window.Page = Page;
