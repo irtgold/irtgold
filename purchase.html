@@ -1,0 +1,42 @@
+<!-- purchase.html -->
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>สั่งซื้อ IRT GOLD</title>
+
+  <!-- Tailwind (ปิด preflight ถ้าใช้ร่วม CSS เดิม) -->
+  <script>window.tailwind={config:{corePlugins:{preflight:false}}}</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React + ReactDOM + Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <link rel="stylesheet" href="assets/style.css?v=3" />
+</head>
+<body class="bg-gray-50">
+  <section class="section" id="purchase">
+    <div class="container">
+      <h2 class="section__title">ฟอร์มสั่งซื้อแพ็กเกจ</h2>
+      <div id="irt-purchase-root"></div>
+    </div>
+  </section>
+
+  <!-- โหลดคอมโพเนนต์ -->
+  <script type="text/babel" data-presets="typescript,react" src="assets/purchase.jsx"></script>
+
+  <!-- เรนเดอร์หน้า พร้อมอ่าน ?pkg= -->
+  <script type="text/babel">
+    const params = new URLSearchParams(location.search);
+    const pkg = params.get('pkg') || 'IRT GOLD PC';
+    const root = ReactDOM.createRoot(document.getElementById('irt-purchase-root'));
+
+    // หมายเหตุ: ในไฟล์ purchase.jsx ต้องมี `window.Page = Page;`
+    // หรือ export ให้ใช้ได้กับ UMD ตามที่เราใช้ในหน้า index ปัจจุบัน
+    root.render(<Page initPackage={pkg} />);
+  </script>
+</body>
+</html>
