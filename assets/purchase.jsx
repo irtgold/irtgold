@@ -139,7 +139,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
             className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
               errors.email ? "border-red-300" : "border-gray-200"
             }`}
-            placeholder="you@example.com"
+            placeholder="you@gmail.com"
           />
           {errors.email && <p className="text-xs text-red-600">{errors.email}</p>}
         </div>
@@ -166,7 +166,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
               className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
                 errors.mt5 ? "border-red-300" : "border-gray-200"
               }`}
-              placeholder="กรอกหมายเลขพอร์ต MT5"
+              placeholder="กรอกหมายเลขพอร์ต MT5 เช่น 104414"
             />
             {errors.mt5 && <p className="text-xs text-red-600">{errors.mt5}</p>}
           </div>
