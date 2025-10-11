@@ -354,4 +354,7 @@ if (typeof window !== "undefined" && (window as any).__RUN_PURCHASE_PAGE_TESTS__
   // TC3: PC ต้องมี mt5
   const pcNoMt5: FormState = { ...okMB, mt5: "", slip: new File(["x"], "s.png") };
   const r3 = validatePurchaseForm("IRT GOLD PC", pcNoMt5);
-  console.assert(!!r3.mt5, "TC3 failed");\n  console.groupEnd();\n}\n\n// โยนคอมโพเนนต์ Page ไปไว้ที่ window เพื่อให้ index.html เรียกใช้งานได้\nwindow.Page = Page;\n
+  console.assert(!!r3.mt5, "TC3 failed");\n  console.groupEnd();\n}\n\n
+  
+  // โยนคอมโพเนนต์ Page ไปไว้ที่ window เพื่อให้ index.html เรียกใช้งานได้
+window.Page = Page;
