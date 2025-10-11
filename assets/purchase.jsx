@@ -253,27 +253,6 @@ function Page({ initPackage }) {
         </div>
       </div>
 
-      {/* 4+5) การ์ด 2 ช่อง ขนาดสัดส่วนคงที่ */}
-      <div className="max-w-6xl mx-auto px-4 mt-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="rounded-2xl overflow-hidden shadow border">
-            <img src={urls.pcImgUrl} alt="IRT GOLD PC" className="w-full aspect-[16/9] object-cover" />
-            <div className="p-4">
-              <h3 className="text-xl md:text-2xl font-extrabold text-indigo-700">IRT GOLD PC</h3>
-              <p className="text-sm text-gray-600 mt-1">สำหรับใช้งานบนคอมพิวเตอร์ • ฿4,590</p>
-            </div>
-          </div>
-
-          <div className="rounded-2xl overflow-hidden shadow border">
-            <img src={urls.mbImgUrl} alt="IRT GOLD MB" className="w-full aspect-[16/9] object-cover" />
-            <div className="p-4">
-              <h3 className="text-xl md:text-2xl font-extrabold text-green-700">IRT GOLD MB</h3>
-              <p className="text-sm text-gray-600 mt-1">สำหรับใช้งานบนมือถือ • ฿2,390</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* 6) ขยายฟอร์มให้กว้างเท่าคอนเทนเนอร์ */}
       <div className="max-w-6xl mx-auto px-4 mt-8 mb-10">
         <PurchaseForm selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} />
