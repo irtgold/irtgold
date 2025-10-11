@@ -20,11 +20,10 @@ function validatePurchaseForm(selectedPackage, values) {
 // ---------- รูปตัวอย่างปรับได้ ----------
 const DEFAULTS = {
   heroUrl:
-    "https://images.unsplash.com/photo-1601597111158-d1a2169d7b2b?q=80&w=1600&auto=format&fit=crop",
-  pcImgUrl:
-    "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop",
-  mbImgUrl:
-    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop",
+const DEFAULTS = {
+  heroUrl: "Github-p/bn/bn.png",
+  pcImgUrl: "Github-p/irtpc/irtpc1.png",
+  mbImgUrl: "Github-p/itrmb/mb1.png",
 };
 
 // ---------- สั่งซื้อ ----------
