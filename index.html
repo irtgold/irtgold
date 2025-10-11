@@ -5,18 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IRT GOLD V5.0 - Indicator Rhythm Trading</title>
   <link rel="stylesheet" href="assets/style.css?v=3">
-  <!-- ปิด preflight เพื่อไม่ให้ Tailwind reset CSS เดิมของคุณ -->
-<script>
-  window.tailwind = { config: { corePlugins: { preflight: false } } };
-</script>
-<!-- Tailwind CDN (ใช้คลาสของฟอร์ม) -->
-<script src="https://cdn.tailwindcss.com"></script>
-
-<!-- React + ReactDOM + Babel (รัน JSX/TSX จาก purchase.jsx) -->
-<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  
 </head>
 <body>
   <!-- ============ NAV ============ -->
@@ -465,7 +453,7 @@
     <div class="pricing__grid">
       
       <!-- ===== การ์ด IRT GOLD PC (สีน้ำเงิน) ===== -->
-      <div class="pricing__card pricing__card--pc" data-pkg="IRT GOLD PC" tabindex="0" role="button">
+      <div class="pricing__card pricing__card--pc">
         <div class="pricing__header">
           <h3 class="package-name">IRT GOLD PC</h3>
           <div class="price-box">
@@ -490,12 +478,12 @@
         </div>
         
         <div class="pricing__footer">
-          <a href="#purchase" class="btn-buy" data-pkg="IRT GOLD PC">สั่งซื้อเลย</a>
+          <a href="#contact" class="btn-buy">สั่งซื้อเลย</a>
         </div>
       </div>
       
       <!-- ===== การ์ด IRT GOLD MB (สีเขียว) ===== -->
-      <div class="pricing__card pricing__card--mb" data-pkg="IRT GOLD MB" tabindex="0" role="button">
+      <div class="pricing__card pricing__card--mb">
         <div class="pricing__header">
           <h3 class="package-name">IRT GOLD MB</h3>
           <div class="price-box">
@@ -508,62 +496,25 @@
         </div>
         
         <div class="pricing__body">
-          <ul class="features-list">
-            <li><span class="chk">✔</span> ระบบอินดิเคเตอร์ 2 ตัว</li>
-            <li><span class="x">✕</span> ใช้กับ MT5 PC (Windows/Mac)</li>
-            <li><span class="chk">✔</span> ใช้กับ TradingView</li>
-            <li><span class="chk">✔</span> สัญญาณแจ้งเตือน Real-time</li>
-            <li><span class="chk">✔</span> คอร์สสอนแบบเต็ม + Live Coaching</li>
-            <li><span class="chk">✔</span> เข้ากลุ่ม VIP Signal Room ตลอดชีพ</li>
-            <li><span class="chk">✔</span> อัพเดตเวอร์ชันใหม่ฟรี</li>
-          </ul>
+<ul class="features-list">
+  <li><span class="chk">✔</span> ระบบอินดิเคเตอร์ 2 ตัว</li>
+  <li><span class="x">✕</span> ใช้กับ MT5 PC (Windows/Mac)</li>
+  <li><span class="chk">✔</span> ใช้กับ TradingView</li>
+  <li><span class="chk">✔</span> สัญญาณแจ้งเตือน Real-time</li>
+  <li><span class="chk">✔</span> คอร์สสอนแบบเต็ม + Live Coaching</li>
+  <li><span class="chk">✔</span> เข้ากลุ่ม VIP Signal Room ตลอดชีพ</li>
+  <li><span class="chk">✔</span> อัพเดตเวอร์ชันใหม่ฟรี</li>
+</ul>
         </div>
         
         <div class="pricing__footer">
-          <a href="#purchase" class="btn-buy" data-pkg="IRT GOLD MB">สั่งซื้อเลย</a>
+          <a href="#contact" class="btn-buy">สั่งซื้อเลย</a>
         </div>
       </div>
-
+      
     </div>
   </div>
 </section>
-     
-<!-- ======== PURCHASE FORM ROOT ======== -->
-<section class="section" id="purchase">
-  <div class="container">
-    <h2 class="section__title">ฟอร์มสั่งซื้อแพ็กเกจ</h2>
-    <div id="irt-purchase-root"></div>
-  </div>
-</section>
-      
-<script>
-  // ให้กดปุ่ม "สั่งซื้อเลย" หรือคลิกทั้งการ์ดแล้วเลื่อนลงไปยังฟอร์ม
-  // พร้อมส่งชื่อแพ็กเกจไปให้ React ตั้งค่าอัตโนมัติ
-  document.addEventListener('click', (e) => {
-    const el = e.target.closest('a.btn-buy[data-pkg], .pricing__card[data-pkg]');
-    if (!el) return;
-
-    const pkg = el.dataset.pkg || '';
-    // เลื่อนลงไปยังส่วนฟอร์ม
-    const formSection = document.querySelector('#purchase');
-    if (formSection) formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    // ส่ง event ไปให้ React ตั้งค่า selectedPackage
-    if (pkg) {
-      window.dispatchEvent(new CustomEvent('irt:select-package', { detail: pkg }));
-    }
-  });
-
-  // กด Enter/Space บนการ์ดได้ (เพื่อการเข้าถึง)
-  document.addEventListener('keydown', (e) => {
-    const card = e.target.closest('.pricing__card[data-pkg]');
-    if (!card) return;
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      card.click();
-    }
-  });
-</script>
       
 <!-- ================= CONTACT ================= -->
 <section class="section" id="contact">
@@ -618,23 +569,5 @@
       <p>© 2025 IRT GOLD — All Rights Reserved</p>
     </div>
   </footer>
-      
-      <!-- คอมโพเนนต์ฟอร์ม -->
-<script
-  type="text/babel"
-  data-presets="typescript,react"
-  src="assets/purchase.jsx">
-</script>
-
-<!-- เรนเดอร์ลง #irt-purchase-root -->
-<script type="text/babel">
-  const rootEl = document.getElementById('irt-purchase-root');
-  const root = ReactDOM.createRoot(rootEl);
-
-  // purchase.jsx (แบบ UMD) ต้องปิดท้ายไฟล์ด้วย:  window.Page = Page;
-  // แล้วเรียกเรนเดอร์แบบนี้
-  root.render(<Page />);
-</script>
-      
 </body>
 </html>
