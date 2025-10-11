@@ -243,14 +243,14 @@ function Page({ initPackage }) {
   return (
     <div className="bg-white">
       {/* 2) แบนเนอร์อยู่บนสุด + สัดส่วนพอดี */}
-      <div className="w-full">
-        <div className="max-w-6xl mx-auto px-4 pt-6">
-          <img
-            src={urls.heroUrl}
-            alt="IRT GOLD Banner"
-            className="w-full rounded-xl object-cover aspect-[21/8] shadow"
-          />
-        </div>
+<div className="w-full">
+  <img
+    src={urls.heroUrl}
+    alt="IRT GOLD Banner"
+    className="block w-full object-cover"
+    style={{ aspectRatio: "21/8" }}  // คุมสัดส่วนให้สวย
+  />
+</div>
       </div>
 
       {/* 6) ขยายฟอร์มให้กว้างเท่าคอนเทนเนอร์ */}
