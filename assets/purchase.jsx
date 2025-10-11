@@ -276,7 +276,7 @@ function Page({ initPackage }) {
         style={{ backgroundImage: `url(${urls.heroUrl})` }}
       >
         <div className="bg-black/40 text-white px-6 py-3 rounded-xl shadow-lg">
-          <h1 className="text-2xl md:text-3xl font-bold tracking-wide">IRT GOLD Purchase System</h1>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-wide">IRT GOLD</h1>
           <p className="text-xs md:text-sm text-white/90 mt-1">อัปโหลดสลิปและยืนยันการสั่งซื้อได้ภายในไม่กี่คลิก</p>
         </div>
       </div>
