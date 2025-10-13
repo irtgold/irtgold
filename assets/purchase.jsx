@@ -2,7 +2,7 @@
 const { useState, useEffect } = React;
 
 // ====== ปลายทาง API (ถ้าต่อ Apps Script ให้ใส่ URL ที่นี่) ======
-const WEB_APP_URL = "https://script.google.com/macros/s/PASTE_YOUR_WEB_APP_ID/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby1a_9TLw4RnrjPHQwlZF3zCDWRvQ2mnwLFQaDoU4Sjwe9OiZKSp4b-cbsHr2ye4V-9ug/exec";
 
 // ---------- ตัวช่วยตรวจสอบฟอร์ม ----------
 function validatePurchaseForm(selectedPackage, values) {
@@ -38,39 +38,40 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const validation = validatePurchaseForm(selectedPackage, form);
-    setErrors(validation);
-    if (Object.keys(validation).length) return;
+async function handleSubmit(e) {
+  e.preventDefault();
+  const validation = validatePurchaseForm(selectedPackage, form);
+  setErrors(validation);
+  if (Object.keys(validation).length) return;
 
-    setSubmitting(true);
-    setSuccess(null);
-    try {
-      // DEMO: หน่วงเวลาแทนส่งจริง
-      await new Promise((r) => setTimeout(r, 700));
+  setSubmitting(true);
+  setSuccess(null);
 
-      // (ใช้งานจริง) ส่งไป Apps Script:
-      // const fd = new FormData();
-      // fd.append("selectedPackage", selectedPackage);
-      // fd.append("fullName", form.fullName);
-      // fd.append("email", form.email);
-      // fd.append("phone", form.phone);
-      // fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
-      // fd.append("purchaseDate", form.purchaseDate);
-      // if (form.slip) fd.append("slip", form.slip, form.slip.name);
-      // const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
-      // const data = await res.json();
-      // if (!data.ok) throw new Error(data.error || "Upload failed");
+  try {
+    const fd = new FormData();
+    fd.append("selectedPackage", selectedPackage);
+    fd.append("fullName", form.fullName);
+    fd.append("email", form.email);
+    fd.append("phone", form.phone);
+    fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
+    fd.append("purchaseDate", form.purchaseDate);
+    if (form.slip) fd.append("slip", form.slip, form.slip.name); // ชื่อ field ต้องเป็น 'slip'
 
-      setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
-      setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
-    } catch (err) {
-      setErrors({ submit: "เกิดข้อผิดพลาดขณะส่งข้อมูล" });
-    } finally {
-      setSubmitting(false);
-    }
+    const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
+    const data = await res.json(); // doPost ส่ง JSON กลับ
+
+    if (!data.ok) throw new Error(data.msg || "Upload failed");
+
+    setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
+    setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
+  } catch (err) {
+    console.error(err);
+    setErrors({ submit: "เกิดข้อผิดพลาดขณะส่งข้อมูล" });
+  } finally {
+    setSubmitting(false);
   }
+}
+
 
   return (
     <div className="w-full bg-white rounded-2xl shadow-lg p-6 border-t-4 border-indigo-500">
