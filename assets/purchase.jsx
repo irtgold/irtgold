@@ -91,7 +91,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
           onClick={() => setSelectedPackage("IRT GOLD PC")}
         >
           <h3 className="font-bold text-indigo-700 flex items-center gap-2">
-            <img src="icon/Pc.png" alt="PC" className="h-5 w-5 object-contain" />
+            <img src="Github-p/icon/Pc.png" alt="PC" className="h-5 w-5 object-contain" />
             IRT GOLD PC
           </h3>
           <p className="text-sm text-gray-600">สำหรับใช้งานบนคอมพิวเตอร์</p>
@@ -108,7 +108,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
           onClick={() => setSelectedPackage("IRT GOLD MB")}
         >
           <h3 className="font-bold text-green-700 flex items-center gap-2">
-            <img src="icon/Mb.png" alt="Mobile" className="h-5 w-5 object-contain" />
+            <img src="Github-p/icon/Mb.png" alt="Mobile" className="h-5 w-5 object-contain" />
             IRT GOLD MB
           </h3>
           <p className="text-sm text-gray-600">สำหรับใช้งานบนมือถือ</p>
@@ -138,7 +138,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
 
           {/* โลโก้ธนาคาร (เล็ก ๆ ด้านขวา) */}
           <img
-            src="icon/Kb.png"
+            src="Github-p/icon/Kb.png"
             alt="KBank"
             className="h-12 w-auto object-contain shrink-0"
           />
