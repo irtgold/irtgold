@@ -1,47 +1,87 @@
 <!-- purchase.html -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>สั่งซื้อ IRT GOLD</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>สั่งซื้อ IRT GOLD</title>
 
-  <!-- Tailwind; ปิด preflight เพื่อไม่ชนกับสไตล์เดิม -->
-  <script>window.tailwind={config:{corePlugins:{preflight:false}}};</script>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind: ปิด preflight กันชนกับสไตล์เดิม -->
+    <script>
+      window.tailwind = { config: { corePlugins: { preflight: false } } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- React + ReactDOM + Babel (รัน JSX/TSX จาก purchase.jsx) -->
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="assets/style.css?v=3" />
+  </head>
 
-  <link rel="stylesheet" href="assets/style.css?v=3" />
-</head>
-<body class="m-0 bg-gray-50">
-  <section class="section" id="purchase">
-    <div class="container mx-auto px-4 py-0">
-      <div id="irt-purchase-root"></div>
-    </div>
-  </section>
+  <body class="m-0 bg-gray-50">
+    <section id="purchase" class="section">
+      <div class="container mx-auto px-4 py-0">
+        <!-- จุด mount ของ React (ต้องมี) -->
+        <div id="irt-purchase-root"></div>
 
-  <!-- โหลดคอมโพเนนต์ฟอร์ม -->
-  <script
-    type="text/babel"
-    data-presets="typescript,react"
-    src="assets/purchase.jsx"
-  ></script>
+        <!-- กล่องแสดง error กรณีโหลดคอมโพเนนต์ไม่สำเร็จ -->
+        <div id="irt-error" class="hidden mt-6 rounded-md bg-red-50 p-4 text-red-800 text-sm"></div>
 
-  <!-- เรนเดอร์ #irt-purchase-root -->
-  <script type="text/babel">
-    // อ่าน pkg= จาก URL (เช่น purchase.html?pkg=IRT%20GOLD%20PC)
-    const url = new URL(location.href);
-    const initPkg = url.searchParams.get('pkg') || 'IRT GOLD PC';
+        <noscript>
+          <p class="mt-6 text-sm text-red-700">
+            จำเป็นต้องเปิดใช้งาน JavaScript เพื่อใช้งานหน้านี้
+          </p>
+        </noscript>
+      </div>
+    </section>
 
-    const rootEl = document.getElementById('irt-purchase-root');
-    const root = ReactDOM.createRoot(rootEl);
+    <!-- React/ReactDOM (UMD). ถ้าต้องการโหมด production เปลี่ยนเป็น react.production.min.js -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
 
-    // คอมโพเนนต์ Page ถูกผูกไว้เป็น window.Page ใน purchase.jsx (แบบ UMD)
-    root.render(<Page initPackage={initPkg} />);
-  </script>
-</body>
+    <!-- Babel แปล JSX/TSX ในเบราว์เซอร์ (เหมาะทดสอบ/หน้าเล็ก ๆ) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- โหลดคอมโพเนนต์ของคุณ (ห้ามมี import/export ข้างในไฟล์นี้) 
+         ให้ประกาศเป็น UMD/global เช่น:  window.Page = function Page(props) { ... } -->
+    <script
+      type="text/babel"
+      data-presets="react,typescript"
+      src="assets/purchase.jsx?v=3"
+    ></script>
+
+    <!-- Bootstrap เรนเดอร์ -->
+    <script type="text/babel">
+      (function () {
+        try {
+          const rootEl = document.getElementById('irt-purchase-root');
+          const errEl  = document.getElementById('irt-error');
+
+          // อ่าน pkg= จาก query string
+          const url = new URL(window.location.href);
+          const initPkg = url.searchParams.get('pkg') || 'IRT GOLD PC';
+
+          if (!rootEl) {
+            throw new Error('ไม่พบ #irt-purchase-root ในหน้า HTML');
+          }
+          if (!window.React || !window.ReactDOM) {
+            throw new Error('โหลด React/ReactDOM ไม่สำเร็จ');
+          }
+
+          // ต้องให้ purchase.jsx กำหนด window.Page
+          if (typeof window.Page !== 'function') {
+            throw new Error('ไม่พบคอมโพเนนต์ Page (คาดว่า assets/purchase.jsx ยังไม่ได้กำหนด window.Page)');
+          }
+
+          const root = ReactDOM.createRoot(rootEl);
+          root.render(<Page initPackage={initPkg} />);
+        } catch (e) {
+          // แสดง error ที่หน้า (ช่วยดีบักเวลาไฟล์ JSX โหลดไม่ติด)
+          const el = document.getElementById('irt-error');
+          if (el) {
+            el.classList.remove('hidden');
+            el.textContent = 'เกิดข้อผิดพลาด: ' + (e?.message || e);
+          }
+          console.error(e);
+        }
+      })();
+    </script>
+  </body>
 </html>
