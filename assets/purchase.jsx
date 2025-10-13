@@ -1,4 +1,4 @@
-/** assets/purchase.jsx (UMD + Babel) */
+/** assets/purchase.jsx (UMD + Babel; fixed) */
 const { useState, useEffect } = React;
 
 // ====== ปลายทาง API (ถ้าต่อ Apps Script ให้ใส่ URL ที่นี่) ======
@@ -17,11 +17,11 @@ function validatePurchaseForm(selectedPackage, values) {
   return e;
 }
 
-// ---------- รูปเริ่มต้น (ใช้รูปใน repo) ----------
+// ---------- รูปเริ่มต้น (ต้องให้พาธเข้าถึงได้จริงใน repo/gh-pages) ----------
 const DEFAULTS = {
-  heroUrl: "Github-p/bn/bn.png",          // แบนเนอร์ด้านบน
-  pcImgUrl: "Github-p/irtpc/irtpc1.png",  // รูปการ์ด IRT GOLD PC
-  mbImgUrl: "Github-p/itrmb/mb1.png",     // รูปการ์ด IRT GOLD MB
+  heroUrl: "Github-p/bn/bn.png",
+  pcImgUrl: "Github-p/irtpc/irtpc1.png",
+  mbImgUrl: "Github-p/itrmb/mb1.png",
 };
 
 // ---------- ฟอร์มสั่งซื้อ ----------
@@ -229,7 +229,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   );
 }
 
-// ---------- หน้า Page (ปรับ Layout ตาม 6 ข้อ) ----------
+// ---------- หน้า Page ----------
 function Page({ initPackage }) {
   const [selectedPackage, setSelectedPackage] = useState(initPackage || "IRT GOLD PC");
   const [urls] = useState(DEFAULTS);
@@ -242,20 +242,21 @@ function Page({ initPackage }) {
 
   return (
     <div className="bg-white">
-      {/* 2) แบนเนอร์อยู่บนสุด + สัดส่วนพอดี */}
-<div className="w-full">
-  <img
-    src={urls.heroUrl}
-    alt="IRT GOLD Banner"
-    className="block w-full object-cover"
-    style={{ aspectRatio: "21/8" }}  // คุมสัดส่วนให้สวย
-  />
-</div>
+      {/* Banner */}
+      <div className="w-full">
+        <img
+          src={urls.heroUrl}
+          alt="IRT GOLD Banner"
+          className="block w-full object-cover aspect-[21/8]"
+        />
       </div>
 
-      {/* 6) ขยายฟอร์มให้กว้างเท่าคอนเทนเนอร์ */}
+      {/* Form */}
       <div className="max-w-6xl mx-auto px-4 mt-8 mb-10">
-        <PurchaseForm selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} />
+        <PurchaseForm
+          selectedPackage={selectedPackage}
+          setSelectedPackage={setSelectedPackage}
+        />
       </div>
     </div>
   );
