@@ -79,7 +79,9 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ
       </p>
 
+      {/* การ์ดเลือกแพ็กเกจ + ไอคอน Pc / Mb */}
       <div className="grid grid-cols-2 gap-4 mb-6">
+        {/* IRT GOLD PC */}
         <div
           className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
             selectedPackage === "IRT GOLD PC"
@@ -88,11 +90,15 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
           }`}
           onClick={() => setSelectedPackage("IRT GOLD PC")}
         >
-          <h3 className="font-bold text-indigo-700">IRT GOLD PC</h3>
+          <h3 className="font-bold text-indigo-700 flex items-center gap-2">
+            <img src="icon/Pc.png" alt="PC" className="h-5 w-5 object-contain" />
+            IRT GOLD PC
+          </h3>
           <p className="text-sm text-gray-600">สำหรับใช้งานบนคอมพิวเตอร์</p>
           <p className="text-lg font-semibold text-indigo-600 mt-2">฿4,590</p>
         </div>
 
+        {/* IRT GOLD MB */}
         <div
           className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
             selectedPackage === "IRT GOLD MB"
@@ -101,21 +107,45 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
           }`}
           onClick={() => setSelectedPackage("IRT GOLD MB")}
         >
-          <h3 className="font-bold text-green-700">IRT GOLD MB</h3>
+          <h3 className="font-bold text-green-700 flex items-center gap-2">
+            <img src="icon/Mb.png" alt="Mobile" className="h-5 w-5 object-contain" />
+            IRT GOLD MB
+          </h3>
           <p className="text-sm text-gray-600">สำหรับใช้งานบนมือถือ</p>
           <p className="text-lg font-semibold text-green-600 mt-2">฿2,390</p>
         </div>
       </div>
 
+      {/* กล่องรายละเอียดธนาคาร + ไอคอน KBank + กรอบเลขที่บัญชีพื้นเขียวอ่อน */}
       <div className="bg-gray-50 border rounded-xl p-4 mb-6">
-        <p className="font-medium text-gray-800">💳 ธนาคารกสิกรไทย</p>
-        <p className="text-gray-700">ชื่อบัญชี: บริษัท ไออาร์ที เทรดดิ้ง จำกัด</p>
-        <p className="text-gray-700">
-          เลขที่บัญชี: <span className="font-semibold">123-4-56789-0</span>
-        </p>
-        <p className="text-gray-500 text-sm mt-1">(โปรดตรวจสอบยอดก่อนโอน)</p>
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex-1">
+            <p className="font-medium text-gray-800">ธนาคารกสิกรไทย</p>
+            <p className="text-gray-700">ชื่อบัญชี: บริษัท ไออาร์ที เทรดดิ้ง จำกัด</p>
+
+            {/* กรอบเลขที่บัญชีเป็นพื้นสีเขียวอ่อน */}
+            <div className="mt-2 rounded-lg border border-green-200 bg-green-50 px-3 py-2">
+              <p className="text-gray-800">
+                เลขที่บัญชี:{" "}
+                <span className="font-semibold tracking-wider text-green-800">
+                  123-4-56789-0
+                </span>
+              </p>
+            </div>
+
+            <p className="text-gray-500 text-sm mt-1">(โปรดตรวจสอบยอดก่อนโอน)</p>
+          </div>
+
+          {/* โลโก้ธนาคาร (เล็ก ๆ ด้านขวา) */}
+          <img
+            src="icon/Kb.png"
+            alt="KBank"
+            className="h-12 w-auto object-contain shrink-0"
+          />
+        </div>
       </div>
 
+      {/* ฟอร์มข้อมูลผู้ซื้อ */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">ชื่อ-นามสกุล</label>
