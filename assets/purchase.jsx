@@ -121,12 +121,12 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
             <p className="font-medium text-gray-800">ธนาคารกสิกรไทย</p>
-            <p className="text-gray-700">ชื่อบัญชี: หจก.เลิศฐาชัย1994 </p>
+            <p className="text-gray-700">ชื่อบัญชี : หจก.เลิศฐาชัย1994 </p>
 
             {/* กรอบเลขที่บัญชีเป็นพื้นสีเขียวอ่อน */}
             <div className="mt-2 rounded-lg border border-green-200 bg-green-50 px-3 py-2">
               <p className="text-gray-800">
-                เลขที่บัญชี:{" "}
+                เลขที่บัญชี :{" "}
                 <span className="font-semibold tracking-wider text-green-800">
                   216-8-19894-1
                 </span>
