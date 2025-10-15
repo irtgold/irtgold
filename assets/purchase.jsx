@@ -57,8 +57,6 @@ fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
 fd.append("purchaseDate", form.purchaseDate);
 if (form.slip) fd.append("slip", form.slip, form.slip.name);
 
-const res = await fetch(WEB_APP_URL, { method: "POST", body: fd }); // ชื่อ field ต้องเป็น 'slip'
-
     const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
     const data = await res.json(); // doPost ส่ง JSON กลับ
 
