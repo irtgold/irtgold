@@ -38,40 +38,42 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const validation = validatePurchaseForm(selectedPackage, form);
-    setErrors(validation);
-    if (Object.keys(validation).length) return;
+async function handleSubmit(e) {
+  e.preventDefault();
 
-    setSubmitting(true);
-    setSuccess(null);
+  const validation = validatePurchaseForm(selectedPackage, form);
+  setErrors(validation);
+  if (Object.keys(validation).length) return;
 
-    try {
-      const fd = new FormData();
-      fd.append("selectedPackage", selectedPackage);
-      fd.append("fullName", form.fullName);
-      fd.append("email", form.email);
-      fd.append("phone", form.phone);
-      fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
-      fd.append("purchaseDate", form.purchaseDate);
-      if (form.slip) fd.append("slip", form.slip, form.slip.name);
+  setSubmitting(true);
+  setSuccess(null);
 
-      // สำคัญ: ต้องมี await fetch
-      const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
-      const data = await res.json();
-      console.log("AppsScript response:", data);
-      if (!data.ok) throw new Error(data.error || data.msg || "Upload failed");
+  try {
+    const fd = new FormData();
+    fd.append("selectedPackage", selectedPackage);
+    fd.append("fullName", form.fullName);
+    fd.append("email", form.email);
+    fd.append("phone", form.phone);
+    fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
+    fd.append("purchaseDate", form.purchaseDate);
+    if (form.slip) fd.append("slip", form.slip, form.slip.name);
 
-      setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
-      setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
-    } catch (err) {
-      console.error(err);
-      setErrors({ submit: "เกิดข้อผิดพลาดขณะส่งข้อมูล" });
-    } finally {
-      setSubmitting(false);
-    }
-  } // <-- ปิด handleSubmit ให้เรียบร้อย
+    // <<< สำคัญ: ต้องมีบรรทัดนี้จริง ๆ >>>
+    const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
+
+    const data = await res.json();               // Apps Script ส่ง JSON กลับ
+    console.log("AppsScript response:", data);   // ดูรายละเอียดใน DevTools > Console
+    if (!data.ok) throw new Error(data.error || data.msg || "Upload failed");
+
+    setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
+    setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
+  } catch (err) {
+    console.error(err);
+    setErrors({ submit: "เกิดข้อผิดพลาดขณะส่งข้อมูล" });
+  } finally {
+    setSubmitting(false);
+  }
+}
 
   return (
     <div className="w-full bg-white rounded-2xl shadow-lg p-6 border-t-4 border-indigo-500">
