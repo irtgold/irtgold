@@ -2,7 +2,7 @@
 const { useState, useEffect } = React;
 
 // <<< ใส่ URL ของ Web App ที่เพิ่ง Deploy (ลงท้าย /exec) >>>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbytvwFcWncTcwVrf6IHE3XHEx4uFC0UIO65cocTMkLF0zwtNuXP05A8JvCVhIJvg3cDng/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwC7h3yCg6V_04KH8L0ou3U6i1S8exUX-M3pLbXfhCP4ouM2LWsxH6Wz3eF-l33Uz3rlA/exec";
 
 // ----- ตรวจฟอร์ม -----
 function validatePurchaseForm(selectedPackage, values) {
@@ -57,19 +57,19 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
       fd.append("purchaseDate", form.purchaseDate);
       if (form.slip) fd.append("slip", form.slip, form.slip.name);
 
-      const res = await fetch(WEB_APP_URL, {
-        method: "POST",
-        body: fd,
-        mode: "cors",
-        cache: "no-store",
-      });
+const res = await fetch(WEB_APP_URL, {
+  method: "POST",
+  body: fd,             // ส่ง FormData ตรง ๆ ไม่ต้องใส่ header เอง
+  // ไม่ต้องใส่ mode/cache/header อะไรเพิ่มเติม
+});
 
-      const data = await res.json().catch(() => ({}));
-      console.log("AppsScript response:", data);
+const data = await res.json().catch(() => ({}));
+console.log("AppsScript response:", data);
 
-      if (!res.ok || !data.ok) {
-        throw new Error(data.error || data.msg || `HTTP ${res.status}`);
-      }
+if (!res.ok || !data.ok) {
+  throw new Error(data.error || data.msg || `HTTP ${res.status}`);
+}
+
 
       setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
       setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
