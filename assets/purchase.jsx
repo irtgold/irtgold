@@ -47,31 +47,32 @@ async function handleSubmit(e) {
   setSubmitting(true);
   setSuccess(null);
 
-  try {
-    const fd = new FormData();
-fd.append("selectedPackage", selectedPackage);
-fd.append("fullName", form.fullName);
-fd.append("email", form.email);
-fd.append("phone", form.phone);
-fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
-fd.append("purchaseDate", form.purchaseDate);
-if (form.slip) fd.append("slip", form.slip, form.slip.name);
+try {
+  const fd = new FormData();
+  fd.append("selectedPackage", selectedPackage);
+  fd.append("fullName", form.fullName);
+  fd.append("email", form.email);
+  fd.append("phone", form.phone);
+  fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
+  fd.append("purchaseDate", form.purchaseDate);
+  if (form.slip) fd.append("slip", form.slip, form.slip.name);
 
-- const data = await res.json(); // doPost ส่ง JSON กลับ
-- if (!data.ok) throw new Error(data.msg || "Upload failed");
-+ const data = await res.json();            // doPost ส่ง JSON กลับ
-+ console.log("AppsScript response:", data); // ดู error detail ใน DevTools > Console
-+ if (!data.ok) throw new Error(data.error || data.msg || "Upload failed");
+  // <<< บรรทัดนี้ห้ามหาย >>>
+  const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
 
-    setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
-    setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
-  } catch (err) {
-    console.error(err);
-    setErrors({ submit: "เกิดข้อผิดพลาดขณะส่งข้อมูล" });
-  } finally {
-    setSubmitting(false);
-  }
+  const data = await res.json();              // doPost ส่ง JSON กลับ
+  console.log("AppsScript response:", data);  // ดูรายละเอียด error ใน DevTools > Console
+  if (!data.ok) throw new Error(data.error || data.msg || "Upload failed");
+
+  setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
+  setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
+} catch (err) {
+  console.error(err);
+  setErrors({ submit: "เกิดข้อผิดพลาดขณะส่งข้อมูล" });
+} finally {
+  setSubmitting(false);
 }
+
 
 
   return (
