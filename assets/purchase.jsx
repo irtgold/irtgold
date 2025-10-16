@@ -1,7 +1,7 @@
-/** assets/purchase.jsx (UMD + Babel; fixed) */
+/** assets/purchase.jsx (UMD + Babel) */
 const { useState, useEffect } = React;
 
-// ====== ปลายทาง API (ใช้ URL ที่เพิ่ง Deploy) ======
+// === ใส่ URL Web App (ของ Deployment ล่าสุดที่ "ใครก็เข้าได้") ===
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxbKzhpEpeA8vXOu6TQAHb_oNyt89y3Hd4c5MBd9dmncfaVqZDjEQekSGmtztA8SSpDww/exec";
 
 // ---------- ตรวจฟอร์ม ----------
@@ -38,48 +38,57 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
 
-async function handleSubmit(e) {
-  e.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-  const validation = validatePurchaseForm(selectedPackage, form);
-  setErrors(validation);
-  if (Object.keys(validation).length) return;
+    const validation = validatePurchaseForm(selectedPackage, form);
+    setErrors(validation);
+    if (Object.keys(validation).length) return;
 
-  setSubmitting(true);
-  setSuccess(null);
+    setSubmitting(true);
+    setSuccess(null);
 
-  try {
-    const fd = new FormData();
-    fd.append("selectedPackage", selectedPackage);
-    fd.append("fullName", form.fullName);
-    fd.append("email", form.email);
-    fd.append("phone", form.phone);
-    fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
-    fd.append("purchaseDate", form.purchaseDate);
-    if (form.slip) fd.append("slip", form.slip, form.slip.name);
+    try {
+      const fd = new FormData();
+      fd.append("selectedPackage", selectedPackage);
+      fd.append("fullName", form.fullName);
+      fd.append("email", form.email);
+      fd.append("phone", form.phone);
+      fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
+      fd.append("purchaseDate", form.purchaseDate);
+      if (form.slip) fd.append("slip", form.slip, form.slip.name);
 
-    // <<< สำคัญ: ต้องมีบรรทัดนี้จริง ๆ >>>
-    const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
+      // สำคัญ: ต้อง fetch ไปยัง Web App URL จริง (exec)
+      const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
 
-    const data = await res.json();               // Apps Script ส่ง JSON กลับ
-    console.log("AppsScript response:", data);   // ดูรายละเอียดใน DevTools > Console
-    if (!data.ok) throw new Error(data.error || data.msg || "Upload failed");
+      // ถ้า Apps Script พัง/เขียน header ไม่ครบ จะได้ text กลับมา → ป้องกัน parse พัง
+      const text = await res.text();
+      let data = {};
+      try { data = JSON.parse(text); } catch (_) { data = { ok: false, error: "Invalid JSON from Apps Script", raw: text }; }
 
-    setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
-    setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
-  } catch (err) {
-    console.error(err);
-    setErrors({ submit: "เกิดข้อผิดพลาดขณะส่งข้อมูล" });
-  } finally {
-    setSubmitting(false);
+      console.log("AppsScript response:", data); // เปิด DevTools > Console เพื่อดูรายละเอียดได้
+
+      if (!data.ok) {
+        // โยนรายละเอียดที่ได้จริง เพื่อรู้ว่าพังตรงไหน
+        throw new Error(data.error || data.msg || "Upload failed");
+      }
+
+      setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
+      setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
+    } catch (err) {
+      console.error("Submit error:", err);
+      setErrors({ submit: `เกิดข้อผิดพลาดขณะส่งข้อมูล: ${err.message || err}` });
+    } finally {
+      setSubmitting(false);
+    }
   }
-}
 
   return (
     <div className="w-full bg-white rounded-2xl shadow-lg p-6 border-t-4 border-indigo-500">
       <h2 className="text-2xl font-semibold text-center mb-2 text-indigo-700">สั่งซื้อแพ็กเกจ</h2>
       <p className="text-center text-sm text-gray-500 mb-6">เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ</p>
 
+      {/* การ์ดเลือกแพ็กเกจ */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div
           className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
@@ -110,11 +119,12 @@ async function handleSubmit(e) {
         </div>
       </div>
 
+      {/* กล่องธนาคาร */}
       <div className="bg-gray-50 border rounded-xl p-4 mb-6">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
             <p className="font-medium text-gray-800">ธนาคารกสิกรไทย</p>
-            <p className="text-gray-700">ชื่อบัญชี : หจก.เลิศฐาชัย1994</p>
+            <p className="text-gray-700">ชื่อบัญชี : หจก.เลิศฐาชัย1994 </p>
             <div className="mt-2 rounded-lg border border-green-200 bg-green-50 px-3 py-2">
               <p className="text-gray-800">
                 เลขที่บัญชี : <span className="font-semibold tracking-wider text-green-800">216-8-19894-1</span>
@@ -126,6 +136,7 @@ async function handleSubmit(e) {
         </div>
       </div>
 
+      {/* ฟอร์มข้อมูลผู้ซื้อ */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">ชื่อ-นามสกุล</label>
@@ -151,7 +162,7 @@ async function handleSubmit(e) {
         </div>
 
         <div>
-          <label className="block text_sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
+          <label className="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
           <input
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
@@ -246,5 +257,5 @@ function Page({ initPackage }) {
   );
 }
 
-// ให้ไฟล์ HTML เรียกใช้ได้ (รูปแบบ UMD)
+// ให้ไฟล์ HTML เรียกใช้ได้ (UMD)
 window.Page = Page;
