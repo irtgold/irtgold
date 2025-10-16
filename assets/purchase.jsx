@@ -1,8 +1,8 @@
 /** assets/purchase.jsx (UMD + Babel) */
 const { useState, useEffect } = React;
 
-// === ใส่ URL Web App (ของ Deployment ล่าสุดที่ "ใครก็เข้าได้") ===
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzi4JU53rrQy3CY2BhUy1y6F56wH5Utm7CzcFOo5oHbGedHlJbHpjrC-mHyG2UGQGfkOQ/exec";
+// === URL ของ Apps Script (ต้องเป็นอันล่าสุดที่เพิ่ง Deploy และลงท้าย /exec) ===
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby9MXICoeZeZdeYsepfb-PRK0W_yP7VxjYigqPlEgssYDjwIL1Vp8N7gf2y0xWF4stjwA/exec";
 
 // ---------- ตรวจฟอร์ม ----------
 function validatePurchaseForm(selectedPackage, values) {
@@ -58,26 +58,28 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
       fd.append("purchaseDate", form.purchaseDate);
       if (form.slip) fd.append("slip", form.slip, form.slip.name);
 
-      // สำคัญ: ต้อง fetch ไปยัง Web App URL จริง (exec)
-      const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
+      // ยิง POST ไป Apps Script
+      const res = await fetch(WEB_APP_URL, {
+        method: "POST",
+        body: fd,
+        // ไม่ใส่ headers Content-Type เอง ปล่อยให้เบราว์เซอร์ตั้ง multipart boundary
+      });
 
-      // ถ้า Apps Script พัง/เขียน header ไม่ครบ จะได้ text กลับมา → ป้องกัน parse พัง
-      const text = await res.text();
-      let data = {};
-      try { data = JSON.parse(text); } catch (_) { data = { ok: false, error: "Invalid JSON from Apps Script", raw: text }; }
-
-      console.log("AppsScript response:", data); // เปิด DevTools > Console เพื่อดูรายละเอียดได้
-
-      if (!data.ok) {
-        // โยนรายละเอียดที่ได้จริง เพื่อรู้ว่าพังตรงไหน
-        throw new Error(data.error || data.msg || "Upload failed");
+      // เผื่อกรณี preflight ผ่านแต่สถานะฝั่ง Apps Script เป็น error (>=400)
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status} ${res.statusText}`);
       }
+
+      const data = await res.json();          // Apps Script ส่ง JSON กลับ
+      console.log("AppsScript response:", data);
+      if (!data.ok) throw new Error(data.error || data.msg || "Upload failed");
 
       setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
       setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
     } catch (err) {
-      console.error("Submit error:", err);
-      setErrors({ submit: `เกิดข้อผิดพลาดขณะส่งข้อมูล: ${err.message || err}` });
+      console.error("submit error:", err);
+      // เบราว์เซอร์ขึ้น TypeError: Failed to fetch -> สื่อว่าโดน CORS/Network block
+      setErrors({ submit: `เกิดข้อผิดพลาดขณะส่งข้อมูล` });
     } finally {
       setSubmitting(false);
     }
@@ -88,12 +90,10 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
       <h2 className="text-2xl font-semibold text-center mb-2 text-indigo-700">สั่งซื้อแพ็กเกจ</h2>
       <p className="text-center text-sm text-gray-500 mb-6">เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ</p>
 
-      {/* การ์ดเลือกแพ็กเกจ */}
+      {/* เลือกแพ็กเกจ */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div
-          className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
-            selectedPackage === "IRT GOLD PC" ? "border-indigo-500 bg-indigo-50 scale-[1.02]" : "border-gray-200 hover:border-indigo-300"
-          }`}
+          className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${selectedPackage === "IRT GOLD PC" ? "border-indigo-500 bg-indigo-50 scale-[1.02]" : "border-gray-200 hover:border-indigo-300"}`}
           onClick={() => setSelectedPackage("IRT GOLD PC")}
         >
           <h3 className="font-bold text-indigo-700 flex items-center gap-2">
@@ -105,9 +105,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         </div>
 
         <div
-          className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
-            selectedPackage === "IRT GOLD MB" ? "border-green-500 bg-green-50 scale-[1.02]" : "border-gray-200 hover:border-green-300"
-          }`}
+          className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${selectedPackage === "IRT GOLD MB" ? "border-green-500 bg-green-50 scale-[1.02]" : "border-gray-200 hover:border-green-300"}`}
           onClick={() => setSelectedPackage("IRT GOLD MB")}
         >
           <h3 className="font-bold text-green-700 flex items-center gap-2">
@@ -119,7 +117,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         </div>
       </div>
 
-      {/* กล่องธนาคาร */}
+      {/* ธนาคาร */}
       <div className="bg-gray-50 border rounded-xl p-4 mb-6">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
@@ -136,7 +134,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         </div>
       </div>
 
-      {/* ฟอร์มข้อมูลผู้ซื้อ */}
+      {/* ฟอร์ม */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">ชื่อ-นามสกุล</label>
@@ -212,9 +210,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         <button
           type="submit"
           disabled={submitting}
-          className={`w-full rounded-xl py-2 font-semibold text-white shadow-md transition-transform ${
-            submitting ? "bg-indigo-300 cursor-wait" : "bg-gradient-to-r from-indigo-600 to-green-500 hover:scale-[1.02]"
-          }`}
+          className={`w-full rounded-xl py-2 font-semibold text-white shadow-md transition-transform ${submitting ? "bg-indigo-300 cursor-wait" : "bg-gradient-to-r from-indigo-600 to-green-500 hover:scale-[1.02]"}`}
         >
           {submitting ? "กำลังส่งข้อมูล..." : "ยืนยันการสั่งซื้อ"}
         </button>
@@ -229,12 +225,13 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         </div>
       )}
 
-      <footer className="mt-6 text-xs text-gray-400 text-center">© {new Date().getFullYear()} IRT — ระบบสั่งซื้อแพ็กเกจ</footer>
+      <footer className="mt-6 text-xs text-gray-400 text-center">
+        © {new Date().getFullYear()} IRT — ระบบสั่งซื้อแพ็กเกจ
+      </footer>
     </div>
   );
 }
 
-// ---------- หน้า Page ----------
 function Page({ initPackage }) {
   const [selectedPackage, setSelectedPackage] = useState(initPackage || "IRT GOLD PC");
   const [urls] = useState(DEFAULTS);
@@ -257,5 +254,4 @@ function Page({ initPackage }) {
   );
 }
 
-// ให้ไฟล์ HTML เรียกใช้ได้ (UMD)
 window.Page = Page;
