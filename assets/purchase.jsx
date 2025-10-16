@@ -1,10 +1,10 @@
 /** assets/purchase.jsx (UMD + Babel) */
 const { useState, useEffect } = React;
 
-// === URL ของ Apps Script (ต้องเป็นอันล่าสุดที่เพิ่ง Deploy และลงท้าย /exec) ===
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby9MXICoeZeZdeYsepfb-PRK0W_yP7VxjYigqPlEgssYDjwIL1Vp8N7gf2y0xWF4stjwA/exec";
+// <<< ใส่ URL ของ Web App ที่เพิ่ง Deploy (ลงท้าย /exec) >>>
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbytvwFcWncTcwVrf6IHE3XHEx4uFC0UIO65cocTMkLF0zwtNuXP05A8JvCVhIJvg3cDng/exec";
 
-// ---------- ตรวจฟอร์ม ----------
+// ----- ตรวจฟอร์ม -----
 function validatePurchaseForm(selectedPackage, values) {
   const e = {};
   if (!values.fullName || !values.fullName.trim()) e.fullName = "กรุณากรอกชื่อ-นามสกุล";
@@ -17,14 +17,14 @@ function validatePurchaseForm(selectedPackage, values) {
   return e;
 }
 
-// ---------- รูปเริ่มต้น ----------
+// ----- รูปเริ่มต้น -----
 const DEFAULTS = {
   heroUrl: "Github-p/bn/bn.png",
   pcImgUrl: "Github-p/irtpc/irtpc1.png",
   mbImgUrl: "Github-p/itrmb/mb1.png",
 };
 
-// ---------- ฟอร์มสั่งซื้อ ----------
+// ----- ฟอร์มสั่งซื้อ -----
 function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [form, setForm] = useState({
     fullName: "",
@@ -40,7 +40,6 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     const validation = validatePurchaseForm(selectedPackage, form);
     setErrors(validation);
     if (Object.keys(validation).length) return;
@@ -58,28 +57,25 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
       fd.append("purchaseDate", form.purchaseDate);
       if (form.slip) fd.append("slip", form.slip, form.slip.name);
 
-      // ยิง POST ไป Apps Script
       const res = await fetch(WEB_APP_URL, {
         method: "POST",
         body: fd,
-        // ไม่ใส่ headers Content-Type เอง ปล่อยให้เบราว์เซอร์ตั้ง multipart boundary
+        mode: "cors",
+        cache: "no-store",
       });
 
-      // เผื่อกรณี preflight ผ่านแต่สถานะฝั่ง Apps Script เป็น error (>=400)
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status} ${res.statusText}`);
-      }
-
-      const data = await res.json();          // Apps Script ส่ง JSON กลับ
+      const data = await res.json().catch(() => ({}));
       console.log("AppsScript response:", data);
-      if (!data.ok) throw new Error(data.error || data.msg || "Upload failed");
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || data.msg || `HTTP ${res.status}`);
+      }
 
       setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
       setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
     } catch (err) {
       console.error("submit error:", err);
-      // เบราว์เซอร์ขึ้น TypeError: Failed to fetch -> สื่อว่าโดน CORS/Network block
-      setErrors({ submit: `เกิดข้อผิดพลาดขณะส่งข้อมูล` });
+      setErrors({ submit: `เกิดข้อผิดพลาดขณะส่งข้อมูล: ${String(err.message || err)}` });
     } finally {
       setSubmitting(false);
     }
@@ -93,7 +89,9 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
       {/* เลือกแพ็กเกจ */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div
-          className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${selectedPackage === "IRT GOLD PC" ? "border-indigo-500 bg-indigo-50 scale-[1.02]" : "border-gray-200 hover:border-indigo-300"}`}
+          className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
+            selectedPackage === "IRT GOLD PC" ? "border-indigo-500 bg-indigo-50 scale-[1.02]" : "border-gray-200 hover:border-indigo-300"
+          }`}
           onClick={() => setSelectedPackage("IRT GOLD PC")}
         >
           <h3 className="font-bold text-indigo-700 flex items-center gap-2">
@@ -105,7 +103,9 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         </div>
 
         <div
-          className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${selectedPackage === "IRT GOLD MB" ? "border-green-500 bg-green-50 scale-[1.02]" : "border-gray-200 hover:border-green-300"}`}
+          className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
+            selectedPackage === "IRT GOLD MB" ? "border-green-500 bg-green-50 scale-[1.02]" : "border-gray-200 hover:border-green-300"
+          }`}
           onClick={() => setSelectedPackage("IRT GOLD MB")}
         >
           <h3 className="font-bold text-green-700 flex items-center gap-2">
@@ -117,24 +117,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         </div>
       </div>
 
-      {/* ธนาคาร */}
-      <div className="bg-gray-50 border rounded-xl p-4 mb-6">
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex-1">
-            <p className="font-medium text-gray-800">ธนาคารกสิกรไทย</p>
-            <p className="text-gray-700">ชื่อบัญชี : หจก.เลิศฐาชัย1994 </p>
-            <div className="mt-2 rounded-lg border border-green-200 bg-green-50 px-3 py-2">
-              <p className="text-gray-800">
-                เลขที่บัญชี : <span className="font-semibold tracking-wider text-green-800">216-8-19894-1</span>
-              </p>
-            </div>
-            <p className="text-gray-500 text-sm mt-1">(โปรดตรวจสอบยอดก่อนโอน)</p>
-          </div>
-          <img src="Github-p/icon/Kb.png" alt="KBank" className="h-12 w-auto object-contain shrink-0" />
-        </div>
-      </div>
-
-      {/* ฟอร์ม */}
+      {/* ฟอร์มข้อมูลลูกค้า */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">ชื่อ-นามสกุล</label>
@@ -210,7 +193,9 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         <button
           type="submit"
           disabled={submitting}
-          className={`w-full rounded-xl py-2 font-semibold text-white shadow-md transition-transform ${submitting ? "bg-indigo-300 cursor-wait" : "bg-gradient-to-r from-indigo-600 to-green-500 hover:scale-[1.02]"}`}
+          className={`w-full rounded-xl py-2 font-semibold text-white shadow-md transition-transform ${
+            submitting ? "bg-indigo-300 cursor-wait" : "bg-gradient-to-r from-indigo-600 to-green-500 hover:scale-[1.02]"
+          }`}
         >
           {submitting ? "กำลังส่งข้อมูล..." : "ยืนยันการสั่งซื้อ"}
         </button>
@@ -224,14 +209,11 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
           </div>
         </div>
       )}
-
-      <footer className="mt-6 text-xs text-gray-400 text-center">
-        © {new Date().getFullYear()} IRT — ระบบสั่งซื้อแพ็กเกจ
-      </footer>
     </div>
   );
 }
 
+// ----- หน้า Page -----
 function Page({ initPackage }) {
   const [selectedPackage, setSelectedPackage] = useState(initPackage || "IRT GOLD PC");
   const [urls] = useState(DEFAULTS);
@@ -253,5 +235,4 @@ function Page({ initPackage }) {
     </div>
   );
 }
-
 window.Page = Page;
