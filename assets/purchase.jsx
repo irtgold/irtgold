@@ -2,7 +2,7 @@
 const { useState, useEffect } = React;
 
 // ====== ปลายทาง API (ถ้าต่อ Apps Script ให้ใส่ URL ที่นี่) ======
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw6TL7ie9smUTA0zmrDDbrivrEOQV0z3SNxHs97pLMS4xQUn0lbjv18wzon-OZHb4p7/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzGOz78PF51QYccDDZCb6K6wF_T1S0js81UzxS_qH_fN1SqiVWtAmbiDXMVUiZEIdPcdQ/exec";
 
 // ---------- ตัวช่วยตรวจสอบฟอร์ม ----------
 function validatePurchaseForm(selectedPackage, values) {
