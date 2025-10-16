@@ -1,10 +1,10 @@
 /** assets/purchase.jsx (UMD + Babel; fixed) */
 const { useState, useEffect } = React;
 
-// ====== ปลายทาง API (ถ้าต่อ Apps Script ให้ใส่ URL ที่นี่) ======
+// ====== ปลายทาง API (ใช้ URL ที่เพิ่ง Deploy) ======
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyF0xcxP5MDh5TiJPsG2A8N3vqPXIrfa7TG6m-IgdvxqSjE5TVWWorusIcCtCLMcR5NnQ/exec";
 
-// ---------- ตัวช่วยตรวจสอบฟอร์ม ----------
+// ---------- ตรวจฟอร์ม ----------
 function validatePurchaseForm(selectedPackage, values) {
   const e = {};
   if (!values.fullName || !values.fullName.trim()) e.fullName = "กรุณากรอกชื่อ-นามสกุล";
@@ -17,7 +17,7 @@ function validatePurchaseForm(selectedPackage, values) {
   return e;
 }
 
-// ---------- รูปเริ่มต้น (ต้องให้พาธเข้าถึงได้จริงใน repo/gh-pages) ----------
+// ---------- รูปเริ่มต้น ----------
 const DEFAULTS = {
   heroUrl: "Github-p/bn/bn.png",
   pcImgUrl: "Github-p/irtpc/irtpc1.png",
@@ -38,58 +38,50 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
 
-async function handleSubmit(e) {
-  e.preventDefault();
-  const validation = validatePurchaseForm(selectedPackage, form);
-  setErrors(validation);
-  if (Object.keys(validation).length) return;
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const validation = validatePurchaseForm(selectedPackage, form);
+    setErrors(validation);
+    if (Object.keys(validation).length) return;
 
-  setSubmitting(true);
-  setSuccess(null);
+    setSubmitting(true);
+    setSuccess(null);
 
-try {
-  const fd = new FormData();
-  fd.append("selectedPackage", selectedPackage);
-  fd.append("fullName", form.fullName);
-  fd.append("email", form.email);
-  fd.append("phone", form.phone);
-  fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
-  fd.append("purchaseDate", form.purchaseDate);
-  if (form.slip) fd.append("slip", form.slip, form.slip.name);
+    try {
+      const fd = new FormData();
+      fd.append("selectedPackage", selectedPackage);
+      fd.append("fullName", form.fullName);
+      fd.append("email", form.email);
+      fd.append("phone", form.phone);
+      fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
+      fd.append("purchaseDate", form.purchaseDate);
+      if (form.slip) fd.append("slip", form.slip, form.slip.name);
 
-  // <<< บรรทัดนี้ห้ามหาย >>>
-  const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
+      // สำคัญ: ต้องมี await fetch
+      const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
+      const data = await res.json();
+      console.log("AppsScript response:", data);
+      if (!data.ok) throw new Error(data.error || data.msg || "Upload failed");
 
-  const data = await res.json();              // doPost ส่ง JSON กลับ
-  console.log("AppsScript response:", data);  // ดูรายละเอียด error ใน DevTools > Console
-  if (!data.ok) throw new Error(data.error || data.msg || "Upload failed");
-
-  setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
-  setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
-} catch (err) {
-  console.error(err);
-  setErrors({ submit: "เกิดข้อผิดพลาดขณะส่งข้อมูล" });
-} finally {
-  setSubmitting(false);
-}
-
-
+      setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
+      setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
+    } catch (err) {
+      console.error(err);
+      setErrors({ submit: "เกิดข้อผิดพลาดขณะส่งข้อมูล" });
+    } finally {
+      setSubmitting(false);
+    }
+  } // <-- ปิด handleSubmit ให้เรียบร้อย
 
   return (
     <div className="w-full bg-white rounded-2xl shadow-lg p-6 border-t-4 border-indigo-500">
       <h2 className="text-2xl font-semibold text-center mb-2 text-indigo-700">สั่งซื้อแพ็กเกจ</h2>
-      <p className="text-center text-sm text-gray-500 mb-6">
-        เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ
-      </p>
+      <p className="text-center text-sm text-gray-500 mb-6">เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ</p>
 
-      {/* การ์ดเลือกแพ็กเกจ + ไอคอน Pc / Mb */}
       <div className="grid grid-cols-2 gap-4 mb-6">
-        {/* IRT GOLD PC */}
         <div
           className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
-            selectedPackage === "IRT GOLD PC"
-              ? "border-indigo-500 bg-indigo-50 scale-[1.02]"
-              : "border-gray-200 hover:border-indigo-300"
+            selectedPackage === "IRT GOLD PC" ? "border-indigo-500 bg-indigo-50 scale-[1.02]" : "border-gray-200 hover:border-indigo-300"
           }`}
           onClick={() => setSelectedPackage("IRT GOLD PC")}
         >
@@ -101,12 +93,9 @@ try {
           <p className="text-lg font-semibold text-indigo-600 mt-2">฿4,590</p>
         </div>
 
-        {/* IRT GOLD MB */}
         <div
           className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
-            selectedPackage === "IRT GOLD MB"
-              ? "border-green-500 bg-green-50 scale-[1.02]"
-              : "border-gray-200 hover:border-green-300"
+            selectedPackage === "IRT GOLD MB" ? "border-green-500 bg-green-50 scale-[1.02]" : "border-gray-200 hover:border-green-300"
           }`}
           onClick={() => setSelectedPackage("IRT GOLD MB")}
         >
@@ -119,45 +108,29 @@ try {
         </div>
       </div>
 
-      {/* กล่องรายละเอียดธนาคาร + ไอคอน KBank + กรอบเลขที่บัญชีพื้นเขียวอ่อน */}
       <div className="bg-gray-50 border rounded-xl p-4 mb-6">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
             <p className="font-medium text-gray-800">ธนาคารกสิกรไทย</p>
-            <p className="text-gray-700">ชื่อบัญชี : หจก.เลิศฐาชัย1994 </p>
-
-            {/* กรอบเลขที่บัญชีเป็นพื้นสีเขียวอ่อน */}
+            <p className="text-gray-700">ชื่อบัญชี : หจก.เลิศฐาชัย1994</p>
             <div className="mt-2 rounded-lg border border-green-200 bg-green-50 px-3 py-2">
               <p className="text-gray-800">
-                เลขที่บัญชี :{" "}
-                <span className="font-semibold tracking-wider text-green-800">
-                  216-8-19894-1
-                </span>
+                เลขที่บัญชี : <span className="font-semibold tracking-wider text-green-800">216-8-19894-1</span>
               </p>
             </div>
-
             <p className="text-gray-500 text-sm mt-1">(โปรดตรวจสอบยอดก่อนโอน)</p>
           </div>
-
-          {/* โลโก้ธนาคาร (เล็ก ๆ ด้านขวา) */}
-          <img
-            src="Github-p/icon/Kb.png"
-            alt="KBank"
-            className="h-12 w-auto object-contain shrink-0"
-          />
+          <img src="Github-p/icon/Kb.png" alt="KBank" className="h-12 w-auto object-contain shrink-0" />
         </div>
       </div>
 
-      {/* ฟอร์มข้อมูลผู้ซื้อ */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">ชื่อ-นามสกุล</label>
           <input
             value={form.fullName}
             onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
-              errors.fullName ? "border-red-300" : "border-gray-200"
-            }`}
+            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${errors.fullName ? "border-red-300" : "border-gray-200"}`}
             placeholder="เช่น ศุภวัสส์ เลิศฐาชัยพรกุล "
           />
           {errors.fullName && <p className="text-xs text-red-600">{errors.fullName}</p>}
@@ -169,22 +142,18 @@ try {
             type="email"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
-              errors.email ? "border-red-300" : "border-gray-200"
-            }`}
+            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${errors.email ? "border-red-300" : "border-gray-200"}`}
             placeholder="you1234@gmail.com"
           />
           {errors.email && <p className="text-xs text-red-600">{errors.email}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
+          <label className="block text_sm font-medium text-gray-700">เบอร์โทรศัพท์</label>
           <input
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
-              errors.phone ? "border-red-300" : "border-gray-200"
-            }`}
+            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${errors.phone ? "border-red-300" : "border-gray-200"}`}
             placeholder="เช่น 0812345678"
           />
           {errors.phone && <p className="text-xs text-red-600">{errors.phone}</p>}
@@ -196,9 +165,7 @@ try {
             <input
               value={form.mt5}
               onChange={(e) => setForm({ ...form, mt5: e.target.value })}
-              className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
-                errors.mt5 ? "border-red-300" : "border-gray-200"
-              }`}
+              className={`mt-1 block w-full rounded-xl border px-3 py-2 ${errors.mt5 ? "border-red-300" : "border-gray-200"}`}
               placeholder="กรอกหมายเลขพอร์ต MT5 เช่น 100400"
             />
             {errors.mt5 && <p className="text-xs text-red-600">{errors.mt5}</p>}
@@ -211,9 +178,7 @@ try {
             type="date"
             value={form.purchaseDate}
             onChange={(e) => setForm({ ...form, purchaseDate: e.target.value })}
-            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
-              errors.purchaseDate ? "border-red-300" : "border-gray-200"
-            }`}
+            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${errors.purchaseDate ? "border-red-300" : "border-gray-200"}`}
           />
           {errors.purchaseDate && <p className="text-xs text-red-600">{errors.purchaseDate}</p>}
         </div>
@@ -235,9 +200,7 @@ try {
           type="submit"
           disabled={submitting}
           className={`w-full rounded-xl py-2 font-semibold text-white shadow-md transition-transform ${
-            submitting
-              ? "bg-indigo-300 cursor-wait"
-              : "bg-gradient-to-r from-indigo-600 to-green-500 hover:scale-[1.02]"
+            submitting ? "bg-indigo-300 cursor-wait" : "bg-gradient-to-r from-indigo-600 to-green-500 hover:scale-[1.02]"
           }`}
         >
           {submitting ? "กำลังส่งข้อมูล..." : "ยืนยันการสั่งซื้อ"}
@@ -248,16 +211,12 @@ try {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-green-50 border border-green-300 text-green-800 px-6 py-4 rounded-xl shadow-xl text-center">
             <p className="font-semibold mb-1">✅ {success}</p>
-            <button onClick={() => setSuccess(null)} className="mt-2 text-sm text-green-700 underline">
-              ปิด
-            </button>
+            <button onClick={() => setSuccess(null)} className="mt-2 text-sm text-green-700 underline">ปิด</button>
           </div>
         </div>
       )}
 
-      <footer className="mt-6 text-xs text-gray-400 text-center">
-        © {new Date().getFullYear()} IRT — ระบบสั่งซื้อแพ็กเกจ
-      </footer>
+      <footer className="mt-6 text-xs text-gray-400 text-center">© {new Date().getFullYear()} IRT — ระบบสั่งซื้อแพ็กเกจ</footer>
     </div>
   );
 }
@@ -275,25 +234,15 @@ function Page({ initPackage }) {
 
   return (
     <div className="bg-white">
-      {/* Banner */}
       <div className="w-full">
-        <img
-          src={urls.heroUrl}
-          alt="IRT GOLD Banner"
-          className="block w-full object-cover aspect-[21/8]"
-        />
+        <img src={urls.heroUrl} alt="IRT GOLD Banner" className="block w-full object-cover aspect-[21/8]" />
       </div>
-
-      {/* Form */}
       <div className="max-w-6xl mx-auto px-4 mt-8 mb-10">
-        <PurchaseForm
-          selectedPackage={selectedPackage}
-          setSelectedPackage={setSelectedPackage}
-        />
+        <PurchaseForm selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} />
       </div>
     </div>
   );
 }
 
-// ให้ไฟล์ HTML เรียกใช้ได้
+// ให้ไฟล์ HTML เรียกใช้ได้ (รูปแบบ UMD)
 window.Page = Page;
