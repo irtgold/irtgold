@@ -2,7 +2,7 @@
 const { useState, useEffect } = React;
 
 // <<< ใส่ URL ของ Web App ที่เพิ่ง Deploy (ลงท้าย /exec) >>>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwC7h3yCg6V_04KH8L0ou3U6i1S8exUX-M3pLbXfhCP4ouM2LWsxH6Wz3eF-l33Uz3rlA/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwgGqBf4eF6e_PsLJf8DGHrYhkrtehwRlG9Cok8CmBKyMMUwznAbRyN5OQZAJDfPNpjdw/exec";
 
 // ----- ตรวจฟอร์ม -----
 function validatePurchaseForm(selectedPackage, values) {
