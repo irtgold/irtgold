@@ -1,8 +1,8 @@
 /** assets/purchase.jsx (UMD + Babel) */
 const { useState, useEffect } = React;
 
-// <<< ใส่ URL ของ Web App ที่เพิ่ง Deploy (ลงท้าย /exec) >>>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbziIdhdBiTC-G67U1k1726KV4BZWabLft8DVatdsHZZ/dev";
+// <<< ใส่ URL ของ Web App (ต้องเป็นตัวที่ Deploy แล้วและลงท้าย /exec) >>>
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwUGeIiAEu3JkIjCIsQ3WyoJMYA7PZ90vEDrDsOSi6Pc2MHd2VIwbwUFI8GuQtoqK5VeQ/exec"; //
 
 // ----- ตรวจฟอร์ม -----
 function validatePurchaseForm(selectedPackage, values) {
@@ -38,55 +38,55 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
 
-async function handleSubmit(e) {
-  e.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-  const validation = validatePurchaseForm(selectedPackage, form);
-  setErrors(validation);
-  if (Object.keys(validation).length) return; // form invalid
+    const validation = validatePurchaseForm(selectedPackage, form);
+    setErrors(validation);
+    if (Object.keys(validation).length) return; // form invalid
 
-  setSubmitting(true);
-  setSuccess(null);
+    setSubmitting(true);
+    setSuccess(null);
 
-  try {
-    const fd = new FormData();
-    fd.append('selectedPackage', selectedPackage);
-    fd.append('fullName', form.fullName);
-    fd.append('email', form.email);
-    fd.append('phone', form.phone);
-    fd.append('mt5', selectedPackage === 'IRT GOLD PC' ? form.mt5 : '');
-    fd.append('purchaseDate', form.purchaseDate);
-    if (form.slip) fd.append('slip', form.slip, form.slip.name);
+    try {
+      const fd = new FormData();
+      fd.append("selectedPackage", selectedPackage);
+      fd.append("fullName", form.fullName);
+      fd.append("email", form.email);
+      fd.append("phone", form.phone);
+      fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
+      fd.append("purchaseDate", form.purchaseDate);
+      if (form.slip) fd.append("slip", form.slip, form.slip.name);
 
-    const res = await fetch(WEB_APP_URL, {
-      method: 'POST',
-      body: fd,
-    });
+      // สำคัญ: อย่าใส่ header Content-Type เอง ปล่อยให้ FormData จัดการ boundary
+      const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
 
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok || !data.ok) {
-      throw new Error(data.error || `HTTP ${res.status}`);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) throw new Error(data.error || `HTTP ${res.status}`);
+
+      setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
+      setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
+    } catch (err) {
+      setErrors({ submit: `เกิดข้อผิดพลาดขณะส่งข้อมูล: ${String(err.message || err)}` });
+    } finally {
+      setSubmitting(false);
     }
-
-    setSuccess('ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง');
-    setForm({ fullName: '', email: '', phone: '', mt5: '', purchaseDate: '', slip: null });
-  } catch (err) {
-    setErrors({ submit: `เกิดข้อผิดพลาดขณะส่งข้อมูล: ${String(err.message || err)}` });
-  } finally {
-    setSubmitting(false);
   }
-}
 
   return (
     <div className="w-full bg-white rounded-2xl shadow-lg p-6 border-t-4 border-indigo-500">
       <h2 className="text-2xl font-semibold text-center mb-2 text-indigo-700">สั่งซื้อแพ็กเกจ</h2>
-      <p className="text-center text-sm text-gray-500 mb-6">เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ</p>
+      <p className="text-center text-sm text-gray-500 mb-6">
+        เลือกแพ็กเกจ ชำระเงิน และอัปโหลดสลิปเพื่อยืนยันการสั่งซื้อ
+      </p>
 
       {/* เลือกแพ็กเกจ */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div
           className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
-            selectedPackage === "IRT GOLD PC" ? "border-indigo-500 bg-indigo-50 scale-[1.02]" : "border-gray-200 hover:border-indigo-300"
+            selectedPackage === "IRT GOLD PC"
+              ? "border-indigo-500 bg-indigo-50 scale-[1.02]"
+              : "border-gray-200 hover:border-indigo-300"
           }`}
           onClick={() => setSelectedPackage("IRT GOLD PC")}
         >
@@ -100,7 +100,9 @@ async function handleSubmit(e) {
 
         <div
           className={`cursor-pointer border rounded-xl p-4 transition-all duration-200 ${
-            selectedPackage === "IRT GOLD MB" ? "border-green-500 bg-green-50 scale-[1.02]" : "border-gray-200 hover:border-green-300"
+            selectedPackage === "IRT GOLD MB"
+              ? "border-green-500 bg-green-50 scale-[1.02]"
+              : "border-gray-200 hover:border-green-300"
           }`}
           onClick={() => setSelectedPackage("IRT GOLD MB")}
         >
@@ -120,7 +122,9 @@ async function handleSubmit(e) {
           <input
             value={form.fullName}
             onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${errors.fullName ? "border-red-300" : "border-gray-200"}`}
+            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
+              errors.fullName ? "border-red-300" : "border-gray-200"
+            }`}
             placeholder="เช่น ศุภวัสส์ เลิศฐาชัยพรกุล "
           />
           {errors.fullName && <p className="text-xs text-red-600">{errors.fullName}</p>}
@@ -132,7 +136,9 @@ async function handleSubmit(e) {
             type="email"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${errors.email ? "border-red-300" : "border-gray-200"}`}
+            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
+              errors.email ? "border-red-300" : "border-gray-200"
+            }`}
             placeholder="you1234@gmail.com"
           />
           {errors.email && <p className="text-xs text-red-600">{errors.email}</p>}
@@ -143,7 +149,9 @@ async function handleSubmit(e) {
           <input
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${errors.phone ? "border-red-300" : "border-gray-200"}`}
+            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
+              errors.phone ? "border-red-300" : "border-gray-200"
+            }`}
             placeholder="เช่น 0812345678"
           />
           {errors.phone && <p className="text-xs text-red-600">{errors.phone}</p>}
@@ -155,7 +163,9 @@ async function handleSubmit(e) {
             <input
               value={form.mt5}
               onChange={(e) => setForm({ ...form, mt5: e.target.value })}
-              className={`mt-1 block w-full rounded-xl border px-3 py-2 ${errors.mt5 ? "border-red-300" : "border-gray-200"}`}
+              className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
+                errors.mt5 ? "border-red-300" : "border-gray-200"
+              }`}
               placeholder="กรอกหมายเลขพอร์ต MT5 เช่น 100400"
             />
             {errors.mt5 && <p className="text-xs text-red-600">{errors.mt5}</p>}
@@ -168,7 +178,9 @@ async function handleSubmit(e) {
             type="date"
             value={form.purchaseDate}
             onChange={(e) => setForm({ ...form, purchaseDate: e.target.value })}
-            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${errors.purchaseDate ? "border-red-300" : "border-gray-200"}`}
+            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
+              errors.purchaseDate ? "border-red-300" : "border-gray-200"
+            }`}
           />
           {errors.purchaseDate && <p className="text-xs text-red-600">{errors.purchaseDate}</p>}
         </div>
@@ -184,7 +196,9 @@ async function handleSubmit(e) {
           {errors.slip && <p className="text-xs text-red-600">{errors.slip}</p>}
         </div>
 
-        {errors.submit && <p className="text-sm text-red-600 text-center">{errors.submit}</p>}
+        {errors.submit && (
+          <p className="text-sm text-red-600 text-center">{errors.submit}</p>
+        )}
 
         <button
           type="submit"
@@ -201,7 +215,9 @@ async function handleSubmit(e) {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-green-50 border border-green-300 text-green-800 px-6 py-4 rounded-xl shadow-xl text-center">
             <p className="font-semibold mb-1">✅ {success}</p>
-            <button onClick={() => setSuccess(null)} className="mt-2 text-sm text-green-700 underline">ปิด</button>
+            <button onClick={() => setSuccess(null)} className="mt-2 text-sm text-green-700 underline">
+              ปิด
+            </button>
           </div>
         </div>
       )}
