@@ -38,41 +38,86 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+async function handleSubmit(e) {
+  e.preventDefault();
 
-    const validation = validatePurchaseForm(selectedPackage, form);
-    setErrors(validation);
-    if (Object.keys(validation).length) return; // form invalid
-
-    setSubmitting(true);
-    setSuccess(null);
-
-    try {
-      const fd = new FormData();
-      fd.append("selectedPackage", selectedPackage);
-      fd.append("fullName", form.fullName);
-      fd.append("email", form.email);
-      fd.append("phone", form.phone);
-      fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
-      fd.append("purchaseDate", form.purchaseDate);
-      if (form.slip) fd.append("slip", form.slip, form.slip.name);
-
-      // สำคัญ: อย่าใส่ header Content-Type เอง ปล่อยให้ FormData จัดการ boundary
-      const res = await fetch(WEB_APP_URL, { method: "POST", body: fd });
-
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data.ok) throw new Error(data.error || `HTTP ${res.status}`);
-
-      setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
-      setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
-    } catch (err) {
-      setErrors({ submit: `เกิดข้อผิดพลาดขณะส่งข้อมูล: ${String(err.message || err)}` });
-    } finally {
-      setSubmitting(false);
-    }
+  const validation = validatePurchaseForm(selectedPackage, form);
+  setErrors(validation);
+  if (Object.keys(validation).length) {
+    console.log('❌ Form validation failed:', validation);
+    return;
   }
 
+  setSubmitting(true);
+  setSuccess(null);
+
+  try {
+    const fd = new FormData();
+    fd.append("selectedPackage", selectedPackage);
+    fd.append("fullName", form.fullName);
+    fd.append("email", form.email);
+    fd.append("phone", form.phone);
+    fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
+    fd.append("purchaseDate", form.purchaseDate);
+    
+    if (form.slip) {
+      fd.append("slip", form.slip, form.slip.name);
+      console.log('📎 Slip file attached:', form.slip.name, 'Size:', form.slip.size, 'bytes');
+    } else {
+      console.log('⚠️ No slip file attached');
+    }
+
+    // ⭐ Log ข้อมูลก่อนส่ง
+    console.log('📤 Sending to:', WEB_APP_URL);
+    console.log('📦 Package:', selectedPackage);
+    console.log('👤 Name:', form.fullName);
+
+    const res = await fetch(WEB_APP_URL, { 
+      method: "POST", 
+      body: fd,
+      // ⭐ สำคัญ: ไม่ต้องใส่ Content-Type header
+    });
+
+    console.log('📥 Response status:', res.status);
+
+    const data = await res.json().catch((parseErr) => {
+      console.error('❌ JSON parse error:', parseErr);
+      return {};
+    });
+
+    console.log('📥 Response data:', data);
+
+    if (!res.ok || !data.ok) {
+      throw new Error(data.error || `HTTP ${res.status}`);
+    }
+
+    setSuccess("✅ ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
+    console.log('✅ Slip URL:', data.slipUrl);
+    
+    // รีเซ็ตฟอร์ม
+    setForm({ 
+      fullName: "", 
+      email: "", 
+      phone: "", 
+      mt5: "", 
+      purchaseDate: "", 
+      slip: null 
+    });
+    
+    // รีเซ็ต input file
+    const fileInput = document.querySelector('input[type="file"]');
+    if (fileInput) fileInput.value = '';
+    
+  } catch (err) {
+    console.error('❌ Submit error:', err);
+    setErrors({ 
+      submit: `เกิดข้อผิดพลาดขณะส่งข้อมูล: ${String(err.message || err)}` 
+    });
+  } finally {
+    setSubmitting(false);
+  }
+}
+  
   return (
     <div className="w-full bg-white rounded-2xl shadow-lg p-6 border-t-4 border-indigo-500">
       <h2 className="text-2xl font-semibold text-center mb-2 text-indigo-700">สั่งซื้อแพ็กเกจ</h2>
