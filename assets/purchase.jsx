@@ -2,7 +2,7 @@
 const { useState, useEffect } = React;
 
 // <<< ใส่ URL ของ Web App ที่เพิ่ง Deploy (ลงท้าย /exec) >>>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxIBPziFbket0hU0ydLH_0zmQOVxXnGy20q3YccfYlL81U87uDKnhhEir63gi_GsSY8Qw/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbziIdhdBiTC-G67U1k1726KV4BZWabLft8DVatdsHZZ/dev";
 
 // ----- ตรวจฟอร์ม -----
 function validatePurchaseForm(selectedPackage, values) {
@@ -38,48 +38,44 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const validation = validatePurchaseForm(selectedPackage, form);
-    setErrors(validation);
-    if (Object.keys(validation).length) return;
+async function handleSubmit(e) {
+  e.preventDefault();
 
-    setSubmitting(true);
-    setSuccess(null);
+  const validation = validatePurchaseForm(selectedPackage, form);
+  setErrors(validation);
+  if (Object.keys(validation).length) return; // form invalid
 
-    try {
-      const fd = new FormData();
-      fd.append("selectedPackage", selectedPackage);
-      fd.append("fullName", form.fullName);
-      fd.append("email", form.email);
-      fd.append("phone", form.phone);
-      fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
-      fd.append("purchaseDate", form.purchaseDate);
-      if (form.slip) fd.append("slip", form.slip, form.slip.name);
+  setSubmitting(true);
+  setSuccess(null);
 
-const res = await fetch(WEB_APP_URL, {
-  method: "POST",
-  body: fd,             // ส่ง FormData ตรง ๆ ไม่ต้องใส่ header เอง
-  // ไม่ต้องใส่ mode/cache/header อะไรเพิ่มเติม
-});
+  try {
+    const fd = new FormData();
+    fd.append('selectedPackage', selectedPackage);
+    fd.append('fullName', form.fullName);
+    fd.append('email', form.email);
+    fd.append('phone', form.phone);
+    fd.append('mt5', selectedPackage === 'IRT GOLD PC' ? form.mt5 : '');
+    fd.append('purchaseDate', form.purchaseDate);
+    if (form.slip) fd.append('slip', form.slip, form.slip.name);
 
-const data = await res.json().catch(() => ({}));
-console.log("AppsScript response:", data);
+    const res = await fetch(WEB_APP_URL, {
+      method: 'POST',
+      body: fd,
+    });
 
-if (!res.ok || !data.ok) {
-  throw new Error(data.error || data.msg || `HTTP ${res.status}`);
-}
-
-
-      setSuccess("ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
-      setForm({ fullName: "", email: "", phone: "", mt5: "", purchaseDate: "", slip: null });
-    } catch (err) {
-      console.error("submit error:", err);
-      setErrors({ submit: `เกิดข้อผิดพลาดขณะส่งข้อมูล: ${String(err.message || err)}` });
-    } finally {
-      setSubmitting(false);
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) {
+      throw new Error(data.error || `HTTP ${res.status}`);
     }
+
+    setSuccess('ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง');
+    setForm({ fullName: '', email: '', phone: '', mt5: '', purchaseDate: '', slip: null });
+  } catch (err) {
+    setErrors({ submit: `เกิดข้อผิดพลาดขณะส่งข้อมูล: ${String(err.message || err)}` });
+  } finally {
+    setSubmitting(false);
   }
+}
 
   return (
     <div className="w-full bg-white rounded-2xl shadow-lg p-6 border-t-4 border-indigo-500">
