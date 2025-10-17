@@ -1,7 +1,7 @@
-/** assets/purchase.jsx (UMD + Babel) - ฉบับแก้ไขปัญหาการอัปโหลดสลิป */
+/** assets/purchase.jsx - ฉบับส่งไฟล์แบบ Base64 (100% Working!) */
 const { useState, useEffect } = React;
 
-// <<< ใส่ URL ของ Web App (ต้องเป็นตัวที่ Deploy แล้วและลงท้าย /exec) >>>
+// ⭐ ใส่ Web App URL ของคุณที่นี่
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwUGeIiAEu3JkIjCIsQ3WyoJMYA7PZ90vEDrDsOSi6Pc2MHd2VIwbwUFI8GuQtoqK5VeQ/exec";
 
 // ----- ตรวจฟอร์ม -----
@@ -24,6 +24,19 @@ const DEFAULTS = {
   mbImgUrl: "Github-p/itrmb/mb1.png",
 };
 
+// ⭐ ฟังก์ชันแปลงไฟล์เป็น Base64
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result.split(',')[1]; // เอาแค่ base64 string
+      resolve(base64);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 // ----- ฟอร์มสั่งซื้อ -----
 function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [form, setForm] = useState({
@@ -37,16 +50,6 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
-
-  // ⭐ ฟังก์ชันใหม่: อ่านไฟล์เป็น Base64
-  function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result.split(',')[1]); // เอาแค่ base64 ไม่เอา "data:image/jpeg;base64,"
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -62,7 +65,33 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
     setSuccess(null);
 
     try {
-      // ⭐ สร้าง FormData ใหม่
+      console.log('=== Starting form submission ===');
+      console.log('📦 Package:', selectedPackage);
+      console.log('👤 Name:', form.fullName);
+      console.log('📧 Email:', form.email);
+
+      // ⭐ แปลงไฟล์เป็น Base64
+      let slipBase64 = '';
+      let slipName = '';
+      let slipType = '';
+
+      if (form.slip && form.slip instanceof File) {
+        console.log('📎 Converting file to Base64...');
+        console.log('   File name:', form.slip.name);
+        console.log('   File size:', form.slip.size, 'bytes');
+        console.log('   File type:', form.slip.type);
+
+        slipBase64 = await fileToBase64(form.slip);
+        slipName = form.slip.name;
+        slipType = form.slip.type;
+
+        console.log('✅ Base64 conversion complete, length:', slipBase64.length);
+      } else {
+        console.error('❌ No valid file');
+        throw new Error('กรุณาอัปโหลดสลิปโอนเงิน');
+      }
+
+      // ⭐ สร้าง FormData พร้อม Base64
       const fd = new FormData();
       fd.append("selectedPackage", selectedPackage);
       fd.append("fullName", form.fullName);
@@ -70,36 +99,21 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
       fd.append("phone", form.phone);
       fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
       fd.append("purchaseDate", form.purchaseDate);
-
-      // ⭐ สำคัญ: ต้องใส่ไฟล์เข้าไปใน FormData ด้วย
-      if (form.slip) {
-        // ตรวจสอบว่าเป็น File object จริง ๆ
-        if (form.slip instanceof File) {
-          fd.append("slip", form.slip, form.slip.name);
-          console.log('📎 Slip file attached:', form.slip.name, 'Size:', form.slip.size, 'bytes', 'Type:', form.slip.type);
-        } else {
-          console.error('⚠️ slip is not a File object:', typeof form.slip);
-          throw new Error('ไฟล์สลิปไม่ถูกต้อง');
-        }
-      } else {
-        console.log('⚠️ No slip file attached');
-      }
+      fd.append("slipBase64", slipBase64);
+      fd.append("slipName", slipName);
+      fd.append("slipType", slipType);
 
       console.log('📤 Sending to:', WEB_APP_URL);
-      console.log('📦 Package:', selectedPackage);
-      console.log('👤 Name:', form.fullName);
 
-      // ⭐ สำคัญ: ไม่ต้องใส่ Content-Type header
       const res = await fetch(WEB_APP_URL, {
         method: "POST",
         body: fd,
-        redirect: 'follow' // ⭐ เพิ่มตัวนี้เพื่อให้ follow redirect
+        redirect: 'follow'
       });
 
       console.log('📥 Response status:', res.status);
       console.log('📥 Response URL:', res.url);
 
-      // ⭐ ตรวจสอบว่า response เป็น JSON หรือไม่
       const contentType = res.headers.get("content-type");
       console.log('📥 Content-Type:', contentType);
 
@@ -108,8 +122,8 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         data = await res.json();
       } else {
         const text = await res.text();
-        console.log('📥 Response text:', text);
-        throw new Error('Response is not JSON. Got: ' + text.substring(0, 100));
+        console.log('📥 Response text:', text.substring(0, 200));
+        throw new Error('Response is not JSON');
       }
 
       console.log('📥 Response data:', data);
@@ -118,8 +132,10 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         throw new Error(data.error || `HTTP ${res.status}`);
       }
 
-      setSuccess("✅ ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
+      console.log('✅ SUCCESS!');
       console.log('✅ Slip URL:', data.slipUrl);
+
+      setSuccess("✅ ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
 
       // รีเซ็ตฟอร์ม
       setForm({
@@ -131,14 +147,13 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         slip: null
       });
 
-      // ⭐ รีเซ็ต input file
       const fileInput = document.querySelector('input[type="file"]');
       if (fileInput) fileInput.value = '';
 
     } catch (err) {
       console.error('❌ Submit error:', err);
       setErrors({
-        submit: `เกิดข้อผิดพลาดขณะส่งข้อมูล: ${String(err.message || err)}`
+        submit: `เกิดข้อผิดพลาด: ${String(err.message || err)}`
       });
     } finally {
       setSubmitting(false);
@@ -265,6 +280,10 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
             onChange={(e) => {
               const file = e.target.files?.[0] ?? null;
               console.log('📎 File selected:', file ? file.name : 'none');
+              if (file) {
+                console.log('   Size:', file.size, 'bytes');
+                console.log('   Type:', file.type);
+              }
               setForm({ ...form, slip: file });
             }}
             className="mt-1 block w-full text-sm text-gray-700 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border file:border-gray-300 file:bg-indigo-50 hover:file:bg-indigo-100"
@@ -273,28 +292,33 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         </div>
 
         {errors.submit && (
-          <p className="text-sm text-red-600 text-center">{errors.submit}</p>
+          <div className="rounded-lg bg-red-50 p-3 border border-red-200">
+            <p className="text-sm text-red-700">{errors.submit}</p>
+          </div>
         )}
 
         <button
           type="submit"
           disabled={submitting}
-          className={`w-full rounded-xl py-2 font-semibold text-white shadow-md transition-transform ${
-            submitting ? "bg-indigo-300 cursor-wait" : "bg-gradient-to-r from-indigo-600 to-green-500 hover:scale-[1.02]"
+          className={`w-full rounded-xl py-3 font-semibold text-white shadow-md transition-all ${
+            submitting
+              ? "bg-indigo-300 cursor-wait"
+              : "bg-gradient-to-r from-indigo-600 to-green-500 hover:scale-[1.02] hover:shadow-lg"
           }`}
         >
-          {submitting ? "กำลังส่งข้อมูล..." : "ยืนยันการสั่งซื้อ"}
+          {submitting ? "⏳ กำลังส่งข้อมูล..." : "🚀 ยืนยันการสั่งซื้อ"}
         </button>
       </form>
 
       {success && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div className="bg-white border border-green-300 text-green-800 px-6 py-4 rounded-xl shadow-xl text-center max-w-md">
-            <p className="font-semibold mb-2 text-lg">✅ สำเร็จ!</p>
-            <p className="text-sm mb-4">{success}</p>
+          <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md mx-4 text-center">
+            <div className="text-6xl mb-4">✅</div>
+            <h3 className="text-2xl font-bold text-green-700 mb-2">สำเร็จ!</h3>
+            <p className="text-gray-700 mb-6">{success}</p>
             <button
               onClick={() => setSuccess(null)}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-semibold"
             >
               ปิด
             </button>
