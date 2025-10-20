@@ -375,21 +375,20 @@ html, body{ height:100%; }
 /* kill default browser margin/padding so the banner can touch the top */
 html, body { margin: 0; padding: 0; }
 
-/* ========== แก้ล่าสุด ปกมือถือ========== */
 
-/* กันเมนูทับคอนเทนต์ */
-body { margin: 0; }
-.nav-spacer { height: 64px; }              /* ถ้าแถบเมนูสูงกว่านี้ ค่อยเพิ่มเลข */
-@media (min-width: 1024px){ .nav-spacer { height: 72px; } }
+/* ===== Mobile-only: ย่อรูปปกให้พอดีจอ ===== */
+:root { --nav-h: 88px; }                 /* ความสูงแถบเมนูบนมือถือ ปรับตามจริง */
 
-/* ให้ปกแสดงชัวร์บนมือถือ */
-header.hero { position: relative; }
-header.hero img.hero__banner{
-  width: 100%;
-  height: 70vh;                /* มือถือเห็นเต็มตา */
-  object-fit: cover;           /* ครอบเต็มโดยไม่บิด */
-  display: block !important;   /* กันกรณีธีมไปซ่อนบนจอเล็ก */
-}
-@media (min-width: 1024px){
-  header.hero img.hero__banner{ height: 80vh; }
+@media (max-width: 767px) {
+  /* กันเมนูทับ: ขยับ hero ลงเท่าความสูงเมนู */
+  header.hero { margin-top: var(--nav-h); }
+
+  /* ย่อรูปให้พอดีจอมือถือ */
+  header.hero img.hero__banner {
+    display: block;
+    width: 100%;
+    height: auto;                         /* รักษาสัดส่วนรูป */
+    max-height: calc(100vh - var(--nav-h)); /* ไม่เกินความสูงจอที่เหลือ */
+    object-fit: contain;                  /* โชว์รูปเต็ม ไม่ครอบตัด */
+  }
 }
