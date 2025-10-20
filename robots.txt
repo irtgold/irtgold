@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://irtgold.github.io/irtgold/sitemap.xml
