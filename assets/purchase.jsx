@@ -1,8 +1,16 @@
-/** assets/purchase.jsx - ฉบับส่งไฟล์แบบ Base64 + คำแนะนำเช็ค Spam */
+/** assets/purchase.jsx - ฉบับส่งไฟล์แบบ Base64 + คำแนะนำเช็ค Spam + แสดงเลขบัญชี */
 const { useState, useEffect } = React;
 
 // ⭐ ใส่ Web App URL ของคุณที่นี่
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwUGeIiAEu3JkIjCIsQ3WyoJMYA7PZ90vEDrDsOSi6Pc2MHd2VIwbwUFI8GuQtoqK5VeQ/exec";
+
+// ⭐ ข้อมูลบัญชีธนาคาร
+const BANK_INFO = {
+  bankName: "ธนาคารกสิกรไทย",
+  accountName: "นาย.เลิศฐาชัยพรกุล 1994",
+  accountNumber: "216-8-19894-1",
+  bankLogo: "https://upload.wikimedia.org/wikipedia/th/a/a4/Kbank-logo.png" // หรือใส่ลิงก์โลโก้ของคุณ
+};
 
 // ----- ตรวจฟอร์ม -----
 function validatePurchaseForm(selectedPackage, values) {
@@ -29,12 +37,92 @@ function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {
-      const base64 = reader.result.split(',')[1]; // เอาแค่ base64 string
+      const base64 = reader.result.split(',')[1];
       resolve(base64);
     };
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
+}
+
+// ⭐ Component แสดงข้อมูลบัญชีธนาคาร
+function BankAccountInfo() {
+  const [copied, setCopied] = useState(false);
+
+  const copyAccountNumber = () => {
+    navigator.clipboard.writeText(BANK_INFO.accountNumber);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-6 mb-6 shadow-sm">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-bold text-green-800 flex items-center gap-2">
+          <span className="text-2xl">🏦</span>
+          บัญชีสำหรับโอนเงิน
+        </h3>
+        <div className="bg-white px-3 py-1 rounded-full">
+          <img 
+            src={BANK_INFO.bankLogo} 
+            alt="Bank Logo" 
+            className="h-6 object-contain"
+            onError={(e) => e.target.style.display = 'none'}
+          />
+        </div>
+      </div>
+      
+      <div className="space-y-3 bg-white rounded-lg p-4 border border-green-100">
+        <div className="flex justify-between items-start">
+          <div>
+            <p className="text-xs text-gray-500 mb-1">ธนาคาร</p>
+            <p className="text-sm font-semibold text-gray-800">{BANK_INFO.bankName}</p>
+          </div>
+        </div>
+        
+        <div className="border-t border-gray-100 pt-3">
+          <p className="text-xs text-gray-500 mb-1">ชื่อบัญชี</p>
+          <p className="text-sm font-semibold text-gray-800">{BANK_INFO.accountName}</p>
+        </div>
+        
+        <div className="border-t border-gray-100 pt-3">
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="text-xs text-gray-500 mb-1">เลขที่บัญชี</p>
+              <p className="text-xl font-bold text-green-700 tracking-wider font-mono">
+                {BANK_INFO.accountNumber}
+              </p>
+            </div>
+            <button
+              onClick={copyAccountNumber}
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow-md"
+            >
+              {copied ? (
+                <>
+                  <span>✓</span>
+                  <span>คัดลอกแล้ว</span>
+                </>
+              ) : (
+                <>
+                  <span>📋</span>
+                  <span>คัดลอก</span>
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div className="mt-4 bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+        <p className="text-xs text-gray-700 flex items-start gap-2">
+          <span className="text-base">💡</span>
+          <span>
+            <strong>คำแนะนำ:</strong> โอนเงินตามจำนวนที่เลือก จากนั้นอัปโหลดสลิปโอนเงินด้านล่าง
+          </span>
+        </p>
+      </div>
+    </div>
+  );
 }
 
 // ----- ฟอร์มสั่งซื้อ -----
@@ -70,7 +158,6 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
       console.log('👤 Name:', form.fullName);
       console.log('📧 Email:', form.email);
 
-      // ⭐ แปลงไฟล์เป็น Base64
       let slipBase64 = '';
       let slipName = '';
       let slipType = '';
@@ -91,7 +178,6 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         throw new Error('กรุณาอัปโหลดสลิปโอนเงิน');
       }
 
-      // ⭐ สร้าง FormData พร้อม Base64
       const fd = new FormData();
       fd.append("selectedPackage", selectedPackage);
       fd.append("fullName", form.fullName);
@@ -137,7 +223,6 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
 
       setSuccess("✅ ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
 
-      // รีเซ็ตฟอร์ม
       setForm({
         fullName: "",
         email: "",
@@ -201,6 +286,9 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
           <p className="text-lg font-semibold text-green-600 mt-2">฿2,390</p>
         </div>
       </div>
+
+      {/* ⭐ แสดงข้อมูลบัญชีธนาคาร */}
+      <BankAccountInfo />
 
       {/* ฟอร์มข้อมูลลูกค้า */}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -310,7 +398,6 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         </button>
       </form>
 
-      {/* ⭐ Success Modal พร้อมคำแนะนำเช็ค Spam */}
       {success && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
           <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md mx-4 text-center">
@@ -318,7 +405,6 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
             <h3 className="text-2xl font-bold text-green-700 mb-2">สำเร็จ!</h3>
             <p className="text-gray-700 mb-4">{success}</p>
             
-            {/* ⭐ เพิ่มส่วนคำแนะนำเช็ค Spam */}
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6 text-left">
               <p className="text-sm text-gray-700 font-semibold mb-2">
                 📧 เราได้ส่งอีเมลยืนยันไปแล้ว
