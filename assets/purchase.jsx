@@ -4,14 +4,6 @@ const { useState, useEffect } = React;
 // ⭐ ใส่ Web App URL ของคุณที่นี่
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwUGeIiAEu3JkIjCIsQ3WyoJMYA7PZ90vEDrDsOSi6Pc2MHd2VIwbwUFI8GuQtoqK5VeQ/exec";
 
-// ⭐ ข้อมูลบัญชีธนาคาร
-const BANK_INFO = {
-  bankName: "ธนาคารกสิกรไทย",
-  accountName: "หจก.เลิศฐาชัยพรกุล 1994",
-  accountNumber: "216-8-19894-1",
-  bankLogo: "https://upload.wikimedia.org/wikipedia/th/a/a4/Kbank-logo.png" // หรือใส่ลิงก์โลโก้ของคุณ
-};
-
 // ----- ตรวจฟอร์ม -----
 function validatePurchaseForm(selectedPackage, values) {
   const e = {};
