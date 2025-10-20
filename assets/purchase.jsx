@@ -7,7 +7,7 @@ const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwUGeIiAEu3JkIjCIsQ
 // ⭐ ข้อมูลบัญชีธนาคาร
 const BANK_INFO = {
   bankName: "ธนาคารกสิกรไทย",
-  accountName: "นาย.เลิศฐาชัยพรกุล 1994",
+  accountName: "หจก.เลิศฐาชัย 1994",
   accountNumber: "216-8-19894-1",
   bankLogo: "Github-p/icon/Kb.png" // หรือใส่ลิงก์โลโก้ของคุณ
 };
