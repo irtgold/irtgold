@@ -374,3 +374,22 @@ html, body{ height:100%; }
 
 /* kill default browser margin/padding so the banner can touch the top */
 html, body { margin: 0; padding: 0; }
+
+/* ========== แก้ล่าสุด ปกมือถือ========== */
+
+/* กันเมนูทับคอนเทนต์ */
+body { margin: 0; }
+.nav-spacer { height: 64px; }              /* ถ้าแถบเมนูสูงกว่านี้ ค่อยเพิ่มเลข */
+@media (min-width: 1024px){ .nav-spacer { height: 72px; } }
+
+/* ให้ปกแสดงชัวร์บนมือถือ */
+header.hero { position: relative; }
+header.hero img.hero__banner{
+  width: 100%;
+  height: 70vh;                /* มือถือเห็นเต็มตา */
+  object-fit: cover;           /* ครอบเต็มโดยไม่บิด */
+  display: block !important;   /* กันกรณีธีมไปซ่อนบนจอเล็ก */
+}
+@media (min-width: 1024px){
+  header.hero img.hero__banner{ height: 80vh; }
+}
