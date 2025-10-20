@@ -9,7 +9,7 @@ const BANK_INFO = {
   bankName: "ธนาคารกสิกรไทย",
   accountName: "นาย.เลิศฐาชัยพรกุล 1994",
   accountNumber: "216-8-19894-1",
-  bankLogo: "https://upload.wikimedia.org/wikipedia/th/a/a4/Kbank-logo.png" // หรือใส่ลิงก์โลโก้ของคุณ
+  bankLogo: "Github-p/icon/Kb.png" // หรือใส่ลิงก์โลโก้ของคุณ
 };
 
 // ----- ตรวจฟอร์ม -----
