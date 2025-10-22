@@ -392,3 +392,14 @@ html, body { margin: 0; padding: 0; }
     object-fit: contain;                  /* โชว์รูปเต็ม ไม่ครอบตัด */
   }
 }
+
+
+/* เลื่อนนุ่มๆ เวลาใช้ #hash */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ถ้าเมนูเป็น fixed สูง ~80px ให้ขยับจุดเลื่อนลงมาหน่อย */
+#home, #irtpc, #irtmb, #video, #pricing, #contact {
+  scroll-margin-top: 80px;  /* ปรับตามความสูง navbar ของคุณ */
+}
