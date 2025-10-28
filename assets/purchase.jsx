@@ -1,10 +1,8 @@
-/** assets/purchase.jsx - ฉบับส่งไฟล์แบบ Base64 + คำแนะนำเช็ค Spam + แสดงเลขบัญชี + TradingView สำหรับ MB */
+/** assets/purchase.jsx - PC ได้ทั้ง MT5 + TradingView */
 const { useState, useEffect } = React;
 
-// ⭐ ใส่ Web App URL ของคุณที่นี่
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwUGeIiAEu3JkIjCIsQ3WyoJMYA7PZ90vEDrDsOSi6Pc2MHd2VIwbwUFI8GuQtoqK5VeQ/exec";
 
-// ⭐ ข้อมูลบัญชีธนาคาร
 const BANK_INFO = {
   bankName: "กสิกรไทย",
   accountName: "หจก.เลิศฐาชัย 1994",
@@ -19,21 +17,29 @@ function validatePurchaseForm(selectedPackage, values) {
   if (!values.email) e.email = "กรุณากรอกอีเมล";
   else if (!/^([^\s@]+)@([^\s@]+)\.[^\s@]+$/.test(values.email)) e.email = "อีเมลไม่ถูกต้อง";
   if (!values.phone) e.phone = "กรุณากรอกเบอร์โทร";
-  if (selectedPackage === "IRT GOLD PC" && !values.mt5) e.mt5 = "กรุณากรอกหมายเลขพอร์ต MT5";
-  if (selectedPackage === "IRT GOLD MB" && !values.tradingview) e.tradingview = "กรุณากรอกชื่อผู้ใช้งาน TradingView";
+  
+  // ⭐ PC ต้องกรอก MT5 และ TradingView (สำหรับไฟล์ MB โบนัส)
+  if (selectedPackage === "IRT GOLD PC") {
+    if (!values.mt5) e.mt5 = "กรุณากรอกหมายเลขพอร์ต MT5";
+    if (!values.tvUsername) e.tvUsername = "กรุณากรอกชื่อผู้ใช้งาน TradingView";
+  }
+  
+  // ⭐ MB ต้องกรอกแค่ TradingView
+  if (selectedPackage === "IRT GOLD MB") {
+    if (!values.tvUsername) e.tvUsername = "กรุณากรอกชื่อผู้ใช้งาน TradingView";
+  }
+  
   if (!values.purchaseDate) e.purchaseDate = "กรุณาเลือกวันที่ซื้อ";
   if (!values.slip) e.slip = "กรุณาอัปโหลดสลิปโอนเงิน";
   return e;
 }
 
-// ----- รูปเริ่มต้น -----
 const DEFAULTS = {
   heroUrl: "Github-p/bn/bn.png",
   pcImgUrl: "Github-p/irtpc/irtpc1.png",
   mbImgUrl: "Github-p/itrmb/mb1.png",
 };
 
-// ⭐ ฟังก์ชันแปลงไฟล์เป็น Base64
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -46,7 +52,6 @@ function fileToBase64(file) {
   });
 }
 
-// ⭐ Component แสดงข้อมูลบัญชีธนาคาร
 function BankAccountInfo() {
   const [copied, setCopied] = useState(false);
 
@@ -126,14 +131,13 @@ function BankAccountInfo() {
   );
 }
 
-// ----- ฟอร์มสั่งซื้อ -----
 function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   const [form, setForm] = useState({
     fullName: "",
     email: "",
     phone: "",
     mt5: "",
-    tradingview: "",
+    tvUsername: "",
     purchaseDate: "",
     slip: null,
   });
@@ -166,17 +170,11 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
 
       if (form.slip && form.slip instanceof File) {
         console.log('📎 Converting file to Base64...');
-        console.log('   File name:', form.slip.name);
-        console.log('   File size:', form.slip.size, 'bytes');
-        console.log('   File type:', form.slip.type);
-
         slipBase64 = await fileToBase64(form.slip);
         slipName = form.slip.name;
         slipType = form.slip.type;
-
-        console.log('✅ Base64 conversion complete, length:', slipBase64.length);
+        console.log('✅ Base64 conversion complete');
       } else {
-        console.error('❌ No valid file');
         throw new Error('กรุณาอัปโหลดสลิปโอนเงิน');
       }
 
@@ -185,14 +183,21 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
       fd.append("fullName", form.fullName);
       fd.append("email", form.email);
       fd.append("phone", form.phone);
-      fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
-      fd.append("tradingview", selectedPackage === "IRT GOLD MB" ? form.tradingview : "");
       fd.append("purchaseDate", form.purchaseDate);
       fd.append("slipBase64", slipBase64);
       fd.append("slipName", slipName);
       fd.append("slipType", slipType);
-
-      console.log('📤 Sending to:', WEB_APP_URL);
+      
+      // ⭐ ส่งค่าตาม package
+      if (selectedPackage === "IRT GOLD PC") {
+        fd.append("mt5", form.mt5);
+        fd.append("tradingview", form.tvUsername); // คอลัมน์ G
+        fd.append("mbTradingview", ""); // ไม่มี
+      } else {
+        fd.append("mt5", "");
+        fd.append("tradingview", ""); // ไม่มี
+        fd.append("mbTradingview", form.tvUsername); // คอลัมน์ H
+      }
 
       const res = await fetch(WEB_APP_URL, {
         method: "POST",
@@ -200,30 +205,19 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         redirect: 'follow'
       });
 
-      console.log('📥 Response status:', res.status);
-      console.log('📥 Response URL:', res.url);
-
       const contentType = res.headers.get("content-type");
-      console.log('📥 Content-Type:', contentType);
-
       let data;
       if (contentType && contentType.includes("application/json")) {
         data = await res.json();
       } else {
-        const text = await res.text();
-        console.log('📥 Response text:', text.substring(0, 200));
         throw new Error('Response is not JSON');
       }
-
-      console.log('📥 Response data:', data);
 
       if (!res.ok || !data.ok) {
         throw new Error(data.error || `HTTP ${res.status}`);
       }
 
       console.log('✅ SUCCESS!');
-      console.log('✅ Slip URL:', data.slipUrl);
-
       setSuccess("✅ ส่งข้อมูลเรียบร้อย! ทีมงานจะตรวจสอบภายใน 24 ชั่วโมง");
 
       setForm({
@@ -231,7 +225,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         email: "",
         phone: "",
         mt5: "",
-        tradingview: "",
+        tvUsername: "",
         purchaseDate: "",
         slip: null
       });
@@ -271,6 +265,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
             IRT GOLD PC
           </h3>
           <p className="text-sm text-gray-600">สำหรับใช้งานบนคอมพิวเตอร์</p>
+          <p className="text-xs text-green-600 mt-1">🎁 ฟรี! ไฟล์มือถือด้วย</p>
           <p className="text-lg font-semibold text-indigo-600 mt-2">฿4,590</p>
         </div>
 
@@ -291,7 +286,6 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         </div>
       </div>
 
-      {/* ⭐ แสดงข้อมูลบัญชีธนาคาร */}
       <BankAccountInfo />
 
       {/* ฟอร์มข้อมูลลูกค้า */}
@@ -352,21 +346,24 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
           </div>
         )}
 
-        {/* ⭐ แสดงฟิลด์ TradingView สำหรับ MB */}
-        {selectedPackage === "IRT GOLD MB" && (
-          <div>
-            <label className="block text-sm font-medium text-gray-700">ชื่อผู้ใช้งาน TradingView</label>
-            <input
-              value={form.tradingview}
-              onChange={(e) => setForm({ ...form, tradingview: e.target.value })}
-              className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
-                errors.tradingview ? "border-red-300" : "border-gray-200"
-              }`}
-              placeholder="เช่น IRTGOLD"
-            />
-            {errors.tradingview && <p className="text-xs text-red-600">{errors.tradingview}</p>}
-          </div>
-        )}
+        {/* ⭐ แสดงฟิลด์ TradingView สำหรับทั้ง PC และ MB */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            ชื่อผู้ใช้งาน TradingView
+            {selectedPackage === "IRT GOLD PC" && (
+              <span className="text-xs text-green-600 ml-2">🎁 สำหรับไฟล์มือถือ (โบนัส)</span>
+            )}
+          </label>
+          <input
+            value={form.tvUsername}
+            onChange={(e) => setForm({ ...form, tvUsername: e.target.value })}
+            className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
+              errors.tvUsername ? "border-red-300" : "border-gray-200"
+            }`}
+            placeholder="เช่น IRTGOLD"
+          />
+          {errors.tvUsername && <p className="text-xs text-red-600">{errors.tvUsername}</p>}
+        </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700">วันที่ซื้อ</label>
@@ -388,11 +385,6 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
             accept="image/*"
             onChange={(e) => {
               const file = e.target.files?.[0] ?? null;
-              console.log('📎 File selected:', file ? file.name : 'none');
-              if (file) {
-                console.log('   Size:', file.size, 'bytes');
-                console.log('   Type:', file.type);
-              }
               setForm({ ...form, slip: file });
             }}
             className="mt-1 block w-full text-sm text-gray-700 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border file:border-gray-300 file:bg-indigo-50 hover:file:bg-indigo-100"
@@ -426,6 +418,14 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
             <h3 className="text-2xl font-bold text-green-700 mb-2">สำเร็จ!</h3>
             <p className="text-gray-700 mb-4">{success}</p>
             
+            {selectedPackage === "IRT GOLD PC" && (
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                <p className="text-sm text-green-700 font-semibold">
+                  🎁 คุณจะได้รับไฟล์ทั้ง PC และ Mobile!
+                </p>
+              </div>
+            )}
+            
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6 text-left">
               <p className="text-sm text-gray-700 font-semibold mb-2">
                 📧 เราได้ส่งอีเมลยืนยันไปแล้ว
@@ -438,9 +438,6 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
                 <li>📂 โฟลเดอร์ Promotions</li>
                 <li>📂 โฟลเดอร์ Updates</li>
               </ul>
-              <p className="text-xs text-gray-500 mt-2 italic">
-                💡 พบอีเมลแล้ว? กด "ไม่ใช่สแปม" เพื่อให้ครั้งต่อไปเข้ากล่องจดหมายปกติ
-              </p>
             </div>
             
             <button
@@ -456,7 +453,6 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
   );
 }
 
-// ----- หน้า Page -----
 function Page({ initPackage }) {
   const [selectedPackage, setSelectedPackage] = useState(initPackage || "IRT GOLD PC");
   const [urls] = useState(DEFAULTS);
