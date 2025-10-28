@@ -1,4 +1,4 @@
-/** assets/purchase.jsx - ฉบับส่งไฟล์แบบ Base64 + คำแนะนำเช็ค Spam + แสดงเลขบัญชี */
+/** assets/purchase.jsx - ฉบับส่งไฟล์แบบ Base64 + คำแนะนำเช็ค Spam + แสดงเลขบัญชี + TradingView สำหรับ MB */
 const { useState, useEffect } = React;
 
 // ⭐ ใส่ Web App URL ของคุณที่นี่
@@ -9,7 +9,7 @@ const BANK_INFO = {
   bankName: "กสิกรไทย",
   accountName: "หจก.เลิศฐาชัย 1994",
   accountNumber: "216-8-19894-1",
-  bankLogo: "Github-p/icon/Kb.png" // หรือใส่ลิงก์โลโก้ของคุณ
+  bankLogo: "Github-p/icon/Kb.png"
 };
 
 // ----- ตรวจฟอร์ม -----
@@ -20,6 +20,7 @@ function validatePurchaseForm(selectedPackage, values) {
   else if (!/^([^\s@]+)@([^\s@]+)\.[^\s@]+$/.test(values.email)) e.email = "อีเมลไม่ถูกต้อง";
   if (!values.phone) e.phone = "กรุณากรอกเบอร์โทร";
   if (selectedPackage === "IRT GOLD PC" && !values.mt5) e.mt5 = "กรุณากรอกหมายเลขพอร์ต MT5";
+  if (selectedPackage === "IRT GOLD MB" && !values.tradingview) e.tradingview = "กรุณากรอกชื่อผู้ใช้งาน TradingView";
   if (!values.purchaseDate) e.purchaseDate = "กรุณาเลือกวันที่ซื้อ";
   if (!values.slip) e.slip = "กรุณาอัปโหลดสลิปโอนเงิน";
   return e;
@@ -132,6 +133,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
     email: "",
     phone: "",
     mt5: "",
+    tradingview: "",
     purchaseDate: "",
     slip: null,
   });
@@ -184,6 +186,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
       fd.append("email", form.email);
       fd.append("phone", form.phone);
       fd.append("mt5", selectedPackage === "IRT GOLD PC" ? form.mt5 : "");
+      fd.append("tradingview", selectedPackage === "IRT GOLD MB" ? form.tradingview : "");
       fd.append("purchaseDate", form.purchaseDate);
       fd.append("slipBase64", slipBase64);
       fd.append("slipName", slipName);
@@ -228,6 +231,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
         email: "",
         phone: "",
         mt5: "",
+        tradingview: "",
         purchaseDate: "",
         slip: null
       });
@@ -332,6 +336,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
           {errors.phone && <p className="text-xs text-red-600">{errors.phone}</p>}
         </div>
 
+        {/* ⭐ แสดงฟิลด์ MT5 สำหรับ PC */}
         {selectedPackage === "IRT GOLD PC" && (
           <div>
             <label className="block text-sm font-medium text-gray-700">หมายเลขพอร์ต MT5</label>
@@ -344,6 +349,22 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
               placeholder="กรอกหมายเลขพอร์ต MT5 เช่น 100400"
             />
             {errors.mt5 && <p className="text-xs text-red-600">{errors.mt5}</p>}
+          </div>
+        )}
+
+        {/* ⭐ แสดงฟิลด์ TradingView สำหรับ MB */}
+        {selectedPackage === "IRT GOLD MB" && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700">ชื่อผู้ใช้งาน TradingView</label>
+            <input
+              value={form.tradingview}
+              onChange={(e) => setForm({ ...form, tradingview: e.target.value })}
+              className={`mt-1 block w-full rounded-xl border px-3 py-2 ${
+                errors.tradingview ? "border-red-300" : "border-gray-200"
+              }`}
+              placeholder="เช่น IRTGOLD"
+            />
+            {errors.tradingview && <p className="text-xs text-red-600">{errors.tradingview}</p>}
           </div>
         )}
 
