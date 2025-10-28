@@ -265,7 +265,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
             IRT GOLD PC
           </h3>
           <p className="text-sm text-gray-600">สำหรับใช้งานบนคอมพิวเตอร์</p>
-          <p className="text-xs text-green-600 mt-1">🎁 ฟรี! ไฟล์มือถือด้วย</p>
+          <p className="text-xs text-green-600 mt-1">🎁และรับไฟล์มือถือด้วย</p>
           <p className="text-lg font-semibold text-indigo-600 mt-2">฿4,590</p>
         </div>
 
@@ -351,7 +351,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
           <label className="block text-sm font-medium text-gray-700">
             ชื่อผู้ใช้งาน TradingView
             {selectedPackage === "IRT GOLD PC" && (
-              <span className="text-xs text-green-600 ml-2">🎁 สำหรับไฟล์มือถือ (โบนัส)</span>
+              <span className="text-xs text-green-600 ml-2"> สำหรับไฟล์มือถือ </span>
             )}
           </label>
           <input
