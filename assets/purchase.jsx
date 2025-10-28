@@ -287,7 +287,7 @@ function PurchaseForm({ selectedPackage, setSelectedPackage }) {
             IRT GOLD MB
           </h3>
           <p className="text-sm text-gray-600">สำหรับใช้งานบนมือถือ</p>
-          <p className="text-lg font-semibold text-green-600 mt-2">฿2,390</p>
+          <p className="text-lg font-semibold text-green-600 mt-2">฿3,290</p>
         </div>
       </div>
 
