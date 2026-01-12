@@ -1,4 +1,3 @@
-<!-- purchase.html -->
 <!doctype html>
 <html lang="th">
 <head>
@@ -8,29 +7,49 @@
   <!-- TITLE + SEO -->
   <title>สั่งซื้อ | IRT GOLD</title>
   <meta name="description" content="สั่งซื้อผลิตภัณฑ์/เครื่องมือจาก IRT GOLD พร้อมวิธีชำระเงินและติดต่อทีมงาน" />
-  <link rel="canonical" href="https://irtgold.github.io/irtgold/purchase.html" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="สั่งซื้อ | IRT GOLD" />
-  <meta property="og:description" content="เลือกแพ็กเกจและชำระเงินได้ง่าย ๆ กับ IRT GOLD" />
-  <meta property="og:url" content="https://irtgold.github.io/irtgold/purchase.html" />
-  <meta property="og:type" content="website" />
-  <!-- ถ้ามีภาพให้ใส่ URL รูปของหน้านี้ได้ เช่น
-  <meta property="og:image" content="https://irtgold.github.io/irtgold/assets/og-purchase.jpg" /> -->
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="assets/style.css?v=3" />
-
-  <!-- (ถ้าใช้ Tailwind ในหน้านี้จริงค่อยใส่) -->
-  <script>
-    window.tailwind = { config: { corePlugins: { preflight: false } } };
-  </script>
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff', // blue-50
+              100: '#dbeafe', // blue-100
+              500: '#3b82f6', // blue-500
+              600: '#2563eb', // blue-600
+              700: '#1d4ed8', // blue-700
+              800: '#1e40af', // blue-800
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Google tag (gtag.js) — ใช้ไอดีเดียวกับหน้าแรก -->
+  <style>
+    body { font-family: 'Sarabun', sans-serif; }
+    .spinner {
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top: 3px solid #fff;
+      width: 20px;
+      height: 20px;
+      -webkit-animation: spin 1s linear infinite; /* Safari */
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCBMS32BKS"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -40,73 +59,405 @@
   </script>
 </head>
 
-  <body class="m-0 bg-gray-50">
-    <section id="purchase" class="section">
-      <div class="container mx-auto px-4 py-0">
-        <!-- จุด mount ของ React (ต้องมี) -->
-        <div id="irt-purchase-root"></div>
+<body class="bg-brand-50 text-slate-800">
 
-        <!-- กล่องแสดง error กรณีโหลดคอมโพเนนต์ไม่สำเร็จ -->
-        <div id="irt-error" class="hidden mt-6 rounded-md bg-red-50 p-4 text-red-800 text-sm"></div>
+  <!-- จุด Mount ของ React -->
+  <div id="irt-purchase-root"></div>
 
-        <noscript>
-          <p class="mt-6 text-sm text-red-700">
-            จำเป็นต้องเปิดใช้งาน JavaScript เพื่อใช้งานหน้านี้
-          </p>
-        </noscript>
-      </div>
-    </section>
+  <!-- React Libraries -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- React/ReactDOM (UMD). ถ้าต้องการโหมด production เปลี่ยนเป็น react.production.min.js -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <!-- Main React Application -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
 
-    <!-- Babel แปล JSX/TSX ในเบราว์เซอร์ (เหมาะทดสอบ/หน้าเล็ก ๆ) -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    // ⭐ ใส่ URL ของ Google Apps Script ที่ Deploy แล้วตรงนี้
+    const SCRIPT_URL = 'INSERT_YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE'; 
 
-    <!-- โหลดคอมโพเนนต์ของคุณ (ห้ามมี import/export ข้างในไฟล์นี้) 
-         ให้ประกาศเป็น UMD/global เช่น:  window.Page = function Page(props) { ... } -->
-    <script
-      type="text/babel"
-      data-presets="react,typescript"
-      src="assets/purchase.jsx?v=3"
-    ></script>
+    function Page() {
+      // Package Info (Fixed)
+      const pkgName = "IRT GOLD PC + MB V.5.0";
+      const pkgPrice = 3290;
 
-    <!-- Bootstrap เรนเดอร์ -->
-    <script type="text/babel">
-      (function () {
-        try {
-          const rootEl = document.getElementById('irt-purchase-root');
-          const errEl  = document.getElementById('irt-error');
+      // Form State
+      const [formData, setFormData] = useState({
+        fullName: '',
+        email: '',
+        phone: '',
+        mt5: '',
+        tradingview: '', // For PC/Mobile combined
+        purchaseDate: new Date().toISOString().split('T')[0],
+      });
+      
+      const [slipFile, setSlipFile] = useState(null);
+      const [slipPreview, setSlipPreview] = useState(null);
+      
+      const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+      const [errorMsg, setErrorMsg] = useState('');
 
-          // อ่าน pkg= จาก query string
-          const url = new URL(window.location.href);
-          const initPkg = url.searchParams.get('pkg') || 'IRT GOLD PC';
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+      };
 
-          if (!rootEl) {
-            throw new Error('ไม่พบ #irt-purchase-root ในหน้า HTML');
-          }
-          if (!window.React || !window.ReactDOM) {
-            throw new Error('โหลด React/ReactDOM ไม่สำเร็จ');
-          }
-
-          // ต้องให้ purchase.jsx กำหนด window.Page
-          if (typeof window.Page !== 'function') {
-            throw new Error('ไม่พบคอมโพเนนต์ Page (คาดว่า assets/purchase.jsx ยังไม่ได้กำหนด window.Page)');
-          }
-
-          const root = ReactDOM.createRoot(rootEl);
-          root.render(<Page initPackage={initPkg} />);
-        } catch (e) {
-          // แสดง error ที่หน้า (ช่วยดีบักเวลาไฟล์ JSX โหลดไม่ติด)
-          const el = document.getElementById('irt-error');
-          if (el) {
-            el.classList.remove('hidden');
-            el.textContent = 'เกิดข้อผิดพลาด: ' + (e?.message || e);
-          }
-          console.error(e);
+      const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          setSlipFile(file);
+          // Create preview
+          const reader = new FileReader();
+          reader.onloadend = () => setSlipPreview(reader.result);
+          reader.readAsDataURL(file);
         }
-      })();
-    </script>
-  </body>
+      };
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        if (!slipFile) {
+          alert('กรุณาแนบสลิปการโอนเงิน');
+          return;
+        }
+
+        if (!SCRIPT_URL || SCRIPT_URL.includes('INSERT_YOUR')) {
+           alert('Error: ยังไม่ได้ตั้งค่า URL ของ Google Script ในไฟล์ HTML');
+           return;
+        }
+
+        setStatus('submitting');
+        setErrorMsg('');
+
+        try {
+          // Convert file to Base64
+          const reader = new FileReader();
+          reader.readAsDataURL(slipFile);
+          
+          reader.onload = async () => {
+            const base64Data = reader.result.split(',')[1]; // Remove "data:image/jpeg;base64," prefix
+            
+            // Prepare payload
+            const payload = new FormData();
+            payload.append('selectedPackage', pkgName);
+            payload.append('fullName', formData.fullName);
+            payload.append('email', formData.email);
+            payload.append('phone', formData.phone);
+            payload.append('mt5', formData.mt5);
+            payload.append('tradingview', formData.tradingview);
+            // Map tradingview to mbTradingview as well just in case backend expects it
+            payload.append('mbTradingview', formData.tradingview);
+            payload.append('purchaseDate', formData.purchaseDate);
+            
+            // Slip handling
+            payload.append('slipBase64', base64Data);
+            payload.append('slipName', slipFile.name);
+            payload.append('slipType', slipFile.type);
+
+            // Send to Google Script
+            const response = await fetch(SCRIPT_URL, {
+              method: 'POST',
+              body: payload,
+            });
+
+            const result = await response.json();
+
+            if (result.ok) {
+              setStatus('success');
+              window.scrollTo(0,0);
+            } else {
+              throw new Error(result.error || 'Submission failed');
+            }
+          };
+
+          reader.onerror = () => {
+             throw new Error("Failed to read file");
+          };
+
+        } catch (err) {
+          console.error(err);
+          setStatus('error');
+          setErrorMsg('เกิดข้อผิดพลาดในการส่งข้อมูล: ' + err.message);
+        }
+      };
+
+      if (status === 'success') {
+        return (
+          <div className="min-h-screen flex items-center justify-center bg-brand-50 px-4 py-10">
+            <div className="bg-white p-8 rounded-2xl shadow-xl max-w-lg w-full text-center border border-blue-100">
+              
+              {/* Icon Success */}
+              <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
+                <i className="fas fa-check text-4xl text-brand-600"></i>
+              </div>
+
+              <h2 className="text-3xl font-bold text-brand-800 mb-2">สั่งซื้อสำเร็จ!</h2>
+              <p className="text-slate-500 mb-8 text-lg">
+                เราได้รับข้อมูลการสั่งซื้อของคุณเรียบร้อยแล้ว
+              </p>
+
+              {/* Timeline Steps (สิ่งที่ลูกค้าถามหา) */}
+              <div className="relative flex justify-between items-start mb-10 text-sm text-left">
+                {/* Connecting Line */}
+                <div className="absolute top-4 left-4 right-4 h-1 bg-gray-100 -z-10"></div>
+                <div className="absolute top-4 left-4 right-1/2 h-1 bg-brand-200 -z-10"></div>
+
+                {/* Step 1 */}
+                <div className="flex flex-col items-center w-1/3 text-center">
+                   <div className="w-8 h-8 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold mb-2 shadow-md ring-4 ring-white">1</div>
+                   <p className="font-bold text-brand-700">แจ้งโอน</p>
+                   <p className="text-xs text-slate-400">เสร็จสิ้น</p>
+                </div>
+
+                {/* Step 2 */}
+                <div className="flex flex-col items-center w-1/3 text-center">
+                   <div className="w-8 h-8 rounded-full bg-white border-2 border-brand-300 text-brand-300 flex items-center justify-center font-bold mb-2 shadow-sm">2</div>
+                   <p className="font-bold text-slate-600">รอตรวจสอบ</p>
+                   <p className="text-xs text-slate-400">~15-60 นาที</p>
+                </div>
+
+                 {/* Step 3 */}
+                 <div className="flex flex-col items-center w-1/3 text-center">
+                   <div className="w-8 h-8 rounded-full bg-white border-2 border-slate-200 text-slate-300 flex items-center justify-center font-bold mb-2 shadow-sm">3</div>
+                   <p className="font-bold text-slate-600">รับสินค้า</p>
+                   <p className="text-xs text-slate-400">ทางอีเมล</p>
+                </div>
+              </div>
+
+              <div className="bg-blue-50 rounded-xl p-4 mb-8 text-left border border-blue-100">
+                <p className="text-brand-800 font-semibold mb-1"><i className="fas fa-info-circle mr-2"></i>สิ่งที่ต้องทำตอนนี้:</p>
+                <p className="text-sm text-slate-600 pl-6">
+                  ทีมงานกำลังตรวจสอบสลิปของคุณ เมื่อเรียบร้อยแล้ว ระบบจะส่ง <strong>License Key</strong> และ <strong>คู่มือติดตั้ง</strong> ไปยังอีเมล: <br/>
+                  <span className="font-bold text-brand-600 block mt-1">{formData.email}</span>
+                </p>
+              </div>
+
+              <a href="index.html" className="block w-full bg-brand-600 text-white px-6 py-4 rounded-xl font-bold hover:bg-brand-700 transition shadow-lg shadow-blue-200">
+                กลับหน้าหลัก
+              </a>
+            </div>
+          </div>
+        );
+      }
+
+      return (
+        <div className="max-w-4xl mx-auto py-10 px-4">
+          <div className="text-center mb-10">
+            <h1 className="text-3xl md:text-4xl font-bold text-brand-800 mb-2">
+              <i className="fas fa-shopping-cart text-brand-600 mr-2"></i> สั่งซื้อสินค้า
+            </h1>
+            <p className="text-slate-500">กรอกข้อมูลและแจ้งชำระเงินเพื่อรับสินค้าทันที</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+            
+            {/* Left Column: Product & Payment Info */}
+            <div className="md:col-span-1 space-y-6">
+              
+              {/* Product Card */}
+              <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div className="bg-gradient-to-r from-brand-700 to-brand-600 p-4 text-white text-center">
+                  <h3 className="font-bold text-lg">รายการสั่งซื้อ</h3>
+                </div>
+                <div className="p-6">
+                  <div className="mb-4">
+                    <span className="bg-blue-100 text-brand-700 text-xs font-bold px-2 py-1 rounded-full mb-2 inline-block">BEST SELLER</span>
+                    <h4 className="font-bold text-slate-800 text-lg">{pkgName}</h4>
+                    <p className="text-sm text-slate-500 mt-1">
+                      <i className="fas fa-desktop mr-1 text-brand-400"></i> สำหรับ PC (MT5) <br/>
+                      <i className="fas fa-mobile-alt mr-1 text-brand-400"></i> สำหรับมือถือ (TradingView)
+                    </p>
+                  </div>
+                  <div className="border-t border-slate-100 pt-4 flex justify-between items-center">
+                    <span className="text-slate-500">ราคารวม</span>
+                    <span className="text-2xl font-bold text-brand-600">฿{pkgPrice.toLocaleString()}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bank Info */}
+              <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <h3 className="font-bold text-slate-800 mb-4 flex items-center">
+                  <i className="fas fa-university text-brand-600 mr-2"></i> ช่องทางชำระเงิน
+                </h3>
+                <div className="bg-white p-4 rounded-lg border border-blue-200 shadow-sm mb-4 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-1 h-full bg-green-500"></div>
+                  <div className="flex items-center mb-3">
+                    <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center text-white font-bold mr-3 shadow-sm">
+                      K
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500">ธนาคารกสิกรไทย</p>
+                      <p className="font-bold text-slate-800 text-lg">216-8-19894-1</p>
+                    </div>
+                  </div>
+                  <p className="text-sm text-slate-700 font-medium ml-1">ชื่อบัญชี: หจก.เลิศฐาชัย 1994</p>
+                </div>
+                <div className="text-xs text-slate-500 bg-orange-50 p-2 rounded text-center border border-orange-100">
+                  <i className="fas fa-exclamation-circle text-orange-500 mr-1"></i>
+                  โปรดเก็บสลิปไว้เป็นหลักฐาน
+                </div>
+              </div>
+
+            </div>
+
+            {/* Right Column: Form */}
+            <div className="md:col-span-2">
+              <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg border border-slate-100 p-6 md:p-8">
+                <h3 className="font-bold text-xl text-brand-800 mb-6 pb-2 border-b border-slate-100">
+                  <i className="fas fa-user-edit text-brand-600 mr-2"></i> ข้อมูลผู้ซื้อ
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  {/* Full Name */}
+                  <div className="col-span-1 md:col-span-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-1">ชื่อ-นามสกุล <span className="text-red-500">*</span></label>
+                    <input 
+                      type="text" 
+                      name="fullName" 
+                      required
+                      value={formData.fullName} 
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-slate-50 focus:bg-white"
+                      placeholder="กรอกชื่อจริงและนามสกุล"
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">อีเมล <span className="text-red-500">*</span></label>
+                    <input 
+                      type="email" 
+                      name="email" 
+                      required
+                      value={formData.email} 
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-slate-50 focus:bg-white"
+                      placeholder="example@gmail.com"
+                    />
+                  </div>
+
+                  {/* Phone */}
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">เบอร์โทรศัพท์ <span className="text-red-500">*</span></label>
+                    <input 
+                      type="tel" 
+                      name="phone" 
+                      required
+                      value={formData.phone} 
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-slate-50 focus:bg-white"
+                      placeholder="08xxxxxxxx"
+                    />
+                  </div>
+                </div>
+
+                <h3 className="font-bold text-xl text-brand-800 mb-6 pb-2 border-b border-slate-100 pt-4">
+                  <i className="fas fa-cogs text-brand-600 mr-2"></i> ข้อมูลบัญชีเทรด
+                </h3>
+
+                <div className="grid grid-cols-1 gap-6 mb-6">
+                  {/* MT5 */}
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">เลขบัญชี MT5 (สำหรับ PC) <span className="text-red-500">*</span></label>
+                    <input 
+                      type="text" 
+                      name="mt5" 
+                      required
+                      value={formData.mt5} 
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-slate-50 focus:bg-white"
+                      placeholder="เช่น 809xxxx"
+                    />
+                    <p className="text-xs text-slate-500 mt-1">เลขบัญชีเทรด tptrades หรือโบรกเกอร์ที่รองรับ MT5</p>
+                  </div>
+
+                  {/* TradingView */}
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">ชื่อผู้ใช้ TradingView (สำหรับ Mobile/App) <span className="text-red-500">*</span></label>
+                    <input 
+                      type="text" 
+                      name="tradingview" 
+                      required
+                      value={formData.tradingview} 
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition bg-slate-50 focus:bg-white"
+                      placeholder="Username ของ TradingView"
+                    />
+                  </div>
+                </div>
+
+                <h3 className="font-bold text-xl text-brand-800 mb-6 pb-2 border-b border-slate-100 pt-4">
+                  <i className="fas fa-file-invoice-dollar text-brand-600 mr-2"></i> แจ้งชำระเงิน
+                </h3>
+
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">แนบสลิปโอนเงิน <span className="text-red-500">*</span></label>
+                  
+                  <div className="flex items-center justify-center w-full">
+                    <label className={`flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-xl cursor-pointer transition relative overflow-hidden ${slipPreview ? 'border-brand-400 bg-blue-50' : 'border-slate-300 bg-slate-50 hover:bg-white hover:border-brand-300'}`}>
+                      {slipPreview ? (
+                        <div className="w-full h-full p-2 relative group">
+                          <img src={slipPreview} alt="Slip preview" className="w-full h-full object-contain" />
+                          <div className="absolute inset-0 bg-black bg-opacity-40 hidden group-hover:flex items-center justify-center text-white text-sm font-medium rounded-lg">เปลี่ยนรูปภาพ</div>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                          <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-3 text-brand-600">
+                             <i className="fas fa-cloud-upload-alt text-xl"></i>
+                          </div>
+                          <p className="text-sm text-slate-500"><span className="font-semibold text-brand-600">คลิกเพื่ออัปโหลด</span> หรือลากไฟล์มาวาง</p>
+                          <p className="text-xs text-slate-400 mt-1">JPG, PNG (Max 5MB)</p>
+                        </div>
+                      )}
+                      <input type="file" className="hidden" accept="image/*" onChange={handleFileChange} required />
+                    </label>
+                  </div>
+                  
+                  <div className="mt-4">
+                    <label className="block text-sm font-medium text-slate-700 mb-1">วันที่โอน</label>
+                    <input 
+                      type="date" 
+                      name="purchaseDate"
+                      value={formData.purchaseDate}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-brand-500 bg-slate-50 focus:bg-white"
+                    />
+                  </div>
+                </div>
+
+                {errorMsg && (
+                  <div className="mb-4 p-4 bg-red-50 text-red-700 rounded-lg border border-red-200 text-sm">
+                    <i className="fas fa-exclamation-triangle mr-1"></i> {errorMsg}
+                  </div>
+                )}
+
+                <button 
+                  type="submit" 
+                  disabled={status === 'submitting'}
+                  className={`w-full py-4 rounded-xl font-bold text-lg text-white shadow-lg transform transition hover:-translate-y-1 ${status === 'submitting' ? 'bg-slate-400 cursor-not-allowed' : 'bg-brand-600 hover:bg-brand-700 shadow-blue-200'}`}
+                >
+                  {status === 'submitting' ? (
+                    <span className="flex items-center justify-center">
+                      <div className="spinner mr-2"></div> กำลังส่งข้อมูล...
+                    </span>
+                  ) : (
+                    <span><i className="fas fa-paper-plane mr-2"></i> ยืนยันการสั่งซื้อ</span>
+                  )}
+                </button>
+                <p className="text-center text-xs text-slate-400 mt-4">
+                  การกดปุ่มยืนยันถือว่าท่านยอมรับเงื่อนไขการให้บริการ
+                </p>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('irt-purchase-root'));
+    root.render(<Page />);
+  </script>
+</body>
 </html>
