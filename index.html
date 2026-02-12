@@ -318,6 +318,37 @@
       </div>
     </div>
   </section>
+  <section id="reviews" class="py-12 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <span class="inline-block px-3 py-1 bg-amber-50 text-amber-600 text-[10px] font-bold rounded-full mb-3">⭐ รีวิวจากผู้ใช้จริง</span>
+        <h2 class="text-2xl font-bold text-slate-900">เสียงยืนยันจากนักเทรดกว่า <span class="text-amber-500">1,000+ คน</span></h2>
+      </div>
+      <div class="max-w-2xl mx-auto">
+        <div id="testimonialCard" class="relative bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 shadow-xl border border-slate-100">
+          <div class="absolute top-6 right-6 text-5xl text-blue-100 font-serif">"</div>
+          <div class="flex items-center gap-3 mb-4">
+            <div id="tAvatar" class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg"></div>
+            <div class="flex-1">
+              <div id="tName" class="font-bold text-slate-900"></div>
+              <div id="tRole" class="text-xs text-slate-500"></div>
+              <div class="flex gap-0.5 mt-0.5">⭐⭐⭐⭐⭐</div>
+            </div>
+            <div class="px-3 py-1.5 bg-green-50 rounded-full"><span id="tProfit" class="text-green-600 font-bold text-xs"></span></div>
+          </div>
+          <p id="tText" class="text-sm text-slate-700 leading-relaxed italic"></p>
+          <div class="flex justify-center gap-2 mt-6" id="tDots"></div>
+        </div>
+      </div>
+      <!-- Review Image Preview -->
+      <div class="mt-8">
+        <div class="grid grid-cols-3 md:grid-cols-6 gap-2" id="reviewPreview"></div>
+        <div class="text-center mt-4">
+          <button onclick="openReviews()" class="px-6 py-2 bg-blue-50 text-blue-600 font-bold text-sm rounded-full hover:bg-blue-100 transition-all border border-blue-200">ดูรีวิวทั้งหมด 26 รีวิว →</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ============ MARKETS ============ -->
   <section class="py-10 bg-gradient-to-r from-blue-600 to-cyan-500">
@@ -413,37 +444,6 @@
   </section>
 
   <!-- ============ TESTIMONIALS ============ -->
-  <section id="reviews" class="py-12 bg-white">
-    <div class="max-w-4xl mx-auto px-4">
-      <div class="text-center mb-8">
-        <span class="inline-block px-3 py-1 bg-amber-50 text-amber-600 text-[10px] font-bold rounded-full mb-3">⭐ รีวิวจากผู้ใช้จริง</span>
-        <h2 class="text-2xl font-bold text-slate-900">เสียงยืนยันจากนักเทรดกว่า <span class="text-amber-500">1,000+ คน</span></h2>
-      </div>
-      <div class="max-w-2xl mx-auto">
-        <div id="testimonialCard" class="relative bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 shadow-xl border border-slate-100">
-          <div class="absolute top-6 right-6 text-5xl text-blue-100 font-serif">"</div>
-          <div class="flex items-center gap-3 mb-4">
-            <div id="tAvatar" class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg"></div>
-            <div class="flex-1">
-              <div id="tName" class="font-bold text-slate-900"></div>
-              <div id="tRole" class="text-xs text-slate-500"></div>
-              <div class="flex gap-0.5 mt-0.5">⭐⭐⭐⭐⭐</div>
-            </div>
-            <div class="px-3 py-1.5 bg-green-50 rounded-full"><span id="tProfit" class="text-green-600 font-bold text-xs"></span></div>
-          </div>
-          <p id="tText" class="text-sm text-slate-700 leading-relaxed italic"></p>
-          <div class="flex justify-center gap-2 mt-6" id="tDots"></div>
-        </div>
-      </div>
-      <!-- Review Image Preview -->
-      <div class="mt-8">
-        <div class="grid grid-cols-3 md:grid-cols-6 gap-2" id="reviewPreview"></div>
-        <div class="text-center mt-4">
-          <button onclick="openReviews()" class="px-6 py-2 bg-blue-50 text-blue-600 font-bold text-sm rounded-full hover:bg-blue-100 transition-all border border-blue-200">ดูรีวิวทั้งหมด 26 รีวิว →</button>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ============ PRICING ============ -->
   <section id="pricing" class="py-16 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
