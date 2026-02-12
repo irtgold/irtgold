@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRT GOLD V5.0 - ระบบเทรดครบวงจร | AI แจ้งสัญญาณ 24 ชม.</title>
+  <meta name="description" content="IRT GOLD ระบบ AI แจ้งสัญญาณเทรด 24 ชม. ใช้ได้ทุกตลาด ทองคำ Forex Crypto หุ้น ซื้อครั้งเดียวใช้ได้ตลอดชีพ">
+  <meta property="og:title" content="IRT GOLD V5.0 - ระบบเทรดครบวงจร">
+  <meta property="og:description" content="AI แจ้งสัญญาณ 24 ชม. ไม่ต้องเฝ้ากราฟ ราคาพิเศษ 3,290 บาท">
+  <meta property="og:type" content="website">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Prompt', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 overflow-x-hidden font-sans">
+
+  <!-- ============ NAVBAR ============ -->
+  <nav class="fixed w-full z-50 top-0 bg-white/95 backdrop-blur-xl border-b border-slate-200 h-14">
+    <div class="max-w-6xl mx-auto px-4 h-full flex justify-between items-center">
+      <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <div class="w-9 h-9 flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-lg shadow-blue-500/20">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <span class="font-bold text-lg text-slate-900">IRT <span class="text-amber-500">GOLD</span></span>
+      </div>
+      
+      <div class="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-full">
+        <button onclick="scrollTo('home')" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">หน้าแรก</button>
+        <button onclick="scrollTo('features')" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">ฟีเจอร์</button>
+        <button onclick="scrollTo('video')" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">วิดีโอ</button>
+        <button onclick="scrollTo('pricing')" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">ราคา</button>
+        <button onclick="openReviews()" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">รีวิว</button>
+      </div>
+
+      <a href="https://m.me/Meedee.Indi" target="_blank" rel="noopener noreferrer" class="hidden md:block px-5 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs font-bold rounded-full shadow-lg shadow-blue-500/20 transition-all hover:-translate-y-0.5">แชทเลย</a>
+
+      <button onclick="toggleMenu()" class="md:hidden p-2 hover:bg-slate-100 rounded-xl" id="menuBtn">
+        <svg class="w-5 h-5" id="menuIcon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="fixed inset-0 z-40 bg-white pt-16 hidden">
+    <div class="flex flex-col p-4 gap-2">
+      <button onclick="scrollTo('home');toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">หน้าแรก</button>
+      <button onclick="scrollTo('features');toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">ฟีเจอร์</button>
+      <button onclick="scrollTo('video');toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">วิดีโอ</button>
+      <button onclick="scrollTo('pricing');toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">ราคา</button>
+      <button onclick="openReviews();toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">รีวิว</button>
+    </div>
+  </div>
+
+  <!-- ============ HERO SECTION ============ -->
+  <section id="home" class="relative pt-20 pb-16 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-sky-50/30"></div>
+    <div class="absolute top-10 right-0 w-72 h-72 bg-gradient-to-bl from-blue-500/10 to-transparent rounded-full blur-3xl"></div>
+    
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <!-- Left -->
+        <div class="text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 mb-4 animate-pulse">
+            <span class="text-[10px] font-bold text-red-600">🔥 ราคาพิเศษ 3,290 บาท ก่อนปรับขึ้นเป็น 15,000 บาท!</span>
+          </div>
+          
+          <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 leading-tight">
+            AI แจ้งสัญญาณ 24 ชม.<br>
+            <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">ไม่ต้องเฝ้ากราฟ!</span>
+          </h1>
+          
+          <p class="text-sm text-slate-600 mb-6 leading-relaxed max-w-md mx-auto lg:mx-0">
+            ระบบออกแบบมาให้ใช้งานง่าย <span class="font-semibold text-blue-600">AI ช่วยแจ้งสัญญาณตลอด 24 ชม.</span> เหมาะกับคนทำงาน หรือมีเวลาจำกัด <span class="font-semibold text-blue-500">เปิดระบบ = พร้อมทำกำไรได้ทันที!</span>
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-6">
+            <a href="https://irtgold.github.io/irtgold/purchase.html?pkg=IRT%20GOLD%20PC" target="_blank" class="group px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold text-sm rounded-xl shadow-xl shadow-blue-500/20 transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
+              ⚡ สั่งซื้อเลย →
+            </a>
+            <button onclick="scrollTo('video')" class="px-6 py-3 bg-white text-slate-700 font-bold text-sm rounded-xl border-2 border-slate-200 transition-all flex items-center justify-center gap-2 shadow-lg">
+              ▶ ดูวิดีโอสาธิต
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-4 gap-2">
+            <div class="text-center p-2 rounded-lg bg-white/60 border border-slate-100">
+              <div class="flex items-center justify-center gap-1 text-blue-600 mb-0.5"><span class="text-sm font-bold text-slate-900">5+ ปี</span></div>
+              <span class="text-[10px] text-slate-500">ประสบการณ์</span>
+            </div>
+            <div class="text-center p-2 rounded-lg bg-white/60 border border-slate-100">
+              <div class="flex items-center justify-center gap-1 text-blue-600 mb-0.5"><span class="text-sm font-bold text-slate-900">24 ชม.</span></div>
+              <span class="text-[10px] text-slate-500">AI แจ้งเตือน</span>
+            </div>
+            <div class="text-center p-2 rounded-lg bg-white/60 border border-slate-100">
+              <div class="flex items-center justify-center gap-1 text-blue-600 mb-0.5"><span class="text-sm font-bold text-slate-900">1,000+</span></div>
+              <span class="text-[10px] text-slate-500">ผู้ใช้งาน</span>
+            </div>
+            <div class="text-center p-2 rounded-lg bg-white/60 border border-slate-100">
+              <div class="flex items-center justify-center gap-1 text-blue-600 mb-0.5"><span class="text-sm font-bold text-slate-900">ฟรี!</span></div>
+              <span class="text-[10px] text-slate-500">คอร์สเรียน</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right - Hero Image -->
+        <div class="relative">
+          <div class="relative mx-auto max-w-xl">
+            <div class="absolute -top-3 -left-3 z-20 px-3 py-1.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-[10px] font-bold rounded-full shadow-lg animate-bounce">🤖 AI Signal 24 ชม.</div>
+            
+            <div class="relative bg-white rounded-2xl p-2 shadow-2xl shadow-slate-200/50 border border-slate-100">
+              <div class="aspect-video rounded-xl overflow-hidden relative">
+                <img src="Github_web/Banner/bn1.png" alt="IRT GOLD" class="w-full h-full object-cover">
+                <div class="absolute top-4 right-4 flex gap-2">
+                  <div class="px-3 py-1.5 bg-blue-500/20 backdrop-blur-sm rounded-lg"><span class="text-blue-400 text-xs font-medium">💻 PC</span></div>
+                  <div class="px-3 py-1.5 bg-green-500/20 backdrop-blur-sm rounded-lg"><span class="text-green-400 text-xs font-medium">📱 Mobile</span></div>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4">
+                  <div class="flex justify-between items-end">
+                    <div><div class="text-amber-400 font-bold text-xl">XAUUSD</div><div class="text-white/80 text-sm">TradingView + MT5</div></div>
+                    <div class="text-right"><div class="text-green-400 font-bold text-xl">+125 pips</div><div class="text-white/60 text-sm">Last Signal</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Telegram Alert Card -->
+            <div class="absolute -bottom-6 -right-6 z-20 p-3 bg-white rounded-xl shadow-xl border border-green-200 max-w-[180px]">
+              <div class="flex items-center gap-2 mb-2">
+                <div class="w-7 h-7 rounded-full bg-green-100 flex items-center justify-center">🔔</div>
+                <span class="text-[10px] font-bold text-green-600">📱 Telegram Alert!</span>
+              </div>
+              <div class="text-[9px] text-slate-500 space-y-0.5 bg-slate-50 rounded-lg p-2">
+                <div>✅ Entry: <span class="text-slate-700 font-semibold">2,645.50</span></div>
+                <div>✅ TP1: <span class="text-green-600 font-semibold">2,658.00</span></div>
+                <div>✅ TP2: <span class="text-green-600 font-semibold">2,670.00</span></div>
+                <div>✅ SL: <span class="text-red-500 font-semibold">2,638.00</span></div>
+              </div>
+            </div>
+            
+            <div class="absolute top-1/2 -left-4 z-20 px-3 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] font-bold rounded-xl shadow-lg transform -translate-y-1/2">⚡ Real-time Alert</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEM SECTION ============ -->
+  <section class="py-10 bg-white">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center mb-6">
+        <span class="inline-block px-3 py-1 bg-red-50 text-red-600 text-[10px] font-bold rounded-full mb-3">🤔 หลายคนเทรดแล้วไม่รู้ว่า...</span>
+      </div>
+      <div class="flex flex-wrap justify-center gap-3 mb-6">
+        <div class="px-4 py-2 rounded-xl bg-red-50 border border-red-100 flex items-center gap-2"><span class="text-xs font-bold text-slate-700">⚠️ จะเข้าซื้อตรงไหนดี ❓</span></div>
+        <div class="px-4 py-2 rounded-xl bg-red-50 border border-red-100 flex items-center gap-2"><span class="text-xs font-bold text-slate-700">🎯 จะขายทำกำไรตรงไหน ❓</span></div>
+        <div class="px-4 py-2 rounded-xl bg-red-50 border border-red-100 flex items-center gap-2"><span class="text-xs font-bold text-slate-700">🛡️ ตัดขาดทุนตรงไหน ❓</span></div>
+        <div class="px-4 py-2 rounded-xl bg-red-50 border border-red-100 flex items-center gap-2"><span class="text-xs font-bold text-slate-700">👁️ ต้องเฝ้ากราฟทั้งวัน ❓</span></div>
+      </div>
+      
+      <div class="bg-gradient-to-r from-blue-50 to-sky-50 rounded-2xl p-6 border border-blue-200">
+        <div class="text-center mb-6">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-full font-bold text-sm mb-2">🤖 AI แจ้งสัญญาณให้หมดเลย!</div>
+          <p class="text-xs text-slate-600">ไม่ต้องเฝ้ากราฟ ไม่พลาดจังหวะสำคัญ เปิดระบบ = พร้อมทำกำไรได้ทันที</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-xl overflow-hidden border border-blue-100 shadow-sm">
+            <img src="Github_web/Banner/Entry.png" alt="IRT GOLD Entry Point" class="w-full h-full object-cover min-h-[280px]">
+          </div>
+          <div class="space-y-3">
+            <div class="bg-white rounded-xl p-4 text-center shadow-sm border border-slate-100"><div class="text-2xl mb-1">✅</div><div class="text-xs text-slate-500 mb-1">ซื้อตรงไหน</div><div class="font-bold text-sm text-blue-600">Entry Point</div></div>
+            <div class="bg-white rounded-xl p-4 text-center shadow-sm border border-slate-100"><div class="text-2xl mb-1">✅</div><div class="text-xs text-slate-500 mb-1">ขายทำกำไรตรงไหน</div><div class="font-bold text-sm text-green-600">TP1, TP2</div></div>
+            <div class="bg-white rounded-xl p-4 text-center shadow-sm border border-slate-100"><div class="text-2xl mb-1">✅</div><div class="text-xs text-slate-500 mb-1">ตัดขาดทุนตรงไหน</div><div class="font-bold text-sm text-red-600">Stop Loss</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PC TOOLS ============ -->
+  <section id="features" class="py-12 bg-gradient-to-b from-blue-50 to-sky-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 text-[10px] font-bold rounded-full mb-3">💻 ระบบ PC Version</span>
+        <h2 class="text-2xl font-bold text-slate-900 mb-2">4 เครื่องมือช่วยวิเคราะห์ในหน้าจอเดียว</h2>
+        <p class="text-slate-500 text-sm">ทั้งหมดนี้ระบบคิดให้หมด แค่ทำตามได้เลย 👍</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- PC Tool 1 -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-blue-100 hover:border-blue-200 hover:shadow-lg transition-all">
+          <div class="p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white shadow-lg">📊</div>
+            <div class="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-sm font-bold">1</div>
+            <div><h3 class="text-slate-900 font-bold">Dashboard</h3><p class="text-slate-500 text-xs">บอกแรงซื้อ-แรงขาย ดูง่ายว่าตลาดขึ้นหรือลง</p></div>
+          </div>
+          <div class="mx-4 mb-4"><img src="Github_web/Pc/Pc1.png" alt="Dashboard" class="w-full aspect-video object-cover rounded-xl"></div>
+        </div>
+        <!-- PC Tool 2 -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-blue-100 hover:border-blue-200 hover:shadow-lg transition-all">
+          <div class="p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center text-white shadow-lg">⬡</div>
+            <div class="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-sm font-bold">2</div>
+            <div><h3 class="text-slate-900 font-bold">Harmonic</h3><p class="text-slate-500 text-xs">จับรูปแบบราคาให้อัตโนมัติ พร้อมแจ้งเตือน</p></div>
+          </div>
+          <div class="mx-4 mb-4"><img src="Github_web/Pc/Pc2.png" alt="Harmonic" class="w-full aspect-video object-cover rounded-xl"></div>
+        </div>
+        <!-- PC Tool 3 -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-blue-100 hover:border-blue-200 hover:shadow-lg transition-all">
+          <div class="p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center text-white shadow-lg">🎯</div>
+            <div class="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-sm font-bold">3</div>
+            <div><h3 class="text-slate-900 font-bold">Signal</h3><p class="text-slate-500 text-xs">สัญญาณซื้อ/ขาย พร้อม Entry, TP1, TP2, SL</p></div>
+          </div>
+          <div class="mx-4 mb-4"><img src="Github_web/Pc/Pc3.png" alt="Signal" class="w-full aspect-video object-cover rounded-xl"></div>
+        </div>
+        <!-- PC Tool 4 -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-blue-100 hover:border-blue-200 hover:shadow-lg transition-all">
+          <div class="p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-lg">📐</div>
+            <div class="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-sm font-bold">4</div>
+            <div><h3 class="text-slate-900 font-bold">แนวรับ-แนวต้าน</h3><p class="text-slate-500 text-xs">ตีกรอบ Supply/Demand ให้เลย</p></div>
+          </div>
+          <div class="mx-4 mb-4"><img src="Github_web/Pc/Pc4.png" alt="Supply Demand" class="w-full aspect-video object-cover rounded-xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MOBILE VERSION ============ -->
+  <section class="py-12 bg-gradient-to-b from-sky-50 to-blue-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <span class="inline-block px-3 py-1 bg-green-50 text-green-600 text-[10px] font-bold rounded-full mb-3">📱 ระบบ Mobile Version</span>
+        <h2 class="text-2xl font-bold text-slate-900 mb-2">มาพร้อมระบบ AI แจ้งสัญญาณ</h2>
+        <p class="text-slate-500 text-sm">ผ่าน Telegram แบบเรียลไทม์ 🚀</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl overflow-hidden border border-blue-100 hover:border-blue-200 hover:shadow-lg transition-all">
+          <div class="p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white shadow-lg">📊</div>
+            <div class="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-sm font-bold">1</div>
+            <div><h3 class="text-slate-900 font-bold">Dashboard</h3><p class="text-slate-500 text-xs">ดูแรงซื้อ-แรงขาย ทุก Timeframe</p></div>
+          </div>
+          <div class="mx-4 mb-4"><img src="Github_web/Mb/Mb1.png" alt="MB Dashboard" class="w-full aspect-video object-cover rounded-xl"></div>
+        </div>
+        <div class="bg-white rounded-2xl overflow-hidden border border-blue-100 hover:border-blue-200 hover:shadow-lg transition-all">
+          <div class="p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center text-white shadow-lg">🎯</div>
+            <div class="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-sm font-bold">2</div>
+            <div><h3 class="text-slate-900 font-bold">Signal</h3><p class="text-slate-500 text-xs">สัญญาณ Buy/Sell พร้อม TP1, TP2, SL</p></div>
+          </div>
+          <div class="mx-4 mb-4"><img src="Github_web/Mb/Mb2.png" alt="MB Signal" class="w-full aspect-video object-cover rounded-xl"></div>
+        </div>
+        <div class="bg-white rounded-2xl overflow-hidden border border-blue-100 hover:border-blue-200 hover:shadow-lg transition-all">
+          <div class="p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center text-white shadow-lg">📈</div>
+            <div class="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-sm font-bold">3</div>
+            <div><h3 class="text-slate-900 font-bold">Volume</h3><p class="text-slate-500 text-xs">วิเคราะห์ Volume แรงซื้อ-ขาย</p></div>
+          </div>
+          <div class="mx-4 mb-4"><img src="Github_web/Mb/Mb3.png" alt="MB Volume" class="w-full aspect-video object-cover rounded-xl"></div>
+        </div>
+        <div class="bg-white rounded-2xl overflow-hidden border border-blue-100 hover:border-blue-200 hover:shadow-lg transition-all">
+          <div class="p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-lg">📐</div>
+            <div class="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-sm font-bold">4</div>
+            <div><h3 class="text-slate-900 font-bold">แนวรับ-แนวต้าน</h3><p class="text-slate-500 text-xs">Supply/Demand Zone อัตโนมัติ</p></div>
+          </div>
+          <div class="mx-4 mb-4"><img src="Github_web/Mb/Mb4.png" alt="MB Supply Demand" class="w-full aspect-video object-cover rounded-xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TELEGRAM SECTION ============ -->
+  <section class="py-12 bg-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-72 h-72 bg-blue-50 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-72 h-72 bg-blue-50 rounded-full blur-3xl"></div>
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div class="text-center md:text-left">
+          <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-2">IRT <span class="text-amber-500">GOLD</span></h2>
+          <p class="text-xl text-blue-600 font-bold mb-6">เวอร์ชั่นใหม่</p>
+          <div class="flex items-center gap-3 justify-center md:justify-start mb-6">
+            <div class="px-3 py-1.5 bg-slate-100 rounded-lg border border-slate-200"><span class="text-slate-700 text-sm font-bold">📊 TradingView</span></div>
+            <span class="text-amber-500 text-xl">→</span>
+            <div class="px-3 py-1.5 bg-sky-50 rounded-lg border border-sky-200"><span class="text-sky-600 text-sm font-bold">📱 Telegram</span></div>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-800 mb-2">ส่งสัญญาณทันใจ</h3>
+          <p class="text-3xl font-black text-blue-600 mb-6">Telegram ฉบับเรียลไทม์</p>
+          <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+            <div class="flex items-center gap-2 px-4 py-2 bg-amber-50 rounded-xl border border-amber-200"><span class="text-amber-600 font-bold">🪙 ทองคำ</span></div>
+            <div class="flex items-center gap-2 px-4 py-2 bg-green-50 rounded-xl border border-green-200"><span class="text-green-600 font-bold">💵 ห้องคู่เงินหลัก 8 คู่</span></div>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-100">
+            <img src="Github_web/Telegram/Telegram1.png" alt="Telegram Signal" class="w-full h-full object-cover">
+          </div>
+          <div class="absolute -top-3 -right-3 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full shadow-lg"><span class="text-white text-sm font-bold">🚀 Real-time!</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARKETS ============ -->
+  <section class="py-10 bg-gradient-to-r from-blue-600 to-cyan-500">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center mb-6">
+        <h3 class="text-xl font-bold text-white mb-2">📈 ใช้ได้กับทุกตลาด ไม่จำกัด!</h3>
+        <p class="text-blue-100 text-sm">ซื้อโปรแกรมเดียว ใช้ได้ทุกตลาดเลย!</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-3">
+        <div class="flex items-center gap-3 px-4 py-3 bg-white/20 backdrop-blur-sm rounded-xl border border-white/20"><div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center text-white shadow-lg">🪙</div><div><div class="text-white font-bold text-sm">ทองคำ</div><div class="text-blue-100 text-[10px]">XAUUSD</div></div></div>
+        <div class="flex items-center gap-3 px-4 py-3 bg-white/20 backdrop-blur-sm rounded-xl border border-white/20"><div class="w-10 h-10 rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white shadow-lg">💵</div><div><div class="text-white font-bold text-sm">Forex</div><div class="text-blue-100 text-[10px]">ทุกคู่เงิน</div></div></div>
+        <div class="flex items-center gap-3 px-4 py-3 bg-white/20 backdrop-blur-sm rounded-xl border border-white/20"><div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center text-white shadow-lg">₿</div><div><div class="text-white font-bold text-sm">คริปโต</div><div class="text-blue-100 text-[10px]">BTC, ETH</div></div></div>
+        <div class="flex items-center gap-3 px-4 py-3 bg-white/20 backdrop-blur-sm rounded-xl border border-white/20"><div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white shadow-lg">📈</div><div><div class="text-white font-bold text-sm">หุ้นไทย</div><div class="text-blue-100 text-[10px]">SET</div></div></div>
+        <div class="flex items-center gap-3 px-4 py-3 bg-white/20 backdrop-blur-sm rounded-xl border border-white/20"><div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-400 to-violet-500 flex items-center justify-center text-white shadow-lg">💼</div><div><div class="text-white font-bold text-sm">หุ้นต่างประเทศ</div><div class="text-blue-100 text-[10px]">US, EU</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT YOU GET ============ -->
+  <section class="py-12 bg-white">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <span class="inline-block px-3 py-1 bg-green-50 text-green-600 text-[10px] font-bold rounded-full mb-3">🎁 สิ่งที่จะได้รับ</span>
+        <h2 class="text-2xl font-bold text-slate-900 mb-2">ซื้อครั้งเดียวได้ครบ!</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white shadow-lg flex-shrink-0 text-xl">💻</div><div><h3 class="font-bold text-slate-900 mb-0.5">ใช้ได้ทั้ง คอม + มือถือ</h3><p class="text-xs text-slate-500">ซื้อครั้งเดียวได้ครบ (2 เครื่อง)</p></div></div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-lg flex-shrink-0 text-xl">🌐</div><div><h3 class="font-bold text-slate-900 mb-0.5">ใช้ได้ทุกตลาด</h3><p class="text-xs text-slate-500">ทองคำ, Forex, Crypto, หุ้น</p></div></div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-blue-500 flex items-center justify-center text-white shadow-lg flex-shrink-0 text-xl">📲</div><div><h3 class="font-bold text-slate-900 mb-0.5">Telegram Signal ฟรี</h3><p class="text-xs text-slate-500">ห้องสัญญาณทองคำ+คู่เงิน</p></div></div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-rose-500 flex items-center justify-center text-white shadow-lg flex-shrink-0 text-xl">🔴</div><div><h3 class="font-bold text-slate-900 mb-0.5">FB ไลฟ์สด</h3><p class="text-xs text-slate-500">ดูการเทรดจริงจากโค้ช</p></div></div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white shadow-lg flex-shrink-0 text-xl">💬</div><div><h3 class="font-bold text-slate-900 mb-0.5">กลุ่มไลน์พูดคุย</h3><p class="text-xs text-slate-500">ปรึกษาโค้ชส่วนตัวได้</p></div></div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center text-white shadow-lg flex-shrink-0 text-xl">🎓</div><div><h3 class="font-bold text-slate-900 mb-0.5">คอร์สเรียนฟรี!</h3><p class="text-xs text-slate-500">มูลค่า 21,900 บาท</p></div></div>
+      </div>
+      
+      <!-- Course Bonus -->
+      <div class="mt-8 bg-gradient-to-r from-violet-50 to-purple-50 rounded-2xl p-6 border border-violet-200">
+        <div class="flex flex-col md:flex-row items-center gap-6">
+          <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white shadow-xl flex-shrink-0 text-4xl">🎓</div>
+          <div class="text-center md:text-left flex-1">
+            <div class="inline-block px-3 py-1 bg-violet-500 text-white text-[10px] font-bold rounded-full mb-2">🎓 พิเศษ!</div>
+            <h3 class="text-lg font-bold text-slate-900 mb-1">คอร์สเรียนจังหวะเทรดแบบละเอียด</h3>
+            <p class="text-sm text-slate-600 mb-2">เรียนย้อนหลังได้ตลอด ไม่ลบคลิป รวมคอร์สเทคนิคการเทรดกราฟเปล่า</p>
+            <div class="flex items-center gap-3 justify-center md:justify-start">
+              <span class="text-slate-400 line-through text-sm">มูลค่า 21,900 บาท</span>
+              <span class="px-3 py-1 bg-green-500 text-white font-bold rounded-full text-sm">ฟรี!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VIDEO SECTION ============ -->
+  <section id="video" class="py-12 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <span class="inline-block px-3 py-1 bg-red-50 text-red-500 text-[10px] font-bold rounded-full mb-3">🎬 วิดีโอสาธิต</span>
+        <h2 class="text-2xl font-bold text-slate-900 mb-2">ดูการใช้งานจริง</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200">
+          <div class="flex items-center gap-2 mb-3"><span class="text-slate-800 font-bold">💻 PC Version</span></div>
+          <div class="aspect-video bg-black rounded-xl overflow-hidden">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/iHuyDRYZz6I" title="IRT GOLD PC" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+          </div>
+        </div>
+        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200">
+          <div class="flex items-center gap-2 mb-3"><span class="text-slate-800 font-bold">📱 Mobile Version</span></div>
+          <div class="aspect-video bg-black rounded-xl overflow-hidden">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/4UAj8w08-JM" title="IRT GOLD Mobile" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AI COACH ============ -->
+  <section class="py-12 bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 relative overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-white/5 rounded-full blur-3xl"></div>
+    <div class="max-w-2xl mx-auto px-4 relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-full mb-4 border border-white/20">
+        <span class="text-[10px] font-bold text-white">🤖 AI ช่วยตอบคำถาม</span>
+      </div>
+      <h2 class="text-2xl font-bold text-white mb-3">มีคำถามเกี่ยวกับ IRT GOLD?</h2>
+      <div class="bg-white/10 backdrop-blur-xl rounded-xl p-1 max-w-md mx-auto border border-white/20">
+        <div class="flex gap-2">
+          <input type="text" id="aiInput" placeholder="ถามอะไรก็ได้..." class="flex-1 bg-white/10 border-none text-white placeholder:text-blue-200/60 focus:ring-2 focus:ring-white/30 rounded-lg px-3 py-2.5 text-sm outline-none" onkeydown="if(event.key==='Enter')askAi()">
+          <button onclick="askAi()" class="px-4 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-bold" id="aiBtn">➤</button>
+        </div>
+      </div>
+      <div id="aiResponse" class="mt-4 hidden"></div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section id="reviews" class="py-12 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <span class="inline-block px-3 py-1 bg-amber-50 text-amber-600 text-[10px] font-bold rounded-full mb-3">⭐ รีวิวจากผู้ใช้จริง</span>
+        <h2 class="text-2xl font-bold text-slate-900">เสียงยืนยันจากนักเทรดกว่า <span class="text-amber-500">1,000+ คน</span></h2>
+      </div>
+      <div class="max-w-2xl mx-auto">
+        <div id="testimonialCard" class="relative bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 shadow-xl border border-slate-100">
+          <div class="absolute top-6 right-6 text-5xl text-blue-100 font-serif">"</div>
+          <div class="flex items-center gap-3 mb-4">
+            <div id="tAvatar" class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg"></div>
+            <div class="flex-1">
+              <div id="tName" class="font-bold text-slate-900"></div>
+              <div id="tRole" class="text-xs text-slate-500"></div>
+              <div class="flex gap-0.5 mt-0.5">⭐⭐⭐⭐⭐</div>
+            </div>
+            <div class="px-3 py-1.5 bg-green-50 rounded-full"><span id="tProfit" class="text-green-600 font-bold text-xs"></span></div>
+          </div>
+          <p id="tText" class="text-sm text-slate-700 leading-relaxed italic"></p>
+          <div class="flex justify-center gap-2 mt-6" id="tDots"></div>
+        </div>
+      </div>
+      <!-- Review Image Preview -->
+      <div class="mt-8">
+        <div class="grid grid-cols-3 md:grid-cols-6 gap-2" id="reviewPreview"></div>
+        <div class="text-center mt-4">
+          <button onclick="openReviews()" class="px-6 py-2 bg-blue-50 text-blue-600 font-bold text-sm rounded-full hover:bg-blue-100 transition-all border border-blue-200">ดูรีวิวทั้งหมด 26 รีวิว →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section id="pricing" class="py-16 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-blue-50 to-transparent rounded-full blur-3xl opacity-50"></div>
+    <div class="max-w-4xl mx-auto px-4 relative z-10">
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl shadow-lg text-sm">
+          ⏱ <span class="font-bold">โปรโมชั่นหมดเขตใน</span>
+          <div class="flex items-center gap-1 font-mono text-xs">
+            <span class="bg-white/20 px-1.5 py-0.5 rounded" id="cHours">23</span>:<span class="bg-white/20 px-1.5 py-0.5 rounded" id="cMins">59</span>:<span class="bg-white/20 px-1.5 py-0.5 rounded" id="cSecs">59</span>
+          </div>
+        </div>
+      </div>
+      <div class="max-w-lg mx-auto">
+        <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-8 text-white shadow-2xl shadow-blue-500/30 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full blur-2xl"></div>
+          <div class="absolute -top-0 -right-0 bg-gradient-to-r from-amber-400 to-orange-500 text-amber-900 text-xs font-bold px-4 py-1.5 rounded-bl-2xl rounded-tr-3xl">🔥 ราคาพิเศษ!</div>
+          <div class="text-center mb-6 relative z-10">
+            <h3 class="text-2xl font-bold mb-2">IRT GOLD ครบจบในที่เดียว!</h3>
+            <p class="text-blue-100 text-sm">ซื้อครั้งเดียวจบ! ไม่ต้องต่อ IB ไม่มีค่ารายเดือน</p>
+          </div>
+          <div class="text-center mb-6 relative z-10">
+            <div class="text-blue-200 line-through text-lg">15,000 บาท</div>
+            <div class="text-5xl font-black mb-1">฿3,290</div>
+            <div class="text-blue-100 text-sm">จ่ายครั้งเดียว ใช้ได้ตลอดชีพ</div>
+          </div>
+          <div class="space-y-3 mb-6 relative z-10">
+            <div class="text-sm bg-white/10 rounded-lg px-3 py-2">✅ ใช้ได้ทั้ง คอม + มือถือ (2 เครื่อง)</div>
+            <div class="text-sm bg-white/10 rounded-lg px-3 py-2">✅ AI แจ้งสัญญาณ Telegram 24 ชม.</div>
+            <div class="text-sm bg-white/10 rounded-lg px-3 py-2">✅ ใช้ได้กับ ทองคำ, Forex, Crypto, หุ้น</div>
+            <div class="text-sm bg-white/10 rounded-lg px-3 py-2">✅ เข้าห้อง Telegram Signal ฟรี</div>
+            <div class="text-sm bg-white/10 rounded-lg px-3 py-2">✅ กลุ่มไลน์พูดคุย ปรึกษาโค้ช</div>
+            <div class="text-sm bg-white/10 rounded-lg px-3 py-2">✅ คอร์สเรียน มูลค่า 21,900 บาท ฟรี!</div>
+          </div>
+          <a href="https://irtgold.github.io/irtgold/purchase.html?pkg=IRT%20GOLD%20PC" target="_blank" class="w-full py-4 bg-white hover:bg-slate-50 text-blue-600 font-bold text-lg rounded-xl shadow-xl transition-all hover:-translate-y-1 flex items-center justify-center gap-2 relative z-10">⚡ สั่งซื้อเลย - 3,290 บาท</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" class="py-12 bg-slate-50">
+    <div class="max-w-2xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <span class="inline-block px-3 py-1 bg-violet-50 text-violet-600 text-[10px] font-bold rounded-full mb-3">❓ FAQ</span>
+        <h2 class="text-2xl font-bold text-slate-900">คำถามที่พบบ่อย</h2>
+      </div>
+      <div class="space-y-3" id="faqContainer"></div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="py-16 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
+    <div class="max-w-3xl mx-auto px-4 text-center relative z-10">
+      <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4">พร้อมเทรดให้เป็นระบบมากขึ้นไหม? 😊</h2>
+      <p class="text-amber-300 mb-8 font-bold">IRT ตอบโจทย์ที่สุดแล้ว!</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="https://irtgold.github.io/irtgold/purchase.html?pkg=IRT%20GOLD%20PC" target="_blank" class="group px-8 py-4 bg-white text-blue-600 font-bold rounded-xl shadow-2xl transition-all hover:-translate-y-1 flex items-center justify-center gap-2">⚡ สั่งซื้อเลย</a>
+        <a href="https://lin.ee/sYM0jZJ" target="_blank" class="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl shadow-2xl transition-all hover:-translate-y-1 flex items-center justify-center gap-2">💬 ทักไลน์สอบถาม</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-blue-950 text-blue-300 pt-12 pb-6">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <div class="flex items-center gap-2 mb-3 justify-center">
+          <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <span class="font-bold text-lg text-white">IRT <span class="text-amber-400">GOLD</span></span>
+        </div>
+        <p class="text-xs leading-relaxed mb-6">ระบบออกแบบมาให้ใช้งานง่าย AI ช่วยแจ้งสัญญาณตลอด 24 ชม.</p>
+        <h4 class="text-white font-bold mb-3 text-sm">ติดต่อเรา</h4>
+        <div class="flex flex-wrap justify-center gap-4 text-xs mb-6">
+          <span>📧 irtgold18@gmail.com</span>
+          <span>📞 082-614-4257</span>
+        </div>
+        <h4 class="text-white font-bold mb-3 text-sm">ติดตาม</h4>
+        <div class="flex gap-2 justify-center">
+          <a href="https://www.facebook.com/Meedee.Indi/" target="_blank" class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-600 transition-colors">📘</a>
+          <a href="https://m.me/Meedee.Indi" target="_blank" class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-500 transition-colors">💬</a>
+          <a href="https://youtube.com/@bankirtgold?si=C3OLZ3Ootqn2Avc7" target="_blank" class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center hover:bg-red-500 transition-colors">🎬</a>
+        </div>
+      </div>
+      <div class="border-t border-blue-900 pt-6 text-center text-[10px]">
+        <p class="mb-1">© 2026 IRT GOLD. All rights reserved.</p>
+        <p class="text-blue-400/60">⚠️ การลงทุนมีความเสี่ยง ผู้ลงทุนควรศึกษาข้อมูลก่อนตัดสินใจลงทุน</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ MOBILE BOTTOM BAR ============ -->
+  <div class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-xl border-t border-slate-200 p-2.5 md:hidden z-50 shadow-lg">
+    <div class="flex gap-2 max-w-md mx-auto">
+      <a href="https://lin.ee/sYM0jZJ" target="_blank" class="flex-1 bg-green-500 text-white py-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg">💬 ทักไลน์</a>
+      <a href="https://irtgold.github.io/irtgold/purchase.html?pkg=IRT%20GOLD%20PC" target="_blank" class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg">⚡ สั่งซื้อเลย</a>
+    </div>
+  </div>
+
+  <!-- ============ REVIEWS MODAL ============ -->
+  <div id="reviewsModal" class="fixed inset-0 z-[100] hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeReviews()"></div>
+    <div class="relative bg-white w-full h-full md:w-[95%] md:h-[95%] md:rounded-2xl overflow-hidden mx-auto md:mt-[2.5vh]">
+      <div class="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between z-10">
+        <div class="text-center flex-1">
+          <h2 class="text-2xl md:text-3xl font-bold">รีวิวจาก <span class="text-blue-500">ผู้ใช้งานจริง</span></h2>
+        </div>
+        <button onclick="closeReviews()" class="absolute right-4 top-4 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center">✕</button>
+      </div>
+      <div class="p-4 md:p-6 overflow-y-auto" style="height:calc(100% - 80px)">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4" id="reviewsGrid"></div>
+        <div class="mt-6 text-center">
+          <a href="https://lin.ee/sYM0jZJ" target="_blank" class="inline-block px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-full hover:shadow-lg transition-all">แอดไลน์ ดูรีวิวเพิ่มเติม</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div id="lightbox" class="fixed inset-0 z-[110] hidden">
+    <div class="absolute inset-0 bg-black/95" onclick="closeLightbox()"></div>
+    <div class="absolute top-4 left-4 z-20 text-white text-sm font-medium" id="lbCounter"></div>
+    <button onclick="closeLightbox()" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xl">✕</button>
+    <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-2xl">‹</button>
+    <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-2xl">›</button>
+    <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+      <img id="lbImage" src="" alt="" class="max-w-[90vw] max-h-[85vh] object-contain rounded-2xl pointer-events-auto">
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
