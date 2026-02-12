@@ -9,6 +9,15 @@
   <meta property="og:description" content="AI แจ้งสัญญาณ 24 ชม. ไม่ต้องเฝ้ากราฟ ราคาพิเศษ 3,290 บาท">
   <meta property="og:type" content="website">
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCBMS32BKS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-ZCBMS32BKS');
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -27,21 +36,21 @@
   <nav class="fixed w-full z-50 top-0 bg-white/95 backdrop-blur-xl border-b border-slate-200 h-14">
     <div class="max-w-6xl mx-auto px-4 h-full flex justify-between items-center">
       <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-        <div class="w-9 h-9 flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-lg shadow-blue-500/20">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        <div class="w-9 h-9 flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-lg shadow-blue-500/20 overflow-hidden">
+          <img src="Github_web/icon/irt.png" alt="IRT GOLD" class="w-7 h-7 object-contain">
         </div>
         <span class="font-bold text-lg text-slate-900">IRT <span class="text-amber-500">GOLD</span></span>
       </div>
       
       <div class="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-full">
-        <button onclick="scrollTo('home')" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">หน้าแรก</button>
-        <button onclick="scrollTo('features')" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">ฟีเจอร์</button>
-        <button onclick="scrollTo('video')" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">วิดีโอ</button>
-        <button onclick="scrollTo('pricing')" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">ราคา</button>
+        <button onclick="goTo('home')" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">หน้าแรก</button>
+        <button onclick="goTo('features')" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">ฟีเจอร์</button>
+        <button onclick="goTo('video')" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">วิดีโอ</button>
+        <button onclick="goTo('pricing')" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">ราคา</button>
         <button onclick="openReviews()" class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white rounded-full transition-all">รีวิว</button>
       </div>
 
-      <a href="https://m.me/Meedee.Indi" target="_blank" rel="noopener noreferrer" class="hidden md:block px-5 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs font-bold rounded-full shadow-lg shadow-blue-500/20 transition-all hover:-translate-y-0.5">แชทเลย</a>
+      <a href="https://m.me/Meedee.Indi" target="_blank" rel="noopener noreferrer" class="hidden md:flex items-center gap-1.5 px-5 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs font-bold rounded-full shadow-lg shadow-blue-500/20 transition-all hover:-translate-y-0.5"><img src="Github_web/icon/Chat.png" alt="Chat" class="w-4 h-4"> แชทเลย</a>
 
       <button onclick="toggleMenu()" class="md:hidden p-2 hover:bg-slate-100 rounded-xl" id="menuBtn">
         <svg class="w-5 h-5" id="menuIcon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -52,10 +61,10 @@
   <!-- Mobile Menu -->
   <div id="mobileMenu" class="fixed inset-0 z-40 bg-white pt-16 hidden">
     <div class="flex flex-col p-4 gap-2">
-      <button onclick="scrollTo('home');toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">หน้าแรก</button>
-      <button onclick="scrollTo('features');toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">ฟีเจอร์</button>
-      <button onclick="scrollTo('video');toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">วิดีโอ</button>
-      <button onclick="scrollTo('pricing');toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">ราคา</button>
+      <button onclick="goTo('home');toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">หน้าแรก</button>
+      <button onclick="goTo('features');toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">ฟีเจอร์</button>
+      <button onclick="goTo('video');toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">วิดีโอ</button>
+      <button onclick="goTo('pricing');toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">ราคา</button>
       <button onclick="openReviews();toggleMenu()" class="px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-xl">รีวิว</button>
     </div>
   </div>
@@ -86,7 +95,7 @@
             <a href="https://irtgold.github.io/irtgold/purchase.html?pkg=IRT%20GOLD%20PC" target="_blank" class="group px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold text-sm rounded-xl shadow-xl shadow-blue-500/20 transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
               ⚡ สั่งซื้อเลย →
             </a>
-            <button onclick="scrollTo('video')" class="px-6 py-3 bg-white text-slate-700 font-bold text-sm rounded-xl border-2 border-slate-200 transition-all flex items-center justify-center gap-2 shadow-lg">
+            <button onclick="goTo('video')" class="px-6 py-3 bg-white text-slate-700 font-bold text-sm rounded-xl border-2 border-slate-200 transition-all flex items-center justify-center gap-2 shadow-lg">
               ▶ ดูวิดีโอสาธิต
             </button>
           </div>
@@ -120,8 +129,8 @@
               <div class="aspect-video rounded-xl overflow-hidden relative">
                 <img src="Github_web/Banner/bn1.png" alt="IRT GOLD" class="w-full h-full object-cover">
                 <div class="absolute top-4 right-4 flex gap-2">
-                  <div class="px-3 py-1.5 bg-blue-500/20 backdrop-blur-sm rounded-lg"><span class="text-blue-400 text-xs font-medium">💻 PC</span></div>
-                  <div class="px-3 py-1.5 bg-green-500/20 backdrop-blur-sm rounded-lg"><span class="text-green-400 text-xs font-medium">📱 Mobile</span></div>
+                  <div class="px-3 py-1.5 bg-blue-500/20 backdrop-blur-sm rounded-lg flex items-center gap-1"><img src="Github_web/icon/Pc.png" alt="PC" class="w-4 h-4"><span class="text-blue-400 text-xs font-medium">PC</span></div>
+                  <div class="px-3 py-1.5 bg-green-500/20 backdrop-blur-sm rounded-lg flex items-center gap-1"><img src="Github_web/icon/Mb.png" alt="Mobile" class="w-4 h-4"><span class="text-green-400 text-xs font-medium">Mobile</span></div>
                 </div>
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4">
                   <div class="flex justify-between items-end">
@@ -289,9 +298,9 @@
           <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-2">IRT <span class="text-amber-500">GOLD</span></h2>
           <p class="text-xl text-blue-600 font-bold mb-6">เวอร์ชั่นใหม่</p>
           <div class="flex items-center gap-3 justify-center md:justify-start mb-6">
-            <div class="px-3 py-1.5 bg-slate-100 rounded-lg border border-slate-200"><span class="text-slate-700 text-sm font-bold">📊 TradingView</span></div>
+            <div class="px-3 py-1.5 bg-slate-100 rounded-lg border border-slate-200 flex items-center gap-1"><img src="Github_web/icon/Tdv.png" alt="TradingView" class="w-4 h-4"><span class="text-slate-700 text-sm font-bold">TradingView</span></div>
             <span class="text-amber-500 text-xl">→</span>
-            <div class="px-3 py-1.5 bg-sky-50 rounded-lg border border-sky-200"><span class="text-sky-600 text-sm font-bold">📱 Telegram</span></div>
+            <div class="px-3 py-1.5 bg-sky-50 rounded-lg border border-sky-200 flex items-center gap-1"><img src="Github_web/icon/Chat.png" alt="Telegram" class="w-4 h-4"><span class="text-sky-600 text-sm font-bold">Telegram</span></div>
           </div>
           <h3 class="text-2xl font-bold text-slate-800 mb-2">ส่งสัญญาณทันใจ</h3>
           <p class="text-3xl font-black text-blue-600 mb-6">Telegram ฉบับเรียลไทม์</p>
@@ -335,11 +344,11 @@
         <h2 class="text-2xl font-bold text-slate-900 mb-2">ซื้อครั้งเดียวได้ครบ!</h2>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white shadow-lg flex-shrink-0 text-xl">💻</div><div><h3 class="font-bold text-slate-900 mb-0.5">ใช้ได้ทั้ง คอม + มือถือ</h3><p class="text-xs text-slate-500">ซื้อครั้งเดียวได้ครบ (2 เครื่อง)</p></div></div>
-        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-lg flex-shrink-0 text-xl">🌐</div><div><h3 class="font-bold text-slate-900 mb-0.5">ใช้ได้ทุกตลาด</h3><p class="text-xs text-slate-500">ทองคำ, Forex, Crypto, หุ้น</p></div></div>
-        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-blue-500 flex items-center justify-center text-white shadow-lg flex-shrink-0 text-xl">📲</div><div><h3 class="font-bold text-slate-900 mb-0.5">Telegram Signal ฟรี</h3><p class="text-xs text-slate-500">ห้องสัญญาณทองคำ+คู่เงิน</p></div></div>
-        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-rose-500 flex items-center justify-center text-white shadow-lg flex-shrink-0 text-xl">🔴</div><div><h3 class="font-bold text-slate-900 mb-0.5">FB ไลฟ์สด</h3><p class="text-xs text-slate-500">ดูการเทรดจริงจากโค้ช</p></div></div>
-        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white shadow-lg flex-shrink-0 text-xl">💬</div><div><h3 class="font-bold text-slate-900 mb-0.5">กลุ่มไลน์พูดคุย</h3><p class="text-xs text-slate-500">ปรึกษาโค้ชส่วนตัวได้</p></div></div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg flex-shrink-0"><img src="Github_web/icon/Pc.png" alt="PC" class="w-7 h-7"><img src="Github_web/icon/Mb.png" alt="Mobile" class="w-7 h-7"></div><div><h3 class="font-bold text-slate-900 mb-0.5">ใช้ได้ทั้ง คอม + มือถือ</h3><p class="text-xs text-slate-500">ซื้อครั้งเดียวได้ครบ (2 เครื่อง)</p></div></div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-lg flex-shrink-0"><img src="Github_web/icon/Mt5.png" alt="MT5" class="w-7 h-7"></div><div><h3 class="font-bold text-slate-900 mb-0.5">ใช้ได้ทุกตลาด</h3><p class="text-xs text-slate-500">ทองคำ, Forex, Crypto, หุ้น</p></div></div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-blue-500 flex items-center justify-center shadow-lg flex-shrink-0"><img src="Github_web/icon/Chat.png" alt="Telegram" class="w-7 h-7"></div><div><h3 class="font-bold text-slate-900 mb-0.5">Telegram Signal ฟรี</h3><p class="text-xs text-slate-500">ห้องสัญญาณทองคำ+คู่เงิน</p></div></div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-rose-500 flex items-center justify-center shadow-lg flex-shrink-0"><img src="Github_web/icon/Fb.png" alt="Facebook" class="w-7 h-7"></div><div><h3 class="font-bold text-slate-900 mb-0.5">FB ไลฟ์สด</h3><p class="text-xs text-slate-500">ดูการเทรดจริงจากโค้ช</p></div></div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center shadow-lg flex-shrink-0"><img src="Github_web/icon/Li.png" alt="LINE" class="w-7 h-7"></div><div><h3 class="font-bold text-slate-900 mb-0.5">กลุ่มไลน์พูดคุย</h3><p class="text-xs text-slate-500">ปรึกษาโค้ชส่วนตัวได้</p></div></div>
         <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center text-white shadow-lg flex-shrink-0 text-xl">🎓</div><div><h3 class="font-bold text-slate-900 mb-0.5">คอร์สเรียนฟรี!</h3><p class="text-xs text-slate-500">มูลค่า 21,900 บาท</p></div></div>
       </div>
       
@@ -494,7 +503,7 @@
       <p class="text-amber-300 mb-8 font-bold">IRT ตอบโจทย์ที่สุดแล้ว!</p>
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
         <a href="https://irtgold.github.io/irtgold/purchase.html?pkg=IRT%20GOLD%20PC" target="_blank" class="group px-8 py-4 bg-white text-blue-600 font-bold rounded-xl shadow-2xl transition-all hover:-translate-y-1 flex items-center justify-center gap-2">⚡ สั่งซื้อเลย</a>
-        <a href="https://lin.ee/sYM0jZJ" target="_blank" class="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl shadow-2xl transition-all hover:-translate-y-1 flex items-center justify-center gap-2">💬 ทักไลน์สอบถาม</a>
+        <a href="https://lin.ee/sYM0jZJ" target="_blank" class="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl shadow-2xl transition-all hover:-translate-y-1 flex items-center justify-center gap-2"><img src="Github_web/icon/Li.png" alt="LINE" class="w-5 h-5"> ทักไลน์สอบถาม</a>
       </div>
     </div>
   </section>
@@ -504,22 +513,24 @@
     <div class="max-w-5xl mx-auto px-4">
       <div class="text-center mb-8">
         <div class="flex items-center gap-2 mb-3 justify-center">
-          <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg">
-            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg overflow-hidden">
+            <img src="Github_web/icon/irt.png" alt="IRT GOLD" class="w-6 h-6 object-contain">
           </div>
           <span class="font-bold text-lg text-white">IRT <span class="text-amber-400">GOLD</span></span>
         </div>
         <p class="text-xs leading-relaxed mb-6">ระบบออกแบบมาให้ใช้งานง่าย AI ช่วยแจ้งสัญญาณตลอด 24 ชม.</p>
         <h4 class="text-white font-bold mb-3 text-sm">ติดต่อเรา</h4>
         <div class="flex flex-wrap justify-center gap-4 text-xs mb-6">
-          <span>📧 irtgold18@gmail.com</span>
-          <span>📞 082-614-4257</span>
+          <span class="flex items-center gap-1"><img src="Github_web/icon/Em.png" alt="Email" class="w-4 h-4"> irtgold18@gmail.com</span>
+          <span class="flex items-center gap-1"><img src="Github_web/icon/Tel.png" alt="โทร" class="w-4 h-4"> 082-614-4257</span>
         </div>
         <h4 class="text-white font-bold mb-3 text-sm">ติดตาม</h4>
         <div class="flex gap-2 justify-center">
-          <a href="https://www.facebook.com/Meedee.Indi/" target="_blank" class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-600 transition-colors">📘</a>
-          <a href="https://m.me/Meedee.Indi" target="_blank" class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-500 transition-colors">💬</a>
-          <a href="https://youtube.com/@bankirtgold?si=C3OLZ3Ootqn2Avc7" target="_blank" class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center hover:bg-red-500 transition-colors">🎬</a>
+          <a href="https://www.facebook.com/Meedee.Indi/" target="_blank" class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-600 transition-colors"><img src="Github_web/icon/Fb.png" alt="Facebook" class="w-5 h-5"></a>
+          <a href="https://m.me/Meedee.Indi" target="_blank" class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-500 transition-colors"><img src="Github_web/icon/Chat.png" alt="Chat" class="w-5 h-5"></a>
+          <a href="https://youtube.com/@bankirtgold?si=C3OLZ3Ootqn2Avc7" target="_blank" class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-red-500 transition-colors"><img src="Github_web/icon/Yt.png" alt="YouTube" class="w-5 h-5"></a>
+          <a href="https://lin.ee/sYM0jZJ" target="_blank" class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-green-500 transition-colors"><img src="Github_web/icon/Li.png" alt="LINE" class="w-5 h-5"></a>
+          <a href="https://www.tiktok.com/@supphawat1499" target="_blank" class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-slate-600 transition-colors"><img src="Github_web/icon/Tt.png" alt="TikTok" class="w-5 h-5"></a>
         </div>
       </div>
       <div class="border-t border-blue-900 pt-6 text-center text-[10px]">
@@ -532,8 +543,8 @@
   <!-- ============ MOBILE BOTTOM BAR ============ -->
   <div class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-xl border-t border-slate-200 p-2.5 md:hidden z-50 shadow-lg">
     <div class="flex gap-2 max-w-md mx-auto">
-      <a href="https://lin.ee/sYM0jZJ" target="_blank" class="flex-1 bg-green-500 text-white py-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg">💬 ทักไลน์</a>
-      <a href="https://irtgold.github.io/irtgold/purchase.html?pkg=IRT%20GOLD%20PC" target="_blank" class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg">⚡ สั่งซื้อเลย</a>
+      <a href="https://lin.ee/sYM0jZJ" target="_blank" class="flex-1 bg-green-500 text-white py-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg"><img src="Github_web/icon/Li.png" alt="LINE" class="w-4 h-4"> ทักไลน์</a>
+      <a href="https://irtgold.github.io/irtgold/purchase.html?pkg=IRT%20GOLD%20PC" target="_blank" class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg"><img src="Github_web/icon/Kb.png" alt="Buy" class="w-4 h-4"> สั่งซื้อเลย</a>
     </div>
   </div>
 
@@ -550,7 +561,7 @@
       <div class="p-4 md:p-6 overflow-y-auto" style="height:calc(100% - 80px)">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4" id="reviewsGrid"></div>
         <div class="mt-6 text-center">
-          <a href="https://lin.ee/sYM0jZJ" target="_blank" class="inline-block px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-full hover:shadow-lg transition-all">แอดไลน์ ดูรีวิวเพิ่มเติม</a>
+          <a href="https://lin.ee/sYM0jZJ" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-full hover:shadow-lg transition-all"><img src="Github_web/icon/Li.png" alt="LINE" class="w-5 h-5"> แอดไลน์ ดูรีวิวเพิ่มเติม</a>
         </div>
       </div>
     </div>
