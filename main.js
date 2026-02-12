@@ -12,7 +12,7 @@ const TOTAL_REVIEWS = 26;
 // ================================
 // Navigation
 // ================================
-function scrollTo(id) {
+function goTo(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 }
 
