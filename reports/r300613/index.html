@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta property="og:title" content="IRT GOLD EA V.5.2 — Backtest Comparison">
+<meta property="og:description" content="เปรียบเทียบ EA กันหน้าทุน (BE) vs ไม่มีกันหน้าทุน (NONE) | XAUUSD M5">
+<title>IRT GOLD EA V.5.2 - Backtest Comparison</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #F8F6F2;
+  --card: #FFFFFF;
+  --card-border: #E8E4DD;
+  --text: #2C2825;
+  --text-muted: #8A857E;
+  --gold: #C5973E;
+  --gold-light: #F5EDD8;
+  --gold-dark: #9B7730;
+  --be-color: #2E86DE;
+  --be-light: #E8F1FB;
+  --be-dark: #1B5EA3;
+  --none-color: #E74C3C;
+  --none-light: #FCE8E6;
+  --none-dark: #B33527;
+  --green: #27AE60;
+  --green-light: #E8F8EF;
+  --red: #E74C3C;
+  --red-light: #FCE8E6;
+  --shadow: 0 2px 20px rgba(44,40,37,0.06);
+  --shadow-lg: 0 8px 40px rgba(44,40,37,0.1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Sarabun', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 20px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.header h1 span {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header .subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.header .test-period {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* SUMMARY HERO CARDS */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.hero-card {
+  background: var(--card);
+  border: 1.5px solid var(--card-border);
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hero-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-card.be { border-top: 4px solid var(--be-color); }
+.hero-card.none { border-top: 4px solid var(--none-color); }
+
+.hero-card .ea-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.hero-card.be .ea-tag { background: var(--be-light); color: var(--be-dark); }
+.hero-card.none .ea-tag { background: var(--none-light); color: var(--none-dark); }
+
+.hero-card .ea-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.hero-card .ea-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.hero-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.hero-stat {
+  text-align: center;
+  padding: 12px 8px;
+  border-radius: 10px;
+  background: #FAFAF8;
+}
+
+.hero-stat .label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.hero-stat .value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.hero-stat .value.profit { color: var(--green); }
+.hero-stat .value.loss { color: var(--red); }
+
+.hero-stat .detail {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* CHART SECTION */
+.chart-section {
+  background: var(--card);
+  border: 1.5px solid var(--card-border);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.section-title .icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.section-title .icon.gold { background: var(--gold-light); }
+.section-title .icon.blue { background: var(--be-light); }
+.section-title .icon.red { background: var(--none-light); }
+
+.chart-legend {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.chart-container {
+  position: relative;
+  height: 380px;
+}
+
+/* COMPARISON TABLE */
+.comp-table-wrapper {
+  background: var(--card);
+  border: 1.5px solid var(--card-border);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+}
+
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.comp-table thead th {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--card-border);
+  text-align: center;
+}
+
+.comp-table thead th:first-child { text-align: left; }
+
+.comp-table thead th.be-col { color: var(--be-dark); background: var(--be-light); border-radius: 8px 8px 0 0; }
+.comp-table thead th.none-col { color: var(--none-dark); background: var(--none-light); border-radius: 8px 8px 0 0; }
+
+.comp-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #F2F0EC;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+}
+
+.comp-table tbody td:first-child {
+  text-align: left;
+  font-family: 'Sarabun', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.comp-table tbody tr:hover { background: #FDFCFA; }
+
+.comp-table .winner {
+  font-weight: 700;
+  position: relative;
+}
+
+.comp-table .winner.be { color: var(--be-dark); background: var(--be-light); }
+.comp-table .winner.none { color: var(--none-dark); background: var(--none-light); }
+
+.comp-table .category-row td {
+  background: #FAFAF8;
+  font-family: 'Sarabun', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--gold-dark);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.badge-win {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 6px;
+  font-family: 'Sarabun', sans-serif;
+}
+
+.badge-win.be { background: var(--be-light); color: var(--be-dark); }
+.badge-win.none { background: var(--none-light); color: var(--none-dark); }
+
+/* PROS/CONS */
+.pros-cons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.pros-cons-card {
+  background: var(--card);
+  border: 1.5px solid var(--card-border);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.pros-cons-card.be { border-left: 4px solid var(--be-color); }
+.pros-cons-card.none { border-left: 4px solid var(--none-color); }
+
+.pc-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.pc-header .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.pc-header .dot.be { background: var(--be-color); }
+.pc-header .dot.none { background: var(--none-color); }
+
+.pc-header h3 {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.pc-section {
+  margin-bottom: 16px;
+}
+
+.pc-section:last-child { margin-bottom: 0; }
+
+.pc-section h4 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pc-section h4.pros { color: var(--green); }
+.pc-section h4.cons { color: var(--red); }
+
+.pc-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.pc-item.pro { background: var(--green-light); }
+.pc-item.con { background: var(--red-light); }
+
+.pc-item .icon { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+
+/* VERDICT */
+.verdict-section {
+  background: linear-gradient(135deg, #FBF8F1, #F5EDD8);
+  border: 2px solid var(--gold);
+  border-radius: 16px;
+  padding: 36px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.verdict-section h2 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: var(--gold-dark);
+}
+
+.verdict-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 24px;
+  text-align: left;
+}
+
+.verdict-box {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid var(--card-border);
+}
+
+.verdict-box h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.verdict-box p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* BAR CHART */
+.bar-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.bar-chart-card {
+  background: var(--card);
+  border: 1.5px solid var(--card-border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.bar-chart-card .chart-container {
+  height: 280px;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 32px 0;
+  color: var(--text-muted);
+  font-size: 12px;
+  border-top: 1px solid var(--card-border);
+}
+
+.footer .brand {
+  font-weight: 700;
+  color: var(--gold);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-grid,
+  .pros-cons-grid,
+  .verdict-grid,
+  .bar-charts-grid { grid-template-columns: 1fr; }
+  .header h1 { font-size: 26px; }
+  .container { padding: 20px 16px 40px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge">⚡ IRT GOLD</div>
+    <h1>EA Backtest <span>Comparison</span></h1>
+    <p class="subtitle">เปรียบเทียบประสิทธิภาพ EA ระหว่าง กันหน้าทุน (Break-Even) vs ไม่มีกันหน้าทุน (None)</p>
+    <div class="test-period">
+      📅 XAUUSD M5 &nbsp;|&nbsp; 1 ม.ค. 2026 – 15 ก.พ. 2026 &nbsp;|&nbsp; เงินเริ่มต้น $1,000
+    </div>
+  </div>
+
+  <!-- HERO CARDS -->
+  <div class="hero-grid">
+    <div class="hero-card be">
+      <div class="ea-tag">🛡️ BREAK-EVEN</div>
+      <div class="ea-name">IRT GOLD MB BE V.5.2</div>
+      <div class="ea-desc">Follow Trend + Break-Even + Trailing Stop</div>
+      <div class="hero-stat-grid">
+        <div class="hero-stat">
+          <div class="label">กำไรสุทธิ</div>
+          <div class="value profit">+$471.65</div>
+          <div class="detail">+47.17%</div>
+        </div>
+        <div class="hero-stat">
+          <div class="label">Drawdown</div>
+          <div class="value loss">37.45%</div>
+          <div class="detail">$622.01</div>
+        </div>
+        <div class="hero-stat">
+          <div class="label">Win Rate</div>
+          <div class="value" style="color: var(--be-dark)">82.03%</div>
+          <div class="detail">105 จาก 128 ไม้</div>
+        </div>
+        <div class="hero-stat">
+          <div class="label">Profit Factor</div>
+          <div class="value" style="color: var(--be-dark)">1.20</div>
+          <div class="detail">Sharpe 4.69</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card none">
+      <div class="ea-tag">🎯 NONE (TP/SL)</div>
+      <div class="ea-name">IRT GOLD MB V.5.2</div>
+      <div class="ea-desc">Follow Trend + TP/SL Only (ไม่มีกันหน้าทุน)</div>
+      <div class="hero-stat-grid">
+        <div class="hero-stat">
+          <div class="label">กำไรสุทธิ</div>
+          <div class="value profit">+$2,775.40</div>
+          <div class="detail">+277.54%</div>
+        </div>
+        <div class="hero-stat">
+          <div class="label">Drawdown</div>
+          <div class="value loss">46.33%</div>
+          <div class="detail">$811.95</div>
+        </div>
+        <div class="hero-stat">
+          <div class="label">Win Rate</div>
+          <div class="value" style="color: var(--none-dark)">50.57%</div>
+          <div class="detail">44 จาก 87 ไม้</div>
+        </div>
+        <div class="hero-stat">
+          <div class="label">Profit Factor</div>
+          <div class="value" style="color: var(--none-dark)">1.67</div>
+          <div class="detail">Sharpe 8.77</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQUITY CURVE -->
+  <div class="chart-section">
+    <div class="section-title">
+      <div class="icon gold">📈</div>
+      Equity Curve — เส้นเงินทุนเปรียบเทียบ
+    </div>
+    <div class="chart-legend">
+      <div class="legend-item"><div class="legend-dot" style="background: var(--be-color)"></div>BE (กันหน้าทุน)</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--none-color)"></div>NONE (ไม่มีกันหน้าทุน)</div>
+    </div>
+    <div class="chart-container">
+      <canvas id="equityChart"></canvas>
+    </div>
+  </div>
+
+  <!-- BAR CHARTS -->
+  <div class="bar-charts-grid">
+    <div class="bar-chart-card">
+      <div class="section-title" style="font-size:16px">
+        <div class="icon gold">💰</div>
+        ผลตอบแทน & ความเสี่ยง
+      </div>
+      <div class="chart-container">
+        <canvas id="returnChart"></canvas>
+      </div>
+    </div>
+    <div class="bar-chart-card">
+      <div class="section-title" style="font-size:16px">
+        <div class="icon gold">📊</div>
+        ตัวชี้วัดประสิทธิภาพ
+      </div>
+      <div class="chart-container">
+        <canvas id="metricsChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="comp-table-wrapper">
+    <div class="section-title">
+      <div class="icon gold">📋</div>
+      ตารางเปรียบเทียบแบบละเอียด
+    </div>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="width:40%">รายการ</th>
+          <th class="be-col" style="width:30%">🛡️ BE (กันหน้าทุน)</th>
+          <th class="none-col" style="width:30%">🎯 NONE (TP/SL)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="category-row"><td colspan="3">💰 ผลตอบแทน</td></tr>
+        <tr>
+          <td>กำไรสุทธิ (Net Profit)</td>
+          <td>$471.65</td>
+          <td class="winner none">$2,775.40 <span class="badge-win none">ชนะ</span></td>
+        </tr>
+        <tr>
+          <td>กำไรรวม (Gross Profit)</td>
+          <td>$2,806.50</td>
+          <td class="winner none">$6,916.88 <span class="badge-win none">ชนะ</span></td>
+        </tr>
+        <tr>
+          <td>ขาดทุนรวม (Gross Loss)</td>
+          <td class="winner be">-$2,334.85 <span class="badge-win be">ชนะ</span></td>
+          <td>-$4,141.48</td>
+        </tr>
+        <tr>
+          <td>ผลตอบแทน (%)</td>
+          <td>+47.17%</td>
+          <td class="winner none">+277.54% <span class="badge-win none">ชนะ</span></td>
+        </tr>
+
+        <tr class="category-row"><td colspan="3">📉 ความเสี่ยง & Drawdown</td></tr>
+        <tr>
+          <td>Equity DD สูงสุด</td>
+          <td class="winner be">37.45% ($622) <span class="badge-win be">ชนะ</span></td>
+          <td>46.33% ($812)</td>
+        </tr>
+        <tr>
+          <td>Balance DD สูงสุด</td>
+          <td class="winner be">35.77% ($582) <span class="badge-win be">ชนะ</span></td>
+          <td>45.97% ($802)</td>
+        </tr>
+        <tr>
+          <td>Recovery Factor</td>
+          <td>0.76</td>
+          <td class="winner none">3.42 <span class="badge-win none">ชนะ</span></td>
+        </tr>
+
+        <tr class="category-row"><td colspan="3">📊 ประสิทธิภาพ</td></tr>
+        <tr>
+          <td>Profit Factor</td>
+          <td>1.20</td>
+          <td class="winner none">1.67 <span class="badge-win none">ชนะ</span></td>
+        </tr>
+        <tr>
+          <td>Sharpe Ratio</td>
+          <td>4.69</td>
+          <td class="winner none">8.77 <span class="badge-win none">ชนะ</span></td>
+        </tr>
+        <tr>
+          <td>Expected Payoff</td>
+          <td>$3.68</td>
+          <td class="winner none">$31.90 <span class="badge-win none">ชนะ</span></td>
+        </tr>
+
+        <tr class="category-row"><td colspan="3">🎯 สถิติการเทรด</td></tr>
+        <tr>
+          <td>จำนวนไม้ทั้งหมด</td>
+          <td>128</td>
+          <td>87</td>
+        </tr>
+        <tr>
+          <td>Win Rate</td>
+          <td class="winner be">82.03% <span class="badge-win be">ชนะ</span></td>
+          <td>50.57%</td>
+        </tr>
+        <tr>
+          <td>เทรดชนะ / เทรดแพ้</td>
+          <td>105 / 23</td>
+          <td>44 / 43</td>
+        </tr>
+        <tr>
+          <td>กำไรเฉลี่ย / ไม้</td>
+          <td>$26.73</td>
+          <td class="winner none">$157.20 <span class="badge-win none">ชนะ</span></td>
+        </tr>
+        <tr>
+          <td>ขาดทุนเฉลี่ย / ไม้</td>
+          <td class="winner be">-$101.52 <span class="badge-win be">ชนะ</span></td>
+          <td>-$96.31</td>
+        </tr>
+        <tr>
+          <td>กำไรสูงสุด / ไม้</td>
+          <td>$283.15</td>
+          <td class="winner none">$700.33 <span class="badge-win none">ชนะ</span></td>
+        </tr>
+        <tr>
+          <td>ขาดทุนสูงสุด / ไม้</td>
+          <td class="winner be">-$301.15 <span class="badge-win be">ชนะ</span></td>
+          <td>-$427.25</td>
+        </tr>
+
+        <tr class="category-row"><td colspan="3">🔥 สถิติ Consecutive</td></tr>
+        <tr>
+          <td>ชนะติดต่อกันสูงสุด</td>
+          <td class="winner be">14 ไม้ ($509) <span class="badge-win be">ชนะ</span></td>
+          <td>5 ไม้ ($2,164)</td>
+        </tr>
+        <tr>
+          <td>แพ้ติดต่อกันสูงสุด</td>
+          <td class="winner be">2 ไม้ (-$135) <span class="badge-win be">ชนะ</span></td>
+          <td>6 ไม้ (-$434)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PROS/CONS -->
+  <div class="pros-cons-grid">
+    <div class="pros-cons-card be">
+      <div class="pc-header">
+        <div class="dot be"></div>
+        <h3>🛡️ BE — กันหน้าทุน</h3>
+      </div>
+      <div class="pc-section">
+        <h4 class="pros">✅ ข้อดี</h4>
+        <div class="pc-item pro"><span class="icon">🎯</span>Win Rate สูงมาก 82% — เทรดชนะบ่อย สบายใจ</div>
+        <div class="pc-item pro"><span class="icon">🛡️</span>DD ต่ำกว่า (37% vs 46%) — ปกป้องเงินทุนได้ดีกว่า</div>
+        <div class="pc-item pro"><span class="icon">😌</span>แพ้ติดต่อกันแค่ 2 ไม้ — จิตวิทยาดี ไม่กดดัน</div>
+        <div class="pc-item pro"><span class="icon">📊</span>Equity Curve นิ่ง ไม่หวือหวา — เหมาะกับคนไม่ชอบเสี่ยง</div>
+        <div class="pc-item pro"><span class="icon">🔒</span>ล็อกกำไรอัตโนมัติ — ไม่ต้องกังวลว่ากำไรจะหาย</div>
+      </div>
+      <div class="pc-section">
+        <h4 class="cons">❌ ข้อเสีย</h4>
+        <div class="pc-item con"><span class="icon">💸</span>กำไรน้อยกว่ามาก ($472 vs $2,775) — โตช้า</div>
+        <div class="pc-item con"><span class="icon">✂️</span>ตัดกำไรเร็วเกินไป — หลายไม้ที่ควรได้มากกว่า ถูก BE ตัด</div>
+        <div class="pc-item con"><span class="icon">📉</span>Profit Factor แค่ 1.20 — ใกล้เคียงจุดคุ้มทุน</div>
+        <div class="pc-item con"><span class="icon">🔄</span>จำนวนไม้มาก (128) — เสีย Spread/Commission มากขึ้น</div>
+      </div>
+    </div>
+
+    <div class="pros-cons-card none">
+      <div class="pc-header">
+        <div class="dot none"></div>
+        <h3>🎯 NONE — TP/SL Only</h3>
+      </div>
+      <div class="pc-section">
+        <h4 class="pros">✅ ข้อดี</h4>
+        <div class="pc-item pro"><span class="icon">🚀</span>กำไรสูงกว่า 5.9 เท่า! ($2,775 vs $472) — โตเร็วมาก</div>
+        <div class="pc-item pro"><span class="icon">💎</span>Profit Factor 1.67 — ทำกำไรได้คุ้มค่ากว่าเยอะ</div>
+        <div class="pc-item pro"><span class="icon">📈</span>Recovery Factor 3.42 — ฟื้นตัวจาก DD ได้เร็ว</div>
+        <div class="pc-item pro"><span class="icon">⚡</span>กำไรเฉลี่ย/ไม้ $157 — แต่ละไม้ทำเงินได้เยอะ</div>
+        <div class="pc-item pro"><span class="icon">🏆</span>Sharpe Ratio 8.77 — ผลตอบแทนเทียบความเสี่ยงดีเยี่ยม</div>
+      </div>
+      <div class="pc-section">
+        <h4 class="cons">❌ ข้อเสีย</h4>
+        <div class="pc-item con"><span class="icon">📉</span>DD สูงกว่า (46%) — เสียใจมากกว่าตอนพอร์ตลง</div>
+        <div class="pc-item con"><span class="icon">😰</span>Win Rate แค่ 50% — แพ้เกือบเท่าชนะ อาจกดดันจิตใจ</div>
+        <div class="pc-item con"><span class="icon">🔴</span>แพ้ติดกัน 6 ไม้ — ต้องอดทนมาก</div>
+        <div class="pc-item con"><span class="icon">💥</span>ขาดทุนสูงสุด/ไม้ -$427 — เจ็บตัวหนักกว่าตอนผิดทาง</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="verdict-section">
+    <h2>⚖️ สรุป — เลือกตัวไหนดี?</h2>
+    <p style="color: var(--text-muted); max-width:700px; margin:0 auto; font-size:15px;">
+      ทั้ง 2 ตัวใช้กลยุทธ์เดียวกัน แต่วิธีจัดการกำไรต่างกัน ไม่มีตัวไหน "ดีกว่า" โดยรวม — ขึ้นอยู่กับสไตล์ของคุณ
+    </p>
+    <div class="verdict-grid">
+      <div class="verdict-box">
+        <h3><span style="color:var(--be-color)">🛡️</span> เลือก BE ถ้าคุณ...</h3>
+        <p>
+          • ไม่ชอบเห็นพอร์ตลงแรง<br>
+          • อยากเห็นบัญชีเทรดชนะบ่อยๆ<br>
+          • เป็นมือใหม่ ต้องการความมั่นใจก่อน<br>
+          • รับ Drawdown ได้ไม่เกิน 40%<br>
+          • เน้นรักษาเงินทุน มากกว่าทำกำไรสูงสุด
+        </p>
+      </div>
+      <div class="verdict-box">
+        <h3><span style="color:var(--none-color)">🎯</span> เลือก NONE ถ้าคุณ...</h3>
+        <p>
+          • รับ DD 45%+ ได้ ไม่กระวนกระวาย<br>
+          • ต้องการผลตอบแทนสูงสุด<br>
+          • อดทนรอได้ ไม่ปิด EA ตอนแพ้ติด<br>
+          • เข้าใจว่า Win Rate ต่ำ ≠ ไม่ดี<br>
+          • เชื่อมั่นในระบบ ปล่อย EA ทำงานเต็มที่
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span class="brand">IRT GOLD</span> — EA Backtest Comparison Report<br>
+    Generated from MT5 Strategy Tester | XAUUSD M5 | 1 Jan – 15 Feb 2026<br>
+    ⚠️ ผลการ Backtest ไม่ได้รับประกันผลในอนาคต ผลตอบแทนจริงอาจแตกต่าง
+  </div>
+
+</div>
+
+<script>
+// ===== EQUITY CURVE DATA =====
+const beEquity = [{"time": "2026.01.01 00:00:00", "balance": 1000.0}, {"time": "2026.01.02 13:00:00", "balance": 1000.0}, {"time": "2026.01.02 13:20:20", "balance": 1004.5}, {"time": "2026.01.05 14:05:00", "balance": 1004.5}, {"time": "2026.01.05 14:16:10", "balance": 1009.45}, {"time": "2026.01.05 14:35:00", "balance": 1009.45}, {"time": "2026.01.05 15:12:38", "balance": 1108.0}, {"time": "2026.01.06 01:15:00", "balance": 1108.0}, {"time": "2026.01.06 02:40:03", "balance": 1154.25}, {"time": "2026.01.06 06:35:00", "balance": 1154.25}, {"time": "2026.01.06 07:21:05", "balance": 1159.1}, {"time": "2026.01.06 07:30:00", "balance": 1159.1}, {"time": "2026.01.06 08:32:53", "balance": 1163.95}, {"time": "2026.01.07 00:35:00", "balance": 1163.95}, {"time": "2026.01.07 00:53:25", "balance": 1115.85}, {"time": "2026.01.07 01:00:00", "balance": 1115.85}, {"time": "2026.01.07 01:06:50", "balance": 1037.2}, {"time": "2026.01.07 09:10:00", "balance": 1037.2}, {"time": "2026.01.07 11:28:44", "balance": 1042.15}, {"time": "2026.01.07 18:00:00", "balance": 1042.15}, {"time": "2026.01.07 19:29:21", "balance": 1047.15}, {"time": "2026.01.08 01:30:00", "balance": 1047.15}, {"time": "2026.01.08 02:45:30", "balance": 1105.45}, {"time": "2026.01.08 07:05:00", "balance": 1105.45}, {"time": "2026.01.08 08:09:28", "balance": 1110.35}, {"time": "2026.01.08 08:15:00", "balance": 1110.35}, {"time": "2026.01.08 08:50:07", "balance": 1115.05}, {"time": "2026.01.08 09:20:00", "balance": 1115.05}, {"time": "2026.01.08 12:25:07", "balance": 1161.65}, {"time": "2026.01.08 13:05:00", "balance": 1161.65}, {"time": "2026.01.08 13:15:13", "balance": 1166.65}, {"time": "2026.01.08 18:45:00", "balance": 1166.65}, {"time": "2026.01.08 20:30:33", "balance": 1273.7}, {"time": "2026.01.09 01:55:00", "balance": 1273.7}, {"time": "2026.01.09 02:32:57", "balance": 1278.55}, {"time": "2026.01.09 03:00:00", "balance": 1278.55}, {"time": "2026.01.09 07:14:28", "balance": 1283.5}, {"time": "2026.01.09 07:40:00", "balance": 1283.5}, {"time": "2026.01.09 09:32:37", "balance": 1288.5}, {"time": "2026.01.09 10:55:00", "balance": 1288.5}, {"time": "2026.01.09 12:12:49", "balance": 1293.0}, {"time": "2026.01.09 18:35:00", "balance": 1293.0}, {"time": "2026.01.11 23:43:18", "balance": 1510.84}, {"time": "2026.01.12 04:10:00", "balance": 1510.84}, {"time": "2026.01.12 06:05:29", "balance": 1546.34}, {"time": "2026.01.12 10:15:01", "balance": 1546.34}, {"time": "2026.01.12 12:23:39", "balance": 1479.04}, {"time": "2026.01.12 12:50:00", "balance": 1479.04}, {"time": "2026.01.12 13:11:52", "balance": 1566.74}, {"time": "2026.01.12 14:20:00", "balance": 1566.74}, {"time": "2026.01.12 14:44:05", "balance": 1591.84}, {"time": "2026.01.12 14:44:05", "balance": 1591.84}, {"time": "2026.01.12 14:55:34", "balance": 1596.64}, {"time": "2026.01.12 19:10:00", "balance": 1596.64}, {"time": "2026.01.12 19:49:29", "balance": 1601.54}, {"time": "2026.01.13 09:30:00", "balance": 1601.54}, {"time": "2026.01.13 10:42:41", "balance": 1606.54}, {"time": "2026.01.13 15:30:00", "balance": 1606.54}, {"time": "2026.01.13 15:35:25", "balance": 1611.49}, {"time": "2026.01.13 16:45:00", "balance": 1611.49}, {"time": "2026.01.13 17:11:24", "balance": 1616.44}, {"time": "2026.01.14 08:35:00", "balance": 1616.44}, {"time": "2026.01.14 09:35:43", "balance": 1621.44}, {"time": "2026.01.14 10:15:00", "balance": 1621.44}, {"time": "2026.01.14 10:55:03", "balance": 1625.89}, {"time": "2026.01.14 20:10:00", "balance": 1625.89}, {"time": "2026.01.14 23:06:59", "balance": 1520.14}, {"time": "2026.01.15 02:25:00", "balance": 1520.14}, {"time": "2026.01.15 02:57:50", "balance": 1545.24}, {"time": "2026.01.15 07:55:00", "balance": 1545.24}, {"time": "2026.01.15 09:38:59", "balance": 1502.94}, {"time": "2026.01.15 14:30:00", "balance": 1502.94}, {"time": "2026.01.15 16:11:46", "balance": 1411.34}, {"time": "2026.01.15 21:15:00", "balance": 1411.34}, {"time": "2026.01.15 23:15:19", "balance": 1415.49}, {"time": "2026.01.16 04:25:01", "balance": 1415.49}, {"time": "2026.01.16 05:42:41", "balance": 1379.29}, {"time": "2026.01.16 13:55:00", "balance": 1379.29}, {"time": "2026.01.16 15:05:01", "balance": 1280.19}, {"time": "2026.01.16 16:20:00", "balance": 1280.19}, {"time": "2026.01.16 16:52:08", "balance": 1285.19}, {"time": "2026.01.16 16:52:08", "balance": 1285.19}, {"time": "2026.01.16 16:55:46", "balance": 1290.14}, {"time": "2026.01.16 18:50:00", "balance": 1290.14}, {"time": "2026.01.16 19:05:53", "balance": 1295.14}, {"time": "2026.01.16 20:30:00", "balance": 1295.14}, {"time": "2026.01.16 20:43:45", "balance": 1300.04}, {"time": "2026.01.16 21:00:00", "balance": 1300.04}, {"time": "2026.01.16 21:18:38", "balance": 1226.89}, {"time": "2026.01.19 14:25:00", "balance": 1226.89}, {"time": "2026.01.19 19:16:18", "balance": 1241.69}, {"time": "2026.01.20 01:05:00", "balance": 1241.69}, {"time": "2026.01.20 01:56:18", "balance": 1246.59}, {"time": "2026.01.20 14:40:00", "balance": 1246.59}, {"time": "2026.01.20 15:15:26", "balance": 1251.44}, {"time": "2026.01.20 15:35:00", "balance": 1251.44}, {"time": "2026.01.20 15:55:18", "balance": 1256.34}, {"time": "2026.01.20 20:55:00", "balance": 1256.34}, {"time": "2026.01.21 00:02:25", "balance": 1332.13}, {"time": "2026.01.21 06:50:00", "balance": 1332.13}, {"time": "2026.01.21 07:04:15", "balance": 1212.58}, {"time": "2026.01.21 23:05:00", "balance": 1212.58}, {"time": "2026.01.21 23:12:28", "balance": 1227.28}, {"time": "2026.01.22 01:30:00", "balance": 1227.28}, {"time": "2026.01.22 02:03:25", "balance": 1231.83}, {"time": "2026.01.22 02:03:25", "balance": 1231.83}, {"time": "2026.01.22 02:05:48", "balance": 1236.83}, {"time": "2026.01.22 04:35:00", "balance": 1236.83}, {"time": "2026.01.22 05:45:39", "balance": 1187.23}, {"time": "2026.01.22 13:15:00", "balance": 1187.23}, {"time": "2026.01.22 13:20:59", "balance": 1192.18}, {"time": "2026.01.22 13:20:59", "balance": 1192.18}, {"time": "2026.01.22 13:27:55", "balance": 1197.08}, {"time": "2026.01.23 11:00:00", "balance": 1197.08}, {"time": "2026.01.23 11:04:16", "balance": 1140.18}, {"time": "2026.01.23 13:30:00", "balance": 1140.18}, {"time": "2026.01.23 13:31:37", "balance": 1144.53}, {"time": "2026.01.23 13:35:00", "balance": 1144.53}, {"time": "2026.01.23 14:01:04", "balance": 1149.48}, {"time": "2026.01.23 14:35:00", "balance": 1149.48}, {"time": "2026.01.23 14:39:15", "balance": 1154.23}, {"time": "2026.01.23 18:05:00", "balance": 1154.23}, {"time": "2026.01.23 20:00:35", "balance": 1158.83}, {"time": "2026.01.26 04:45:00", "balance": 1158.83}, {"time": "2026.01.26 05:04:56", "balance": 1163.48}, {"time": "2026.01.26 05:04:56", "balance": 1163.48}, {"time": "2026.01.26 05:19:38", "balance": 1089.98}, {"time": "2026.01.26 05:30:00", "balance": 1089.98}, {"time": "2026.01.26 06:08:32", "balance": 1125.63}, {"time": "2026.01.26 09:05:00", "balance": 1125.63}, {"time": "2026.01.26 09:21:49", "balance": 1130.23}, {"time": "2026.01.26 11:40:00", "balance": 1130.23}, {"time": "2026.01.26 13:00:12", "balance": 1044.38}, {"time": "2026.01.26 20:35:00", "balance": 1044.38}, {"time": "2026.01.26 20:40:20", "balance": 1092.23}, {"time": "2026.01.26 21:00:00", "balance": 1092.23}, {"time": "2026.01.26 21:18:07", "balance": 1212.58}, {"time": "2026.01.26 23:35:02", "balance": 1212.58}, {"time": "2026.01.27 00:53:48", "balance": 1320.56}, {"time": "2026.01.27 04:55:00", "balance": 1320.56}, {"time": "2026.01.27 06:12:43", "balance": 1366.76}, {"time": "2026.01.27 08:45:00", "balance": 1366.76}, {"time": "2026.01.27 09:45:41", "balance": 1381.91}, {"time": "2026.01.27 10:40:00", "balance": 1381.91}, {"time": "2026.01.27 11:51:24", "balance": 1302.81}, {"time": "2026.01.27 12:35:00", "balance": 1302.81}, {"time": "2026.01.27 13:16:21", "balance": 1306.41}, {"time": "2026.01.27 14:45:00", "balance": 1306.41}, {"time": "2026.01.27 15:40:51", "balance": 1310.81}, {"time": "2026.01.27 17:10:00", "balance": 1310.81}, {"time": "2026.01.27 17:16:03", "balance": 1314.06}, {"time": "2026.01.28 09:30:00", "balance": 1314.06}, {"time": "2026.01.28 10:17:03", "balance": 1319.06}, {"time": "2026.01.28 12:55:00", "balance": 1319.06}, {"time": "2026.01.28 13:00:44", "balance": 1324.06}, {"time": "2026.01.29 05:30:00", "balance": 1324.06}, {"time": "2026.01.29 05:34:45", "balance": 1339.01}, {"time": "2026.01.29 07:35:00", "balance": 1339.01}, {"time": "2026.01.29 08:39:58", "balance": 1149.31}, {"time": "2026.01.29 11:50:01", "balance": 1149.31}, {"time": "2026.01.29 12:20:04", "balance": 1176.16}, {"time": "2026.01.29 13:45:00", "balance": 1176.16}, {"time": "2026.01.29 14:14:32", "balance": 1190.26}, {"time": "2026.01.29 14:14:32", "balance": 1190.26}, {"time": "2026.01.29 14:30:10", "balance": 1239.51}, {"time": "2026.01.29 17:35:00", "balance": 1239.51}, {"time": "2026.01.29 17:53:36", "balance": 1259.01}, {"time": "2026.01.29 17:55:06", "balance": 1259.01}, {"time": "2026.01.29 17:55:44", "balance": 1261.11}, {"time": "2026.01.30 01:05:00", "balance": 1261.11}, {"time": "2026.01.30 01:07:33", "balance": 1298.91}, {"time": "2026.01.30 05:25:00", "balance": 1298.91}, {"time": "2026.01.30 05:35:50", "balance": 1338.66}, {"time": "2026.01.30 11:05:02", "balance": 1338.66}, {"time": "2026.01.30 12:47:12", "balance": 1394.61}, {"time": "2026.01.30 12:50:00", "balance": 1394.61}, {"time": "2026.01.30 12:59:56", "balance": 1395.71}, {"time": "2026.01.30 14:55:00", "balance": 1395.71}, {"time": "2026.01.30 14:55:35", "balance": 1423.46}, {"time": "2026.01.30 19:15:00", "balance": 1423.46}, {"time": "2026.01.30 19:16:24", "balance": 1428.31}, {"time": "2026.01.30 21:30:00", "balance": 1428.31}, {"time": "2026.01.30 21:33:03", "balance": 1429.46}, {"time": "2026.02.03 17:15:00", "balance": 1429.46}, {"time": "2026.02.03 17:21:18", "balance": 1519.56}, {"time": "2026.02.03 17:21:22", "balance": 1519.56}, {"time": "2026.02.03 18:32:30", "balance": 1218.41}, {"time": "2026.02.05 09:05:00", "balance": 1218.41}, {"time": "2026.02.05 09:06:38", "balance": 1221.96}, {"time": "2026.02.05 11:20:00", "balance": 1221.96}, {"time": "2026.02.05 11:41:59", "balance": 1225.81}, {"time": "2026.02.05 18:55:00", "balance": 1225.81}, {"time": "2026.02.05 18:59:12", "balance": 1230.41}, {"time": "2026.02.05 19:05:00", "balance": 1230.41}, {"time": "2026.02.05 19:06:17", "balance": 1248.71}, {"time": "2026.02.05 19:15:00", "balance": 1248.71}, {"time": "2026.02.05 19:30:38", "balance": 1263.66}, {"time": "2026.02.05 19:30:38", "balance": 1263.66}, {"time": "2026.02.05 19:37:17", "balance": 1302.86}, {"time": "2026.02.06 01:20:00", "balance": 1302.86}, {"time": "2026.02.06 01:23:38", "balance": 1306.31}, {"time": "2026.02.06 14:35:00", "balance": 1306.31}, {"time": "2026.02.06 14:39:37", "balance": 1353.46}, {"time": "2026.02.06 16:30:00", "balance": 1353.46}, {"time": "2026.02.06 16:43:24", "balance": 1355.61}, {"time": "2026.02.06 21:00:00", "balance": 1355.61}, {"time": "2026.02.08 23:01:10", "balance": 1494.5}, {"time": "2026.02.09 01:45:00", "balance": 1494.5}, {"time": "2026.02.09 02:56:47", "balance": 1499.1}, {"time": "2026.02.09 05:05:00", "balance": 1499.1}, {"time": "2026.02.09 05:45:11", "balance": 1580.75}, {"time": "2026.02.09 09:20:00", "balance": 1580.75}, {"time": "2026.02.09 09:54:45", "balance": 1478.0}, {"time": "2026.02.09 11:45:00", "balance": 1478.0}, {"time": "2026.02.09 11:59:25", "balance": 1482.4}, {"time": "2026.02.09 11:59:25", "balance": 1482.4}, {"time": "2026.02.09 12:06:46", "balance": 1487.3}, {"time": "2026.02.09 12:06:46", "balance": 1487.3}, {"time": "2026.02.09 12:17:28", "balance": 1492.3}, {"time": "2026.02.09 12:35:00", "balance": 1492.3}, {"time": "2026.02.09 12:38:24", "balance": 1497.3}, {"time": "2026.02.09 18:05:00", "balance": 1497.3}, {"time": "2026.02.09 18:18:11", "balance": 1502.0}, {"time": "2026.02.09 18:30:00", "balance": 1502.0}, {"time": "2026.02.09 20:34:40", "balance": 1614.55}, {"time": "2026.02.10 02:55:00", "balance": 1614.55}, {"time": "2026.02.10 02:57:56", "balance": 1618.9}, {"time": "2026.02.10 07:15:00", "balance": 1618.9}, {"time": "2026.02.10 07:29:06", "balance": 1623.3}, {"time": "2026.02.10 17:50:00", "balance": 1623.3}, {"time": "2026.02.10 18:32:04", "balance": 1702.1}, {"time": "2026.02.10 20:05:00", "balance": 1702.1}, {"time": "2026.02.10 20:48:16", "balance": 1617.4}, {"time": "2026.02.11 05:20:00", "balance": 1617.4}, {"time": "2026.02.11 05:49:38", "balance": 1631.55}, {"time": "2026.02.11 07:55:00", "balance": 1631.55}, {"time": "2026.02.11 08:06:43", "balance": 1634.75}, {"time": "2026.02.11 13:00:00", "balance": 1634.75}, {"time": "2026.02.11 13:28:52", "balance": 1639.7}, {"time": "2026.02.11 13:28:52", "balance": 1639.7}, {"time": "2026.02.11 13:30:27", "balance": 1455.1}, {"time": "2026.02.11 18:20:00", "balance": 1455.1}, {"time": "2026.02.11 19:36:01", "balance": 1491.9}, {"time": "2026.02.12 13:30:00", "balance": 1491.9}, {"time": "2026.02.12 13:56:34", "balance": 1390.15}, {"time": "2026.02.12 16:00:00", "balance": 1390.15}, {"time": "2026.02.12 16:13:14", "balance": 1673.3}, {"time": "2026.02.13 01:00:00", "balance": 1673.3}, {"time": "2026.02.13 01:01:32", "balance": 1531.0}, {"time": "2026.02.13 09:30:00", "balance": 1531.0}, {"time": "2026.02.13 10:48:48", "balance": 1534.9}, {"time": "2026.02.13 12:10:00", "balance": 1534.9}, {"time": "2026.02.13 13:30:03", "balance": 1413.65}, {"time": "2026.02.13 14:45:00", "balance": 1413.65}, {"time": "2026.02.13 14:49:48", "balance": 1441.8}, {"time": "2026.02.13 21:00:00", "balance": 1441.8}, {"time": "2026.02.13 21:44:58", "balance": 1471.65}];
+const noneEquity = [{"time": "2026.01.01 00:00:00", "balance": 1000.0}, {"time": "2026.01.02 13:00:00", "balance": 1000.0}, {"time": "2026.01.02 13:24:01", "balance": 950.0}, {"time": "2026.01.05 14:05:00", "balance": 950.0}, {"time": "2026.01.05 14:55:04", "balance": 1045.95}, {"time": "2026.01.06 01:15:00", "balance": 1045.95}, {"time": "2026.01.06 02:10:13", "balance": 1126.3}, {"time": "2026.01.06 06:35:00", "balance": 1126.3}, {"time": "2026.01.06 09:15:59", "balance": 1065.45}, {"time": "2026.01.07 00:35:00", "balance": 1065.45}, {"time": "2026.01.07 00:52:31", "balance": 1027.3}, {"time": "2026.01.07 01:00:00", "balance": 1027.3}, {"time": "2026.01.07 01:05:19", "balance": 963.15}, {"time": "2026.01.07 09:10:00", "balance": 963.15}, {"time": "2026.01.07 11:58:37", "balance": 1027.55}, {"time": "2026.01.07 18:00:00", "balance": 1027.55}, {"time": "2026.01.07 20:01:32", "balance": 988.3}, {"time": "2026.01.08 01:30:00", "balance": 988.3}, {"time": "2026.01.08 01:55:05", "balance": 1051.8}, {"time": "2026.01.08 07:05:00", "balance": 1051.8}, {"time": "2026.01.08 12:01:43", "balance": 1122.75}, {"time": "2026.01.08 13:05:00", "balance": 1122.75}, {"time": "2026.01.08 14:47:47", "balance": 1056.6}, {"time": "2026.01.08 18:45:00", "balance": 1056.6}, {"time": "2026.01.08 20:22:12", "balance": 1109.95}, {"time": "2026.01.09 01:55:00", "balance": 1109.95}, {"time": "2026.01.09 13:32:30", "balance": 1185.45}, {"time": "2026.01.09 18:35:00", "balance": 1185.45}, {"time": "2026.01.11 23:06:06", "balance": 1298.89}, {"time": "2026.01.12 04:10:00", "balance": 1298.89}, {"time": "2026.01.12 05:41:45", "balance": 1352.39}, {"time": "2026.01.12 10:15:01", "balance": 1352.39}, {"time": "2026.01.12 12:08:25", "balance": 1295.94}, {"time": "2026.01.12 12:50:00", "balance": 1295.94}, {"time": "2026.01.12 13:03:53", "balance": 1337.19}, {"time": "2026.01.12 14:20:00", "balance": 1337.19}, {"time": "2026.01.12 15:07:34", "balance": 1436.29}, {"time": "2026.01.12 19:10:00", "balance": 1436.29}, {"time": "2026.01.12 20:06:42", "balance": 1386.84}, {"time": "2026.01.13 09:30:00", "balance": 1386.84}, {"time": "2026.01.13 10:11:03", "balance": 1420.14}, {"time": "2026.01.13 15:30:00", "balance": 1420.14}, {"time": "2026.01.13 17:58:14", "balance": 1326.04}, {"time": "2026.01.14 08:35:00", "balance": 1326.04}, {"time": "2026.01.14 14:39:52", "balance": 1272.24}, {"time": "2026.01.14 20:10:00", "balance": 1272.24}, {"time": "2026.01.14 21:37:38", "balance": 1183.44}, {"time": "2026.01.15 02:25:00", "balance": 1183.44}, {"time": "2026.01.15 03:20:27", "balance": 1285.19}, {"time": "2026.01.15 07:55:00", "balance": 1285.19}, {"time": "2026.01.15 09:37:03", "balance": 1255.74}, {"time": "2026.01.15 14:30:00", "balance": 1255.74}, {"time": "2026.01.15 15:15:51", "balance": 1188.69}, {"time": "2026.01.15 21:15:00", "balance": 1188.69}, {"time": "2026.01.16 00:08:28", "balance": 1144.33}, {"time": "2026.01.16 04:25:01", "balance": 1144.33}, {"time": "2026.01.16 05:39:06", "balance": 1116.43}, {"time": "2026.01.16 13:55:00", "balance": 1116.43}, {"time": "2026.01.16 14:47:35", "balance": 1044.98}, {"time": "2026.01.16 16:20:00", "balance": 1044.98}, {"time": "2026.01.18 23:00:03", "balance": 851.11}, {"time": "2026.01.19 14:25:00", "balance": 851.11}, {"time": "2026.01.19 15:54:47", "balance": 883.11}, {"time": "2026.01.19 17:30:00", "balance": 883.11}, {"time": "2026.01.19 17:50:29", "balance": 912.11}, {"time": "2026.01.20 01:05:00", "balance": 912.11}, {"time": "2026.01.20 04:28:17", "balance": 997.11}, {"time": "2026.01.20 14:40:00", "balance": 997.11}, {"time": "2026.01.20 23:44:13", "balance": 1146.71}, {"time": "2026.01.21 06:50:00", "balance": 1146.71}, {"time": "2026.01.21 07:00:02", "balance": 1053.71}, {"time": "2026.01.21 23:05:00", "balance": 1053.71}, {"time": "2026.01.21 23:58:43", "balance": 1230.01}, {"time": "2026.01.22 01:30:00", "balance": 1230.01}, {"time": "2026.01.22 05:59:16", "balance": 1102.36}, {"time": "2026.01.22 13:15:00", "balance": 1102.36}, {"time": "2026.01.22 13:42:46", "balance": 1044.71}, {"time": "2026.01.23 11:00:00", "balance": 1044.71}, {"time": "2026.01.23 11:01:18", "balance": 1002.86}, {"time": "2026.01.23 13:30:00", "balance": 1002.86}, {"time": "2026.01.23 14:38:16", "balance": 1088.16}, {"time": "2026.01.23 14:38:16", "balance": 1088.16}, {"time": "2026.01.23 16:25:25", "balance": 1252.71}, {"time": "2026.01.23 18:05:00", "balance": 1252.71}, {"time": "2026.01.25 23:00:16", "balance": 1398.95}, {"time": "2026.01.26 04:45:00", "balance": 1398.95}, {"time": "2026.01.26 05:12:27", "balance": 1348.15}, {"time": "2026.01.26 05:30:00", "balance": 1348.15}, {"time": "2026.01.26 06:38:02", "balance": 1436.85}, {"time": "2026.01.26 09:05:00", "balance": 1436.85}, {"time": "2026.01.26 09:56:46", "balance": 1370.85}, {"time": "2026.01.26 11:40:00", "balance": 1370.85}, {"time": "2026.01.26 12:56:25", "balance": 1301.3}, {"time": "2026.01.26 20:35:00", "balance": 1301.3}, {"time": "2026.01.26 21:21:01", "balance": 1466.35}, {"time": "2026.01.26 23:35:02", "balance": 1466.35}, {"time": "2026.01.27 00:50:18", "balance": 1585.68}, {"time": "2026.01.27 04:55:00", "balance": 1585.68}, {"time": "2026.01.27 05:50:25", "balance": 1660.68}, {"time": "2026.01.27 08:45:00", "balance": 1660.68}, {"time": "2026.01.27 09:59:23", "balance": 1744.73}, {"time": "2026.01.27 10:40:00", "balance": 1744.73}, {"time": "2026.01.27 11:48:31", "balance": 1684.73}, {"time": "2026.01.27 12:35:00", "balance": 1684.73}, {"time": "2026.01.27 13:43:44", "balance": 1600.88}, {"time": "2026.01.27 14:45:00", "balance": 1600.88}, {"time": "2026.01.27 14:58:16", "balance": 1467.53}, {"time": "2026.01.27 17:10:00", "balance": 1467.53}, {"time": "2026.01.27 20:03:24", "balance": 1570.23}, {"time": "2026.01.28 09:30:00", "balance": 1570.23}, {"time": "2026.01.28 11:04:38", "balance": 1477.23}, {"time": "2026.01.28 12:55:00", "balance": 1477.23}, {"time": "2026.01.28 13:45:16", "balance": 1391.08}, {"time": "2026.01.29 05:30:00", "balance": 1391.08}, {"time": "2026.01.29 06:21:25", "balance": 1626.23}, {"time": "2026.01.29 07:35:00", "balance": 1626.23}, {"time": "2026.01.29 08:06:33", "balance": 1480.93}, {"time": "2026.01.29 11:50:01", "balance": 1480.93}, {"time": "2026.01.29 13:35:30", "balance": 1355.23}, {"time": "2026.01.29 13:45:00", "balance": 1355.23}, {"time": "2026.01.29 14:46:27", "balance": 1229.03}, {"time": "2026.01.29 17:35:00", "balance": 1229.03}, {"time": "2026.01.29 20:56:51", "balance": 942.63}, {"time": "2026.01.30 01:05:00", "balance": 942.63}, {"time": "2026.01.30 01:11:35", "balance": 1219.78}, {"time": "2026.01.30 05:25:00", "balance": 1219.78}, {"time": "2026.01.30 05:58:21", "balance": 1417.43}, {"time": "2026.01.30 11:05:02", "balance": 1417.43}, {"time": "2026.01.30 13:31:08", "balance": 1824.23}, {"time": "2026.01.30 14:55:00", "balance": 1824.23}, {"time": "2026.01.30 17:07:32", "balance": 2406.18}, {"time": "2026.01.30 19:15:00", "balance": 2406.18}, {"time": "2026.02.01 23:11:26", "balance": 3106.51}, {"time": "2026.02.03 17:15:00", "balance": 3106.51}, {"time": "2026.02.03 18:32:30", "balance": 2898.66}, {"time": "2026.02.05 09:05:00", "balance": 2898.66}, {"time": "2026.02.05 12:19:39", "balance": 3210.11}, {"time": "2026.02.05 18:55:00", "balance": 3210.11}, {"time": "2026.02.05 20:00:30", "balance": 3406.41}, {"time": "2026.02.06 01:20:00", "balance": 3406.41}, {"time": "2026.02.06 02:28:04", "balance": 2979.16}, {"time": "2026.02.06 14:35:00", "balance": 2979.16}, {"time": "2026.02.08 23:23:41", "balance": 3302.05}, {"time": "2026.02.09 01:45:00", "balance": 3302.05}, {"time": "2026.02.09 16:22:55", "balance": 3623.1}, {"time": "2026.02.09 18:05:00", "balance": 3623.1}, {"time": "2026.02.09 19:30:01", "balance": 3735.05}, {"time": "2026.02.10 02:55:00", "balance": 3735.05}, {"time": "2026.02.10 03:15:06", "balance": 3632.95}, {"time": "2026.02.10 07:15:00", "balance": 3632.95}, {"time": "2026.02.10 08:38:18", "balance": 3556.2}, {"time": "2026.02.10 17:50:00", "balance": 3556.2}, {"time": "2026.02.10 18:24:43", "balance": 3679.45}, {"time": "2026.02.10 20:05:00", "balance": 3679.45}, {"time": "2026.02.10 20:44:19", "balance": 3611.8}, {"time": "2026.02.11 05:20:00", "balance": 3611.8}, {"time": "2026.02.11 07:11:04", "balance": 3684.3}, {"time": "2026.02.11 07:55:00", "balance": 3684.3}, {"time": "2026.02.11 09:47:11", "balance": 3758.85}, {"time": "2026.02.11 13:00:00", "balance": 3758.85}, {"time": "2026.02.11 13:30:04", "balance": 3633.0}, {"time": "2026.02.11 18:20:00", "balance": 3633.0}, {"time": "2026.02.11 23:11:47", "balance": 3515.95}, {"time": "2026.02.12 13:30:00", "balance": 3515.95}, {"time": "2026.02.12 13:46:53", "balance": 3434.6}, {"time": "2026.02.12 16:00:00", "balance": 3434.6}, {"time": "2026.02.12 16:11:11", "balance": 3583.95}, {"time": "2026.02.13 01:00:00", "balance": 3583.95}, {"time": "2026.02.13 01:01:21", "balance": 3476.85}, {"time": "2026.02.13 09:30:00", "balance": 3476.85}, {"time": "2026.02.13 11:24:34", "balance": 3628.15}, {"time": "2026.02.13 12:10:00", "balance": 3628.15}, {"time": "2026.02.13 12:35:31", "balance": 3541.3}, {"time": "2026.02.13 14:45:00", "balance": 3541.3}, {"time": "2026.02.13 21:44:58", "balance": 3775.4}];
+
+// Parse and merge timelines
+function parseDate(s) { return new Date(s.replace(/\./g, '-').replace(' ', 'T')); }
+
+// Sample to reduce density for chart
+function sampleData(data, maxPts) {
+  if (data.length <= maxPts) return data;
+  const step = Math.ceil(data.length / maxPts);
+  const result = [];
+  for (let i = 0; i < data.length; i += step) result.push(data[i]);
+  if (result[result.length - 1] !== data[data.length - 1]) result.push(data[data.length - 1]);
+  return result;
+}
+
+const beSampled = sampleData(beEquity, 120);
+const noneSampled = sampleData(noneEquity, 120);
+
+// Build unified date labels
+const allDates = new Set();
+beSampled.forEach(d => allDates.add(d.time.substring(0, 10)));
+noneSampled.forEach(d => allDates.add(d.time.substring(0, 10)));
+const sortedDates = [...allDates].sort();
+
+// Interpolate
+function interpolate(data, dates) {
+  const result = [];
+  let idx = 0;
+  for (const date of dates) {
+    while (idx < data.length - 1 && data[idx + 1].time.substring(0, 10) <= date) idx++;
+    result.push(data[idx].balance);
+  }
+  return result;
+}
+
+const beValues = interpolate(beSampled, sortedDates);
+const noneValues = interpolate(noneSampled, sortedDates);
+const labels = sortedDates.map(d => { const p = d.split('.'); return p[2] + '/' + p[1]; });
+
+// Equity Chart
+const eqCtx = document.getElementById('equityChart').getContext('2d');
+new Chart(eqCtx, {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [
+      {
+        label: 'BE (กันหน้าทุน)',
+        data: beValues,
+        borderColor: '#2E86DE',
+        backgroundColor: 'rgba(46,134,222,0.08)',
+        borderWidth: 2.5,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+      },
+      {
+        label: 'NONE (TP/SL Only)',
+        data: noneValues,
+        borderColor: '#E74C3C',
+        backgroundColor: 'rgba(231,76,60,0.08)',
+        borderWidth: 2.5,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { intersect: false, mode: 'index' },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#2C2825',
+        titleFont: { family: 'JetBrains Mono', size: 12 },
+        bodyFont: { family: 'JetBrains Mono', size: 12 },
+        padding: 12,
+        cornerRadius: 8,
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString('en-US', {minimumFractionDigits:2})
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: 'JetBrains Mono', size: 10 }, color: '#8A857E', maxTicksLimit: 12 }
+      },
+      y: {
+        grid: { color: '#F2F0EC' },
+        ticks: {
+          font: { family: 'JetBrains Mono', size: 11 },
+          color: '#8A857E',
+          callback: v => '$' + v.toLocaleString()
+        }
+      }
+    }
+  }
+});
+
+// Return & Risk Chart
+const retCtx = document.getElementById('returnChart').getContext('2d');
+new Chart(retCtx, {
+  type: 'bar',
+  data: {
+    labels: ['กำไรสุทธิ', 'Gross Profit', 'Gross Loss', 'DD สูงสุด ($)'],
+    datasets: [
+      {
+        label: 'BE',
+        data: [471.65, 2806.50, 2334.85, 622.01],
+        backgroundColor: 'rgba(46,134,222,0.75)',
+        borderRadius: 6,
+      },
+      {
+        label: 'NONE',
+        data: [2775.40, 6916.88, 4141.48, 811.95],
+        backgroundColor: 'rgba(231,76,60,0.75)',
+        borderRadius: 6,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: { font: { family: 'Sarabun', size: 12, weight: '600' }, usePointStyle: true, pointStyle: 'rectRounded' }
+      },
+      tooltip: {
+        backgroundColor: '#2C2825',
+        bodyFont: { family: 'JetBrains Mono', size: 12 },
+        padding: 10,
+        cornerRadius: 8,
+        callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString('en-US', {minimumFractionDigits:2}) }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { family: 'Sarabun', size: 11 }, color: '#8A857E' } },
+      y: { grid: { color: '#F2F0EC' }, ticks: { font: { family: 'JetBrains Mono', size: 11 }, color: '#8A857E', callback: v => '$' + v.toLocaleString() } }
+    }
+  }
+});
+
+// Metrics Chart
+const metCtx = document.getElementById('metricsChart').getContext('2d');
+new Chart(metCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Profit Factor', 'Recovery Factor', 'Sharpe Ratio', 'Win Rate (%)'],
+    datasets: [
+      {
+        label: 'BE',
+        data: [1.20, 0.76, 4.69, 82.03],
+        backgroundColor: 'rgba(46,134,222,0.75)',
+        borderRadius: 6,
+      },
+      {
+        label: 'NONE',
+        data: [1.67, 3.42, 8.77, 50.57],
+        backgroundColor: 'rgba(231,76,60,0.75)',
+        borderRadius: 6,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: { font: { family: 'Sarabun', size: 12, weight: '600' }, usePointStyle: true, pointStyle: 'rectRounded' }
+      },
+      tooltip: {
+        backgroundColor: '#2C2825',
+        bodyFont: { family: 'JetBrains Mono', size: 12 },
+        padding: 10,
+        cornerRadius: 8,
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { family: 'Sarabun', size: 11 }, color: '#8A857E' } },
+      y: { grid: { color: '#F2F0EC' }, ticks: { font: { family: 'JetBrains Mono', size: 11 }, color: '#8A857E' } }
+    }
+  }
+});
+</script>
+</body>
+</html>
