@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRT GOLD ALL3 V.7.0 — หลักการทำงาน</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI',sans-serif; background:#0a0e1a; color:#e0e6f0; }
+
+  /* HERO */
+  .hero { background:linear-gradient(135deg,#0d1b2a 0%,#1a2e4a 50%,#0d2235 100%);
+          padding:60px 20px; text-align:center; border-bottom:2px solid #f5a623; }
+  .hero h1 { font-size:2.8rem; color:#f5a623; text-shadow:0 0 30px rgba(245,166,35,0.5); }
+  .hero p  { font-size:1.1rem; color:#8ab4d4; margin-top:10px; }
+  .badge   { display:inline-block; background:#f5a623; color:#000; font-weight:700;
+             padding:4px 16px; border-radius:20px; margin-top:12px; font-size:0.9rem; }
+
+  /* SECTION */
+  .section { max-width:960px; margin:40px auto; padding:0 20px; }
+  .section-title { font-size:1.6rem; color:#f5a623; border-left:4px solid #f5a623;
+                   padding-left:16px; margin-bottom:24px; }
+
+  /* CARDS */
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+  .card { background:#111827; border:1px solid #1e3a5f; border-radius:12px; padding:24px;
+          transition:transform 0.2s,box-shadow 0.2s; }
+  .card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(245,166,35,0.15); }
+  .card-icon { font-size:2.4rem; margin-bottom:12px; }
+  .card h3   { color:#f5a623; font-size:1.1rem; margin-bottom:8px; }
+  .card p    { color:#8ab4d4; font-size:0.9rem; line-height:1.6; }
+  .tag { display:inline-block; background:#1e3a5f; color:#60a5fa; font-size:0.75rem;
+         padding:2px 10px; border-radius:12px; margin-top:8px; }
+
+  /* SYSTEM FLOW */
+  .flow { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin:20px 0; }
+  .flow-box { background:#111827; border:1px solid #1e3a5f; border-radius:8px;
+              padding:12px 18px; text-align:center; min-width:120px; }
+  .flow-box .label { font-size:0.75rem; color:#8ab4d4; margin-bottom:4px; }
+  .flow-box .val   { font-size:1rem; color:#f5a623; font-weight:700; }
+  .arrow { color:#f5a623; font-size:1.4rem; }
+
+  /* SYSTEM DETAIL */
+  .sys-block { background:#111827; border:1px solid #1e3a5f; border-radius:12px;
+               padding:24px; margin-bottom:20px; }
+  .sys-header { display:flex; align-items:center; gap:16px; margin-bottom:16px; }
+  .sys-num { background:#f5a623; color:#000; font-weight:900; font-size:1.2rem;
+             width:40px; height:40px; border-radius:50%; display:flex;
+             align-items:center; justify-content:center; flex-shrink:0; }
+  .sys-title { font-size:1.2rem; color:#e0e6f0; font-weight:700; }
+  .sys-sub   { font-size:0.85rem; color:#8ab4d4; }
+  .cond-list { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .cond { background:#0d1b2a; border-radius:8px; padding:14px; }
+  .cond h4 { font-size:0.85rem; margin-bottom:8px; }
+  .cond h4.buy  { color:#22c55e; }
+  .cond h4.sell { color:#ef4444; }
+  .cond ul { list-style:none; }
+  .cond ul li { font-size:0.82rem; color:#8ab4d4; padding:3px 0;
+                padding-left:16px; position:relative; }
+  .cond ul li::before { content:"›"; position:absolute; left:0; color:#f5a623; }
+
+  /* STATS TABLE */
+  .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; }
+  .stat-box { background:#111827; border:1px solid #1e3a5f; border-radius:10px;
+              padding:20px; text-align:center; }
+  .stat-box .stat-label { font-size:0.8rem; color:#8ab4d4; margin-bottom:6px; }
+  .stat-box .stat-val   { font-size:1.8rem; font-weight:900; }
+  .stat-box .stat-val.green  { color:#22c55e; }
+  .stat-box .stat-val.yellow { color:#f5a623; }
+  .stat-box .stat-val.blue   { color:#60a5fa; }
+
+  /* MONTHLY TABLE */
+  table { width:100%; border-collapse:collapse; }
+  th { background:#1e3a5f; color:#f5a623; padding:10px 14px; text-align:left; font-size:0.85rem; }
+  td { padding:10px 14px; font-size:0.85rem; border-bottom:1px solid #1a2e4a; }
+  tr:hover td { background:#0d1b2a; }
+  .pos { color:#22c55e; font-weight:700; }
+  .neg { color:#ef4444; font-weight:700; }
+
+  /* LOT TABLE */
+  .lot-table { width:100%; border-collapse:collapse; }
+  .lot-table th { background:#1e3a5f; color:#f5a623; padding:10px 14px; font-size:0.85rem; }
+  .lot-table td { padding:10px 14px; font-size:0.85rem; border-bottom:1px solid #1a2e4a; color:#8ab4d4; }
+  .lot-table td:last-child { color:#22c55e; font-weight:700; }
+
+  /* TIMELINE */
+  .timeline { position:relative; padding-left:32px; }
+  .timeline::before { content:""; position:absolute; left:8px; top:0; bottom:0;
+                       width:2px; background:#1e3a5f; }
+  .tl-item { position:relative; margin-bottom:20px; }
+  .tl-dot  { position:absolute; left:-28px; top:4px; width:12px; height:12px;
+              background:#f5a623; border-radius:50%; }
+  .tl-item h4 { color:#f5a623; font-size:0.9rem; margin-bottom:4px; }
+  .tl-item p  { color:#8ab4d4; font-size:0.85rem; line-height:1.5; }
+
+  /* FOOTER */
+  footer { text-align:center; padding:40px 20px; color:#3d5166; font-size:0.85rem;
+           border-top:1px solid #1e3a5f; margin-top:60px; }
+
+  @media(max-width:600px) {
+    .hero h1 { font-size:1.8rem; }
+    .cond-list { grid-template-columns:1fr; }
+    .flow { justify-content:center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div style="font-size:3rem;margin-bottom:12px;">⚙️</div>
+  <h1>IRT GOLD ALL3 V.7.0</h1>
+  <p>ระบบเทรดทอง 3 Strategy ทำงานพร้อมกัน อัตโนมัติ 100%</p>
+  <span class="badge">XAUUSD · M5 · MetaTrader 5</span>
+</div>
+
+<!-- OVERVIEW CARDS -->
+<div class="section">
+  <div class="section-title">ภาพรวมระบบ</div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h3>3 ระบบทำงานพร้อมกัน</h3>
+      <p>S1, S4, S6 ทำงานอิสระจากกัน แต่ละระบบมี Magic Number แยกกัน เปิด-ปิดไม้ของตัวเองโดยไม่รบกวนกัน</p>
+      <span class="tag">Max 3 ไม้พร้อมกัน</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3>EMA + Cross Strategy</h3>
+      <p>ผสม 2 แนวคิด: Touch Strategy (รอราคากลับมาแตะเส้น) และ Cross Strategy (จับสัญญาณเมื่อเส้นตัดกัน)</p>
+      <span class="tag">No Martingale · No Grid</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <h3>SL/TP ทุกออเดอร์</h3>
+      <p>ทุกไม้มี Stop Loss และ Take Profit ชัดเจนโดยคำนวณจาก ATR ความเสี่ยงต่อออเดอร์คงที่ ควบคุมได้</p>
+      <span class="tag">RR 1:1.3 · ATR Based</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔄</div>
+      <h3>Auto-Update + Remote</h3>
+      <p>Admin สั่ง /stop /start /status /update ได้จาก Telegram ระบบอัพเดทอัตโนมัติจาก GitHub</p>
+      <span class="tag">Telegram Control</span>
+    </div>
+  </div>
+</div>
+
+<!-- TRADE FLOW -->
+<div class="section">
+  <div class="section-title">กระบวนการเทรดทุก Bar ใหม่</div>
+  <div class="flow">
+    <div class="flow-box"><div class="label">เริ่มต้น</div><div class="val">Bar ใหม่</div></div>
+    <div class="arrow">→</div>
+    <div class="flow-box"><div class="label">เช็ค Spread</div><div class="val">&lt; 50 pts</div></div>
+    <div class="arrow">→</div>
+    <div class="flow-box"><div class="label">S1 มีไม้?</div><div class="val">ถ้าไม่มี → เช็ค</div></div>
+    <div class="arrow">→</div>
+    <div class="flow-box"><div class="label">S4 มีไม้?</div><div class="val">ถ้าไม่มี → เช็ค</div></div>
+    <div class="arrow">→</div>
+    <div class="flow-box"><div class="label">S6 มีไม้?</div><div class="val">ถ้าไม่มี → เช็ค</div></div>
+    <div class="arrow">→</div>
+    <div class="flow-box"><div class="label">ผลลัพธ์</div><div class="val">Max 3 ไม้</div></div>
+  </div>
+  <p style="color:#8ab4d4;font-size:0.85rem;margin-top:8px;">
+    💡 แต่ละระบบเช็คอิสระ — S1 เปิดแล้ว S4 และ S6 ยังเช็คต่อได้
+  </p>
+</div>
+
+<!-- 3 SYSTEMS -->
+<div class="section">
+  <div class="section-title">3 ระบบเทรด</div>
+
+  <!-- S1 -->
+  <div class="sys-block">
+    <div class="sys-header">
+      <div class="sys-num">S1</div>
+      <div>
+        <div class="sys-title">EMA 50/200 Touch Strategy</div>
+        <div class="sys-sub">รอราคา Pullback มาแตะ EMA50 แล้วเด้งต่อตาม Trend</div>
+      </div>
+    </div>
+    <div style="margin-bottom:16px;padding:12px;background:#0d1b2a;border-radius:8px;">
+      <svg width="100%" height="80" viewBox="0 0 500 80">
+        <!-- EMA200 line -->
+        <line x1="0" y1="55" x2="500" y2="45" stroke="#f5a623" stroke-width="2"/>
+        <text x="5" y="42" fill="#f5a623" font-size="11">EMA 200</text>
+        <!-- EMA50 line -->
+        <line x1="0" y1="38" x2="500" y2="28" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="5" y="25" fill="#60a5fa" font-size="11">EMA 50</text>
+        <!-- Price dip to EMA50 then bounce -->
+        <polyline points="50,15 150,20 220,27 260,30 290,22 350,12 420,8 480,5"
+                  stroke="#22c55e" stroke-width="2" fill="none"/>
+        <!-- Touch point -->
+        <circle cx="260" cy="30" r="5" fill="#22c55e"/>
+        <text x="240" y="45" fill="#22c55e" font-size="10">Touch → BUY</text>
+      </svg>
+    </div>
+    <div class="cond-list">
+      <div class="cond">
+        <h4 class="buy">🟢 BUY เมื่อ</h4>
+        <ul>
+          <li>ราคา &gt; EMA200 (Uptrend)</li>
+          <li>EMA50 &gt; EMA200</li>
+          <li>ราคาแตะหรือสัมผัส EMA50</li>
+          <li>แท่งปิดบน EMA50 (Bullish)</li>
+          <li>RSI &lt; 70</li>
+        </ul>
+      </div>
+      <div class="cond">
+        <h4 class="sell">🔴 SELL เมื่อ</h4>
+        <ul>
+          <li>ราคา &lt; EMA200 (Downtrend)</li>
+          <li>EMA50 &lt; EMA200</li>
+          <li>ราคาแตะหรือสัมผัส EMA50</li>
+          <li>แท่งปิดใต้ EMA50 (Bearish)</li>
+          <li>RSI &gt; 30</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="sys-block">
+    <div class="sys-header">
+      <div class="sys-num">S4</div>
+      <div>
+        <div class="sys-title">EMA 21/89 Cross Strategy</div>
+        <div class="sys-sub">จับสัญญาณทันทีที่ EMA21 ตัดผ่าน EMA89</div>
+      </div>
+    </div>
+    <div style="margin-bottom:16px;padding:12px;background:#0d1b2a;border-radius:8px;">
+      <svg width="100%" height="80" viewBox="0 0 500 80">
+        <line x1="0" y1="60" x2="200" y2="30" x2="200" y2="30" stroke="#f5a623" stroke-width="2"/>
+        <polyline points="0,60 200,30 500,10" stroke="#f5a623" stroke-width="2" fill="none"/>
+        <text x="5" y="75" fill="#f5a623" font-size="11">EMA 89</text>
+        <polyline points="0,70 180,50 220,28 500,8" stroke="#60a5fa" stroke-width="1.5" fill="none"/>
+        <text x="5" y="18" fill="#60a5fa" font-size="11">EMA 21</text>
+        <!-- Cross point -->
+        <circle cx="210" cy="29" r="6" fill="#22c55e" opacity="0.8"/>
+        <text x="220" y="25" fill="#22c55e" font-size="10">Cross ↑ → BUY</text>
+      </svg>
+    </div>
+    <div class="cond-list">
+      <div class="cond">
+        <h4 class="buy">🟢 BUY เมื่อ</h4>
+        <ul>
+          <li>EMA21 ตัดขึ้นผ่าน EMA89</li>
+          <li>Bar ก่อน: EMA21 &lt; EMA89</li>
+          <li>Bar ปัจจุบัน: EMA21 &gt; EMA89</li>
+        </ul>
+      </div>
+      <div class="cond">
+        <h4 class="sell">🔴 SELL เมื่อ</h4>
+        <ul>
+          <li>EMA21 ตัดลงผ่าน EMA89</li>
+          <li>Bar ก่อน: EMA21 &gt; EMA89</li>
+          <li>Bar ปัจจุบัน: EMA21 &lt; EMA89</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- S6 -->
+  <div class="sys-block">
+    <div class="sys-header">
+      <div class="sys-num">S6</div>
+      <div>
+        <div class="sys-title">EMA 8/34 Cross Strategy</div>
+        <div class="sys-sub">จับ Momentum เร็ว EMA8 ตัด EMA34 — ตอบสนองเร็วกว่า S4</div>
+      </div>
+    </div>
+    <div class="cond-list">
+      <div class="cond">
+        <h4 class="buy">🟢 BUY เมื่อ</h4>
+        <ul>
+          <li>EMA8 ตัดขึ้นผ่าน EMA34</li>
+          <li>Bar ก่อน: EMA8 &lt; EMA34</li>
+          <li>Bar ปัจจุบัน: EMA8 &gt; EMA34</li>
+        </ul>
+      </div>
+      <div class="cond">
+        <h4 class="sell">🔴 SELL เมื่อ</h4>
+        <ul>
+          <li>EMA8 ตัดลงผ่าน EMA34</li>
+          <li>Bar ก่อน: EMA8 &gt; EMA34</li>
+          <li>Bar ปัจจุบัน: EMA8 &lt; EMA34</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SL/TP -->
+<div class="section">
+  <div class="section-title">การคำนวณ SL / TP</div>
+  <div class="flow" style="justify-content:flex-start;">
+    <div class="flow-box"><div class="label">ATR Period</div><div class="val">14</div></div>
+    <div class="arrow">×</div>
+    <div class="flow-box"><div class="label">Multiplier</div><div class="val">1.3</div></div>
+    <div class="arrow">=</div>
+    <div class="flow-box"><div class="label">Stop Loss</div><div class="val" style="color:#ef4444;">SL</div></div>
+    <div class="arrow">×</div>
+    <div class="flow-box"><div class="label">Risk Reward</div><div class="val">1.3</div></div>
+    <div class="arrow">=</div>
+    <div class="flow-box"><div class="label">Take Profit</div><div class="val" style="color:#22c55e;">TP</div></div>
+  </div>
+  <p style="color:#8ab4d4;font-size:0.85rem;margin-top:12px;">
+    ✅ ทุกออเดอร์มี SL/TP ชัดเจน · ไม่มี Martingale · ไม่มี Grid · ความเสี่ยงต่อออเดอร์คงที่
+  </p>
+</div>
+
+<!-- LOT SIZE -->
+<div class="section">
+  <div class="section-title">ขนาด Lot (Auto)</div>
+  <table class="lot-table">
+    <tr><th>Balance</th><th>Lot per ระบบ</th><th>Lot สูงสุด (3 ระบบ)</th></tr>
+    <tr><td>$0 – $2,000</td><td>0.01</td><td>0.03</td></tr>
+    <tr><td>$2,001 – $3,000</td><td>0.02</td><td>0.06</td></tr>
+    <tr><td>$3,001 – $4,000</td><td>0.03</td><td>0.09</td></tr>
+    <tr><td>$4,001 – $5,000</td><td>0.04</td><td>0.12</td></tr>
+    <tr><td>$5,001+</td><td>0.05</td><td>0.15</td></tr>
+  </table>
+</div>
+
+<!-- BT RESULTS 3 months -->
+<div class="section">
+  <div class="section-title">ผล Backtest 3 เดือน — ม.ค.–มี.ค. 2026</div>
+  <div class="stats-grid">
+    <div class="stat-box"><div class="stat-label">Net P/L</div><div class="stat-val green">+$885</div></div>
+    <div class="stat-box"><div class="stat-label">Profit Factor</div><div class="stat-val yellow">1.10</div></div>
+    <div class="stat-box"><div class="stat-label">Win Rate</div><div class="stat-val yellow">44%</div></div>
+    <div class="stat-box"><div class="stat-label">Total Trades</div><div class="stat-val blue">625</div></div>
+    <div class="stat-box"><div class="stat-label">Recovery Factor</div><div class="stat-val green">1.06</div></div>
+    <div class="stat-box"><div class="stat-label">Initial Deposit</div><div class="stat-val blue">$1,000</div></div>
+  </div>
+
+  <div style="margin-top:28px;">
+    <table>
+      <tr><th>เดือน</th><th>Net P/L</th><th>Trades</th><th>Win Rate</th><th>สถานะ</th></tr>
+      <tr>
+        <td>มกราคม 2026</td>
+        <td class="pos">+$28</td>
+        <td>242</td><td>41%</td>
+        <td><span style="background:#1e3b2f;color:#22c55e;padding:2px 10px;border-radius:12px;font-size:0.8rem;">กำไร ✅</span></td>
+      </tr>
+      <tr>
+        <td>กุมภาพันธ์ 2026</td>
+        <td class="pos">+$610</td>
+        <td>186</td><td>47%</td>
+        <td><span style="background:#1e3b2f;color:#22c55e;padding:2px 10px;border-radius:12px;font-size:0.8rem;">กำไร ✅</span></td>
+      </tr>
+      <tr>
+        <td>มีนาคม 2026</td>
+        <td class="pos">+$248</td>
+        <td>198</td><td>45%</td>
+        <td><span style="background:#1e3b2f;color:#22c55e;padding:2px 10px;border-radius:12px;font-size:0.8rem;">กำไร ✅</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Per system 3M -->
+  <div style="margin-top:24px;">
+    <p style="color:#8ab4d4;margin-bottom:12px;font-size:0.9rem;">📊 แยกตามระบบ:</p>
+    <div class="card-grid">
+      <div class="card">
+        <h3>S1 — EMA 50/200 Touch</h3>
+        <p style="color:#22c55e;font-size:1.4rem;font-weight:900;margin:8px 0;">+$435</p>
+        <p>378 trades · WR 43%</p>
+      </div>
+      <div class="card">
+        <h3>S4 — EMA 21/89 Cross</h3>
+        <p style="color:#22c55e;font-size:1.4rem;font-weight:900;margin:8px 0;">+$398</p>
+        <p>75 trades · WR 47%</p>
+      </div>
+      <div class="card">
+        <h3>S6 — EMA 8/34 Cross</h3>
+        <p style="color:#22c55e;font-size:1.4rem;font-weight:900;margin:8px 0;">+$55</p>
+        <p>169 trades · WR 44%</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BT 1 month march -->
+<div class="section">
+  <div class="section-title">ผล Backtest เดือนล่าสุด — มีนาคม 2026</div>
+  <div class="stats-grid">
+    <div class="stat-box"><div class="stat-label">Net P/L</div><div class="stat-val green">+$248</div></div>
+    <div class="stat-box"><div class="stat-label">Profit Factor</div><div class="stat-val yellow">1.09</div></div>
+    <div class="stat-box"><div class="stat-label">Win Rate</div><div class="stat-val yellow">45%</div></div>
+    <div class="stat-box"><div class="stat-label">Total Trades</div><div class="stat-val blue">198</div></div>
+  </div>
+</div>
+
+<!-- TELEGRAM SYSTEM -->
+<div class="section">
+  <div class="section-title">ระบบแจ้งเตือน Telegram</div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">📡</div>
+      <h3>IRT Event 1</h3>
+      <p>แจ้งเปิด/ปิดออเดอร์ทุกไม้ แจ้งเมื่อ EA เริ่มทำงาน แจ้งอัพเดทใหม่</p>
+      <span class="tag">Real-time Alert</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3>IRT Report 2</h3>
+      <p>รายงาน Daily ทุก 23:30 น. (จ–ศ) สรุป Trades, P/L, Win Rate ประจำวัน</p>
+      <span class="tag">Daily Report</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎮</div>
+      <h3>IRT Control Room 3</h3>
+      <p>Admin ควบคุมด้วยคำสั่ง /stop /start /status /update</p>
+      <span class="tag">Admin Only</span>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN COMMANDS -->
+<div class="section">
+  <div class="section-title">คำสั่ง Admin</div>
+  <div class="sys-block">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+      <div style="background:#0d1b2a;border-radius:8px;padding:16px;">
+        <div style="color:#f5a623;font-family:monospace;font-size:1.1rem;margin-bottom:6px;">/stop</div>
+        <div style="color:#8ab4d4;font-size:0.85rem;">หยุดเปิดออเดอร์ใหม่ทันที (ไม้ที่เปิดอยู่ยังทำงานต่อ)</div>
+      </div>
+      <div style="background:#0d1b2a;border-radius:8px;padding:16px;">
+        <div style="color:#f5a623;font-family:monospace;font-size:1.1rem;margin-bottom:6px;">/start</div>
+        <div style="color:#8ab4d4;font-size:0.85rem;">เริ่มเปิดออเดอร์ใหม่อีกครั้ง</div>
+      </div>
+      <div style="background:#0d1b2a;border-radius:8px;padding:16px;">
+        <div style="color:#f5a623;font-family:monospace;font-size:1.1rem;margin-bottom:6px;">/status</div>
+        <div style="color:#8ab4d4;font-size:0.85rem;">ดูสถานะ Balance, Equity, DD, Open positions</div>
+      </div>
+      <div style="background:#0d1b2a;border-radius:8px;padding:16px;">
+        <div style="color:#f5a623;font-family:monospace;font-size:1.1rem;margin-bottom:6px;">/update</div>
+        <div style="color:#8ab4d4;font-size:0.85rem;">แจ้งลูกค้าให้ปิด-เปิด MT5 เพื่อโหลดเวอร์ชันใหม่</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTO UPDATE -->
+<div class="section">
+  <div class="section-title">ระบบ Auto-Update</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <h4>Admin อัพโหลด EA ใหม่</h4>
+      <p>อัพโหลด .ex5 ใหม่ขึ้น GitHub และแก้เลขใน version.txt</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <h4>EA เช็คเวอร์ชันอัตโนมัติ</h4>
+      <p>EA ลูกค้าเช็ค version.txt ทุก 30 นาที ถ้าพบเวอร์ชันใหม่กว่า ดาวน์โหลดทันที</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <h4>แจ้งเตือนลูกค้าใน Telegram</h4>
+      <p>ส่งข้อความไปที่ IRT Event 1 พร้อมเลขพอร์ตและชื่อลูกค้า ให้ทราบว่ามีอัพเดท</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <h4>ลูกค้าปิด-เปิด MT5</h4>
+      <p>EA โหลดเวอร์ชันใหม่จากที่ดาวน์โหลดไว้อัตโนมัติ ไม่ต้องส่งไฟล์ใหม่เอง</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>📈 IRT GOLD ALL3 V.7.0 · Copyright 2026 IRT GOLD</p>
+  <p style="margin-top:6px;">เอกสารนี้จัดทำเพื่อใช้อธิบายภายในทีมเท่านั้น</p>
+</footer>
+
+</body>
+</html>
