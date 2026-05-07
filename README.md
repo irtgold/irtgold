@@ -1,7 +1,10 @@
+
 IRT GOLD — ระบบเทรดครบวงจร
 หน้าเว็บหลักของ IRT GOLD - Trading Education & Software
-🔗 ลิงก์
+🔗 ลิงก์หลัก
 เข้าชม: https://irtgold.github.io/irtgold/
+📊 รายงานผลเทรด — reports/r300613
+หน้าลิงก์📋 หน้าหลักรายงานhttps://irtgold.github.io/irtgold/reports/r300613/index.html📈 IRT GOLD Reporthttps://irtgold.github.io/irtgold/reports/r300613/IRT_GOLD_Report.html🔍 ALL3 V7 Overviewhttps://irtgold.github.io/irtgold/reports/r300613/IRT_GOLD_ALL3_V7_Overview.html🤖 Madi Reporthttps://irtgold.github.io/irtgold/reports/r300613/Madi.html🎯 Entry Reporthttps://irtgold.github.io/irtgold/reports/r300613/entry.html
 📝 เกี่ยวกับ
 หน้า Sales Page ครบจบสำหรับ IRT GOLD V5.0 ระบบอินดิเคเตอร์ 5-in-1 สำหรับ MT5 พร้อม Features, วิดีโอสาธิต, ราคา และรีวิวจากลูกค้า
 ✨ มีอะไรบ้าง
@@ -11,7 +14,7 @@ Features Showcase ทั้ง 5 โมดูล
 วิดีโอสาธิตการใช้งาน
 Pricing Table ราคาพิเศษ 3,290 บาท
 รีวิวลูกค้าจริง
-Google Analytics 4 Event Tracking
+รายงานผลเทรด EA Backtest
 
 📞 ติดต่อ
 
