@@ -14,7 +14,7 @@
 
 - 📋 [หน้าหลักรายงาน](https://irtgold.github.io/irtgold/reports/r300613/index.html)
 - 📈 [IRT GOLD Report](https://irtgold.github.io/irtgold/reports/r300613/IRT_GOLD_Report.html)
-- 🔍 [ALL3 V7 ](https://irtgold.github.io/irtgold/reports/r300613/IRT_GOLD_ALL3_V7.html)
+- 🔍 [irt_gold_all3_v7 ](https://irtgold.github.io/irtgold/reports/r300613/irt_gold_all3_v7.html)
 - 🤖 [Madi Report](https://irtgold.github.io/irtgold/reports/r300613/Madi.html)
 - 🎯 [Entry Report](https://irtgold.github.io/irtgold/reports/r300613/entry.html)
 
