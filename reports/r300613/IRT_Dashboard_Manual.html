@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRT GOLD — คู่มือการใช้งาน Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#ffffff;color:#1a1a2e;font-family:'Segoe UI',sans-serif;font-size:14px;line-height:1.7;}
+
+/* ── NAV ── */
+.nav{background:#ffffff;border-bottom:1px solid #e5e7eb;padding:14px 32px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px #0000000a;}
+.nav-logo{font-size:17px;font-weight:700;color:#d4a017;letter-spacing:1px;}
+.nav-ver{font-size:11px;color:#6b7280;background:#f3f4f6;padding:2px 8px;border-radius:10px;}
+.nav-tag{font-size:11px;color:#059669;background:#ecfdf5;border:1px solid #6ee7b7;padding:2px 10px;border-radius:10px;}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,#f8fafc 0%,#f0fdf9 50%,#fffbeb 100%);padding:56px 40px 40px;text-align:center;border-bottom:1px solid #e5e7eb;}
+.hero h1{font-size:32px;font-weight:800;color:#111827;margin-bottom:8px;}
+.hero h1 span{color:#d4a017;}
+.hero-sub{font-size:15px;color:#6b7280;max-width:580px;margin:0 auto 28px;}
+.hero-badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.badge{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.5px;}
+.badge-g{background:#ecfdf5;border:1px solid #6ee7b7;color:#059669;}
+.badge-b{background:#eff6ff;border:1px solid #93c5fd;color:#2563eb;}
+.badge-y{background:#fffbeb;border:1px solid #fcd34d;color:#d97706;}
+
+/* ── LAYOUT ── */
+.container{max-width:1080px;margin:0 auto;padding:40px 24px;}
+.section{margin-bottom:52px;}
+.section-title{font-size:20px;font-weight:700;color:#111827;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.section-title::before{content:'';display:inline-block;width:4px;height:22px;background:linear-gradient(180deg,#26a69a,#f0c040);border-radius:2px;}
+
+/* ── DASHBOARD MOCK ── */
+.dash-wrap{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;}
+.dash-panel{background:#0a0c14;border:1px solid #252d45;border-radius:6px;width:300px;font-family:'Consolas','Courier New',monospace;font-size:12px;overflow:hidden;flex-shrink:0;}
+.dash-hdr{background:#1a1e30;border-bottom:1px solid #252d45;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;}
+.dash-hdr-t{font-size:10px;color:#9090cc;letter-spacing:2px;}
+.dash-hdr-s{font-size:10px;color:#f0c040;}
+.dash-table{width:100%;border-collapse:collapse;}
+.dash-table th{font-size:9px;color:#454e68;padding:5px 8px 4px;text-align:center;letter-spacing:1px;border-bottom:1px solid #1a1e2e;background:#11141f;}
+.dash-table th:first-child{text-align:left;}
+.dash-table td{padding:5px 8px;text-align:center;font-size:11px;border-bottom:1px solid #13161f;}
+.dash-table td:first-child{text-align:left;font-size:9px;color:#454e68;letter-spacing:.5px;text-transform:uppercase;}
+.dash-table tr:last-child td{border-bottom:none;}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:middle;}
+.dot-g{background:#26a69a;box-shadow:0 0 6px #26a69a99;}
+.dot-r{background:#ef5350;box-shadow:0 0 6px #ef535099;}
+.dot-y{background:#f0c040;box-shadow:0 0 4px #f0c04088;}
+.g{color:#26a69a;} .r{color:#ef5350;} .y{color:#f0c040;} .gy{color:#454e68;} .bl{color:#64b5f6;}
+.div-line{height:1px;background:#1a1e2e;}
+.score-wrap{padding:8px 12px 4px;}
+.sc-row{display:flex;align-items:center;gap:7px;margin-bottom:6px;}
+.sc-lbl{font-size:10px;width:32px;}
+.sc-bar{flex:1;height:6px;background:#13161f;border-radius:3px;overflow:hidden;}
+.sc-fill{height:100%;border-radius:3px;}
+.buy-fill{background:linear-gradient(90deg,#1a6b64,#26a69a);}
+.sell-fill{background:linear-gradient(90deg,#8b1a1a,#ef5350);}
+.sc-num{font-size:11px;font-weight:bold;min-width:28px;text-align:right;}
+.chk-wrap{padding:4px 12px 6px;}
+.chk{display:flex;align-items:flex-start;gap:6px;font-size:10px;padding:2px 0;line-height:1.5;}
+.chk.pass{color:#26a69a88;} .chk.fail{color:#ef535055;}
+.chk-ic{width:12px;flex-shrink:0;}
+.sig-btn{margin:6px 10px 10px;padding:7px 10px;border-radius:4px;text-align:center;font-size:12px;font-weight:bold;letter-spacing:2px;}
+.sig-sell{background:linear-gradient(90deg,#ef535022,#ef535011);border:1px solid #ef535066;color:#ef5350;}
+.sig-buy{background:linear-gradient(90deg,#26a69a22,#26a69a11);border:1px solid #26a69a66;color:#26a69a;}
+
+/* ── EXPLAIN CARDS ── */
+.explain-list{display:flex;flex-direction:column;gap:10px;flex:1;min-width:260px;}
+.ex-card{background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:14px 16px;}
+.ex-card-title{font-size:13px;font-weight:600;color:#111827;margin-bottom:5px;display:flex;align-items:center;gap:8px;}
+.ex-card p{font-size:12px;color:#4b5563;line-height:1.6;}
+.tag-g{background:#ecfdf5;color:#059669;border:1px solid #6ee7b7;padding:1px 7px;border-radius:4px;font-size:10px;font-weight:600;}
+.tag-r{background:#fef2f2;color:#dc2626;border:1px solid #fca5a5;padding:1px 7px;border-radius:4px;font-size:10px;font-weight:600;}
+.tag-y{background:#fffbeb;color:#d97706;border:1px solid #fcd34d;padding:1px 7px;border-radius:4px;font-size:10px;font-weight:600;}
+.tag-b{background:#eff6ff;color:#2563eb;border:1px solid #93c5fd;padding:1px 7px;border-radius:4px;font-size:10px;font-weight:600;}
+
+/* ── SIGNAL CARDS ── */
+.sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.sig-card{border-radius:8px;padding:20px;border:1px solid;}
+.sig-card.buy{background:#f0fdf9;border-color:#6ee7b7;}
+.sig-card.sell{background:#fef2f2;border-color:#fca5a5;}
+.sig-card h3{font-size:16px;font-weight:700;margin-bottom:10px;}
+.sig-card.buy h3{color:#059669;}
+.sig-card.sell h3{color:#dc2626;}
+.sig-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.sig-card ul li{font-size:13px;color:#374151;display:flex;align-items:center;gap:8px;}
+.sig-card ul li::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.sig-card.buy ul li::before{background:#059669;}
+.sig-card.sell ul li::before{background:#dc2626;}
+
+/* ── STEP FLOW ── */
+.steps{display:flex;flex-direction:column;gap:0;}
+.step{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid #e5e7eb;}
+.step:last-child{border-bottom:none;}
+.step-num{width:36px;height:36px;background:#fffbeb;border:2px solid #fcd34d;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#d97706;flex-shrink:0;margin-top:2px;}
+.step-body h4{font-size:14px;font-weight:600;color:#111827;margin-bottom:5px;}
+.step-body p{font-size:13px;color:#4b5563;}
+.step-body .tip{margin-top:8px;background:#fffbeb;border-left:3px solid #f0c040;padding:8px 12px;border-radius:0 4px 4px 0;font-size:12px;color:#78350f;}
+
+/* ── INDICATOR ROW ── */
+.ind-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.ind-card{background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:16px;}
+.ind-card-icon{font-size:22px;margin-bottom:8px;}
+.ind-card h4{font-size:13px;font-weight:600;color:#111827;margin-bottom:5px;}
+.ind-card p{font-size:12px;color:#4b5563;line-height:1.5;}
+
+/* ── SCORE TABLE ── */
+.score-tbl{width:100%;border-collapse:collapse;background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;}
+.score-tbl thead tr{background:#f3f4f6;}
+.score-tbl th{padding:10px 16px;text-align:left;font-size:12px;color:#6b7280;letter-spacing:1px;text-transform:uppercase;}
+.score-tbl td{padding:10px 16px;font-size:13px;color:#374151;border-top:1px solid #e5e7eb;}
+.score-tbl tr:hover td{background:#f9fafb;}
+.score-badge{padding:2px 10px;border-radius:10px;font-size:11px;font-weight:600;}
+.s5{background:#ecfdf5;color:#059669;border:1px solid #6ee7b7;}
+.s3{background:#fffbeb;color:#d97706;border:1px solid #fcd34d;}
+.s1{background:#fef2f2;color:#dc2626;border:1px solid #fca5a5;}
+
+/* ── WARNING BOX ── */
+.warn-box{background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:16px 20px;display:flex;gap:12px;align-items:flex-start;}
+.warn-icon{font-size:20px;flex-shrink:0;}
+.warn-body{font-size:13px;color:#78350f;line-height:1.6;}
+
+/* ── FOOTER ── */
+footer{background:#f3f4f6;border-top:1px solid #e5e7eb;padding:24px 32px;text-align:center;color:#6b7280;font-size:12px;}
+
+@media(max-width:600px){
+  .sig-grid{grid-template-columns:1fr;}
+  .dash-wrap{flex-direction:column;}
+  .dash-panel{width:100%;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-logo">⚡ IRT GOLD</span>
+  <span class="nav-ver">V.7.0</span>
+  <span class="nav-tag">Dashboard Manual</span>
+  <span style="margin-left:auto;color:#454e68;font-size:11px;">เวอร์ชัน: 2026-06-10</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>คู่มือการใช้งาน <span>IRT GOLD Dashboard</span></h1>
+  <p class="hero-sub">ระบบวิเคราะห์หลายกรอบเวลาพร้อมกัน — อ่านสัญญาณ ตัดสินใจ เทรดได้ทันที</p>
+  <div class="hero-badges">
+    <span class="badge badge-g">Multi-Timeframe</span>
+    <span class="badge badge-b">Real-time Score</span>
+    <span class="badge badge-y">XAUUSD Gold</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: Overview Indicators -->
+  <div class="section">
+    <div class="section-title">Indicators ที่ใช้งานร่วมกัน</div>
+    <div class="ind-grid">
+      <div class="ind-card">
+        <div class="ind-card-icon">📈</div>
+        <h4>IRT GOLD MADI V.7.0</h4>
+        <p>Indicator หลัก — วาดบน Chart โดยตรง แสดง Supertrend, Supply/Demand Zone, สัญญาณ MA และ DI พร้อม TP/SL อัตโนมัติ</p>
+      </div>
+      <div class="ind-card">
+        <div class="ind-card-icon">🔍</div>
+        <h4>IRT RSI Divergence</h4>
+        <p>Indicator ใน Pane ล่าง — แสดง RSI พร้อมสัญญาณ Bullish/Bearish Divergence และ Hidden Divergence</p>
+      </div>
+      <div class="ind-card">
+        <div class="ind-card-icon">📊</div>
+        <h4>Dashboard Panel</h4>
+        <p>ส่วนหนึ่งของ MADI V.7.0 — แสดงสรุปสัญญาณ 4 Timeframe พร้อม Score และ Checklist ที่มุมขวาบนของ Chart</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Dashboard Panel -->
+  <div class="section">
+    <div class="section-title">อ่านค่าใน Dashboard Panel</div>
+    <div class="dash-wrap">
+
+      <!-- Mock Dashboard -->
+      <div class="dash-panel">
+        <div class="dash-hdr">
+          <span class="dash-hdr-t">IRT GOLD — DASHBOARD</span>
+          <span class="dash-hdr-s">XAUUSD • H1</span>
+        </div>
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th style="width:72px">Indicator</th>
+              <th>M15</th><th>H1</th><th>H4</th><th>D1</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TREND</td>
+              <td><span class="dot dot-g"></span></td>
+              <td><span class="dot dot-g"></span></td>
+              <td><span class="dot dot-r"></span></td>
+              <td><span class="dot dot-g"></span></td>
+            </tr>
+            <tr>
+              <td>EMA IRT</td>
+              <td class="g">▲ UP</td>
+              <td class="g">▲ UP</td>
+              <td class="r">▼ DN</td>
+              <td class="g">▲ UP</td>
+            </tr>
+            <tr>
+              <td>RSI IRT</td>
+              <td class="gy">52</td>
+              <td class="g">64</td>
+              <td class="r">42</td>
+              <td class="y">71</td>
+            </tr>
+            <tr>
+              <td>MA SIG</td>
+              <td class="g">▲ BUY</td>
+              <td class="g">▲ BUY</td>
+              <td class="r">▼ SELL</td>
+              <td class="gy">—</td>
+            </tr>
+            <tr>
+              <td>DI SIG</td>
+              <td class="gy">—</td>
+              <td class="g">▲ BULL</td>
+              <td class="gy">—</td>
+              <td class="r">▼ BEAR</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="div-line"></div>
+        <div class="score-wrap">
+          <div class="sc-row">
+            <span class="sc-lbl g">BUY</span>
+            <div class="sc-bar"><div class="sc-fill buy-fill" style="width:67%"></div></div>
+            <span class="sc-num g">4/6</span>
+          </div>
+          <div class="sc-row">
+            <span class="sc-lbl r">SELL</span>
+            <div class="sc-bar"><div class="sc-fill sell-fill" style="width:33%"></div></div>
+            <span class="sc-num r">2/6</span>
+          </div>
+        </div>
+        <div class="chk-wrap">
+          <div class="chk pass"><span class="chk-ic">✓</span> Supertrend UP (H1)</div>
+          <div class="chk pass"><span class="chk-ic">✓</span> EMA 21 &gt; EMA 89</div>
+          <div class="chk pass"><span class="chk-ic">✓</span> RSI &gt; 50</div>
+          <div class="chk pass"><span class="chk-ic">✓</span> MA Signal BUY</div>
+          <div class="chk fail"><span class="chk-ic">✗</span> DI Signal BUY</div>
+          <div class="chk fail"><span class="chk-ic">✗</span> H4 Trend Bullish</div>
+        </div>
+        <div class="sig-btn sig-buy">BUY — Moderate (4/6)</div>
+      </div>
+
+      <!-- Explain Cards -->
+      <div class="explain-list">
+        <div class="ex-card">
+          <div class="ex-card-title">🟢🔴 แถว TREND — Supertrend</div>
+          <p>จุดสี แสดงทิศทางของ Supertrend แต่ละ Timeframe<br>
+          <span class="tag-g">● เขียว</span> = Uptrend &nbsp;
+          <span class="tag-r">● แดง</span> = Downtrend<br>
+          ดูว่า TF ใหญ่ (H4, D1) เป็นสีอะไร — นั่นคือทิศทางหลัก</p>
+        </div>
+        <div class="ex-card">
+          <div class="ex-card-title">📊 แถว EMA IRT — EMA 21/89</div>
+          <p><span class="tag-g">▲ UP</span> = EMA 21 อยู่เหนือ EMA 89 (Bullish)<br>
+          <span class="tag-r">▼ DN</span> = EMA 21 อยู่ใต้ EMA 89 (Bearish)<br>
+          ใช้ยืนยันทิศทาง Trend ร่วมกับ Supertrend</p>
+        </div>
+        <div class="ex-card">
+          <div class="ex-card-title">📉 แถว RSI IRT — RSI (14)</div>
+          <p>ตัวเลขสี แสดงระดับ RSI แต่ละ TF<br>
+          <span class="tag-g">≥ 60</span> = Strong Bull &nbsp;
+          <span class="tag-g" style="opacity:.6">50–59</span> = Bullish<br>
+          <span class="tag-r" style="opacity:.6">40–49</span> = Bearish &nbsp;
+          <span class="tag-r">≤ 39</span> = Strong Bear<br>
+          <span class="tag-y">≥ 70</span> = Overbought — ระวังการกลับตัว</p>
+        </div>
+        <div class="ex-card">
+          <div class="ex-card-title">⚡ แถว MA SIG — EMA Cross Signal</div>
+          <p><span class="tag-g">▲ BUY</span> = EMA 21 ตัดขึ้น EMA 89 ล่าสุด<br>
+          <span class="tag-r">▼ SELL</span> = EMA 21 ตัดลง EMA 89 ล่าสุด<br>
+          <span class="tag-b">—</span> = ยังไม่มีสัญญาณตัดใน TF นั้น</p>
+        </div>
+        <div class="ex-card">
+          <div class="ex-card-title">🔍 แถว DI SIG — RSI Divergence</div>
+          <p><span class="tag-g">▲ BULL</span> = Regular Bullish Divergence<br>
+          <span class="tag-r">▼ BEAR</span> = Regular Bearish Divergence<br>
+          <span class="tag-b">—</span> = ยังไม่มี Divergence ปรากฏ<br>
+          สัญญาณนี้มาจาก IRT RSI Divergence Indicator</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Score System -->
+  <div class="section">
+    <div class="section-title">ระบบ Score — ตัดสินใจเทรด</div>
+    <p style="color:#4b5563;margin-bottom:20px;">Score คำนวณจาก 6 เงื่อนไข โดยใช้ข้อมูล H1 เป็นหลัก — ยิ่ง Score สูง ยิ่ง Confluence ดี</p>
+    <table class="score-tbl">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>เงื่อนไข</th>
+          <th>Indicator</th>
+          <th>ความหมาย</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="g">1</td>
+          <td>Supertrend UP (current TF)</td>
+          <td><span class="tag-b">MADI</span></td>
+          <td>ราคาอยู่เหนือ Supertrend</td>
+        </tr>
+        <tr>
+          <td class="g">2</td>
+          <td>EMA 21 &gt; EMA 89 (current TF)</td>
+          <td><span class="tag-b">MADI</span></td>
+          <td>EMA สั้นอยู่เหนือ EMA ยาว = Bullish</td>
+        </tr>
+        <tr>
+          <td class="g">3</td>
+          <td>RSI &gt; 50 (current TF)</td>
+          <td><span class="tag-b">MADI</span></td>
+          <td>Momentum อยู่ฝั่ง Bullish</td>
+        </tr>
+        <tr>
+          <td class="g">4</td>
+          <td>MA Signal BUY (H1)</td>
+          <td><span class="tag-b">MADI</span></td>
+          <td>EMA cross BUY ล่าสุดใน H1</td>
+        </tr>
+        <tr>
+          <td class="g">5</td>
+          <td>DI Signal BUY (H1)</td>
+          <td><span class="tag-y">RSI DIV</span></td>
+          <td>Bullish Divergence ปรากฏใน H1</td>
+        </tr>
+        <tr>
+          <td class="g">6</td>
+          <td>H4 Trend UP</td>
+          <td><span class="tag-b">MADI</span></td>
+          <td>Supertrend H4 = Uptrend (TF ใหญ่กว่า)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;">
+      <div style="background:#ecfdf5;border:1px solid #6ee7b7;border-radius:8px;padding:16px;text-align:center;">
+        <div style="font-size:24px;font-weight:800;color:#059669;">5–6 / 6</div>
+        <div style="font-size:12px;color:#374151;margin-top:4px;">Strong Signal</div>
+        <div style="font-size:11px;color:#065f46;margin-top:6px;">Confidence สูง — เทรดได้เต็ม lot</div>
+      </div>
+      <div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:16px;text-align:center;">
+        <div style="font-size:24px;font-weight:800;color:#d97706;">3–4 / 6</div>
+        <div style="font-size:12px;color:#374151;margin-top:4px;">Moderate Signal</div>
+        <div style="font-size:11px;color:#78350f;margin-top:6px;">รอยืนยันเพิ่มหรือลด lot ลง</div>
+      </div>
+      <div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:16px;text-align:center;">
+        <div style="font-size:24px;font-weight:800;color:#dc2626;">1–2 / 6</div>
+        <div style="font-size:12px;color:#374151;margin-top:4px;">Weak Signal</div>
+        <div style="font-size:11px;color:#7f1d1d;margin-top:6px;">ข้ามสัญญาณนี้ — รอจังหวะดีกว่า</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Trading Setup -->
+  <div class="section">
+    <div class="section-title">เงื่อนไขเปิด Trade ที่แนะนำ</div>
+    <div class="sig-grid">
+      <div class="sig-card buy">
+        <h3>▲ BUY Setup</h3>
+        <ul>
+          <li>Supertrend H1 และ H4 = สีเขียว</li>
+          <li>EMA IRT (H1) = ▲ UP</li>
+          <li>RSI H1 อยู่ในช่วง 50–70</li>
+          <li>MA SIG (H1) = ▲ BUY</li>
+          <li>Score BUY ≥ 4/6</li>
+          <li>ราคาอยู่เหนือ Demand Zone</li>
+        </ul>
+      </div>
+      <div class="sig-card sell">
+        <h3>▼ SELL Setup</h3>
+        <ul>
+          <li>Supertrend H1 และ H4 = สีแดง</li>
+          <li>EMA IRT (H1) = ▼ DN</li>
+          <li>RSI H1 อยู่ในช่วง 30–50</li>
+          <li>MA SIG (H1) = ▼ SELL</li>
+          <li>Score SELL ≥ 4/6</li>
+          <li>ราคาอยู่ใต้ Supply Zone</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: Step-by-step -->
+  <div class="section">
+    <div class="section-title">ขั้นตอนการอ่านสัญญาณ (Step-by-Step)</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>ดู Signal Button ก่อน</h4>
+          <p>มองที่ปุ่มด้านล่าง Dashboard — <span class="g">BUY</span> หรือ <span class="r">SELL</span> และดู Score (เช่น Strong 5/6) เพื่อประเมิน Confidence ในภาพรวมทันที</p>
+          <div class="tip">💡 ถ้า Moderate หรือต่ำกว่า ให้ดูรายละเอียดใน Table ก่อนเปิด Trade</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>ตรวจ TF ใหญ่ก่อน (H4 → D1)</h4>
+          <p>ดูคอลัมน์ H4 และ D1 ในตาราง — Supertrend Dot และ EMA IRT ต้องสอดคล้องกับทิศทางที่ต้องการเทรด</p>
+          <div class="tip">💡 ถ้า H4 และ D1 ขัดแย้งกัน — รอหรือลด lot</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>ยืนยันด้วย H1 (TF หลัก)</h4>
+          <p>ดูคอลัมน์ H1 — MA SIG และ DI SIG ต้องเป็น BUY/BULL สำหรับ Long, หรือ SELL/BEAR สำหรับ Short RSI H1 ควรอยู่เหนือ 50 (BUY) หรือต่ำกว่า 50 (SELL)</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>ดู Checklist — นับ ✓</h4>
+          <p>Checklist 6 ข้อด้านล่าง Score Bar — ✓ สีเขียว = เงื่อนไขผ่าน, ✗ สีแดง = ไม่ผ่าน ยิ่งมี ✓ มากยิ่งดี เป้าหมาย ≥ 4 ข้อสำหรับ Strong</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>เปิด Order เมื่อ Signal ปรากฏบน Chart</h4>
+          <p>เมื่อ Indicator วาด Label <span class="tag-g">IRT MA BUY</span> หรือ <span class="tag-g">IRT DI BUY</span> บน Chart พร้อม TP/SL Box อัตโนมัติ — ใช้ราคาที่ Label ชี้เป็น Entry</p>
+          <div class="tip">💡 TP และ SL คำนวณจาก ATR อัตโนมัติ — ไม่ต้องตั้งเอง</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: Warning -->
+  <div class="section">
+    <div class="warn-box">
+      <div class="warn-icon">⚠️</div>
+      <div class="warn-body">
+        <strong style="color:#f0c040;">ข้อควรระวัง</strong><br>
+        Dashboard ใช้เป็นเครื่องมือช่วยตัดสินใจ ไม่ใช่สัญญาณ 100% — ควรดูร่วมกับ Price Action, News สำคัญ และ Money Management เสมอ การเทรด XAUUSD มีความเสี่ยงสูง ผลลัพธ์ที่ผ่านมาไม่ใช่การการันตีอนาคต
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="color:#d4a017;font-weight:700;font-size:14px;margin-bottom:6px;">⚡ IRT GOLD — Trading Education</div>
+  IRT GOLD MADI V.7.0 &nbsp;|&nbsp; IRT RSI Divergence &nbsp;|&nbsp; Pine Script v6 &nbsp;|&nbsp; TradingView<br>
+  <span style="color:#9ca3af;">© 2026 IRT GOLD. เอกสารภายในสำหรับทีมงานเท่านั้น</span>
+</footer>
+
+</body>
+</html>
