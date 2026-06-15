@@ -38,6 +38,36 @@
 
 ---
 
+## 📖 คู่มือการใช้งาน
+
+### 📘 [IRT Dashboard Manual — MADI V.7.0](https://irtgold.github.io/irtgold/reports/r300613/IRT_Dashboard_Manual.html)
+> คู่มือการอ่านสัญญาณ Dashboard แบบ Multi-Timeframe สำหรับ XAUUSD
+
+**ระบบ Score 6 เงื่อนไข:**
+
+| คะแนน | ความหมาย | การตัดสินใจ |
+|--------|----------|-------------|
+| 5–6 / 6 | 🟢 Strong Signal | เปิด Full Position |
+| 3–4 / 6 | 🟡 Moderate | Confirm หรือลด Size |
+| 1–2 / 6 | 🔴 Weak Signal | ข้ามสัญญาณนี้ |
+
+**6 เงื่อนไขที่นับคะแนน:**
+1. Supertrend direction
+2. EMA 21/89 alignment
+3. RSI level (60+ = Bull / 39− = Bear)
+4. MA Signal (EMA Cross)
+5. RSI Divergence signal
+6. Higher Timeframe trend (H4/D1)
+
+**ขั้นตอนเทรด 5 ขั้น:**
+1. ดู Signal Button + คะแนน Dashboard
+2. ตรวจ Timeframe ใหญ่ (H4 → D1)
+3. Confirm บน H1
+4. นับ Checkmark ให้ได้ ≥ 4
+5. เปิดออเดอร์ที่ Label บนกราฟ (TP/SL auto)
+
+---
+
 ## 📊 รายงานผลเทรด — Backtest Reports
 
 ### 📋 [หน้าหลักรายงาน](https://irtgold.github.io/irtgold/reports/r300613/index.html)
