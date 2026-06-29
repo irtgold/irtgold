@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRT GOLD V.8.0 — คู่มือการใช้งาน</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #ffffff;
+    color: #1a1a2e;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── Header ── */
+  .hero {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 100%);
+    color: #ffffff;
+    padding: 48px 40px 40px;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: #f0c040;
+    color: #0d1b2a;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: #f0c040; }
+  .hero p {
+    font-size: 15px;
+    color: #a0b4c8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── Layout ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 48px 0 32px; border-bottom: 1px solid #e8edf2; }
+  .section:last-child { border-bottom: none; }
+
+  /* ── Section titles ── */
+  .sec-num {
+    display: inline-block;
+    background: #1a3a5c;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .sec-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0d1b2a;
+    margin-bottom: 6px;
+  }
+  .sec-sub {
+    font-size: 13px;
+    color: #6b7a90;
+    margin-bottom: 24px;
+  }
+
+  /* ── Cards ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .card {
+    background: #f7f9fc;
+    border: 1px solid #e0e8f0;
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+  .card-icon { font-size: 24px; margin-bottom: 10px; }
+  .card h3 { font-size: 14px; font-weight: 700; color: #0d1b2a; margin-bottom: 6px; }
+  .card p { font-size: 13px; color: #4a5568; line-height: 1.6; }
+
+  /* ── Signal badges ── */
+  .sig {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 5px;
+    margin: 2px 3px;
+    letter-spacing: 0.5px;
+  }
+  .sig-buy  { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+  .sig-sell { background: #fce4e4; color: #7f0000; border: 1px solid #ef9a9a; }
+  .sig-orange { background: #fff3e0; color: #7b3000; border: 1px solid #ffcc80; }
+  .sig-gold  { background: #fff8e1; color: #7b5800; border: 1px solid #ffe082; }
+
+  /* ── Color legend ── */
+  .legend-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f4f8;
+  }
+  .legend-row:last-child { border-bottom: none; }
+  .legend-sym {
+    min-width: 80px;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+  .sym-green { background: #e8f5e9; color: #1b7a3a; }
+  .sym-red   { background: #fce4e4; color: #c62828; }
+  .sym-orange { background: #fff3e0; color: #bf5000; }
+  .legend-desc h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: #0d1b2a; }
+  .legend-desc p { font-size: 13px; color: #4a5568; }
+
+  /* ── Dashboard mockup ── */
+  .dash-mock {
+    background: #0a0c14;
+    border-radius: 10px;
+    padding: 0;
+    overflow: hidden;
+    max-width: 440px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    border: 1px solid #2a3050;
+    margin: 20px 0;
+  }
+  .dash-header {
+    background: #1a1e30;
+    color: #f0c040;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    border-bottom: 1px solid #252d45;
+  }
+  .dash-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 1fr 1fr 1fr;
+    border-bottom: 1px solid #1a2040;
+    align-items: center;
+  }
+  .dash-row:last-child { border-bottom: none; }
+  .dash-cell {
+    padding: 7px 8px;
+    color: #a0aac0;
+    font-size: 11px;
+    text-align: center;
+    border-right: 1px solid #1a2040;
+  }
+  .dash-cell:last-child { border-right: none; }
+  .dash-cell.label { text-align: left; color: #6070a0; }
+  .dc-green { color: #26a69a; }
+  .dc-red   { color: #ef5350; }
+  .dc-orange { color: #FF9800; }
+  .dc-gray  { color: #454e68; }
+  .dc-full  {
+    grid-column: 1 / -1;
+    text-align: left;
+    padding: 7px 12px;
+    color: #a0aac0;
+    font-size: 11px;
+    border-right: none;
+  }
+  .dc-full.green { color: #26a69a; }
+  .dc-full.red   { color: #ef5350; }
+  .dc-full.orange { color: #FF9800; }
+  .dash-signal {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 9px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .dash-signal.buy  { background: rgba(38,166,154,0.2); color: #26a69a; }
+  .dash-signal.sell { background: rgba(239,83,80,0.2);  color: #ef5350; }
+
+  /* ── Table ── */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  th { background: #1a3a5c; color: #fff; font-size: 12px; font-weight: 700; padding: 10px 14px; text-align: left; }
+  td { padding: 10px 14px; font-size: 13px; border-bottom: 1px solid #edf2f7; color: #2d3748; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #f7f9fc; }
+
+  /* ── Steps ── */
+  .step-list { counter-reset: step; }
+  .step-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 18px;
+    align-items: flex-start;
+  }
+  .step-num {
+    min-width: 32px; height: 32px;
+    background: #1a3a5c;
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: #0d1b2a; }
+  .step-content p  { font-size: 13px; color: #4a5568; }
+
+  /* ── Zone box ── */
+  .zone-demo {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .zone-box {
+    border-radius: 8px;
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    min-width: 160px;
+  }
+  .zone-supply {
+    background: rgba(0,191,165,0.12);
+    border: 2px solid rgba(0,191,165,0.5);
+    color: #00695c;
+  }
+  .zone-demand {
+    background: rgba(41,182,246,0.12);
+    border: 2px solid rgba(41,182,246,0.5);
+    color: #01579b;
+  }
+  .zone-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; opacity: 0.7; }
+  .zone-strength { font-size: 11px; margin-top: 6px; opacity: 0.8; }
+
+  /* ── Risk preset ── */
+  .risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 16px 0; }
+  .risk-card {
+    border-radius: 8px;
+    padding: 16px 18px;
+    border: 1px solid;
+  }
+  .risk-conservative { border-color: #b2dfdb; background: #e0f2f1; }
+  .risk-balanced     { border-color: #bbdefb; background: #e3f2fd; }
+  .risk-aggressive   { border-color: #ffccbc; background: #fbe9e7; }
+  .risk-scalping     { border-color: #e1bee7; background: #f3e5f5; }
+  .risk-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; color: #0d1b2a; }
+  .risk-card p  { font-size: 12px; color: #4a5568; line-height: 1.6; }
+
+  /* ── Alert box ── */
+  .tip-box {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 4px solid #f0c040;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-size: 13px;
+    color: #7b5800;
+  }
+  .tip-box strong { display: block; margin-bottom: 4px; font-size: 14px; }
+
+  .info-box {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-left: 4px solid #1a3a5c;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-size: 13px;
+    color: #1e3a5f;
+  }
+  .info-box strong { display: block; margin-bottom: 4px; font-size: 14px; }
+
+  /* ── Footer ── */
+  .footer {
+    background: #0d1b2a;
+    color: #a0b4c8;
+    text-align: center;
+    padding: 28px 24px;
+    font-size: 12px;
+    margin-top: 60px;
+  }
+  .footer strong { color: #f0c040; }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 26px; }
+    .dash-row { grid-template-columns: 100px 1fr 1fr 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<div class="hero">
+  <div class="hero-badge">TradingView Indicator</div>
+  <h1>IRT GOLD <span>V.8.0</span></h1>
+  <p>คู่มือการใช้งานฉบับสมบูรณ์ — ระบบสัญญาณ BUY/SELL พร้อม MSZ Zones และ Dashboard วิเคราะห์ Multi-Timeframe</p>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════ 1. ภาพรวม ══════════════════ -->
+<div class="section">
+  <div class="sec-num">SECTION 01</div>
+  <div class="sec-title">ภาพรวมระบบ IRT GOLD V.8.0</div>
+  <div class="sec-sub">ประกอบด้วย 3 ระบบสัญญาณ + MSZ Zone Engine + Dashboard วิเคราะห์</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🟢</div>
+      <h3>System A — EMA Bounce BUY</h3>
+      <p>สัญญาณซื้อขณะราคา Bounce จาก EMA ในทิศทางขาขึ้น ใช้ Supertrend + Choppiness Index คัดกรอง</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔴</div>
+      <h3>System S1 — ST + VWAP SELL</h3>
+      <p>สัญญาณขาย เมื่อ Supertrend พลิกเป็นขาลงครั้งแรก และราคาอยู่ใต้ VWAP</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔴</div>
+      <h3>System S2 — Double Top SELL</h3>
+      <p>จับรูปแบบ Double Top พร้อม Neckline break เป็นสัญญาณกลับทิศขาลง</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔷</div>
+      <h3>MSZ Zone Engine</h3>
+      <p>ตรวจหาโซน SUPPLY / DEMAND จากการอิ่มตัวของ Momentum พร้อมให้คะแนนความแข็งแกร่ง 0-100</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3>Dashboard Multi-TF</h3>
+      <p>ตาราง Trend / EMA / RSI แบบ M15 M30 H1 H4 พร้อม Score ทิศทาง BUY/SELL</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <h3>Trade Block</h3>
+      <p>กล่อง SL/TP อัตโนมัติ ติดตามออเดอร์ที่เปิดอยู่ แสดงประวัติ IRT B / IRT S ทุก Trade</p>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>💡 หลักการสำคัญ</strong>
+    ทุกสัญญาณถูกกรองด้วย <strong>Choppiness Index (CI)</strong> — หากตลาด Sideway (CI &gt; 61.8) สัญญาณจะไม่ fire แม้เงื่อนไขอื่นครบ เพื่อหลีกเลี่ยงการเทรดในตลาดที่ไม่มีทิศทาง
+  </div>
+</div>
+
+<!-- ══════════════════ 2. สัญญาณ IRT B / IRT S ══════════════════ -->
+<div class="section">
+  <div class="sec-num">SECTION 02</div>
+  <div class="sec-title">สัญญาณ IRT B และ IRT S</div>
+  <div class="sec-sub">ป้าย IRT B และ IRT S จะปรากฏหลังจาก Trade ปิดเท่านั้น (ประวัติ)</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div style="margin-bottom:10px;"><span class="sig sig-buy">IRT B</span></div>
+      <h3>IRT B — สัญญาณ BUY</h3>
+      <p>ป้ายสีเขียวปรากฏ <strong>ใต้แท่งเทียน</strong> ณ จุดที่เข้าเทรด BUY<br><br>
+      เงื่อนไข: Supertrend ขาขึ้น + CI Trending + EMA Fast &gt; EMA Slow + ราคา Bounce จาก EMA</p>
+    </div>
+    <div class="card">
+      <div style="margin-bottom:10px;"><span class="sig sig-sell">IRT S</span></div>
+      <h3>IRT S — สัญญาณ SELL</h3>
+      <p>ป้ายสีแดงปรากฏ <strong>เหนือแท่งเทียน</strong> ณ จุดที่เข้าเทรด SELL<br><br>
+      มาจาก S1 (ST พลิก + VWAP) หรือ S2 (Double Top + Neckline break)</p>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>📌 ทำไมป้ายถึงโชว์หลัง Trade ปิด?</strong>
+    IRT B / IRT S แสดงเฉพาะ Trade ที่ <strong>ปิดไปแล้ว</strong> (TP หรือ SL โดน) เพื่อให้เห็น History ที่ชัดเจน — Trade ที่กำลังเปิดอยู่จะไม่มีป้าย เพื่อไม่ให้ชาร์ตรก
+  </div>
+
+  <h3 style="margin: 20px 0 12px; font-size:16px; color:#0d1b2a;">กล่อง SL/TP</h3>
+  <table>
+    <tr>
+      <th>องค์ประกอบ</th>
+      <th>สี</th>
+      <th>ความหมาย</th>
+    </tr>
+    <tr><td>กล่องสีเขียว (บน)</td><td><span class="sig sig-buy">เขียว</span></td><td>โซน Take Profit — TP ราคาเท่าไหร่</td></tr>
+    <tr><td>กล่องสีแดง (ล่าง)</td><td><span class="sig sig-sell">แดง</span></td><td>โซน Stop Loss — SL ราคาเท่าไหร่</td></tr>
+    <tr><td>เส้น Entry</td><td>สีขาว</td><td>ราคาที่เข้าเทรด</td></tr>
+    <tr><td>กล่องจางลง (SL โดน)</td><td>โปร่งมากขึ้น</td><td>Trade นั้นปิดด้วย Stop Loss</td></tr>
+  </table>
+</div>
+
+<!-- ══════════════════ 3. MSZ Zones ══════════════════ -->
+<div class="section">
+  <div class="sec-num">SECTION 03</div>
+  <div class="sec-title">โซน SUPPLY และ DEMAND (MSZ Engine)</div>
+  <div class="sec-sub">Momentum Saturation Zones — ตรวจหาจุดที่ momentum อิ่มตัวและอาจกลับทิศ</div>
+
+  <div class="zone-demo">
+    <div class="zone-box zone-supply">
+      <div class="zone-label">▲ SUPPLY</div>
+      <strong>โซนแรงซื้อ</strong>
+      <div class="zone-strength">สีเขียวอมฟ้า (Teal)<br>ราคามักเด้งขึ้นจากโซนนี้</div>
+    </div>
+    <div class="zone-box zone-demand">
+      <div class="zone-label">▼ DEMAND</div>
+      <strong>โซนแรงขาย</strong>
+      <div class="zone-strength">สีฟ้าอ่อน (Sky Blue)<br>ราคามักกดลงจากโซนนี้</div>
+    </div>
+  </div>
+
+  <h3 style="margin: 20px 0 12px; font-size:16px; color:#0d1b2a;">การอ่านคะแนนโซน</h3>
+  <table>
+    <tr>
+      <th>Rating</th>
+      <th>คะแนน</th>
+      <th>ความหมาย</th>
+    </tr>
+    <tr><td><strong>AAAAA</strong></td><td>80-100/100</td><td>โซนแข็งแกร่งมาก — น่าเชื่อถือสูงสุด</td></tr>
+    <tr><td><strong>AAAA</strong></td><td>65-79/100</td><td>โซนแข็งแกร่ง — น่าเชื่อถือสูง</td></tr>
+    <tr><td><strong>AAA</strong></td><td>50-64/100</td><td>โซนปานกลาง — ใช้ได้ดี</td></tr>
+    <tr><td><strong>AA</strong></td><td>35-49/100</td><td>โซนอ่อน — ระวัง</td></tr>
+    <tr><td><strong>A</strong></td><td>0-34/100</td><td>โซนอ่อนมาก — ใช้ประกอบเท่านั้น</td></tr>
+  </table>
+
+  <h3 style="margin: 20px 0 12px; font-size:16px; color:#0d1b2a;">ตัวนับการ Touch [1x] [2x]...</h3>
+  <p style="color:#4a5568; font-size:14px;">ตัวเลขในวงเล็บ <strong>[2x]</strong> บอกว่าราคาเข้ามาแตะโซนนี้กี่ครั้งแล้ว ยิ่ง Touch มาก โซนยิ่งได้รับการยืนยัน</p>
+
+  <div class="tip-box" style="margin-top:20px;">
+    <strong>🔄 Zone Invalidation</strong>
+    โซน SUPPLY จะถูกลบเมื่อราคาทะลุขึ้นเหนือโซนไป (Invalidate) โซน DEMAND จะถูกลบเมื่อราคาทะลุลงใต้โซน — ระบบจัดการให้อัตโนมัติ
+  </div>
+</div>
+
+<!-- ══════════════════ 4. Dashboard ══════════════════ -->
+<div class="section">
+  <div class="sec-num">SECTION 04</div>
+  <div class="sec-title">Dashboard Panel — วิเคราะห์ Multi-Timeframe</div>
+  <div class="sec-sub">เปิดใช้งานได้ที่ Settings → IRT GOLD Settings → ติ๊ก Dashboard Panel</div>
+
+  <!-- Dashboard Mockup -->
+  <div class="dash-mock">
+    <div class="dash-header">IRT GOLD V.8.0 — DASHBOARD<br><span style="font-size:10px;color:#a0aac0;">SF Trend v.2</span></div>
+    <div class="dash-row" style="background:#11141f;">
+      <div class="dash-cell label">Indicator</div>
+      <div class="dash-cell">M15</div>
+      <div class="dash-cell">M30</div>
+      <div class="dash-cell">H1</div>
+      <div class="dash-cell">H4</div>
+    </div>
+    <div class="dash-row">
+      <div class="dash-cell label">TREND</div>
+      <div class="dash-cell dc-green">●</div>
+      <div class="dash-cell dc-green">●</div>
+      <div class="dash-cell dc-red">●</div>
+      <div class="dash-cell dc-red">●</div>
+    </div>
+    <div class="dash-row">
+      <div class="dash-cell label">EMA IRT</div>
+      <div class="dash-cell dc-green">▲ UP</div>
+      <div class="dash-cell dc-green">▲ UP</div>
+      <div class="dash-cell dc-red">▼ DN</div>
+      <div class="dash-cell dc-red">▼ DN</div>
+    </div>
+    <div class="dash-row">
+      <div class="dash-cell label">RSI IRT</div>
+      <div class="dash-cell dc-green">62</div>
+      <div class="dash-cell dc-green">58</div>
+      <div class="dash-cell" style="color:#ef5350aa;">45</div>
+      <div class="dash-cell dc-red">34</div>
+    </div>
+    <div class="dash-row">
+      <div class="dash-cell label dc-green">BUY</div>
+      <div class="dash-cell dc-full green" style="grid-column:2/5;">██████░░░░</div>
+      <div class="dash-cell dc-green">2/4</div>
+    </div>
+    <div class="dash-row">
+      <div class="dash-cell label dc-red">SELL</div>
+      <div class="dash-cell dc-full red" style="grid-column:2/5;">██████░░░░</div>
+      <div class="dash-cell dc-red">2/4</div>
+    </div>
+    <div class="dash-row"><div class="dc-full orange">✗  Supertrend  DN</div></div>
+    <div class="dash-row"><div class="dc-full orange">✗  EMA 9 &lt; EMA 21</div></div>
+    <div class="dash-row"><div class="dc-full green">✓  RSI &gt; 50</div></div>
+    <div class="dash-row"><div class="dc-full orange">✗  H4 Trend  DN</div></div>
+    <div class="dash-row"><div class="dc-full green">✓  CI  Uptrend  (44)</div></div>
+    <div class="dash-row"><div class="dc-full green">✓  VWAP  Uptrend</div></div>
+    <div class="dash-row"><div class="dc-full dc-gray">●  Trade  →  IDLE</div></div>
+    <div class="dash-row"><div class="dash-signal buy">IRT GOLD — BUY (2/4)</div></div>
+  </div>
+
+  <h3 style="margin: 28px 0 14px; font-size:16px; color:#0d1b2a;">คำอธิบายแต่ละแถว</h3>
+  <table>
+    <tr>
+      <th>แถว</th>
+      <th>ข้อมูล</th>
+      <th>วิธีอ่าน</th>
+    </tr>
+    <tr><td><strong>TREND ●</strong></td><td>Supertrend ทิศทาง</td><td>🟢 เขียว = ขาขึ้น | 🔴 แดง = ขาลง</td></tr>
+    <tr><td><strong>EMA IRT</strong></td><td>EMA 21 vs EMA 89</td><td>▲ UP = EMA เร็ว &gt; ช้า (Bullish) | ▼ DN = Bearish</td></tr>
+    <tr><td><strong>RSI IRT</strong></td><td>RSI(14) ตัวเลข</td><td>สีเขียว ≥ 60 | สีเขียวอ่อน ≥ 50 | สีแดงอ่อน ≥ 40 | สีแดง &lt; 40</td></tr>
+    <tr><td><strong>BUY / SELL bar</strong></td><td>Score X/4</td><td>นับจำนวนเงื่อนไขที่ผ่านในแต่ละฝั่ง</td></tr>
+    <tr><td><strong>CI Status</strong></td><td>Choppiness Index</td><td>Uptrend / Downtrend / Sideway (ส้ม = ห้ามเทรด)</td></tr>
+    <tr><td><strong>VWAP</strong></td><td>ราคา vs VWAP</td><td>Uptrend = เหนือ VWAP | Downtrend = ใต้ VWAP</td></tr>
+    <tr><td><strong>Trade →</strong></td><td>สถานะออเดอร์</td><td>IN BUY / IN SELL / IDLE</td></tr>
+    <tr><td><strong>IRT GOLD — BUY/SELL (X/4)</strong></td><td>สรุปทิศทาง</td><td>ฝั่งที่ Score ชนะ + จำนวนเงื่อนไขที่สนับสนุน</td></tr>
+  </table>
+</div>
+
+<!-- ══════════════════ 5. ระบบสีและสัญลักษณ์ ══════════════════ -->
+<div class="section">
+  <div class="sec-num">SECTION 05</div>
+  <div class="sec-title">ระบบสี ✓ / ✗ และการอ่านสัญญาณ</div>
+  <div class="sec-sub">แต่ละเงื่อนไขแสดงสีตามทิศทางและความสอดคล้องกับ Dominant Direction</div>
+
+  <div style="background:#f7f9fc; border:1px solid #e0e8f0; border-radius:10px; padding:20px 24px; margin-bottom:20px;">
+    <div class="legend-row">
+      <div class="legend-sym sym-green">✓</div>
+      <div class="legend-desc">
+        <h4>✓ สีเขียว — Align กับ BUY Dominant</h4>
+        <p>เงื่อนไขนี้ชี้ <strong>ขาขึ้น</strong> และสอดคล้องกับทิศทางหลักที่ Score BUY ชนะ — สัญญาณยืนยันฝั่ง BUY</p>
+      </div>
+    </div>
+    <div class="legend-row">
+      <div class="legend-sym sym-red">✓</div>
+      <div class="legend-desc">
+        <h4>✓ สีแดง — Align กับ SELL Dominant</h4>
+        <p>เงื่อนไขนี้ชี้ <strong>ขาลง</strong> และสอดคล้องกับทิศทางหลักที่ Score SELL ชนะ — สัญญาณยืนยันฝั่ง SELL</p>
+      </div>
+    </div>
+    <div class="legend-row">
+      <div class="legend-sym sym-orange">✗</div>
+      <div class="legend-desc">
+        <h4>✗ สีส้ม — ขัดแย้งกับ Dominant Direction</h4>
+        <p>เงื่อนไขนี้ชี้ <strong>ทิศทางตรงข้าม</strong> กับ Score ส่วนใหญ่ — เป็น Signal ที่ขัดแย้ง ควรระวัง<br>
+        <em>CI Sideway จะเป็นส้มเสมอ เพราะไม่มีทิศทาง</em></p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin:20px 0 12px; font-size:16px;">ตัวอย่าง Perfect BUY (4/4 ทุกตัวเขียว)</h3>
+  <div style="background:#f0faf8; border:1px solid #a5d6a7; border-radius:8px; padding:16px 20px; font-family:'Courier New',monospace; font-size:13px; color:#1b5e20; line-height:2;">
+    ✓ Supertrend  UP&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#aaa;">← ST ขึ้น</span><br>
+    ✓ EMA 9 &gt; EMA 21&nbsp;&nbsp;<span style="color:#aaa;">← EMA bullish</span><br>
+    ✓ RSI &gt; 50&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#aaa;">← Momentum บวก</span><br>
+    ✓ H4 Trend  UP&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#aaa;">← H4 ขึ้น</span><br>
+    ✓ CI  Uptrend (42)&nbsp;<span style="color:#aaa;">← ตลาด Trending</span><br>
+    ✓ VWAP  Uptrend&nbsp;&nbsp;&nbsp;<span style="color:#aaa;">← ราคาเหนือ VWAP</span>
+  </div>
+
+  <h3 style="margin:20px 0 12px; font-size:16px;">ตัวอย่าง SELL Dominant (3/4) — มีขัดแย้ง 1 ตัว</h3>
+  <div style="background:#fff8f8; border:1px solid #ef9a9a; border-radius:8px; padding:16px 20px; font-family:'Courier New',monospace; font-size:13px; line-height:2;">
+    <span style="color:#FF9800;">✗ Supertrend  UP</span>&nbsp;&nbsp;<span style="color:#aaa;">← ST ขึ้น แต่ขัด SELL dominant</span><br>
+    <span style="color:#c62828;">✓ EMA 9 &lt; EMA 21</span>&nbsp;<span style="color:#aaa;">← align SELL</span><br>
+    <span style="color:#c62828;">✓ RSI &lt; 50</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#aaa;">← align SELL</span><br>
+    <span style="color:#c62828;">✓ H4 Trend  DN</span>&nbsp;&nbsp;<span style="color:#aaa;">← align SELL</span><br>
+    <span style="color:#FF9800;">✗ CI  Uptrend (57)</span>&nbsp;<span style="color:#aaa;">← CI ขึ้น แต่ dominant ขาลง</span><br>
+    <span style="color:#FF9800;">✗ VWAP  Uptrend</span>&nbsp;&nbsp;<span style="color:#aaa;">← VWAP ขึ้น แต่ขัด SELL</span>
+  </div>
+
+  <div class="tip-box" style="margin-top:20px;">
+    <strong>💡 กฎอ่านง่าย</strong>
+    <strong>ทุกตัวสีเดียวกัน = Perfect Setup</strong> — รอให้ทุก ✓ เป็นสีเดียวกันหมด (เขียวทั้งหมด = BUY, แดงทั้งหมด = SELL) ก่อนเข้าเทรดจะได้ความน่าเชื่อถือสูงสุด
+  </div>
+</div>
+
+<!-- ══════════════════ 6. Risk Presets ══════════════════ -->
+<div class="section">
+  <div class="sec-num">SECTION 06</div>
+  <div class="sec-title">Risk Presets — ตั้งค่าความเสี่ยง</div>
+  <div class="sec-sub">เลือกระดับความเสี่ยงที่ Settings → IRT GOLD Settings → Risk Preset</div>
+
+  <div class="risk-grid">
+    <div class="risk-card risk-conservative">
+      <h4>🛡️ Conservative</h4>
+      <p>SL: 2.5× ATR<br>TP: 2.0× SL<br><br>เหมาะสำหรับผู้ที่ต้องการความปลอดภัยสูง ยอมรับ RR ที่น้อยกว่าเพื่อ SL ที่กว้าง</p>
+    </div>
+    <div class="risk-card risk-balanced">
+      <h4>⚖️ Balanced</h4>
+      <p>SL: 1.5× ATR<br>TP: 2.0× SL<br><br>ค่าเริ่มต้น — สมดุลระหว่างความเสี่ยงและผลตอบแทน เหมาะกับการเทรดทั่วไป</p>
+    </div>
+    <div class="risk-card risk-aggressive">
+      <h4>⚡ Aggressive</h4>
+      <p>SL: 1.0× ATR<br>TP: 2.5× SL<br><br>SL แคบ TP ไกล — RR สูง แต่โดน SL ได้บ่อยกว่า เหมาะกับ Trend Strong</p>
+    </div>
+    <div class="risk-card risk-scalping">
+      <h4>⚡ Scalping</h4>
+      <p>SL: 0.8× ATR<br>TP: 1.5× SL<br><br>สำหรับ Scalp TF ต่ำ SL และ TP แคบ เข้าออกเร็ว เหมาะกับ M5-M15</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ 7. วิธีตั้งค่า ══════════════════ -->
+<div class="section">
+  <div class="sec-num">SECTION 07</div>
+  <div class="sec-title">วิธีตั้งค่าและเริ่มใช้งาน</div>
+  <div class="sec-sub">ขั้นตอนการ setup ตั้งแต่ต้น</div>
+
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Add Indicator to Chart</h4>
+        <p>เปิด Pine Script Editor บน TradingView → วาง Code → กด Add to Chart</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>เปิด Dashboard Panel</h4>
+        <p>คลิก Settings (⚙️) → หัวข้อ "━━ IRT GOLD Settings ━━" → ติ๊ก ✓ <strong>Dashboard Panel</strong></p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>เลือก Risk Preset</h4>
+        <p>ที่ Settings → Risk Preset เลือก Conservative / Balanced / Aggressive / Scalping ตามสไตล์การเทรด</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>อ่าน Dashboard ก่อนเทรด</h4>
+        <p>ตรวจสอบ Score และ Checklist — รอให้เงื่อนไขส่วนใหญ่เป็นสีเดียวกัน (เขียวหรือแดง) ก่อนเข้าเทรด</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h4>รอสัญญาณ IRT B / IRT S</h4>
+        <p>เมื่อ Dashboard ยืนยันทิศทาง รอสัญญาณ IRT B (BUY) หรือ IRT S (SELL) เข้ามา พร้อมกล่อง SL/TP อัตโนมัติ</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <h4>ใช้โซน SUPPLY/DEMAND ประกอบ</h4>
+        <p>สังเกต MSZ Zone ใกล้เคียง — โซน AAA ขึ้นไปที่ราคาใกล้อยู่ช่วยยืนยันจุดกลับตัวได้ดี</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>⚠️ ข้อควรระวัง</strong>
+    หาก Dashboard แสดง <strong>✗ สีส้ม</strong> จำนวนมาก หรือ CI แสดง Sideway — <strong>งดเทรด</strong> รอให้ตลาดเลือกทิศทางชัดเจนก่อน
+  </div>
+</div>
+
+<!-- ══════════════════ 8. Settings Overview ══════════════════ -->
+<div class="section">
+  <div class="sec-num">SECTION 08</div>
+  <div class="sec-title">ตัวเลือก Settings ทั้งหมด</div>
+  <div class="sec-sub">อ้างอิงการตั้งค่าแต่ละกลุ่ม</div>
+
+  <table>
+    <tr><th>กลุ่ม</th><th>ตัวเลือก</th><th>ค่าเริ่มต้น</th><th>คำอธิบาย</th></tr>
+    <tr><td>IRT GOLD</td><td>ST Uptrend Color</td><td>เขียว</td><td>สีเส้น Supertrend ขาขึ้น</td></tr>
+    <tr><td>IRT GOLD</td><td>Supertrend Line + Fill</td><td>เปิด</td><td>แสดง/ซ่อนเส้นและพื้นที่ Supertrend</td></tr>
+    <tr><td>IRT GOLD</td><td>MA Signal (BUY)</td><td>เปิด</td><td>แสดงป้าย IRT B หลัง Trade ปิด</td></tr>
+    <tr><td>IRT GOLD</td><td>DI Signal (SELL)</td><td>เปิด</td><td>แสดงป้าย IRT S หลัง Trade ปิด</td></tr>
+    <tr><td>IRT GOLD</td><td>Dashboard Panel</td><td>ปิด</td><td>เปิด/ปิด Dashboard Multi-TF</td></tr>
+    <tr><td>IRT GOLD</td><td>Block Extend (bars)</td><td>10</td><td>ความยาวกล่อง SL/TP ไปทางขวา</td></tr>
+    <tr><td>IRT GOLD</td><td>Risk Preset</td><td>Balanced</td><td>รูปแบบ SL/TP อัตโนมัติ</td></tr>
+    <tr><td>System A</td><td>EMA Fast</td><td>9</td><td>EMA เร็ว สำหรับ Bounce signal</td></tr>
+    <tr><td>System A</td><td>EMA Slow</td><td>21</td><td>EMA ช้า สำหรับ trend filter</td></tr>
+    <tr><td>System S2</td><td>Peak Confirm</td><td>5</td><td>Pivot bars สำหรับ Double Top</td></tr>
+    <tr><td>Zone Settings</td><td>Max Active Zones</td><td>4</td><td>จำนวน Zone สูงสุดที่แสดงพร้อมกัน</td></tr>
+    <tr><td>Zone Settings</td><td>Zone Width (x ATR)</td><td>1.0</td><td>ความหนาของโซน</td></tr>
+    <tr><td>Zone Settings</td><td>Zone Extension (bars)</td><td>20</td><td>โซนยืดออกไปทางขวากี่ bar</td></tr>
+    <tr><td>Visual</td><td>Gradient Zone Fill</td><td>เปิด</td><td>แสดง gradient ความเข้มของโซน</td></tr>
+    <tr><td>Visual</td><td>Touch Markers</td><td>เปิด</td><td>นับจำนวนครั้งที่ราคา Touch โซน</td></tr>
+    <tr><td>Dashboard</td><td>Position</td><td>Top Right</td><td>ตำแหน่ง Dashboard บนชาร์ต</td></tr>
+  </table>
+</div>
+
+</div><!-- /container -->
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<div class="footer">
+  <strong>IRT GOLD V.8.0</strong> — TradingView Indicator<br>
+  &copy; IRT GOLD | Pine Script v6 | All Rights Reserved<br>
+  <span style="font-size:11px; color:#6b7a90;">คู่มือนี้จัดทำเพื่อลูกค้า IRT GOLD เท่านั้น ห้ามเผยแพร่โดยไม่ได้รับอนุญาต</span>
+</div>
+
+</body>
+</html>
